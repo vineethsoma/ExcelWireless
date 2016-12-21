@@ -1,0 +1,188 @@
+<html>
+<head>
+    <title>Bootstrap & Google maps Tutorial by Bootstrapious.com</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='assets/css/contactUs.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<section class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8"><a href="excellWireless.html"><img src="assets/images/logo.png" height="80" width="220" ></a></div>
+            <div class="col-md-2">
+                <a href="#"><label class="signin" >SIGN IN</label></a>
+            </div>
+            <div class="col-md-2">
+                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                <a href="#"><label class="signin">CART</label></a>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="container" ng-mouseover="open = true" ng-mouseleave="open = false" >
+            <div class="row">
+                <div class="col-md-12 col-xs-12" style="background-color: #EEEEEE;">
+
+                    <div class="col-md-2 padding-15">
+                        <span>HOME</span>
+                    </div>
+
+                    <div class="col-md-2 testHover padding-15" >
+                        <span>CATEGORY</span>
+
+                    </div>
+
+                    <div class="col-md-2 testHover padding-15">
+                        <span>BRAND</span>
+                    </div>
+
+                    <div class="col-md-2 testHover padding-15">
+                        <span>PARTS</span>
+                    </div>
+
+                    <div class="col-md-2 padding-15">
+                        <span>LCD BUYBACK</span>
+                    </div>
+
+                    <div class="col-md-2 padding-15">
+                        <span>CONTACT US</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="map"></div>
+        </div>
+
+        <div class="col-md-12">
+            <h1 align="center" style="font-size: 35px">Contact Us</h1>
+            <hr>
+        </div>
+
+        <div class="col-md-4">
+
+            <label class="margin-bottom">Name:</label>
+            <input type="text" class="form-control margin-bottom" placeholder="Please Enter Your Name"> </input>
+
+            <label class="margin-bottom">Email Address:</label>
+            <input type="text" class="form-control margin-bottom" placeholder="Please Enter Your Email Address"> </input>
+
+            <label class="margin-bottom">Phone Number:</label>
+            <input type="text" class="form-control margin-bottom" placeholder="Please Enter Your Phone Number"> </input>
+
+            <label class="margin-bottom">Comments:</label>
+            <textarea class="form-control margin-bottom" rows="6"></textarea>
+
+            <button type="button" class="btn btn-primary" style="margin-left: 155px">Submit</button>
+
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="gap"></div>
+            <h1>Customer Care/Order Support</h1>
+            <p>5955 Jimmy Carter Boulevard</p>
+            <p>Suite 120 </p>
+            <p>Norcross, GA 30071 </p>
+            <br>
+            <br>
+            <br>
+
+            <p>Call Us: (678) 694-1873 </p>
+            <p>Email Us:  exwirelessatl@gmail.com</p>
+            <vr></vr>
+        </div>
+        <div class="col-md-4">
+            <div class="gap"></div>
+            <h1>Feedback</h1>
+        </div>
+
+        <div>
+
+        </div>
+
+    </div> <!-- /.row-->
+
+</div> <!-- /.container-->
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
+<script src="assets/scripts/custom.js"></script>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    <h2>SUPPORT</h2>
+                    <hr>
+                    <ul>
+                        <li>
+                            <p>Call Us Now</p>
+                        </li>
+                        <li class="footer-top-margin">
+                            <strong>(770-703-0801)</strong>
+                        </li>
+
+                        <li class="footer-top-margin">
+                            <p>Email Us Now</p>
+                        </li>
+                        <li class="footer-top-margin" >
+                            <strong>Info@Excellwireless.com</strong>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="col-md-3">
+                    <h4>SHOP</h4>
+                    <hr>
+                    <ul>
+                        <li>Category</li>
+                        <li class="footer-top-margin">Brands</li>
+                        <li class="footer-top-margin">Parts</li>
+                        <li class="footer-top-margin">Lcd Buyback</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>MY ACCOUNT</h4>
+                    <hr>
+                    <ul>
+                        <li >Sign In</li>
+                        <li class="footer-top-margin">Sign Up</li>
+                        <li class="footer-top-margin">My Cart</li>
+                        <li class="footer-top-margin">History</li>
+
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>STAY IN TOUCH</h4>
+                    <hr>
+                    <form>
+                        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                        <br>
+                        <button type="submit" class="btn btn-primary" style="width: 100%">Subscribe</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

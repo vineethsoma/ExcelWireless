@@ -1,0 +1,247 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+. logo{
+    WIDTH: 300px;
+    height: initial;
+}
+.navbar-default
+{
+    padding: 12px;
+    font-size: 18px;
+}
+.signin
+{
+    padding: 25px;
+    color: black;
+}
+
+.container
+{
+    color: #2a2f31;
+    font-family: "Proxima Nova Semibold";
+    font-size: 16px;
+    padding: 10px 0 8px;
+    letter-spacing: 2px;
+}
+
+
+
+footer {
+    background: #EDEFF1;
+    height: auto;
+    padding-bottom: 30px;
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #DDDDDD;
+}
+.removeMarginBtm
+{
+    margin-bottom: 0px !important;
+}
+
+.testHover:hover
+{
+    border-top:3px solid blue;
+    background-color: white;
+}
+.padding-15{
+    padding:15px;
+}
+.li
+{
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+.hoverButtons
+{
+    width: 100px;
+}
+.footer-top-margin
+{
+    margin-top: 10px;
+}
+hr
+{
+    border-top: 1px solid #b7b0b0;
+}
+div.login-box {
+    float: none;
+    margin: 0 auto;
+    clear: both;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.panel-default {
+    border-color: #ddd;
+}
+
+div.login-box .panel-body {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+form {
+    display: block;
+    margin-top: 0em;
+}
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+form input[type="text"], form input[type="email"], form input[type="password"] {
+    height: 40px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+.login-box .input-icon i {
+    color: #555;
+    opacity: 0.6;
+    border-right: 1px solid #ccc;
+    padding-right: 5px;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.input-icon i {
+    font-size: 16px;
+    left: 6px;
+    line-height: 22px;
+    position: absolute;
+    top: 9px;
+}
+.form-control {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 12px;
+    height: 43px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s,box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: #16A085;
+    border-color: #16A085;
+    color: #fff;
+}
+
+.btn {
+    border: medium none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 12px;
+    transition: all 0.25s linear 0s;
+    -webkit-transition: all 0.25s linear 0s;
+    -moz-transition: all 0.25s linear 0s;
+    -ms-transition: all 0.25s linear 0s;
+    -o-transition: all 0.25s linear 0s;
+}
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.panel-footer {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05) inset;
+}
+
+.panel-footer {
+    padding: 20px 15px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.radio, .checkbox {
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.pull-left {
+    float: left!important;
+}
+.panel-intro {
+    padding: 40px 0 25px;
+}
+.input-icon {
+    position: relative;
+}
+div {
+    display: block;
+}
+.font-size
+{
+    font-size: 17px;
+}
