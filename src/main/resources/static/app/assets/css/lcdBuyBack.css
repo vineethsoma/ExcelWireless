@@ -87,7 +87,7 @@ footer {
     margin-bottom: 0px !important;
 }
 
-.testHover:hover
+.tab-hover:hover
 {
     border-top:3px solid blue;
     background-color: white;

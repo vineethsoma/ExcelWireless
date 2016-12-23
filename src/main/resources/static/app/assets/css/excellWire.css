@@ -20,8 +20,10 @@ time, mark, audio, video {
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+    /*vertical-align: baseline;*/
+    color: #2a2f31;
+    font-family: "Proxima Nova Semibold";
+    letter-spacing: 2px;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -47,7 +49,7 @@ table {
     border-spacing: 0;
 }
 
-. logo{
+.logo{
     WIDTH: 300px;
     height: initial;
 }
@@ -62,17 +64,13 @@ table {
     color: black;
 }
 
-.container
-{
+.container {
     color: #2a2f31;
     font-family: "Proxima Nova Semibold";
     font-size: 16px;
     padding: 10px 0 8px;
     letter-spacing: 2px;
 }
-
-
-
 footer {
     background: #EDEFF1;
     height: auto;
@@ -82,18 +80,62 @@ footer {
     border-bottom: 1px solid #CCCCCC;
     border-top: 1px solid #DDDDDD;
 }
+.top-nav {
+    min-height: 34px;
+    background-color: #d3d9df;
+    padding: 0;
+}
 .removeMarginBtm
 {
     margin-bottom: 0px !important;
 }
-
-.testHover:hover
+.main-content {
+    position: relative;
+}
+.tab-cell {
+    border: solid 1px Purple;
+    text-align: center;
+    min-height: 34px;
+    padding-top: 5px;
+    vertical-align: middle;
+}
+.tab-text {
+    border: solid 1px Green;
+    display: block;
+}
+.sub-menu {
+    position: absolute;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    z-index: 999;
+    background-color: #FFF;
+    border: solid 2px #EEE;
+}
+.tab-hover {
+    border-top: solid 3px #FFF;
+}
+.link-hover {
+    border-top: solid 3px #FFF;
+}
+.tab-hover:hover
 {
-    border-top:3px solid blue;
+    border-top:3px solid #ec2635;
     background-color: white;
+    cursor: pointer;
 }
 .padding-15{
     padding:15px;
+}
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+.no-padding-left {
+    padding-left: 0;
+}
+.no-padding-right {
+    padding-right: 0;
 }
 .li
 {
@@ -112,9 +154,33 @@ hr
 {
     border-top: 1px solid #b7b0b0;
 }
-
 .page-header .header-top {
     background: #d3d9df;
     padding: 3px 0;
     border-bottom: 1px solid #d3d9df;
+}
+.main-small-banner {
+    width: 320px;
+}
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+.link-box {
+    float: left;
+    margin: 5px;
+    color: #2a2f31;
+    font-family: "Proxima Nova Semibold";
+    font-size: 12px;
+    letter-spacing: 2px;
+    border: solid 1px #2a2f31;
+    background: none;
+    background-color: #FFF;
+
+}
+
+.link-text {
+    display: block;
+    border: solid 1px Blue;
 }
