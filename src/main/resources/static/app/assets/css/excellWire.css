@@ -105,10 +105,10 @@ footer {
 }
 .sub-menu {
     position: absolute;
-    width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
+    width: inherit;
     z-index: 999;
+    padding-left: -15px;
+    padding-right: -15px;
     background-color: #FFF;
     border: solid 2px #EEE;
 }
