@@ -79,6 +79,7 @@ footer {
     width: 100%;
     border-bottom: 1px solid #CCCCCC;
     border-top: 1px solid #DDDDDD;
+    margin-top: 10px;
 }
 .top-nav {
     min-height: 34px;
@@ -93,24 +94,30 @@ footer {
     position: relative;
 }
 .tab-cell {
-    border: solid 1px Purple;
+    /*border: solid 1px Purple;*/
     text-align: center;
     min-height: 34px;
     padding-top: 5px;
     vertical-align: middle;
 }
 .tab-text {
-    border: solid 1px Green;
+    /*border: solid 1px Green;*/
     display: block;
 }
 .sub-menu {
     position: absolute;
     width: inherit;
     z-index: 999;
-    padding-left: -15px;
-    padding-right: -15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: 0;
+    margin-right: 0;
     background-color: #FFF;
     border: solid 2px #EEE;
+}
+.sub-menu-cell {
+    padding-left: -15px;
+    padding-right: -15px;
 }
 .tab-hover {
     border-top: solid 3px #FFF;
@@ -173,6 +180,8 @@ hr
     color: #2a2f31;
     font-family: "Proxima Nova Semibold";
     font-size: 12px;
+    max-width: 215px;
+    width: 215px;
     letter-spacing: 2px;
     border: solid 1px #2a2f31;
     background: none;
@@ -182,5 +191,5 @@ hr
 
 .link-text {
     display: block;
-    border: solid 1px Blue;
+    /*border: solid 1px Blue;*/
 }

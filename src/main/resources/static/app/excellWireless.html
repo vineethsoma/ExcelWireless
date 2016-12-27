@@ -78,11 +78,20 @@
                 <a href="contactUs.html" class="tab-text"> <span>CONTACT US</span></a>
             </div>
         </div>
-        <div class="row sub-menu" class="fade" ng-show="bodyCtrl.showMenu">
-            <div class="col-sm-12 col-md-12">
+        <div class="row sub-menu" ng-show="bodyCtrl.showMenu" ng-mouseleave="bodyCtrl.leaveSubmenu($event)">
+            <div class="col-sm-12 col-md-12 sub-menu-cell">
                 <ul>
-                    <li ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
-                        <a ng-href class="btn btn-default link-box">Test Link {{$index}}</a>
+                    <li ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]">
+                        <a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.showSubmenu($event)">Test Link {{$index}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row sub-sub-menu" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)">
+            <div class="col-sm-12 col-md-12 sub-menu-cell">
+                <ul>
+                    <li ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]">
+                        <a ng-href class="btn btn-default link-box" >Test Link {{$index}}</a>
                     </li>
                 </ul>
             </div>
