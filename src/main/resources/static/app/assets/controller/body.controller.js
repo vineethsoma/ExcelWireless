@@ -11,7 +11,7 @@
         vm.showMenu = false;
         vm.showSubmenu = false;
         vm.service = dataService;
-
+        vm.mock =
         /**
 		 * What happens when a user hovers over tab.
          * @param isHover
@@ -75,15 +75,15 @@
 
 		function render()
 		{
-            vm.service.callGenericMethod('/getWebMenu', 'GET', {}).then(
-                function success(response) {
-                    console.log(response);
-
-                },
-                function error(reason) {
-
-                }
-            )
+            // vm.service.callGenericMethod('/getWebMenu', 'GET', {}).then(
+            //     function success(response) {
+            //         console.log(response);
+            //
+            //     },
+            //     function error(reason) {
+            //
+            //     }
+            // )
 		}
 
 		render();

@@ -64,6 +64,16 @@ table {
     color: black;
 }
 
+.top-banner {
+    margin-top: -3px;
+}
+.link-list {
+    color: silver;
+    margin-top: 5px;
+}
+.link-list > li  {
+    float: left;
+}
 .container {
     color: #2a2f31;
     font-family: "Proxima Nova Semibold";
@@ -192,4 +202,14 @@ hr
 .link-text {
     display: block;
     /*border: solid 1px Blue;*/
+}
+.img-row-1 {
+    max-height: 350px !important;
+}
+.outset-menu {
+    min-height: 5px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(105,105,105,0.21);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(105,105,105,0.21);
+    box-shadow: 0px 10px 5px 0px rgba(105,105,105,0.21);
 }
