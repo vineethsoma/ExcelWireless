@@ -3,13 +3,14 @@
 
 	angular.module('sampleApp').controller('BodyController', Body);
 
-	Body.$inject = [ '$scope', '$state', '$window', '$log', '$timeout'];
+	Body.$inject = [ '$scope', '$state', '$window', '$log', '$timeout', 'dataService'];
 
-	function Body($scope, $state, $window, $log, $timeout) {
+	function Body($scope, $state, $window, $log, $timeout, dataService) {
 
         var vm = this;
         vm.showMenu = false;
         vm.showSubmenu = false;
+        vm.service = dataService;
 
         /**
 		 * What happens when a user hovers over tab.
@@ -74,7 +75,15 @@
 
 		function render()
 		{
+            vm.service.callGenericMethod('/getWebMenu', 'GET', {}).then(
+                function success(response) {
+                    console.log(response);
 
+                },
+                function error(reason) {
+
+                }
+            )
 		}
 
 		render();
