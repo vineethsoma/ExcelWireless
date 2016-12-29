@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class LearnUiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LearnUiApplication.class, args);
+		SpringApplication.run(LearnUiApplication.class, argss);
 	}
 }
