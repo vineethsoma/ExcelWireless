@@ -241,8 +241,43 @@ form input[type="text"], form input[type="email"], form input[type="password"] {
 div {
     display: block;
 }
-.price
+.product-box {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+.product-description
+{
+    font-size: 15px;
+    font-family: "Proxima Nova Semibold" !important;
+
+}
+.product-price
 {
     font-size: 20px;
     color: red;
+    text-align: center;
+    padding: 5px;
+}
+
+.qut-text
+{
+    height: 40px;
+    width: 60px;
+}
+.center {
+    margin: auto;
+    width: 70%;
+    padding: 11px;
+}
+.btn
+{
+    margin-top: 10px;
 }
