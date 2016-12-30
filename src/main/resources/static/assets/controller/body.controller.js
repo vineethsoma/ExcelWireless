@@ -75,15 +75,14 @@
 
 		function render()
 		{
-            // vm.service.callGenericMethod('/getWebMenu', 'GET', {}).then(
-            //     function success(response) {
-            //         console.log(response);
-            //
-            //     },
-            //     function error(reason) {
-            //
-            //     }
-            // )
+            vm.service.callGenericMethod('/getWebMenu', 'GET', {}).then(
+                function success(response) {
+                    console.log(response);
+                },
+                function error(reason) {
+
+                }
+            )
 		}
 
 		render();

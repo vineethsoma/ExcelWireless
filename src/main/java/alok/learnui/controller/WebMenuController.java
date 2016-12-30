@@ -23,7 +23,6 @@ public class WebMenuController {
 
     @RequestMapping(value = "/getWebMenu", method = RequestMethod.GET)
     public MenuDto getWebMenu() {
-
         return webMenuManager.getWebMenu();
     }
 

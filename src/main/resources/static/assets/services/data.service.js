@@ -7,13 +7,13 @@
     function dataService($http, $log) {
         var service = {}, cache = false, vm = this;
         vm.domain = 'http://localhost';
-        vm.port = '';
+        vm.port = '8080';
         vm.defaultMethodPath = '/getWebMenu';
 
         service.callGenericMethod = function (methodPath, methodType, data, headers, successCallback, errorCallback) {
             var _headers = headers ? headers : {"Content-Type": "application/json"},
                 _domain = vm.domain,
-                _port = vm.port,
+                _port = (vm.port && vm.port.length > 0) ? (":" + vm.port) : "",
                 _path = methodPath || vm.defaultMethodPath,
                 _methodType = (methodType === "GET" || methodType === "PUT" || methodType === "POST" || methodType === 'PATCH' || methodType === "DELETE") ? methodType : "GET",
                 _successCallback, _errorCallback;
