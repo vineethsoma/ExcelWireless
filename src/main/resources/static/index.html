@@ -6,19 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Best mobile device deals...</title>
-
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/excellWire.css">
-
     <!-- Latest compiled and minified JavaScript -->
 </head>
 <body ng-controller="BodyController as bodyCtrl">
@@ -100,29 +96,35 @@
             </div>
         </div>
         <div class="row sub-menu" ng-show="bodyCtrl.showMenu" ng-mouseleave="bodyCtrl.leaveSubmenu($event)">
-            <div class="col-sm-12 col-md-12 sub-menu-cell">
-                <ul>
-                    <li ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]">
-                        <a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.showSubmenu($event)">Test Link {{$index}}</a>
-                    </li>
-                </ul>
+            <div class="col-sm-12 col-md-12">
+                <div class="row sub-menu-1">
+                    <div class="col-sm-12 col-md-12 sub-menu-cell">
+                        <ul>
+                            <li ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]">
+                                <a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.subMenuButtonEnter($event)">Test Link {{$index}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row sub-menu-2" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)">
+                    <div class="col-sm-12 col-md-12 sub-menu-cell">
+                        <ul>
+                            <li ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]">
+                                <a ng-href class="btn btn-default link-box" >Test Link {{$index}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row sub-sub-menu" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)">
-            <div class="col-sm-12 col-md-12 sub-menu-cell">
-                <ul>
-                    <li ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]">
-                        <a ng-href class="btn btn-default link-box" >Test Link {{$index}}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <!--<div class="row sub-sub-menu" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)">-->
+            <!---->
+        <!--</div>-->
     </div>
     <div class="container-fluid">
         <div class="row outset-menu"></div>
     </div>
     <div class="container">
-
         <div class="row">
             <div class="col-md-6 padding-2">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -147,7 +149,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Controls -->
                     <a class="left carousel-control" href="#carousel-example-generic" role="button" ng-non-bindable
                        data-slide="prev">
@@ -225,7 +226,6 @@
     <br>
     <br>
     <br>
-
     <hr>
         <div class="row">
             <div class="col-md-12" style="text-align: center">
