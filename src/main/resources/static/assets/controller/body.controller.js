@@ -39,16 +39,8 @@
             leavingBottom = pY >= (eY + eH);
             leavingTop = pY <= eY;
             if (pY >= (eY + eH)) { // if pointer Y pos is gt (elem y + elem height)
-                console.log("left: " + leavingLeft);
-                console.log("right: " + leavingRight);
-                console.log("bottom: " + leavingBottom);
-                console.log("top: " + leavingTop);
             	vm.setHover(true);
 			} else {
-                console.log("left: " + leavingLeft);
-                console.log("right: " + leavingRight);
-                console.log("bottom: " + leavingBottom);
-                console.log("top: " + leavingTop);
             	vm.setHover(false);
 			}
 		};
@@ -71,6 +63,14 @@
 
         vm.leaveSubmenu = function(event) {
             vm.setHover(false);
+        };
+
+        vm.subMenuButtonEnter = function(event) {
+            vm.showSubmenu = true;
+        };
+
+        vm.leaveSubSubmenu = function(event) {
+            vm.showSubmenu = false;
         };
 
 		function render()
