@@ -989,7 +989,7 @@ public class SQLQueries {
 
     public String getWebBrandsWithModel = "";
     public String getBrandIdsForWeb = "SELECT BRAND_ID FROM BRAND";
-    public String getModelDetailsForBrand = "SELECT distinct MODEL_ID FROM PRODUCT WHERE BRAND_ID = ? AND MODEL_ID <> 'NULL' ";
+    public String getModelDetailsForBrand = "SELECT distinct MODEL_ID FROM product WHERE BRAND_ID = ? AND MODEL_ID <> 'NULL' ";
     public String getModelDetailsForWeb = "SELECT * FROM MODEL WHERE MODEL_ID = ?";
 
     public String getProductDetailsByCategoryId = "SELECT * FROM PRODUCT WHERE CATEGORY_ID = ?";

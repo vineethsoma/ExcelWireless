@@ -78,14 +78,10 @@
                  ng-mouseleave="bodyCtrl.leaveTab($event)">
                 <span class="tab-text">CATEGORY</span>
             </div>
-            <div class="col-md-2 tab-hover tab-cell"
-                 ng-mouseenter="bodyCtrl.enterTab($event)"
-                 ng-mouseleave="bodyCtrl.leaveTab($event)">
+            <div class="col-md-2 tab-hover tab-cell">
                 <span class="tab-text">BRAND</span>
             </div>
-            <div class="col-md-2 tab-hover tab-cell"
-                 ng-mouseenter="bodyCtrl.enterTab($event)"
-                 ng-mouseleave="bodyCtrl.leaveTab($event)">
+            <div class="col-md-2 tab-hover tab-cell">
                 <span class="tab-text">PARTS</span>
             </div>
             <div class="col-md-2 link-hover tab-cell">
@@ -100,8 +96,11 @@
                 <div class="row sub-menu-1">
                     <div class="col-sm-12 col-md-12 sub-menu-cell">
                         <ul>
-                            <li ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]">
-                                <a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.subMenuButtonEnter($event)">Test Link {{$index}}</a>
+                            <!--<li ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]">-->
+                                <!--<a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.subMenuButtonEnter($event)">Test Link {{$index}}</a>-->
+                            <!--</li>-->
+                            <li ng-repeat="category in bodyCtrl.categoryList" ng-model="bodyCtrl.categoryList">
+                                <a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.subMenuButtonEnter($event)">{{category.categoryName}}</a>
                             </li>
                         </ul>
                     </div>
@@ -264,10 +263,10 @@
                 </div>
             </div>
         </div>
-        <!-- Controls --> <a class="left carousel-control" href="#text-carousel" data-slide="prev">
+        <!-- Controls --> <a class="left carousel-control" href="#text-carousel" ng-non-bindable data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
     </a>
-        <a class="right carousel-control" href="#text-carousel" data-slide="next">
+        <a class="right carousel-control" href="#text-carousel" ng-non-bindable data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
 

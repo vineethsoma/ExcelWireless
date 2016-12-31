@@ -11,6 +11,7 @@
         vm.showMenu = false;
         vm.showSubmenu = false;
         vm.service = dataService;
+        vm.categoryList = [];
         vm.mock =
         /**
 		 * What happens when a user hovers over tab.
@@ -77,7 +78,12 @@
 		{
             vm.service.callGenericMethod('/getWebMenu', 'GET', {}).then(
                 function success(response) {
-                    console.log(response);
+                    if (response.data && response.data.categoryDtoList) {
+                        vm.categoryList = response.data.categoryDtoList;
+                    } else {
+                        $log.$error("Category response is missing the categoryDtoList.  Unable to process request.", response);
+                    }
+
                 },
                 function error(reason) {
 
