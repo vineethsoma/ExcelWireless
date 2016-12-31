@@ -74,11 +74,13 @@
                 <span class="tab-text">HOME</span>
             </div>
             <div class="col-md-2 tab-hover tab-cell"
-                 ng-mouseenter="bodyCtrl.enterTab($event)"
+                 ng-mouseenter="bodyCtrl.enterTab('category', $event)"
                  ng-mouseleave="bodyCtrl.leaveTab($event)">
                 <span class="tab-text">CATEGORY</span>
             </div>
-            <div class="col-md-2 tab-hover tab-cell">
+            <div class="col-md-2 tab-hover tab-cell"
+                 ng-mouseenter="bodyCtrl.enterTab('brand', $event)"
+                 ng-mouseleave="bodyCtrl.leaveTab($event)">
                 <span class="tab-text">BRAND</span>
             </div>
             <div class="col-md-2 tab-hover tab-cell">
@@ -96,11 +98,8 @@
                 <div class="row sub-menu-1">
                     <div class="col-sm-12 col-md-12 sub-menu-cell">
                         <ul>
-                            <!--<li ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]">-->
-                                <!--<a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.subMenuButtonEnter($event)">Test Link {{$index}}</a>-->
-                            <!--</li>-->
-                            <li ng-repeat="category in bodyCtrl.categoryList" ng-model="bodyCtrl.categoryList">
-                                <a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.subMenuButtonEnter($event)">{{category.categoryName}}</a>
+                            <li ng-repeat="dataItem in bodyCtrl.dataList" ng-model="bodyCtrl.categoryList">
+                                <a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.subMenuButtonEnter($event)">{{dataItem.name}}</a>
                             </li>
                         </ul>
                     </div>
@@ -108,7 +107,7 @@
                 <div class="row sub-menu-2" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)">
                     <div class="col-sm-12 col-md-12 sub-menu-cell">
                         <ul>
-                            <li ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]">
+                            <li ng-repeat="subItem in bodyCtrl.subItems">
                                 <a ng-href class="btn btn-default link-box" >Test Link {{$index}}</a>
                             </li>
                         </ul>
@@ -116,9 +115,6 @@
                 </div>
             </div>
         </div>
-        <!--<div class="row sub-sub-menu" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)">-->
-            <!---->
-        <!--</div>-->
     </div>
     <div class="container-fluid">
         <div class="row outset-menu"></div>
@@ -338,6 +334,7 @@
 <script type="text/javascript" src="libs/jquery.js"></script>
 <script type="text/javascript" src="libs/jquery.blockUI.js"></script>
 <script type="text/javascript" src="libs/jquery-ui.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.16.3/lodash.min.js"></script>
 <script type="text/javascript" src="libs/daterangepicker.js"></script>
 <script type="text/javascript" src="libs/moment.min.js"></script>
 <script type="text/javascript" src="libs/bootstrap.js"></script>
