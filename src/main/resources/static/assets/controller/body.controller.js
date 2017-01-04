@@ -3,9 +3,9 @@
 
     angular.module('sampleApp').controller('BodyController', Body);
 
-    Body.$inject = ['$scope', '$state', '$window', '$log', '$timeout', 'dataService'];
+    Body.$inject = ['$scope', '$state', '$window', '$log', '$timeout', 'dataService', 'productDetailsService'];
 
-    function Body($scope, $state, $window, $log, $timeout, dataService) {
+    function Body($scope, $state, $window, $log, $timeout, dataService, productDetailsService) {
 
         var vm = this;
         vm.showMenu = false;
@@ -15,6 +15,7 @@
         vm.brandList = [];
         vm.dataList = [];
         vm.responseData = {};
+        vm.productMethods = productDetailsService;
 
         vm.setDataList = function (name) {
             vm.dataList = [];
@@ -99,6 +100,16 @@
             vm.showSubmenu = false;
         };
 
+        function success(response)  {
+            console.log("Success getting product details.");
+            console.log(response);
+        }
+
+        function error(reason) {
+            console.log("error getting product details.");
+            console.log(reason);
+        }
+
         function render() {
             vm.service.callGenericMethod('/getWebMenu', 'GET', {}).then(
                 function success(response) {
@@ -112,11 +123,12 @@
                         $log.$error("Category response is missing the categoryDtoList.  Unable to process request.", response);
                     }
 
-                },
-                function error(reason) {
-
                 }
             )
+
+            vm.productMethods.getProdByCatId(5).then(success, error);
+
+
         }
 
         render();
