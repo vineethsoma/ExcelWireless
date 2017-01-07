@@ -5,10 +5,18 @@ import alok.learnui.util.SQLQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.support.SqlLobValue;
+import org.springframework.jdbc.support.lob.DefaultLobHandler;
+import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +48,8 @@ public class ProductManager {
         }
         return productList;
     }
+
+
 
     private final class ProductMapperForEcomerce implements RowMapper<ProductEcomerceDto>
     {
@@ -83,5 +93,21 @@ public class ProductManager {
         return productList;
     }
 
+    public void insertProductImage(int product_id, String image_path) throws FileNotFoundException {
+
+        File image = new File(image_path);
+
+        InputStream inputStream = new FileInputStream(image);
+
+        LobHandler lobHandler = new DefaultLobHandler();
+
+        SqlLobValue lobValue = new SqlLobValue(inputStream, (int )image.length(), lobHandler);
+
+        int a = jdbcTemplate.update(sqlQueries.updateProductImage,new Object[]{lobValue, product_id}, new int[] {Types.BLOB, Types.INTEGER});
+
+        System.out.println(a);
+
+
+    }
 
 }

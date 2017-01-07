@@ -995,4 +995,5 @@ public class SQLQueries {
     public String getProductDetailsByCategoryId = "SELECT * FROM product WHERE CATEGORY_ID = ?";
 
     public String getProductDetailsByBrandAndModelId = "SELECT * FROM product WHERE BRAND_ID = ? AND MODEL_ID = ?";
+    public String updateProductImage = "UPDATE product SET IMAGE = ? WHERE PRODUCT_ID = ?";
 }

@@ -5,6 +5,7 @@ import alok.learnui.dto.ProductEcomerceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -29,4 +30,12 @@ public class ProductController {
 
         return productManager.getEcommerceProductsByBrand(brand_Id,model_Id);
     }
+
+    @RequestMapping(value = "/insertProductImage", method = RequestMethod.GET)
+    public void insertProductImage(@RequestParam int product_Id, @RequestParam String image_Path) throws FileNotFoundException {
+
+        productManager.insertProductImage(product_Id,image_Path);
+    }
+
+
 }
