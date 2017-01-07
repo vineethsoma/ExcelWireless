@@ -7,19 +7,19 @@
     function productDetailsService(dataService) {
         var vm = this;
         vm.genericService = dataService;
-        vm.productDetailsEndpoint = "/getProductByCategory?category=";
+        vm.productDetailsEndpoint = "/getProductsByCategory?category_Id=";
 
         /**
          * getProductByCategoryId
          * @param catId
          */
         function getProductByCategory(catId) {
-            return vm.dataService.callGenericMethod(vm.productDetailsEndpoint + catId ,'GET', {});
+            var path = vm.productDetailsEndpoint + catId;
+            return vm.genericService.callGenericMethod(path,'GET', {});
         }
 
         return {
            getProdByCatId: getProductByCategory
-
         }
     }
 }());

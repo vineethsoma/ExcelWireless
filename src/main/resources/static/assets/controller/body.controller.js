@@ -124,13 +124,10 @@
                     }
 
                 }
-            )
+            );
 
-            vm.productMethods.getProdByCatId(5).then(success, error);
-
-
+            vm.productMethods.getProdByCatId(12).then(success, error);
         }
-
         render();
     }
 })();
