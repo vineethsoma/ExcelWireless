@@ -66,5 +66,22 @@ public class ProductManager {
             return product;
         }
     }
+    public List<ProductEcomerceDto> getEcommerceProductsByBrand(int brand_Id,int model_Id) {
+
+        List<ProductEcomerceDto> productList = new ArrayList<>();
+
+        try
+        {
+            productList = jdbcTemplate.query(sqlQueries.getProductDetailsByBrandAndModelId,new ProductMapperForEcomerce(),brand_Id,model_Id);
+
+            System.out.println("Send Product Details by Brand and Model Successfully");
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return productList;
+    }
+
 
 }
