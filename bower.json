@@ -1,0 +1,26 @@
+{
+  "name": "excel-wireless",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "Alok Patel"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/abmsource/excelWireless",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-ui-router": "^0.3.2",
+    "bootstrap": "^3.3.7",
+    "bootstrap-sass": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "lodash": "^4.17.4",
+    "jquery": "^3.1.1"
+  }
+}

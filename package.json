@@ -1,0 +1,22 @@
+{
+  "name": "excel-wireless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abmsource/excelWireless.git"
+  },
+  "author": "Alok Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abmsource/excelWireless/issues"
+  },
+  "homepage": "https://github.com/abmsource/excelWireless#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
