@@ -93,28 +93,7 @@
                 <a href="libscontactUs.html" class="tab-text"> <span>CONTACT US</span></a>
             </div>
         </div>
-        <div class="row sub-menu" ng-show="bodyCtrl.showMenu" ng-mouseleave="bodyCtrl.leaveSubmenu($event)">
-            <div class="col-sm-12 col-md-12">
-                <div class="row sub-menu-1">
-                    <div class="col-sm-12 col-md-12 sub-menu-cell">
-                        <ul>
-                            <li ng-repeat="dataItem in bodyCtrl.dataList" ng-model="bodyCtrl.categoryList">
-                                <a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.subMenuButtonEnter($event)">{{dataItem.name}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row sub-menu-2" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)">
-                    <div class="col-sm-12 col-md-12 sub-menu-cell">
-                        <ul>
-                            <li ng-repeat="subItem in bodyCtrl.subItems">
-                                <a ng-href class="btn btn-default link-box" >Test Link {{$index}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
     </section>
@@ -274,7 +253,7 @@
 <script type="text/javascript" src="libs/Chart.js"></script>
 <script type="text/javascript" src="libs/angular-chart.js"></script>
 <script type="application/javascript" src="libs/ng-infinite-scroll.js"></script>
-<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="app.module.js"></script>
 <script type="text/javascript" src="assets/services/data.service.js"></script>
 <script type="text/javascript" src="assets/controller/body.controller.js"></script>
 
