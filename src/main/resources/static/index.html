@@ -19,6 +19,7 @@
     <link rel = "stylesheet" href = "assets/css/lcdBuyBack.css">
     <link rel="stylesheet" href="assets/css/contactUs.css">
     <link rel="stylesheet" href="assets/css/signUp.css">
+
     <!-- Latest compiled and minified JavaScript -->
 </head>
 <body>
@@ -94,8 +95,32 @@
             </div>
         </div>
     </div>
+    <div class="row sub-menu" ng-show="bodyCtrl.showMenu" ng-mouseleave="bodyCtrl.leaveSubmenu($event)">
+        <div class="col-sm-12 col-md-12">
+            <div class="row sub-menu-1">
+                <div class="col-sm-12 col-md-12 sub-menu-cell">
+                    <ul>
+                        <li ng-repeat="dataItem in bodyCtrl.dataList" ng-model="bodyCtrl.categoryList">
+                            <a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.subMenuButtonEnter($event)">{{dataItem.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row sub-menu-2" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)">
+                <div class="col-sm-12 col-md-12 sub-menu-cell">
+                    <ul>
+                        <li ng-repeat="subItem in bodyCtrl.subItems">
+                            <a ng-href class="btn btn-default link-box" >Test Link {{$index}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid">
-        <div class="row outset-menu"></div>
+        <div class="row outset-menu">
+
+        </div>
     </div>
 </section>
 <div>
@@ -143,6 +168,7 @@
                         <li class="footer-top-margin">My Cart</li>
                         <li class="footer-top-margin">History</li>
 
+
                     </ul>
                 </div>
                 <div class="col-md-3">
@@ -165,6 +191,9 @@
 <!--<script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js "> </script>-->
 <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
 <script type="text/javascript" src="app.module.js"></script>
+<script type="text/javascript" src="app/common/body.controller.js"></script>
+<script type="text/javascript" src="app/common/data.service.js"></script>
+<script type="text/javascript" src="app/common/productDetails.service.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
 <script type="text/javascript" src = "app/login/loginController.js"></script>
 <script type="text/javascript" src="app/home/homeController.js"></script>

@@ -1,5 +1,5 @@
 (function() {
-    angular.module('sampleApp')
+    angular.module('excelWireless')
         .factory("productDetailsService", productDetailsService);
 
     productDetailsService.$inject = ['dataService'];
