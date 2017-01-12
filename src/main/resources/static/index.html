@@ -50,7 +50,7 @@
         </div>
     </div>
 </header>
-<section>
+<section ng-controller="BodyController as bodyCtrl">
     <div class="container main-content">
         <div class="row">
             <div class="col-md-6 no-padding"><a href="index.html"><img src="assets/images/logo.png" height="80" width="220"></a></div>
@@ -70,7 +70,7 @@
                 </a>
                 <a href="signIn.html" class="site-button login-button">
                     <i class="fa fa-sign-in" aria-hidden="true"></i>
-                    <span class="login-text" ui-sref = "login">SIGN IN</span>
+                    <span class="login-text">SIGN IN</span>
                 </a>
             </div>
         </div>
@@ -78,41 +78,48 @@
             <div class="col-md-2 tab-cell">
                 <span class="tab-text">HOME</span>
             </div>
-            <div class="col-md-2 tab-hover tab-cell">
+            <div class="col-md-2 tab-hover tab-cell"
+                 ng-mouseenter="bodyCtrl.enterTab('category', $event)"
+                 ng-mouseleave="bodyCtrl.leaveTab($event)">
                 <span class="tab-text">CATEGORY</span>
             </div>
-            <div class="col-md-2 tab-hover tab-cell">
+            <div class="col-md-2 tab-hover tab-cell"
+                 ng-mouseenter="bodyCtrl.enterTab('brand', $event)"
+                 ng-mouseleave="bodyCtrl.leaveTab($event)">
                 <span class="tab-text">BRAND</span>
             </div>
             <div class="col-md-2 tab-hover tab-cell">
                 <span class="tab-text">PARTS</span>
             </div>
             <div class="col-md-2 link-hover tab-cell">
-                <a ui-sref = "lcdBuyback" class="tab-text"> <span>LCD BUYBACK</span> </a>
+                <a href="libslcdBuyBack.html" class="tab-text"> <span>LCD BUYBACK</span> </a>
             </div>
             <div class="col-md-2 link-hover tab-cell">
-                <a  ui-sref = "contactUs" class ="tab-text"> <span>CONTACT US </span> </a>
+                <a href="libscontactUs.html" class="tab-text"> <span>CONTACT US</span></a>
             </div>
         </div>
-    </div>
-    <div class="row sub-menu" ng-show="bodyCtrl.showMenu" ng-mouseleave="bodyCtrl.leaveSubmenu($event)">
-        <div class="col-sm-12 col-md-12">
-            <div class="row sub-menu-1">
-                <div class="col-sm-12 col-md-12 sub-menu-cell">
-                    <ul>
-                        <li ng-repeat="dataItem in bodyCtrl.dataList" ng-model="bodyCtrl.categoryList">
-                            <a ng-href class="btn btn-default link-box" ng-mouseover="bodyCtrl.subMenuButtonEnter($event)">{{dataItem.name}}</a>
-                        </li>
-                    </ul>
+        <div class="row sub-menu" ng-show="bodyCtrl.showMenu" ng-mouseleave="bodyCtrl.leaveSubmenu($event)">
+            <div class="col-sm-12 col-md-12">
+                <div class="row sub-menu-1">
+                    <div class="col-sm-12 col-md-12 sub-menu-cell">
+                        <ul>
+                            <li ng-repeat="dataItem in bodyCtrl.dataList" ng-model="bodyCtrl.categoryList">
+                                <a ng-href
+                                   class="btn btn-default link-box"
+                                   ng-mouseover="bodyCtrl.subMenuButtonEnter($event)"
+                                   ng-click="bodyCtrl.getSubMenuItems(dataItem)">{{dataItem.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="row sub-menu-2" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)">
-                <div class="col-sm-12 col-md-12 sub-menu-cell">
-                    <ul>
-                        <li ng-repeat="subItem in bodyCtrl.subItems">
-                            <a ng-href class="btn btn-default link-box" >Test Link {{$index}}</a>
-                        </li>
-                    </ul>
+                <div class="row sub-menu-2" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)">
+                    <div class="col-sm-12 col-md-12 sub-menu-cell">
+                        <ul>
+                            <li ng-repeat="subItem in bodyCtrl.subListData" ng-model="bodyCtrl.subListData">
+                                <a ng-href class="btn btn-default link-box" >{{subItem.description}}</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -187,6 +194,7 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="bower_components/lodash/dist/lodash.js"></script>
 <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"> </script>
 <!--<script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js "> </script>-->
 <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>

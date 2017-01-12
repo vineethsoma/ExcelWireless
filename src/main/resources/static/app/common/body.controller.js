@@ -13,7 +13,9 @@
         vm.service = dataService;
         vm.categoryList = [];
         vm.brandList = [];
+        vm.subListData = [];
         vm.dataList = [];
+        vm.productList = [];
         vm.responseData = {};
         vm.productMethods = productDetailsService;
 
@@ -21,12 +23,40 @@
             vm.dataList = [];
             if (name === 'category') {
                 vm.categoryList.forEach(function (item, index) {
-                    vm.dataList.push({"id": item.categoryId, "name": item.categoryName});
+                    vm.dataList.push({"categoryId": item.categoryId, "id": item.categoryId, "name": item.categoryName});
                 });
+
             } else if (name === 'brand') {
                 vm.brandList.forEach(function (item, index) {
-                    vm.dataList.push({ "id": item.brandId, "name": item.brandName, "modelList": item.modelDtoList })
+                    vm.dataList.push({ "brandId": item.brandId, "id": item.brandId, "name": item.brandName, "modelList": item.modelDtoList })
                 });
+            }
+        };
+
+
+        vm.getSubMenuItems = function(dataItem) {
+            var item = {};
+            vm.subListData = [];
+            if (dataItem.hasOwnProperty("brandId")) {
+                // we have brands, now get the models.
+                item = _.find(vm.dataList, function(o) { return o.brandId === dataItem.brandId; });
+                if (item && item.modelList) {
+                    vm.subListData = item.modelList || [];
+                    console.log(vm.subListData);
+                }
+            } else if (dataItem.hasOwnProperty("categoryId")) {
+                item = _.find(vm.dataList, function(o) { return o.categoryId === dataItem.categoryId; });
+                if (item) {
+                    if (vm.productList) {
+                        vm.subListData = _.filter(vm.productList, function(o) { return o.categoryId === item.categoryId; })
+                        console.log(vm.subListData);
+                    }
+                }
+            }
+            if (vm.subListData.length > 0) {
+                vm.showSubmenu = true;
+            } else {
+                vm.showSubmenu = false;
             }
         };
 
@@ -92,8 +122,8 @@
         };
 
         vm.subMenuButtonEnter = function (event) {
-            console.log(event);
-            vm.showSubmenu = true;
+            //console.log(event);
+            //vm.showSubmenu = true;
         };
 
         vm.leaveSubSubmenu = function (event) {
@@ -101,13 +131,14 @@
         };
 
         function success(response)  {
-            console.log("Success getting product details.");
-            console.log(response);
+            vm.productList = response.data || [];
+            //console.log("Success getting product details.");
+            //console.log(response);
         }
 
         function error(reason) {
-            console.log("error getting product details.");
-            console.log(reason);
+            //console.log("error getting product details.");
+            //console.log(reason);
         }
 
         function render() {
