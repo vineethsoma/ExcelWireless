@@ -1,0 +1,24 @@
+{
+  "name": "excelwireless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bower": "^1.8.0",
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "prepublish": "node_modules/.bin/bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abmsource/excelWireless.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abmsource/excelWireless/issues"
+  },
+  "homepage": "https://github.com/abmsource/excelWireless#readme"
+}
