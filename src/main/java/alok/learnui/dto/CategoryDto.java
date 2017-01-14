@@ -9,24 +9,8 @@ public class CategoryDto {
     private String categoryName;
     private String description;
     private int noOfProducts;
-
-    public String getFilterValue() {
-        return filterValue;
-    }
-
-    public void setFilterValue(String filterValue) {
-        this.filterValue = filterValue;
-    }
-
     private String filterValue;
 
-    public int getNoOfProducts() {
-        return noOfProducts;
-    }
-
-    public void setNoOfProducts(int noOfProducts) {
-        this.noOfProducts = noOfProducts;
-    }
     public int getCategoryId() {
         return categoryId;
     }
@@ -51,9 +35,19 @@ public class CategoryDto {
         this.description = description;
     }
 
+    public int getNoOfProducts() {
+        return noOfProducts;
+    }
 
+    public void setNoOfProducts(int noOfProducts) {
+        this.noOfProducts = noOfProducts;
+    }
 
+    public String getFilterValue() {
+        return filterValue;
+    }
 
-
-
+    public void setFilterValue(String filterValue) {
+        this.filterValue = filterValue;
+    }
 }
