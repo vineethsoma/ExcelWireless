@@ -1,5 +1,5 @@
 ﻿'use strict'
-var app = angular.module('excelWireless', ['ui.router']);
+var app = angular.module('excelWireless', ['ui.router', 'ui.bootstrap']);
 
 app.config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
 
