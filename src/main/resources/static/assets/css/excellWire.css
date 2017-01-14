@@ -230,7 +230,7 @@ hr
     max-width: 215px;
     width: 215px;
     letter-spacing: 2px;
-    border: solid 1px #2a2f31;
+    border: solid 2px Silver;
     background: none;
     background-color: #FFF;
 
@@ -349,4 +349,12 @@ hr
 .testimonial-font {
     font-family: "Lora Italic";
     font-size: 20px;
+}
+
+.carousel-image-1 {
+   background-image: url("../images/DSC_4663.jpg");
+}
+
+.carousel-image-2 {
+   background-image: url("../images/011.jpg");
 }
