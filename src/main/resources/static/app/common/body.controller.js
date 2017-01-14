@@ -28,6 +28,13 @@
 
             } else if (name === 'brand') {
                 vm.brandList.forEach(function (item, index) {
+                    if (item.modelDtoList && item.modelDtoList.length > 0) {
+                        item.modelDtoList.forEach(function(o, i) {
+                            if (o.modelName) {
+                                o['description'] = o.modelName;
+                            }
+                        });
+                    }
                     vm.dataList.push({ "brandId": item.brandId, "id": item.brandId, "name": item.brandName, "modelList": item.modelDtoList })
                 });
             }
