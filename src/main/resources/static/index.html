@@ -50,7 +50,8 @@
         </div>
     </div>
 </header>
-<section ng-controller="BodyController as bodyCtrl">
+<section ng-controller = "BodyController as bodyCtrl">
+
     <div class="container main-content">
         <div class="row">
             <div class="col-md-6 no-padding"><a href="index.html"><img src="assets/images/logo.png" height="80" width="220"></a></div>
@@ -116,7 +117,7 @@
                     <div class="col-sm-12 col-md-12 sub-menu-cell">
                         <ul>
                             <li ng-repeat="subItem in bodyCtrl.subListData" ng-model="bodyCtrl.subListData">
-                                <a ng-href class="btn btn-default link-box" >{{subItem.description}}</a>
+                                <a ng-href class="btn btn-default link-box" >{{subItem.modelName}}</a>
                             </li>
                         </ul>
                     </div>
