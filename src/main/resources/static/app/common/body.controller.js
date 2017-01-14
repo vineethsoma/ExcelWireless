@@ -38,6 +38,8 @@
             var item = {};
             vm.subListData = [];
             if (dataItem.hasOwnProperty("brandId")) {
+                $log.info("Checking model data for brand: " + dataItem.brandId);
+                $log.info(dataItem);
                 // we have brands, now get the models.
                 item = _.find(vm.dataList, function(o) { return o.brandId === dataItem.brandId; });
                 if (item && item.modelList) {
@@ -45,7 +47,10 @@
                     console.log(vm.subListData);
                 }
             } else if (dataItem.hasOwnProperty("categoryId")) {
+                $log.info("Checking Product data for category: " + dataItem.categoryId);
+                $log.info(dataItem);
                 item = _.find(vm.dataList, function(o) { return o.categoryId === dataItem.categoryId; });
+                $log.info(item);
                 if (item) {
                     if (vm.productList) {
                         vm.subListData = _.filter(vm.productList, function(o) { return o.categoryId === item.categoryId; })
@@ -148,8 +153,11 @@
                         response.data.categoryDtoList &&
                         response.data.webBrandDtoList) {
                         vm.categoryList = response.data.categoryDtoList;
+                        $log.info("categories");
+                        $log.info(vm.categoryList);
                         vm.brandList = response.data.webBrandDtoList;
-                        $log.info(response);
+                        $log.info("brands");
+                        $log.info(vm.brandList);
                     } else {
                         $log.$error("Category response is missing the categoryDtoList.  Unable to process request.", response);
                     }

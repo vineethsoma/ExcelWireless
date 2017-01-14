@@ -1,15 +1,16 @@
-/**
- * Created by asp5045 on 1/10/17.
- */
-'use strict';
+(function() {
+    /**
+     * Created by asp5045 on 1/10/17.
+     */
+    'use strict';
 
-angular.module('excelWireless').controller('contactUsController',contactUsFunction);
+    angular.module('excelWireless').controller('contactUsController',contactUsFunction);
 
-contactUsFunction.$inject = ['$scope', '$state'];
+    contactUsFunction.$inject = ['$scope', '$state'];
 
-function contactUsFunction($scope, $state) {
+    function contactUsFunction($scope, $state) {
 
-    $scope.navigate = function () {
+        $scope.navigate = function () {
 
 
 
@@ -17,6 +18,6 @@ function contactUsFunction($scope, $state) {
 
 
 
+        }
     }
-
-}
+}());

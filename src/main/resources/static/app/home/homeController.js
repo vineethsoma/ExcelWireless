@@ -1,9 +1,11 @@
-'use strict';
+(function() {
+    'use strict';
 
-angular.module('excelWireless').controller('homeController',homeFunction);
+    angular.module('excelWireless').controller('homeController',homeFunction);
 
-homeFunction.$inject = ['$scope'];
+    homeFunction.$inject = ['$scope'];
 
-function homeFunction($scope) {
+    function homeFunction($scope) {
 
-}
+    }
+}());
