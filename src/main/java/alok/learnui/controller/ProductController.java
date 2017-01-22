@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -25,14 +26,14 @@ public class ProductController {
         return productManager.getEcommerceProductsByCategory(category_Id);
     }
 
-    @RequestMapping(value = "/getEcommerceProductsByBrand", method = RequestMethod.GET)
-    public List<ProductEcomerceDto> getEcommerceProductsByBrand(@RequestParam int brand_Id, @RequestParam int model_Id) {
+    @RequestMapping(value = "/getEcommerceProductsByModel", method = RequestMethod.GET)
+    public List<ProductEcomerceDto> getEcommerceProductsByBrand(@RequestParam int model_Id) {
 
-        return productManager.getEcommerceProductsByBrand(brand_Id,model_Id);
+        return productManager.getEcommerceProductsByBrand(model_Id);
     }
 
     @RequestMapping(value = "/insertProductImage", method = RequestMethod.GET)
-    public void insertProductImage(@RequestParam int product_Id, @RequestParam String image_Path) throws FileNotFoundException {
+    public void insertProductImage(@RequestParam int product_Id, @RequestParam String image_Path) throws IOException {
 
         productManager.insertProductImage(product_Id,image_Path);
     }

@@ -3,17 +3,18 @@ package alok.learnui.bl;
 import alok.learnui.dto.ProductEcomerceDto;
 import alok.learnui.util.SQLQueries;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.support.AbstractLobCreatingPreparedStatementCallback;
 import org.springframework.jdbc.core.support.SqlLobValue;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
+import org.springframework.jdbc.support.lob.LobCreator;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -70,21 +71,22 @@ public class ProductManager {
             product.setRetailPrice(rs.getDouble("RETAIL_PRICE"));
             product.setQuantity(rs.getInt("QUANTITY"));
             product.setAddTax(rs.getBoolean("TAX"));
+            product.setImage(rs.getString("IMAGE"));
 
 
 
             return product;
         }
     }
-    public List<ProductEcomerceDto> getEcommerceProductsByBrand(int brand_Id,int model_Id) {
+    public List<ProductEcomerceDto> getEcommerceProductsByBrand(int model_Id) {
 
         List<ProductEcomerceDto> productList = new ArrayList<>();
 
         try
         {
-            productList = jdbcTemplate.query(sqlQueries.getProductDetailsByBrandAndModelId,new ProductMapperForEcomerce(),brand_Id,model_Id);
+            productList = jdbcTemplate.query(sqlQueries.getProductDetailsByModelId,new ProductMapperForEcomerce(),model_Id);
 
-            System.out.println("Send Product Details by Brand and Model Successfully");
+            System.out.println("Send Product Details by Model Successfully");
         }
         catch (Exception e)
         {
@@ -93,11 +95,10 @@ public class ProductManager {
         return productList;
     }
 
-    public void insertProductImage(int product_id, String image_path) throws FileNotFoundException {
+    public void insertProductImage(int product_id, String image_path) throws IOException {
 
-        File image = new File(image_path);
-
-        InputStream inputStream = new FileInputStream(image);
+        final File image = new File(image_path);
+        final InputStream inputStream = new FileInputStream(image);
 
         LobHandler lobHandler = new DefaultLobHandler();
 

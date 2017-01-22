@@ -19,7 +19,7 @@ app.config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$url
 
         .state('contactUs',{
             url:'/contactUs',
-            templateUrl:"app/contactUs/contactUs.html",
+            templateUrl:'app/contactUs/contactUs.html',
             controller:'contactUsController'
         })
 
@@ -29,8 +29,12 @@ app.config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$url
         })
 
         .state('signUp',{
-            url:"/signUp",
-            templateUrl:"app/signUp.html"
+            url:'/signUp',
+            templateUrl:'app/signUp.html'
+        })
+        .state('products',{
+            url:'/products',
+            templateUrl:'app/product/product.html'
         });
 
 }]);

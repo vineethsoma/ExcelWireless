@@ -1,0 +1,19 @@
+
+<div class="container" ng-controller = "ProductController as product">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3" ng-repeate = "products in product.product">
+                <div>
+                    <img class= "img-responsive" src="../../assets/images/IPH_6_4_7_TPPCAG_SD0114_1_5247667688023295897_big.jpg" alt="..."> 
+                </div>
+                <h3 class="product-description">{{products.description}}</h3>
+                <h3 class="product-price">$19.99</h3>
+                <div class="input-group center">
+                    <input type="text" class="form-control"  placeholder="Quantity">
+                    <button type="button" class="btn btn-primary">Add To Cart</button>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>

@@ -63,15 +63,15 @@
                     </span>
                 </div>
             </div>
-            <div class="col-sm-3 col-md-3 no-padding">
-                <a ng-href class="site-button cart-button">
+            <div class="col-sm-3 col-md-3 no-padding" ng-controller = "a as alok">
+                <a ng-href class="site-button cart-button" ng-click = "alok.getMenu()">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     <span class="badge cart-badge">4</span>
                     <span class="cart-text"> Cart </span>
                 </a>
                 <a href="signIn.html" class="site-button login-button">
                     <i class="fa fa-sign-in" aria-hidden="true"></i>
-                    <span class="login-text">SIGN IN</span>
+                    <span class="login-text" ui-sref = "login">SIGN IN</span>
                 </a>
             </div>
         </div>
@@ -93,10 +93,10 @@
                 <span class="tab-text">PARTS</span>
             </div>
             <div class="col-md-2 link-hover tab-cell">
-                <a href="libslcdBuyBack.html" class="tab-text"> <span>LCD BUYBACK</span> </a>
+                <a href="libslcdBuyBack.html" class="tab-text"> <span ui-sref = "lcdBuyback">LCD BUYBACK</span> </a>
             </div>
             <div class="col-md-2 link-hover tab-cell">
-                <a href="libscontactUs.html" class="tab-text"> <span>CONTACT US</span></a>
+                <a href="libscontactUs.html" class="tab-text"> <span ui-sref = "contactUs">CONTACT US</span></a>
             </div>
         </div>
         <div class="row sub-menu" ng-show="bodyCtrl.showMenu" ng-mouseleave="bodyCtrl.leaveSubmenu($event)">
@@ -108,16 +108,16 @@
                                 <a ng-href
                                    class="btn btn-default link-box"
                                    ng-mouseover="bodyCtrl.subMenuButtonEnter($event)"
-                                   ng-click="bodyCtrl.getSubMenuItems(dataItem)">{{dataItem.name}}</a>
+                                   ng-click="bodyCtrl.getSubMenuItems(dataItem,dataItem)">{{dataItem.name}}</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="row sub-menu-2" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)">
+                <div class="row sub-menu-2" ng-show="bodyCtrl.showSubmenu" ng-mouseleave="bodyCtrl.leaveSubSubmenu($event)"  ng-controller = "a as alok">
                     <div class="col-sm-12 col-md-12 sub-menu-cell">
                         <ul>
                             <li ng-repeat="subItem in bodyCtrl.subListData" ng-model="bodyCtrl.subListData">
-                                <a ng-href class="btn btn-default link-box" >{{subItem.description}}</a>
+                                <a ng-href class="btn btn-default link-box" ng-click="alok.getProduct(subItem.modelId)" ui-sref = "products">{{subItem.description}}</a>
                                 <!--<a ng-href class="btn btn-default link-box" >test link</a>-->
                             </li>
                         </ul>
@@ -210,7 +210,12 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
 <script type="text/javascript" src = "app/login/loginController.js"></script>
 <!--<script type="text/javascript" src="app/home/home.component.js"></script>-->
+<script type="text/javascript" src="app/common/GlobleVariavble.js"></script>
 <script type="text/javascript" src="app/home/homeController.js"></script>
 <script type="text/javascript" src="app/contactUs/contactUsController.js"></script>
+<script type="text/javascript" src="app/common/a.js"></script>
+<script type="text/javascript" src="app/common/genericService.js"></script>
+<script type="text/javascript" src="app/product/productController.js"></script>
+<script type="text/javascript" src="app/SignUpController.js"></script>
 </body>
 </html>

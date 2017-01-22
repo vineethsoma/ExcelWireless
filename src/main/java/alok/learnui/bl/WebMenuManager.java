@@ -63,6 +63,8 @@ public class WebMenuManager {
         menuDto.setCategoryDtoList(categoryDtoList);
         menuDto.setWebBrandDtoList(webBrandDtoList);
 
+        System.out.println("Send Web Menu Details Successfully");
+
         return menuDto;
 
 

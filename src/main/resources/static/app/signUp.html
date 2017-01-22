@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller = "SignUpController as signUp">
     <div style="font-size: 35px">
         <h2>Create Customer</h2>
     </div>
@@ -6,35 +6,35 @@
             <div class="col-md-6">
 
                     <label>First Name:</label>
-                    <input type="text" class="form-control" placeholder="FirstName">
+                    <input type="text" class="form-control" placeholder="FirstName" ng-model = "firstName">
             </div>
 
                 <div class="col-md-6">
                     <label>Last Name:</label>
-                    <input type="text" class="form-control" placeholder="LastName"> </input>
+                    <input type="text" class="form-control" placeholder="LastName" ng-model = "lastName"> </input>
                 </div>
 
                 <div class="col-md-6">
                     <label>Phone Number:</label>
-                    <input type="text" class="form-control" placeholder="PhoneNumber"> </input>
+                    <input type="text" class="form-control" placeholder="PhoneNumber" ng-model = "phoneNumber"> </input>
                 </div>
 
                 <div class="col-md-6">
                     <label>Tax Id:</label>
-                    <input type="text" class="form-control" placeholder="Tax Id"> </input>
+                    <input type="text" class="form-control" placeholder="Tax Id" ng-model = "taxId"> </input>
                 </div>
 
                 <div class="col-md-6">
                     <label>Date Of Birth:</label>
-                    <input type="text" class="form-control" placeholder="Tax Id"> </input>
+                    <input type="text" class="form-control" placeholder="Date Of Birth" ng-model = "dateOfBirth"> </input>
                 </div>
                 <div class="col-md-6">
                     <label>Email:</label>
-                    <input type="text" class="form-control" placeholder="Email"> </input>
+                    <input type="text" class="form-control" placeholder="Email" ng-model = "email"> </input>
                 </div>
                 <div class="col-md-6">
                     <label>Customer Type:</label>
-                    <select class="form-control">
+                    <select class="form-control" ng-model = customerType>
                         <option>Business Customer</option>
                         <option>Retail Customer</option>
                     </select>
@@ -54,19 +54,19 @@
             <label>CompanyName:</label>
             </div>
         <div class="col-md-12">
-            <input type="text" class="form-control" placeholder="Company Name"> </input>
+            <input type="text" class="form-control" placeholder="Company Name" ng-model = "companyName"> </input>
         </div>
         <div class="col-md-6">
             <label>Street:</label>
-            <input type="text" class="form-control" placeholder="Street"> </input>
+            <input type="text" class="form-control" placeholder="Street" ng-model = "street"> </input>
         </div>
         <div class="col-md-6">
             <label>City:</label>
-            <input type="text" class="form-control" placeholder="City"> </input>
+            <input type="text" class="form-control" placeholder="City" ng-model = "city"> </input>
         </div>
         <div class="col-md-6">
             <label>ZipCode:</label>
-            <input type="text" class="form-control" placeholder="ZipCode"> </input>
+            <input type="text" class="form-control" placeholder="ZipCode" ng-model = zipCode> </input>
         </div>
         <div class="col-md-6">
             <label>State:</label>
@@ -78,7 +78,7 @@
         <div class="col-md-12">
             <div class="col-md-4"> </div>
             <div class="col-md-4" style="padding: 15px">
-                <button type="button" class="btn btn-primary" style="width: 100%;padding: 10px">Register</button>
+                <button type="button" class="btn btn-primary" style="width: 100%;padding: 10px" ng-click = "signUp.addCustomer()">Register</button>
             </div>
             <div class="col-md-4">
 

@@ -1,25 +1,20 @@
-'use strict';
+angular.module('excelWireless')
+    .factory('StoreService', StoreService);
 
-angular.module('excelWireless').
-    factory('genericService',dataService);
+StoreService.$inject = [ '$http'];
 
-dataService.inject = ['$http','$scope'];
 
-function dataService($http,$scope) {
+function StoreService($http){
+    var vm = {};
+    vm.getData = function (_url){
 
-    var menuDetails = {};
+        return $http({
+            method: 'GET',
+            url: _url,
+            cache: false
+        });
 
-    $scope.getWebMenu = function () {
-
-        $http.get("http://localhost:8080/getWebMenu").
-            then(response)
-        {
-            menuDetails = response.data;
-
-            console.log("This is Alok" + menuDetails)
-        }
-
-    }
-
+    };
+    return vm;
 
 }

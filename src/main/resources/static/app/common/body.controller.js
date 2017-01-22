@@ -3,9 +3,9 @@
 
     angular.module('excelWireless').controller('BodyController', Body);
 
-    Body.$inject = ['$scope', '$state', '$window', '$log', '$timeout', 'dataService', 'productDetailsService'];
+    Body.$inject = ['$scope', '$state', '$window', '$log', '$timeout', 'dataService'];
 
-    function Body($scope, $state, $window, $log, $timeout, dataService, productDetailsService) {
+    function Body($scope, $state, $window, $log, $timeout, dataService) {
 
         var vm = this;
         vm.showMenu = false;
@@ -17,7 +17,7 @@
         vm.dataList = [];
         vm.productList = [];
         vm.responseData = {};
-        vm.productMethods = productDetailsService;
+        // vm.productMethods = productDetailsService;
 
         vm.setDataList = function (name) {
             vm.dataList = [];
@@ -42,6 +42,7 @@
 
 
         vm.getSubMenuItems = function(dataItem) {
+
             var item = {};
             vm.subListData = [];
             if (dataItem.hasOwnProperty("brandId")) {
@@ -172,8 +173,8 @@
                 }
             );
 
-            vm.productMethods.getProdByCatId(12).then(success, error);
-        }
+        //     vm.productMethods.getProdByCatId(12).then(success, error);
+         }
         render();
     }
 })();
