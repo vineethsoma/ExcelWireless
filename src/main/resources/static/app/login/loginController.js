@@ -3,26 +3,34 @@
 
     angular.module('excelWireless').controller('loginController', loginFunction);
 
-    loginFunction.$inject = ['$scope', '$http'];
+    loginFunction.$inject = ['$http', '$state'];
 
-    function loginFunction($scope, $http) {
+    function loginFunction($http, $state) {
 
-        $scope.onLoginClicked = function ($event) {
+        var vm = this;
+
+        vm.onLoginClicked = function (username,password) {
             var userDetail;
-
-            var username = $scope.username;
-            var password = $scope.password;
-
-            console.log(username);
-            console.log(password);
+            console.log(username + password)
 
             $http.get('http://localhost:8080/getUserLoginDetails?username=' + username + '&password=' + password).then(function (response) {
 
                 userDetail = response.data;
 
-                console.info(userDetail)
+                if(userDetail.validUser)
+                {
+                    sessionStorage.validUser = true;
+                    $state.go('home');
+                }
+                else
+                {
+                    sessionStorage.validUser = false;
+                    console.log("Wrong username or password")
+                }
+
+                console.info("Login Response:"+userDetail.username)
 
             });
         }
-    };
+    }
 }());

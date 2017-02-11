@@ -3,9 +3,9 @@
 
     angular.module('excelWireless').controller('BodyController', Body);
 
-    Body.$inject = ['$scope', '$state', '$window', '$log', '$timeout', 'dataService'];
+    Body.$inject = ['$scope','$rootScope', '$state', '$window', '$log', '$timeout', 'dataService', 'StoreService','GlobalVariable'];
 
-    function Body($scope, $state, $window, $log, $timeout, dataService) {
+    function Body($scope, $rootScope,$state, $window, $log, $timeout, dataService, StoreService,GlobalVariable) {
 
         var vm = this;
         vm.showMenu = false;
@@ -152,6 +152,21 @@
         function error(reason) {
             //console.log("error getting product details.");
             //console.log(reason);
+        }
+
+
+        vm.getProductDetails = function () {
+
+                $state.go('partProducts');
+        }
+        vm.cartCount =0;
+        $rootScope.$on('updateCount',function(event,value){
+
+                vm.cartCount += parseInt(value);
+        });
+
+        vm.renderOrderPage = function () {
+            $state.go('order');
         }
 
         function render() {

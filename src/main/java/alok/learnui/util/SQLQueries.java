@@ -411,7 +411,7 @@ public class SQLQueries {
 
     //SQL QUERY TO GET  DETAILS FROM DATABASE
 
-    public String getProductDetails = "SELECT * FROM product ";
+    public String getProductDetails = "SELECT * FROM product";
 
     public String getModelDetails = "SELECT * FROM PRODUCT_MODEL WHERE ID = ? AND ID <> 'NULL' ";
 

@@ -20,16 +20,18 @@
     <link rel="stylesheet" href="assets/css/contactUs.css">
     <link rel="stylesheet" href="assets/css/signUp.css">
     <link rel="stylesheet" href="assets/css/excellWire.css">
+    <link rel="stylesheet" href="assets/css/product.css">
+
     <!-- Latest compiled and minified JavaScript -->
 </head>
 <body>
 <header>
     <div class="container-fluid">
-        <div class="row top-banner">
-            <div class="col-sm-12 col-md-12 no-padding">
-                <img src="assets/images/R2E2m83d.png" width="100%" height="65px">
-            </div>
-        </div>
+        <!--<div class="row top-banner">-->
+            <!--<div class="col-sm-12 col-md-12 no-padding">-->
+                <!--<img src="assets/images/R2E2m83d.png" width="100%" height="65px">-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 no-padding top-nav">
                 <div class="container">
@@ -66,7 +68,7 @@
             <div class="col-sm-3 col-md-3 no-padding" ng-controller = "a as alok">
                 <a ng-href class="site-button cart-button" ng-click = "alok.getMenu()">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span class="badge cart-badge">4</span>
+                    <span class="badge cart-badge" ng-click = "bodyCtrl.renderOrderPage()">{{bodyCtrl.cartCount}}</span>
                     <span class="cart-text"> Cart </span>
                 </a>
                 <a href="signIn.html" class="site-button login-button">
@@ -90,13 +92,13 @@
                 <span class="tab-text">BRAND</span>
             </div>
             <div class="col-md-2 tab-hover tab-cell">
-                <span class="tab-text">PARTS</span>
+                <span class="tab-text" ng-click = "bodyCtrl.getProductDetails()">PARTS </span>
             </div>
             <div class="col-md-2 link-hover tab-cell">
                 <a href="libslcdBuyBack.html" class="tab-text"> <span ui-sref = "lcdBuyback">LCD BUYBACK</span> </a>
             </div>
             <div class="col-md-2 link-hover tab-cell">
-                <a href="libscontactUs.html" class="tab-text"> <span ui-sref = "contactUs">CONTACT US</span></a>
+                <a href="libscontactUs.html" class="tab-text"> <span ui-sref = "addProductImage">CONTACT US</span></a>
             </div>
         </div>
         <div class="row sub-menu" ng-show="bodyCtrl.showMenu" ng-mouseleave="bodyCtrl.leaveSubmenu($event)">
@@ -117,7 +119,7 @@
                     <div class="col-sm-12 col-md-12 sub-menu-cell">
                         <ul>
                             <li ng-repeat="subItem in bodyCtrl.subListData" ng-model="bodyCtrl.subListData">
-                                <a ng-href class="btn btn-default link-box" ng-click="alok.getProduct(subItem.modelId)" ui-sref = "products">{{subItem.description}}</a>
+                                <a  class="btn btn-default link-box" ng-click="alok.getProduct(subItem.modelId)" >{{subItem.description}}</a>
                                 <!--<a ng-href class="btn btn-default link-box" >test link</a>-->
                             </li>
                         </ul>
@@ -207,6 +209,7 @@
 <script type="text/javascript" src="app/common/body.controller.js"></script>
 <script type="text/javascript" src="app/common/data.service.js"></script>
 <script type="text/javascript" src="app/common/productDetails.service.js"></script>
+<script type="text/javascript" src="app/common/appState.service.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
 <script type="text/javascript" src = "app/login/loginController.js"></script>
 <!--<script type="text/javascript" src="app/home/home.component.js"></script>-->
@@ -216,6 +219,11 @@
 <script type="text/javascript" src="app/common/a.js"></script>
 <script type="text/javascript" src="app/common/genericService.js"></script>
 <script type="text/javascript" src="app/product/productController.js"></script>
-<script type="text/javascript" src="app/SignUpController.js"></script>
+<script type="text/javascript" src="app/product/productDetailsController.js"></script>
+<script type="text/javascript" src="app/customer/SignUpController.js"></script>
+<script type = "text/javascript" src="app/product/addProductImageController.js"></script>
+<script type="text/javascript" src="app/product/productDirective.js"></script>
+<script type="text/javascript" src="app/product/partsController.js"></script>
+<script type="text/javascript" src="app/orders/orderController.js"></script>
 </body>
 </html>

@@ -3,9 +3,9 @@
 
     angular.module('excelWireless').controller('a', body);
 
-    body.inject = ['$scope', 'StoreService', 'GlobalVariable'];
+    body.inject = ['$scope', 'StoreService', 'GlobalVariable','$state'];
 
-    function body($scope,StoreService,GlobalVariable) {
+    function body($scope,StoreService,GlobalVariable,$state) {
 
         var vm = this;
 
@@ -22,12 +22,13 @@
         vm.getProduct = function(modelId)
         {
 
-            var products
+            var products;
             StoreService.getData('http://localhost:8080/getEcommerceProductsByModel?model_Id='+modelId).then(
                 function (success) {
                     console.log(success.data)
 
                     GlobalVariable.product = success.data;
+                    $state.go('products');
                 },
                 function (error) {
                     console.log("getReplenishmentInfo call failed");
@@ -35,7 +36,6 @@
 
             console.log("This is test"+ modelId);
         }
-
 
     }
 })();

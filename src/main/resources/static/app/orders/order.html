@@ -1,0 +1,48 @@
+<div class="container" ng-controller = "OrderController as o">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" style="background-color:darkgrey">
+                <div class="col-md-5">
+                </div>
+                <div class="col-md-2">
+                    <label>Total Quantity:</label>
+                    <label>124</label>
+                </div>
+                <div class="col-md-3">
+                    <label>Total Amoun:</label>
+                    <label>$124.00</label>
+                </div>
+                <div class="col-md-2">
+                    <button>Conform Order</button>
+                </div>
+
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Product-Description</th>
+                    <th>Retail</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat = "order in o.orderDto">
+                        <td>1</td>
+                        <td ><img ng-src="data:image/JPEG;base64,{{order.image}}" height="70px" width="70px"></td>
+                        <td>{{order.description}}</td>
+                        <td>{{order.retailPrice}}</td>
+                        <td>{{order.saleQuantity}}</td>
+                        <td>{{order.retailPrice * order.saleQuantity}}</td>
+                        <td><button>Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

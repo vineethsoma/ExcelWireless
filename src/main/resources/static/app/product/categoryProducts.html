@@ -1,5 +1,5 @@
 
-<div class="container" ng-controller = "ProductController as $ctrl">
+<div class="container" ng-controller = "CategoryProductController as $ctrl">
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3" ng-repeat = "product in $ctrl.productDto">
@@ -13,6 +13,6 @@
                     <button ng-show = "$ctrl.user" type="button" class="btn btn-primary" ng-click="$ctrl.updateCartCount($ctrl.countNumber[$index],product)">Add To Cart</button>
                 </div>
             </div>
-            </div>
         </div>
     </div>
+</div>

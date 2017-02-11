@@ -1,0 +1,38 @@
+<div class="container" ng-Controller = "AddProductImageController">
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>SKU</th>
+                    <th>Product-Description</th>
+                    <th>Category</th>
+                    <th>Cost</th>
+                    <th>Retail</th>
+                    <th>Stock</th>
+                    <th>Edit</th>
+                    <th>Add Image</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat = "product in products">
+                    <td>1</td>
+                    <td ><img  ng-src="data:image/JPEG;base64,{{product.image}}" height="100px" width="100px" /></td>
+                    <td>{{product.productNo}}</td>
+                    <td>{{product.description}}</td>
+                    <td>Otter Box</td>
+                    <td>{{product.costPrice}}</td>
+                    <td>{{product.retailPrice}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td> <input type="file" id = "fileElement"/></td>
+                    <td><button ng-click="uploadImage(product.productId,$index)">Add Image</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

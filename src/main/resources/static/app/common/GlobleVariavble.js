@@ -11,6 +11,10 @@
          var globalVar = {};
 
          globalVar.product='';
+         globalVar.prodcutDetails = '';
+         globalVar.partsProduct = '';
+         globalVar.lineItemDto = '';
+         globalVar.productBtCategory = '';
          return globalVar;
      }
 

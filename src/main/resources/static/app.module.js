@@ -25,16 +25,37 @@ app.config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$url
 
         .state('lcdBuyback',{
             url:'/lcdBuyback',
-            templateUrl:'app/lcdBuyback.html',
+            templateUrl:'app/lcdBuyback.html'
         })
 
         .state('signUp',{
             url:'/signUp',
-            templateUrl:'app/signUp.html'
+            templateUrl:'app/customer/signUp.html'
         })
         .state('products',{
             url:'/products',
-            templateUrl:'app/product/product.html'
-        });
+            templateUrl:'app/product/products.html'
+        })
+        .state('productDetails',{
+            url:'/productDetails',
+            templateUrl:'app/product/productDetails.html'
+        })
+        .state('addProductImage',{
+            url:'/addProductImage',
+            templateUrl:'app/product/addProductImage.html'
+        })
+        .state('order',{
+            url:'/order',
+            templateUrl:'app/orders/order.html'
+        })
+        .state('categoryProducts',{
+            url:'/categoryProducts',
+            templateUrl:'app/product/categoryProducts.html'
+        })
+        .state('partProducts',{
+            url:'/partProducts',
+            templateUrl:'app/product/partProducts.html',
+            controller :'PartsController as p'
+    });
 
 }]);

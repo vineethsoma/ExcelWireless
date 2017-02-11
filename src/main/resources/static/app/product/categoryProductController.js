@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('excelWireless').controller('ProductController', getProduct);
+    angular.module('excelWireless').controller('CategoryProductController', getProduct);
 
     getProduct.inject = ['$scope','$rootScope','GlobalVariable', 'StoreService', '$state', 'AppState'];
 
@@ -17,8 +17,28 @@
             console.log("is valid user"+ vm.user);
         }
 
-        vm.productDto = GlobalVariable.product;
+        vm.getProductsByCategoryId = function (categoryId) {
 
+            var products;
+
+            console.log("CategoryId ="+ categoryId)
+
+            StoreService.getData('http://localhost:8080/getProductsByCategory?category_Id='+categoryId).then(
+                function (success) {
+                    console.log("category Product details"+ success.data)
+
+                    GlobalVariable.productBtCategory = success.data;
+                    vm.productDto = GlobalVariable.productBtCategory;
+                    $state.go('categoryProducts');
+                },
+                function (error) {
+                    console.log("Can not get products by category"+ error);
+
+                });
+
+        }
+
+        //vm.productDto = GlobalVariable.productBtCategory;
 
         vm.getProductDetails = function (product) {
             // Set the selected product;

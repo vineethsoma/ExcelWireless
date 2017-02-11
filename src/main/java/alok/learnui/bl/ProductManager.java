@@ -4,6 +4,8 @@ import alok.learnui.dto.ProductEcomerceDto;
 import alok.learnui.util.SQLQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.AbstractLobCreatingPreparedStatementCallback;
@@ -12,6 +14,7 @@ import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobCreator;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.sql.PreparedStatement;
@@ -32,6 +35,23 @@ public class ProductManager {
 
     @Autowired
     SQLQueries sqlQueries;
+
+    public List<ProductEcomerceDto> getProductDetails() {
+
+        List<ProductEcomerceDto> productList = new ArrayList<>();
+
+        try
+        {
+            productList = jdbcTemplate.query(sqlQueries.getProductDetails,new ProductMapperForEcomerce());
+
+            System.out.println("Send Product Details Successfully");
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return productList;
+    }
 
     public List<ProductEcomerceDto> getEcommerceProductsByCategory(int category_Id) {
 
@@ -60,6 +80,10 @@ public class ProductManager {
 
             ProductEcomerceDto product = new ProductEcomerceDto();
 
+//            int blobLength = 0;
+//
+           int blobLength = (int)rs.getBlob("IMAGE").length();
+
             product.setProductId(rs.getInt("PRODUCT_ID"));
             product.setProductNo(rs.getString("PRODUCT_NO"));
             product.setDescription(rs.getString("DESCRIPTION"));
@@ -71,7 +95,10 @@ public class ProductManager {
             product.setRetailPrice(rs.getDouble("RETAIL_PRICE"));
             product.setQuantity(rs.getInt("QUANTITY"));
             product.setAddTax(rs.getBoolean("TAX"));
-            product.setImage(rs.getString("IMAGE"));
+
+            if(blobLength != 0) {
+                product.setImage(rs.getBlob("IMAGE").getBytes(1, blobLength));
+            }
 
 
 
@@ -95,14 +122,16 @@ public class ProductManager {
         return productList;
     }
 
-    public void insertProductImage(int product_id, String image_path) throws IOException {
 
-        final File image = new File(image_path);
-        final InputStream inputStream = new FileInputStream(image);
+    public void insertProductImage(int product_id, MultipartFile image_file) throws IOException {
+
+        //final File image = new File(image_path);
+//        final InputStream inputStream = new FileInputStream(image_path);
 
         LobHandler lobHandler = new DefaultLobHandler();
 
-        SqlLobValue lobValue = new SqlLobValue(inputStream, (int )image.length(), lobHandler);
+        //Here getting image as MultipartFile and then getting input stream of the file and then getting the size of the file.
+        SqlLobValue lobValue = new SqlLobValue(image_file.getInputStream(), (int )image_file.getSize(), lobHandler);
 
         int a = jdbcTemplate.update(sqlQueries.updateProductImage,new Object[]{lobValue, product_id}, new int[] {Types.BLOB, Types.INTEGER});
 

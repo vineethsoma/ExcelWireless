@@ -3,38 +3,39 @@
         <h2>Create Customer</h2>
     </div>
     <div class="row">
+        <form name="signUpForm">
             <div class="col-md-6">
 
                     <label>First Name:</label>
-                    <input type="text" class="form-control" placeholder="FirstName" ng-model = "firstName">
+                    <input type="text" class="form-control" placeholder="FirstName" ng-model = "signUp.firstName" required="true">
             </div>
 
                 <div class="col-md-6">
                     <label>Last Name:</label>
-                    <input type="text" class="form-control" placeholder="LastName" ng-model = "lastName"> </input>
+                    <input type="text" class="form-control" placeholder="LastName" ng-model = "signUp.lastName"> </input>
                 </div>
 
                 <div class="col-md-6">
                     <label>Phone Number:</label>
-                    <input type="text" class="form-control" placeholder="PhoneNumber" ng-model = "phoneNumber"> </input>
+                    <input type="text" class="form-control" placeholder="PhoneNumber" ng-model = "signUp.phoneNumber"> </input>
                 </div>
 
                 <div class="col-md-6">
                     <label>Tax Id:</label>
-                    <input type="text" class="form-control" placeholder="Tax Id" ng-model = "taxId"> </input>
+                    <input type="text" class="form-control" placeholder="Tax Id" ng-model = "signUp.taxId"> </input>
                 </div>
 
                 <div class="col-md-6">
                     <label>Date Of Birth:</label>
-                    <input type="text" class="form-control" placeholder="Date Of Birth" ng-model = "dateOfBirth"> </input>
+                    <input type="text" class="form-control" placeholder="Date Of Birth" ng-model = "signUp.dateOfBirth"> </input>
                 </div>
                 <div class="col-md-6">
                     <label>Email:</label>
-                    <input type="text" class="form-control" placeholder="Email" ng-model = "email"> </input>
+                    <input type="text" class="form-control" placeholder="Email" ng-model = "signUp.email"> </input>
                 </div>
                 <div class="col-md-6">
                     <label>Customer Type:</label>
-                    <select class="form-control" ng-model = customerType>
+                    <select class="form-control" ng-model = "signUp.customerType">
                         <option>Business Customer</option>
                         <option>Retail Customer</option>
                     </select>
@@ -43,10 +44,10 @@
                     <label>Gender:</label>
                     <div>
                         <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">Male
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male" ng-model = "signUp.gender">Male
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">Female
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female" ng-model = "signUp.gender">Female
                         </label>
                     </div>
                     </div>
@@ -54,23 +55,23 @@
             <label>CompanyName:</label>
             </div>
         <div class="col-md-12">
-            <input type="text" class="form-control" placeholder="Company Name" ng-model = "companyName"> </input>
+            <input type="text" class="form-control" placeholder="Company Name" ng-model = "signUp.companyName"> </input>
         </div>
         <div class="col-md-6">
             <label>Street:</label>
-            <input type="text" class="form-control" placeholder="Street" ng-model = "street"> </input>
+            <input type="text" class="form-control" placeholder="Street" ng-model = "signUp.street"> </input>
         </div>
         <div class="col-md-6">
             <label>City:</label>
-            <input type="text" class="form-control" placeholder="City" ng-model = "city"> </input>
+            <input type="text" class="form-control" placeholder="City" ng-model = "signUp.city"> </input>
         </div>
         <div class="col-md-6">
             <label>ZipCode:</label>
-            <input type="text" class="form-control" placeholder="ZipCode" ng-model = zipCode> </input>
+            <input type="text" class="form-control" placeholder="ZipCode" ng-model = "signUp.zipCode"> </input>
         </div>
         <div class="col-md-6">
             <label>State:</label>
-            <select class="form-control">
+            <select class="form-control" ng-model = "signUp.state">
                 <option>Gorgia</option>
                 <option>New York</option>
             </select>
@@ -86,7 +87,7 @@
 
         </div>
 
-
+        </form>
 
     </div>
         </div>

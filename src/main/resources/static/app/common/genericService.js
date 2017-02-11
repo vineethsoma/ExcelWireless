@@ -15,6 +15,20 @@ function StoreService($http){
         });
 
     };
+
+    vm.postData = function (_url,_reqDate,content_type, accept) {
+
+        var headerObj = {
+            Accept : accept
+        };
+        return $http({
+            method:'POST',
+            url:_url,
+            data:_reqDate,
+            headers : headerObj
+        });
+
+    }
     return vm;
 
 }

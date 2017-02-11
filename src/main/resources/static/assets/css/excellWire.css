@@ -1,5 +1,4 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+html, body, div, span, applet, object, iframe, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -217,9 +216,14 @@ hr
     width: 320px;
 }
 .img-responsive {
-    max-width: 100%;
-    height: auto;
+    /*width: 1200px;*/
+    /*height: 320px;*/
     display: block;
+}
+.product-div-main
+{
+    height: 280px;
+    width:180px;
 }
 .link-box {
     float: left;
@@ -242,6 +246,12 @@ hr
 }
 .img-row-1 {
     max-height: 400px !important;
+}
+
+.sliderImage
+{
+    max-height: 400px !important;
+    width: 100% !important;
 }
 .outset-menu {
     min-height: 5px;
@@ -358,3 +368,4 @@ hr
 .carousel-image-2 {
    background-image: url("../images/011.jpg");
 }
+
