@@ -4,14 +4,30 @@
 
     angular.module('excelWireless').controller('PartsController', getPartsProduct);
 
-    getPartsProduct.inject = ['GlobalVariable', 'StoreService', '$state', 'AppState', '$rootScope'];
+    getPartsProduct.inject = ['GlobalVariable', 'StoreService', '$state', 'AppState', '$rootScope','$log'];
 
-    function getPartsProduct(GlobalVariable, StoreService, $state, AppState,$rootScope) {
+    function getPartsProduct(GlobalVariable, StoreService, $state, AppState,$rootScope,$log) {
 
         var vm = this;
 
         vm.productDto = {};
+        vm.barLimit = 5;
+        vm.showDIV = false;
 
+        vm.brandAndModelDetails = [];
+        vm.brandAndModelDetails =  GlobalVariable.brandModelDto;
+
+        //console.log(brandAndModelDetails);
+        $log.info("WebBrandArray" + GlobalVariable.brandModelDto);
+
+        vm.toggle = function()
+        {
+            vm.showDIV = !vm.showDIV;
+        }
+        vm.increaseLimit = function()
+        {
+            vm.barLimit +=5;
+        }
         vm.isValidUser = function () {
             vm.user =  sessionStorage.validUser;
             console.log("is valid user"+ vm.user);
@@ -42,7 +58,9 @@
         }
         function renderData()
         {
-            StoreService.getData('http://localhost:8080/getProductsByCategory?category_Id=13').then(
+
+
+            StoreService.getData(GlobalVariable.URLCONSTANT+'getProductsByCategory?category_Id=6').then(
                 function (success) {
                     // console.log(success.data)
 

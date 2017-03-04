@@ -3,11 +3,14 @@ package alok.learnui.controller;
 
 import alok.learnui.bl.WebMenuManager;
 import alok.learnui.dto.MenuDto;
+import alok.learnui.dto.WebBrandDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Created by asp5045 on 11/17/16.
@@ -25,5 +28,12 @@ public class WebMenuController {
     public MenuDto getWebMenu() {
         return webMenuManager.getWebMenu();
     }
+
+    @RequestMapping(value = "/getSideBardForParts", method = RequestMethod.GET)
+    public List<WebBrandDto> getSideBardForParts() {
+        return webMenuManager.getSideBardForParts();
+    }
+
+
 
 }

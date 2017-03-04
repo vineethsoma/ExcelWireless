@@ -58,6 +58,11 @@ public class CustomerManager {
                     customerDto.getCustomerCreatedDate(),
                     customerDto.getCompanyName());
             System.out.println("Customer Added Successfully");
+
+            //After registration sending email to customer as well as the admin.
+            sendEmailToCustomer(customerDto);
+            sendEmailToAdmin(customerDto);
+
         }
         catch (Exception e)
         {
@@ -117,16 +122,25 @@ public class CustomerManager {
         return customerDto;
     }
 
-    public void sendEmail(CustomerDto customerDto) throws MailException {
+    private void sendEmailToCustomer(CustomerDto customerDto) throws MailException {
 
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(customerDto.getEmail());
         mail.setFrom("exwirelessatl@gmail.com");
         mail.setSubject("Thank You For Joining Excel-Wireless");
-        mail.setText("FirstName :"+customerDto.getFirstName() + "Phone No:"+ customerDto.getOldPhoneNo());
-
+        mail.setText("Dear :" + customerDto.getFirstName() + "We have received your request for joining Excel-Wireless," +
+                " We will get back to you with in 24 hours. ");
         javaMailSender.send(mail);
+    }
+    private void sendEmailToAdmin(CustomerDto customerDto) throws MailException {
 
+        SimpleMailMessage mail = new SimpleMailMessage();
+        mail.setTo("exwirelessatl@gmail.com");
+        mail.setFrom("exwirelessatl@gmail.com");
+        mail.setSubject("Thank You For Joining Excel-Wireless");
+        mail.setText("FirstName :" + customerDto.getFirstName()
+                + " Phone No:" + customerDto.getPhoneNo());
+        javaMailSender.send(mail);
     }
 
 

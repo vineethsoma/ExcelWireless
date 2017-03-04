@@ -143,3 +143,12 @@ li.oe_heading{
     padding-bottom:6px;
     border-bottom:1px solid #ddd;
 }
+/*.constrained {*/
+    /*height:550px;*/
+    /*overflow-y:scroll;*/
+/*}*/
+
+/*.constrained ::-webkit-scrollbar {*/
+    /*!* This is the magic bit *!*/
+    /*display: none;*/
+/*}*/

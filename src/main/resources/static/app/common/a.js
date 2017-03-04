@@ -10,7 +10,7 @@
         var vm = this;
 
         vm.getMenu = function(){
-            StoreService.getData('http://localhost:8080/getWebMenu').then(
+            StoreService.getData(GlobalVariable.URLCONSTANT+'getWebMenu').then(
                 function (success) {
                     console.log(success.data)
                 },
@@ -23,7 +23,7 @@
         {
 
             var products;
-            StoreService.getData('http://localhost:8080/getEcommerceProductsByModel?model_Id='+modelId).then(
+            StoreService.getData(GlobalVariable.URLCONSTANT+'getEcommerceProductsByModel?model_Id='+modelId).then(
                 function (success) {
                     console.log(success.data)
 

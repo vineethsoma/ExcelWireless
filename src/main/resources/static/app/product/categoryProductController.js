@@ -23,7 +23,7 @@
 
             console.log("CategoryId ="+ categoryId)
 
-            StoreService.getData('http://localhost:8080/getProductsByCategory?category_Id='+categoryId).then(
+            StoreService.getData(GlobalVariable.URLCONSTANT+'getProductsByCategory?category_Id='+categoryId).then(
                 function (success) {
                     console.log("category Product details"+ success.data)
 

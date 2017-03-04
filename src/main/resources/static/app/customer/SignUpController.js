@@ -4,9 +4,9 @@
 
     angular.module('excelWireless').controller('SignUpController', signUp);
 
-    signUp.inject = ['StoreService'];
+    signUp.inject = ['StoreService', 'GlobalVariable'];
 
-    function signUp(StoreService) {
+    function signUp(StoreService,GlobalVariable) {
 
         var vm = this;
 
@@ -30,13 +30,12 @@
                 "zipcode": vm.zipCode,
                 "fax": null,
                // "customerCreatedDate": js_yyyy_mm_dd_hh_mm_ss(),
-                "balance": 0,
                 "taxId":vm.taxId,
                 "companyName":vm.companyName
             };
 
             request = JSON.stringify(request);
-            StoreService.postData("http://localhost:8080/addCustomer", request,"application/json", "application/json").
+            StoreService.postData(GlobalVariable.URLCONSTANT+'addCustomer', request,"application/json", "application/json").
                 then(   function (success) {
                     console.log(success.data)
                     //$state.go('products');

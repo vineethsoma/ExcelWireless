@@ -4,6 +4,7 @@ import alok.learnui.dto.*;
 
 import alok.learnui.util.SQLQueries;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -101,6 +102,36 @@ public class WebMenuManager {
         }
 
         return modelDtoListGlobal;
+
+    }
+
+    public List<WebBrandDto> getSideBardForParts() {
+
+        List<BrandDto> brandDtoList = new ArrayList<>();
+        List<ModelDto> modelDtoList = new ArrayList<>();
+        List<WebBrandDto> webBrandDtoList = new ArrayList<>();
+
+        brandDtoList = jdbcTemplate.query(sqlQueries.getBrandDetailsForParts,new WebBrandMapper());
+
+        //Now for Each brand id getting MODEL IDS from PRODUCT table
+        for(int i = 0; i<brandDtoList.size(); i++)
+        {
+            WebBrandDto webBrandDto = new WebBrandDto();
+
+            webBrandDto.setBrandId(brandDtoList.get(i).getBrandId());
+            webBrandDto.setBrandName(brandDtoList.get(i).getBrandName());
+
+            //Calling method to get all models details for particular brand id.
+            modelDtoList = getModelListForBrand(brandDtoList.get(i).getBrandId());
+
+            webBrandDto.setModelDtoList(modelDtoList);
+
+            webBrandDtoList.add(webBrandDto);
+
+            webBrandDtoList.set(i,webBrandDto);
+        }
+
+        return webBrandDtoList;
 
     }
 

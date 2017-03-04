@@ -1,5 +1,5 @@
 angular.module('excelWireless')
-    .controller('AddProductImageController', ['$scope', 'StoreService', '$http', function ($scope, StoreService, $http) {
+    .controller('AddProductImageController', ['$scope', 'StoreService','GlobalVariable','$http', function ($scope, StoreService,GlobalVariable,$http) {
 
         $scope.uploadImage = function (product_Id,value) {
 
@@ -12,7 +12,7 @@ angular.module('excelWireless')
 
             formData.append("file", fileImage);
 
-            $http.post('http://localhost:8080/insertProductImage?product_Id='+product_Id, formData,
+            $http.post(GlobalVariable.URLCONSTANT+'insertProductImage?product_Id='+product_Id, formData,
                 {
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
@@ -25,7 +25,7 @@ angular.module('excelWireless')
 
         getProducts = function () {
 
-                StoreService.getData('http://localhost:8080/getProduct').then(
+                StoreService.getData(GlobalVariable.URLCONSTANT+'getProductsByCategory?category_Id=6').then(
                     function (success) {
 
                         console.log(success.data)

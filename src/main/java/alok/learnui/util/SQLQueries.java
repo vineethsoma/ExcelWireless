@@ -996,4 +996,5 @@ public class SQLQueries {
 
     public String getProductDetailsByModelId = "SELECT * FROM product WHERE MODEL_ID = ?";
     public String updateProductImage = "UPDATE product SET IMAGE = ? WHERE PRODUCT_ID = ?";
+    public String getBrandDetailsForParts = "SELECT distinct p.BRAND_ID, b.BRAND_NAME FROM product p JOIN brand b on p.BRAND_ID = b.BRAND_ID where p.CATEGORY_ID = 14";
 }

@@ -18,10 +18,10 @@ public class CustomerController {
         customerManager.addCustomerToDB(customerDto);
     }
 
-    @RequestMapping(value = "/sendEmail", method = RequestMethod.POST, consumes = "application/json")
-    public void sendEmail(@RequestBody CustomerDto customerDto) {
-        customerManager.sendEmail(customerDto);
-    }
+//    @RequestMapping(value = "/sendEmail", method = RequestMethod.POST, consumes = "application/json")
+//    public void sendEmail(@RequestBody CustomerDto customerDto) {
+//        customerManager.sendEmail(customerDto);
+//    }
 
 
 }

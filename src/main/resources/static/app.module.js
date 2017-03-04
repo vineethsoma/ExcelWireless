@@ -1,7 +1,9 @@
 ﻿'use strict'
-var app = angular.module('excelWireless', ['ui.router', 'ui.bootstrap']);
+var app = angular.module('excelWireless', ['ui.router', 'ui.bootstrap','infinite-scroll']);
 
-app.config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
+app.config(['$stateProvider','$urlRouterProvider','$locationProvider', function ($stateProvider,$urlRouterProvider) {
+
+    // $locationProvider.html5Mode(true);
 
     $urlRouterProvider.otherwise('/home');
 

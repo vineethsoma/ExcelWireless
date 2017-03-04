@@ -6,8 +6,9 @@
 
     function dataService($http, $log) {
         var service = {}, cache = false, vm = this;
-        vm.domain = 'http://localhost';
-        vm.port = '8080';
+        //vm.domain = 'https://excelwireless.cfapps.io';
+        vm.domain = 'http://localhost:8080';
+        vm.port = '';
         vm.defaultMethodPath = '/getWebMenu';
 
         service.callGenericMethod = function (methodPath, methodType, data, headers, successCallback, errorCallback) {

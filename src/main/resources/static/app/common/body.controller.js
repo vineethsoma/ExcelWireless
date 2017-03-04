@@ -54,23 +54,38 @@
                     vm.subListData = item.modelList || [];
                     console.log(vm.subListData);
                 }
+                if (vm.subListData.length > 0) {
+                    vm.showSubmenu = true;
+                } else {
+                    vm.showSubmenu = false;
+                }
             } else if (dataItem.hasOwnProperty("categoryId")) {
                 $log.info("Checking Product data for category: " + dataItem.categoryId);
                 $log.info(dataItem);
                 item = _.find(vm.dataList, function(o) { return o.categoryId === dataItem.categoryId; });
                 $log.info(item);
                 if (item) {
-                    if (vm.productList) {
-                        vm.subListData = _.filter(vm.productList, function(o) { return o.categoryId === item.categoryId; })
-                        console.log(vm.subListData);
-                    }
+
+                        StoreService.getData(GlobalVariable.URLCONSTANT+'getProductsByCategory?category_Id='+item.categoryId).then(
+                            function (response) {
+
+                                console.log(response.data)
+                                if (response.data) {
+                                    vm.subListData = _.filter(response.data, function(o) { return o.categoryId === item.categoryId; })
+                                    console.log(vm.subListData);
+                                    GlobalVariable.product = response.data;
+                                    $state.go('products');
+                                }
+
+                            },
+                            function (error) {
+                                console.log("getReplenishmentInfo call failed");
+                            });
+
+
                 }
             }
-            if (vm.subListData.length > 0) {
-                vm.showSubmenu = true;
-            } else {
-                vm.showSubmenu = false;
-            }
+
         };
 
 
@@ -179,6 +194,11 @@
                         $log.info("categories");
                         $log.info(vm.categoryList);
                         vm.brandList = response.data.webBrandDtoList;
+
+                        GlobalVariable.brandModelDto = vm.dataList;
+                        $log.info("Side brands");
+                        $log.info(GlobalVariable.brandModelDto)
+
                         $log.info("brands");
                         $log.info(vm.brandList);
                     } else {

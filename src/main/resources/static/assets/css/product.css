@@ -44,6 +44,9 @@ footer, header, hgroup, menu, nav, section {
 {
     font-size: 15px;
     font-family: "Proxima Nova Semibold" !important;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
 }
 .product-price
@@ -67,4 +70,12 @@ footer, header, hgroup, menu, nav, section {
 .btn
 {
     margin-top: 10px;
+}
+.constrained {
+    height:550px;
+    overflow-y:scroll;
+}
+.constrained::-webkit-scrollbar {
+
+    display: none;
 }
