@@ -1,40 +1,26 @@
 
 <div class="container" ng-controller = "PartsController as p">
     <div class="row constrained">
-        <div class="col-md-12" infinite-scroll="p.increaseLimit()" infinite-scroll-container='".constrained"'>
-            <div class="col-md-3" ng-repeat = "brands in p.brandAndModelDetails" >
-                <div class="panel-group">
+        <div class="col-md-12">
+            <div class="col-md-3 mycontainer">
 
-                    <div class="panel panel-default">
-                        <a class="list-group-item" data-toggle="collapse"  ng-click="p.toggle()">
-                            <span class="badge">4</span>
-                            {{brand.brandName}}
-                        </a>
-                        <div  id="collapseTC001A" ng-class="{'panel-collapse collapse in':p.showDIV,'panel-collapse collapse':!p.showDIV}">
-                            <div class="panel-body">
-                                <a href="#" class="list-group-item">4</a>
-                                <a href="#" class="list-group-item">3</a>
-                                <a href="#" class="list-group-item">2</a>
-                                <a href="#" class="list-group-item">1</a>
-                            </div>
+                    <div class="left-nav">
+                        <accordion close-others="true" >
+                            <accordion-group  is-open="isopen"
+                                              ng-repeat="item in items">
+                                <accordion-heading >
+                                    {{item.brandName}}
+                                    <i class="pull-right glyphicon"
+                                       ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+                                </accordion-heading>
 
-                        </div>
+                                <div ng-repeat="model in item.modelDtoList">{{model.modelName}}</div>
+                            </accordion-group>
+                        </accordion>
                     </div>
 
-                    <!--<div class="panel panel-default">-->
-                        <!--<a class="list-group-item" data-toggle="collapse" href="#collapseTC002A">-->
-                            <!--<span class="badge">2</span>-->
-                            <!--TC002A-->
-                        <!--</a>-->
-                        <!--<div class="panel-collapse collapse" id="collapseTC002A">-->
-                            <!--<div class="panel-body">-->
-                                <!--<a href="#" class="list-group-item">2</a>-->
-                                <!--<a href="#" class="list-group-item">1</a>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                </div>
+                    <div class="content">
+                    </div>
                 </div>
             <div class="col-md-2" ng-repeat = "product in p.productDto | limitTo:p.barLimit">
                 <div  class= "img-responsive">

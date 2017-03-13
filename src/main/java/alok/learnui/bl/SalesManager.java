@@ -32,8 +32,7 @@ public class SalesManager {
     public void addTransaction(TransactionDto transactionDto) {
 
             try {
-                        jdbcTemplate.update(sqlQueries.addTransaction,
-                        transactionDto.getTransactionCompId(),
+                        jdbcTemplate.update(sqlQueries.addWebTransaction,
                         transactionDto.getTransactionDate(),
                         transactionDto.getTotalAmount(),
                         transactionDto.getTax(),
@@ -41,31 +40,13 @@ public class SalesManager {
                         transactionDto.getSubTotal(),
                         transactionDto.getTotalQuantity(),
                         transactionDto.getCustomerPhoneNo(),
-                        transactionDto.getUserId(),
                         transactionDto.getStatus(),
-                        transactionDto.getPaidAmountCash(),
-                        transactionDto.getChangeAmount(),
-                        transactionDto.getPaidAmountCredit(),
-                        transactionDto.getPaidAmountCheck(),
-                        transactionDto.getTransCreditId(),
-                        transactionDto.getLast4Digits(),
                         transactionDto.getPrevBalance(),
                         transactionDto.getBalance(),
-                        transactionDto.getPaidAmountDebit(),
                         transactionDto.getReceiptNote(),
-                        transactionDto.getTransactionNote(),
-                        transactionDto.getCustomerName(),
-                        transactionDto.getUsername());
+                        transactionDto.getCustomerName());
 
-                if (null != transactionDto.getStatus() && transactionDto.getStatus().equals("c")) {
-
-                    jdbcTemplate.update(sqlQueries.updateBalanceToCustomerProfile,
-                            transactionDto.getBalance(),
-                            transactionDto.getTransactionDate(),
-                            transactionDto.getCustomerPhoneNo());
-                    System.out.println("Customer Balance Added Successfully");
-                }
-                System.out.println("Transaction Added Successfully");
+                System.out.println("Web Transaction Added Successfully");
 
             } catch (Exception e) {
 
