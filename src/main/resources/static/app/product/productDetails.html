@@ -48,13 +48,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div><label>Quantity</label></div>
-                        <input type="text" style=" width: 30px;height: 35px;">
+                        <input ng-show = "productDetails.user" type="text" class="form-control" placeholder="Quantity" ng-model="productDetails.countNumber[$index]" data-restrict-characters="restrictCharacter.OnlyDigits.regExp" style=" width: 30px;height: 35px;">
                         <hr>
                     </div>
                 </div>
             <div class="row">
                 <div class="col-xs-6">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Add To Cart</button>
+                    <button ng-show = "productDetails.user" type="button" class="btn btn-primary btn-lg btn-block" ng-click="p.updateCartCountParts(productDetails.countNumber[$index],a)">Add To Cart</button>
 
                 </div>
             </div>

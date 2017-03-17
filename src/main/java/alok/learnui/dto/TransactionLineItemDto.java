@@ -5,23 +5,122 @@ package alok.learnui.dto;
  */
 public class TransactionLineItemDto {
 
-    private int transactionLineItemId;
-    private int transactionCompId;
-    private String productNumber;
+    private boolean addTax;
+    private int brandId;
+    private int categoryId;
+    private int vendorId;
+    private int modelId;
+    private String description;
+    private String image;
+    private String phoneNo;
+    private String productNo;
     private int quantity;
-    private double retail;
-    private double cost;
-    private double discount;
+    private double retailPrice;
     private String transactionDate;
-    private String ProductDescription;
-    private String  productCount;
     private double retailWithDis;
     private double totalProductPrice;
     private double totalProductPriceWithTax;
     private double discountPercentage;
-    private String transactionStatus;
-    private String imeiNo;
-    private int phoneId;
+    private int quantityForSell;
+    private double costPrice;
+    private double discount;
+
+
+    public boolean isAddTax() {
+        return addTax;
+    }
+
+    public void setAddTax(boolean addTax) {
+        this.addTax = addTax;
+    }
+
+    public int getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public int getVendorId() {
+        return vendorId;
+    }
+
+    public void setVendorId(int vendorId) {
+        this.vendorId = vendorId;
+    }
+
+    public int getModelId() {
+        return modelId;
+    }
+
+    public void setModelId(int modelId) {
+        this.modelId = modelId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public String getProductNo() {
+        return productNo;
+    }
+
+    public void setProductNo(String productNo) {
+        this.productNo = productNo;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getRetailPrice() {
+        return retailPrice;
+    }
+
+    public void setRetailPrice(double retailPrice) {
+        this.retailPrice = retailPrice;
+    }
+
+    public String getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(String transactionDate) {
+        this.transactionDate = transactionDate;
+    }
 
     public double getRetailWithDis() {
         return retailWithDis;
@@ -37,94 +136,6 @@ public class TransactionLineItemDto {
 
     public void setTotalProductPrice(double totalProductPrice) {
         this.totalProductPrice = totalProductPrice;
-    }
-
-
-
-    public String getProductCount() {
-        return productCount;
-    }
-
-    public void setProductCount(String productCount) {
-        this.productCount = productCount;
-    }
-
-
-
-    public String getProductNumber() {
-        return productNumber;
-    }
-
-    public void setProductNumber(String productNumber) {
-        this.productNumber = productNumber;
-    }
-
-
-
-
-    public String getProductDescription() {
-        return ProductDescription;
-    }
-
-    public void setProductDescription(String productDescription) {
-        ProductDescription = productDescription;
-    }
-
-    public String getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setTransactionDate(String transactionDate) {
-        this.transactionDate = transactionDate;
-    }
-
-    public int getTransactionCompId() {
-        return transactionCompId;
-    }
-
-    public void setTransactionCompId(int transactionCompId) {
-        this.transactionCompId = transactionCompId;
-    }
-
-    public double getCost() {
-        return cost;
-    }
-
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getRetail() {
-        return retail;
-    }
-
-    public void setRetail(double retail) {
-        this.retail = retail;
-    }
-
-
-    public int getTransactionLineItemId() {
-        return transactionLineItemId;
-    }
-
-    public void setTransactionLineItemId(int transactionLineItemId) {
-        this.transactionLineItemId = transactionLineItemId;
     }
 
     public double getTotalProductPriceWithTax() {
@@ -143,28 +154,27 @@ public class TransactionLineItemDto {
         this.discountPercentage = discountPercentage;
     }
 
-    public String getTransactionStatus() {
-        return transactionStatus;
+    public int getQuantityForSell() {
+        return quantityForSell;
     }
 
-    public void setTransactionStatus(String transactionStatus) {
-        this.transactionStatus = transactionStatus;
+    public void setQuantityForSell(int quantityForSell) {
+        this.quantityForSell = quantityForSell;
     }
 
-    public String getImeiNo() {
-        return imeiNo;
+    public double getCostPrice() {
+        return costPrice;
     }
 
-    public void setImeiNo(String imeiNo) {
-        this.imeiNo = imeiNo;
+    public void setCostPrice(double costPrice) {
+        this.costPrice = costPrice;
     }
 
-    public int getPhoneId() {
-        return phoneId;
+    public double getDiscount() {
+        return discount;
     }
 
-    public void setPhoneId(int phoneId) {
-        this.phoneId = phoneId;
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
-
 }

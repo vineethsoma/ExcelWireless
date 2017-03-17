@@ -93,9 +93,9 @@ public class SQLQueries {
 
 
     public String updateProductQuantity =
-            "UPDATE PRODUCT SET " +
+            "UPDATE web_transaction_line_item SET " +
                     "QUANTITY = ? " +
-                    "WHERE PRODUCT_ID = ?";
+                    "WHERE CUSTOMER_PHONENO = ? AND PRODUCT_NO = ?";
 
 
     //SQL QUERY TO GET  DETAILS FROM DATABASE
@@ -112,10 +112,7 @@ public class SQLQueries {
 
     public String getBrandDetails = "SELECT * FROM brand ORDER BY BRAND_NAME";
 
-    public String getUserDetails = "SELECT * FROM user ORDER BY USERNAME";
-
-
-
+    public String getUserDetails = "SELECT PHONE_NO,EMAIL,PASSWORD,STREET,CITY,STATE,COUNTRY,ZIPCODE,FAX,COMPANY_NAME,FIRST_NAME,LAST_NAME FROM customer where EMAIL = ?";
 
     //SQL QUERY TO DELETE FROM DATABASE
 
@@ -156,4 +153,34 @@ public class SQLQueries {
     public String getProductDetailsByModelId = "SELECT * FROM product WHERE MODEL_ID = ?";
     public String updateProductImage = "UPDATE product SET IMAGE = ? WHERE PRODUCT_ID = ?";
     public String getBrandDetailsForParts = "SELECT distinct p.BRAND_ID, b.BRAND_NAME FROM product p JOIN brand b on p.BRAND_ID = b.BRAND_ID where p.CATEGORY_ID = 14";
+    public String addSingleTransactionLineItem = "INSERT INTO web_transaction_line_item ("+
+            "CUSTOMER_PHONENO," +
+            "DATE," +
+            "PRODUCT_NO," +
+            "QUANTITY," +
+            "RETAIL," +
+            "COST," +
+            "DISCOUNT," +
+            "DISCOUNT_PERCENTAGE," +
+            "RETAILWITHDISCOUNT," +
+            "TOTALPRODUCTPRICE," +
+            "TOTAL_PRODUCT_PRICE_WITH_TAX) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+
+    public String getProductDescription = "SELECT DESCRIPTION FROM product WHERE PRODUCT_NO = ?";
+
+    public String getTransactionLineItemDetails = "SELECT " +
+            "PRODUCT_NO," +
+            "QUANTITY," +
+            "RETAIL," +
+            "COST," +
+            "DISCOUNT," +
+            "DISCOUNT_PERCENTAGE," +
+            "RETAILWITHDISCOUNT," +
+            "TOTALPRODUCTPRICE," +
+            "TOTAL_PRODUCT_PRICE_WITH_TAX " +
+            "FROM web_transaction_line_item " +
+            "WHERE CUSTOMER_PHONENO = ?";
+
+
+    public String deleteProductFromCustomerOrder = "DELETE FROM web_transaction_line_item where CUSTOMER_PHONENO = ? AND PRODUCT_NO = ?";
 }

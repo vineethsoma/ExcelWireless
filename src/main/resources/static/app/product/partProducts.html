@@ -28,9 +28,13 @@
                 </div>
                 <h2 class="product-description">{{product.description}}</h2>
                 <h2 ng-show = "p.user" class="product-price">${{product.retailPrice}}</h2>
-                <div class="input-group center">
-                   <span> <input ng-show = "p.user" type="text" class="form-control" placeholder="Quantity" ng-model="p.countNumber[$index]" /></span>
-                    <span><button ng-show = "p.user" type="button" class="btn btn-primary" ng-click="p.updateCartCountParts(p.countNumber[$index],product)">Add To Cart</button></span>
+                <div class="row" style="padding: 0px;margin: 0px;">
+                    <div class="col-md-6" style="width: 30%;padding: 0px;">
+                     <input ng-show = "p.user" type="text" class="form-control"  placeholder="Quantity" ng-model="p.countNumber[$index]" data-restrict-characters="restrictCharacter.OnlyDigits.regExp" style="height: 30px"/>
+                        </div>
+                    <div class="col-md-6" style="padding-left: 4px;width: 70%;">
+                    <button style="width: 68px;font-size:9px;height: 30px;" ng-show = "p.user" type="button" class="btn-primary" ng-click="p.updateCartCountParts(p.countNumber[$index],product)">Add To Cart</button>
+                    </div>
                 </div>
             </div>
         </div>

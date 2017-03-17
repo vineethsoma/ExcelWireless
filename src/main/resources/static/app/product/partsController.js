@@ -1,8 +1,10 @@
-angular.module('excelWireless').controller('PartsController', getPartsProduct);
+(function(){
+    'use strict';
+    angular.module('excelWireless').controller('PartsController', getPartsProduct);
 
-    getPartsProduct.inject = ['GlobalVariable', 'StoreService', '$state', 'AppState', '$rootScope','$log', 'ui.bootstrap', '$scope'];
+    getPartsProduct.$inject = ['GlobalVariable', 'StoreService', '$state', 'AppState', '$rootScope','$log', '$scope','RestrictedCharacter.Types'];
 
-    function getPartsProduct(GlobalVariable, StoreService, $state, AppState,$rootScope,$log, $scope) {
+    function getPartsProduct(GlobalVariable, StoreService, $state, AppState,$rootScope,$log, $scope,restrictCharacter) {
 
         // $scope.items = [
         //     {
@@ -30,13 +32,13 @@ angular.module('excelWireless').controller('PartsController', getPartsProduct);
         // ];
 
 
-
-
         var vm = this;
 
         vm.productDto = {};
         vm.barLimit = 5;
         vm.showDIV = false;
+
+        $scope.restrictCharacter = restrictCharacter;
 
         vm.brandAndModelDetails = [];
         vm.brandAndModelDetails = GlobalVariable.brandModelDto;
@@ -63,19 +65,27 @@ angular.module('excelWireless').controller('PartsController', getPartsProduct);
         //getting no of products count as well as the product details and storing in to session to show on the order page.
         vm.updateCartCountParts = function (value, product) {
             console.log("Product details from product to product details" + product.description);
-            product.saleQuantity = value;
+            product.quantity = value;
+            product.phoneNo = sessionStorage.customerPhoneNo;
             a.push(product);
 
             sessionStorage.orderDetails = JSON.stringify(a);
             $rootScope.$emit('updateCount', value);
+
+            StoreService.postData(GlobalVariable.URLCONSTANT + "addTransactionLineItem", product, "application/json", "application/json").then(function (response) {
+                    var data = response.data;
+
+                    console.log("response data", data);
+                },
+                function (error) {
+                    console.log("getReplenishmentInfo call failed");
+                });
         }
 
         vm.isValidUser = function () {
             vm.user = sessionStorage.validUser;
             console.log("is valid user" + vm.user);
         }
-
-
         function renderData() {
 
 
@@ -93,8 +103,8 @@ angular.module('excelWireless').controller('PartsController', getPartsProduct);
             StoreService.getData(GlobalVariable.URLCONSTANT + 'getSideBardForParts').then(
                 function (success) {
                     // console.log(success.data)
-
                     $scope.items = success.data;
+                    GlobalVariable.items = $scope.items;
                 },
                 function (error) {
                     console.log("getReplenishmentInfo call failed");
@@ -118,5 +128,8 @@ angular.module('excelWireless').controller('PartsController', getPartsProduct);
         }
 
         render();
+
     }
 
+
+})();

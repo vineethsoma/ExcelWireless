@@ -1,21 +1,35 @@
 <div class="container" ng-controller = "OrderController as o">
     <div class="row">
         <div class="col-md-12">
-            <div class="row" style="background-color:darkgrey">
-                <div class="col-md-5">
-                </div>
-                <div class="col-md-2">
-                    <label>Total Quantity:</label>
-                    <label>124</label>
-                </div>
-                <div class="col-md-3">
-                    <label>Total Amoun:</label>
-                    <label>$124.00</label>
-                </div>
-                <div class="col-md-2">
-                    <button>Continue Order</button>
-                </div>
+            <!--<div class="row" style="background-color:darkgrey">-->
+                <!--<div class="col-md-5">-->
+                <!--</div>-->
+                <!--<div class="col-md-2">-->
+                    <!--<label>Total Quantity:</label>-->
+                    <!--<label>124</label>-->
+                <!--</div>-->
+                <!--<div class="col-md-3">-->
+                    <!--<label>Total Amoun:</label>-->
+                    <!--<label>$124.00</label>-->
+                <!--</div>-->
+                <!--<div class="col-md-2">-->
+                    <!--<button ng-click = "o.continueOrder()">Continue Order</button>-->
+                <!--</div>-->
 
+            <!--</div>-->
+
+            <div type="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">
+                <span style="color: red">
+                    FINAL ORDER DETAILS-->
+                </span>
+                <span>
+                    TOTAL : ${{o.total}}
+                </span>
+                <span>
+                    TOTAL QUANTITY : {{o.totalQuantity}}</span>
+                <button ng-click = "o.continueOrder()" style="background-color: red;margin-left: 350px;">
+                    Continue Order
+                </button>
             </div>
 
             <table class="table table-striped">
@@ -31,14 +45,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat = "order in o.orderDto">
+                    <tr ng-repeat = "order in o.orderDto track by $index">
                         <td>1</td>
                         <td ><img ng-src="data:image/JPEG;base64,{{order.image}}" height="70px" width="70px"></td>
                         <td>{{order.description}}</td>
                         <td>{{order.retailPrice}}</td>
-                        <td>{{order.saleQuantity}}</td>
-                        <td>{{order.retailPrice * order.saleQuantity}}</td>
-                        <td><button>Remove</button></td>
+                        <td><input type="text" data-restrict-characters="restrictCharacter.OnlyDigits.regExp" ng-value="order.quantity" ng-model = "order.quantity" ng-change="o.test1(order.quantity)"/></td>
+                        <td>{{order.retailPrice * order.quantity}}</td>
+                        <td><button ng-click = "o.removeProduct(order.productNo,$index)">Remove</button></td>
+                        <td><button ng-click = "o.updateProductQuantity(order.quantity,order.productNo)">Update</button></td>
+
                     </tr>
                 </tbody>
             </table>

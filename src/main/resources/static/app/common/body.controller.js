@@ -69,7 +69,8 @@
                         StoreService.getData(GlobalVariable.URLCONSTANT+'getProductsByCategory?category_Id='+item.categoryId).then(
                             function (response) {
 
-                                console.log(response.data)
+                                console.log(response.data);
+                                GlobalVariable.product = {};
                                 if (response.data) {
                                     vm.subListData = _.filter(response.data, function(o) { return o.categoryId === item.categoryId; })
                                     console.log(vm.subListData);

@@ -4,13 +4,12 @@ import alok.learnui.bl.SalesManager;
 import alok.learnui.dto.TransactionDto;
 import alok.learnui.dto.TransactionLineItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
+@RequestMapping("")
+@CrossOrigin(origins = {"*"})
 public class SalesController {
 
     @Autowired
@@ -23,8 +22,26 @@ public class SalesController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addTransactionLineItem", consumes = "application/json")
-    public void addTransactionLineItem(@RequestBody List<TransactionLineItemDto> transactionLineItemDto, @RequestParam String phoneNo)
+    public void addTransactionLineItem(@RequestBody TransactionLineItemDto product)
     {
-        salesManager.addTransactionLineItemToDB(transactionLineItemDto, phoneNo);
+        salesManager.addTransactionLineItemToDB(product);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getTransactionLineItem", produces = "application/json")
+    public List<TransactionLineItemDto> getTransactionLineItem(@RequestParam String phoneNo)
+    {
+       return salesManager.getTransactionLineItemToDB(phoneNo);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/deleteTransactionLineItem")
+    public boolean deleteTransactionLineItem(@RequestParam String phoneNo, @RequestParam String productNo)
+    {
+        return salesManager.deleteTransactionLineItem(phoneNo,productNo);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/updateTransactionLineItem")
+    public boolean updateTransactionLineItem(@RequestParam String phoneNo, @RequestParam String productNo, @RequestParam int quantity)
+    {
+        return salesManager.updateTransactionLineItem(phoneNo,productNo,quantity);
     }
 }

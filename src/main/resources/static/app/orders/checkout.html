@@ -1,0 +1,28 @@
+<div class="container" ng-controller = "CheckoutController as checkout">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4" style="border:1px solid black;"><!--this shipping address div -->
+                    <div style="background-color: red">
+                        <button type="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">
+                            Shipping Information
+                        </button>
+                       </div>
+                <br /><h2>{{checkout.firstName}}    {{checkout.lastName}}</h2>
+                <br /><h3>{{checkout.companyName}}</h3>
+                <br />{{checkout.street}}
+                <br />{checkout.city}}, {{checkout.state}}, {{checkout.zipcode}}</h4>
+                <br />Fax:{{checkout.fax}}
+                <br />Phone:{{checkout.phoneNo}}
+                <br />{{checkout.country}}
+            </div>
+            <div class="col-md-8"><!--this order details div -->
+                <div style="background-color: red" align="center">
+                    <button type="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">
+                        Order Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

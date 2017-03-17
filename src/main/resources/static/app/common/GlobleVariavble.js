@@ -15,8 +15,9 @@
          globalVar.partsProduct = '';
          globalVar.lineItemDto = '';
          globalVar.productBtCategory = '';
-         globalVar.brandModelDto = [];
+         globalVar.items = [];
          globalVar.URLCONSTANT = 'http://localhost:8080/';
+         globalVar.customerPhoneNo = '';
          return globalVar;
      }
 

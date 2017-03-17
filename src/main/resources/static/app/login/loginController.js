@@ -20,6 +20,19 @@
                 if(userDetail.validUser)
                 {
                     sessionStorage.validUser = true;
+                    sessionStorage.customerPhoneNo = userDetail.phoneNo;
+                    sessionStorage.street = userDetail.street;
+                    sessionStorage.city = userDetail.city;
+                    sessionStorage.state = userDetail.state;
+                    sessionStorage.country = userDetail.country;
+                    sessionStorage.zipcode = userDetail.zipcode;
+                    sessionStorage.fax = userDetail.fax;
+                    sessionStorage.email = userDetail.email;
+                    sessionStorage.firstName = userDetail.firstName;
+                    sessionStorage.lastName = userDetail.lastName;
+                    sessionStorage.companyName = userDetail.companyName;
+
+
                     $state.go('home');
                 }
                 else

@@ -26,6 +26,7 @@ public class CustomerDto {
     private double last12MonthsSpend;
     private String companyName;
     private int customerId;
+    private String password;
 
     public String getZipcode() {
         return zipcode;
@@ -193,6 +194,14 @@ public class CustomerDto {
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
 
