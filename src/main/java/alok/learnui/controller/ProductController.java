@@ -34,6 +34,11 @@ public class ProductController {
         return productManager.getProductDetails();
     }
 
+    @RequestMapping(value = "/getProductForSearch", method = RequestMethod.GET)
+    public List<ProductEcomerceDto> getProductForSearch() {
+
+        return productManager.getProductForSearch();
+    }
     @RequestMapping(value = "/getProductsByCategory", method = RequestMethod.GET)
     public List<ProductEcomerceDto> getProductsByCategory(@RequestParam int category_Id) {
 

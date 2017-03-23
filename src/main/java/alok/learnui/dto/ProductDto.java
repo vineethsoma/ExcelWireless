@@ -25,7 +25,7 @@ public class ProductDto {
     private String categoryName;
     private String brandName;
     private String vendorName;
-   private String imeiNo;
+    private String imeiNo;
     private boolean addTax;
     private int stock;
     private int quantityForSell;

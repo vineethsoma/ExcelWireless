@@ -1,4 +1,4 @@
-html, body, div, span, applet, object, iframe,h3, h4, h5, h6, p, blockquote, pre,
+html, body, div, span, applet, object, iframe, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -7,7 +7,7 @@ dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
+figure, figcaption, footer, header,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
     margin: 0;
@@ -22,7 +22,7 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, header, menu, nav, section {
     display: block;
 }
 body {
@@ -374,6 +374,13 @@ text-align: center;
 .carousel-image-2 {
    background-image: url("../images/011.jpg");
 }
+.checkoutDiv
+{
+    border: 1px solid #ccc!important;
+    margin-bottom: 5px;
+    padding: 0.01em 18px;
+    margin-top: 2px;
+}
 /*.constrained {*/
     /*height:550px;*/
     /*overflow-y:scroll;*/
@@ -382,3 +389,107 @@ text-align: center;
     /*!* This is the magic bit *!*/
     /*display: none;*/
 /*}*/
+
+/*contactUs*/
+.gap {
+    height: 30px;
+    width: 100%;
+    clear: both;
+    display: block;
+}
+.margin-bottom
+{
+    margin-bottom: 10px;
+}
+
+/*login ccs*/
+div.login-box {
+    float: none;
+    margin: 0 auto;
+    clear: both;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.panel-default {
+    border-color: #ddd;
+}
+.panel-intro {
+    padding: 40px 0 25px;
+}
+div.login-box .panel-body {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+
+.login-box .input-icon i {
+    color: #555;
+    opacity: 0.6;
+    border-right: 1px solid #ccc;
+    padding-right: 5px;
+
+}
+.panel-footer {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05) inset;
+}
+
+/*PRODUCT PAGE DESIGN*/
+.product-box {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+.product-description
+{
+    font-size: 15px;
+    font-family: "Proxima Nova Semibold" !important;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.product-price
+{
+    font-size: 20px;
+    color: red;
+    text-align: center;
+    padding: 5px;
+}
+
+.qut-text
+{
+    height: 40px;
+    width: 60px;
+}
+.center {
+    margin: auto;
+    width: 70%;
+    padding: 11px;
+}
+.btn
+{
+    margin-top: 10px;
+}
+.constrained {
+    height:550px;
+    overflow-y:scroll;
+}
+.constrained::-webkit-scrollbar {
+
+    display: none;
+}

@@ -8,6 +8,7 @@
     function body($scope,StoreService,GlobalVariable,$state) {
 
         var vm = this;
+        vm.user =  sessionStorage.validUser;
 
         vm.getMenu = function(){
             StoreService.getData(GlobalVariable.URLCONSTANT+'getWebMenu').then(

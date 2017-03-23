@@ -106,6 +106,83 @@ public class SalesManager {
 
     }
 
+    //THIS WILL GIVE LAST TRANSACTION COMP ID WHICH HELP UI TO GENERATE NEXT ID
+    public int getLastTransactionId() {
+
+        int lastTransactionID = jdbcTemplate.queryForObject(sqlQueries.getLastTransactionId, new Object[]{}, Integer.class);
+
+        return lastTransactionID;
+    }
+
+    public boolean checkoutTransactionLineItem(List<TransactionLineItemDto> transactionLineItemDto) {
+
+        //THIS WILL GIVE LAST TRANSACTION COMP ID WHICH HELP UI TO GENERATE NEXT ID
+//        int lastTransactionID = jdbcTemplate.queryForObject(sqlQueries.getLastTransactionId, new Object[]{}, Integer.class);
+//        int finalTransactionId = lastTransactionID + 1;
+
+        try {
+
+            jdbcTemplate.batchUpdate(sqlQueries.addTransactionLineItem, new BatchPreparedStatementSetter() {
+
+                @Override
+                public void setValues(PreparedStatement ps, int i) throws SQLException {
+
+                    TransactionLineItemDto transactionLineItemDto1 = transactionLineItemDto.get(i);
+
+                    ps.setInt(1,transactionLineItemDto1.getTransactionCompId());
+                    ps.setString(2, transactionLineItemDto1.getTransactionDate());
+                    ps.setString(3,"O");
+                    ps.setString(4, transactionLineItemDto1.getProductNo());
+                    ps.setInt(5, transactionLineItemDto1.getQuantity());
+                    ps.setDouble(6, transactionLineItemDto1.getRetailPrice());
+                    ps.setDouble(7, transactionLineItemDto1.getCostPrice());
+                    ps.setDouble(8, transactionLineItemDto1.getDiscount());
+                    ps.setDouble(9, transactionLineItemDto1.getDiscountPercentage());
+                    ps.setDouble(10, transactionLineItemDto1.getRetailWithDis());
+                    ps.setDouble(11, transactionLineItemDto1.getTotalProductPrice());
+                    ps.setDouble(12, transactionLineItemDto1.getTotalProductPriceWithTax());
+                }
+                @Override
+                public int getBatchSize() {
+                    return transactionLineItemDto.size();
+                }
+            });
+            System.out.println("Transaction Line Item Added Successfully");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return true;
+    }
+
+    public boolean checkoutTransaction(TransactionDto transactionDto) {
+        try {
+            jdbcTemplate.update(sqlQueries.addTransaction,
+                    transactionDto.getTransactionCompId(),
+                    transactionDto.getTransactionDate(),
+                    transactionDto.getTotalAmount(),
+                    transactionDto.getTax(),
+                    transactionDto.getDiscount(),
+                    transactionDto.getSubTotal(),
+                    transactionDto.getTotalQuantity(),
+                    transactionDto.getCustomerPhoneNo(),
+                    transactionDto.getStatus(),
+                    transactionDto.getPrevBalance(),
+                    transactionDto.getBalance(),
+                    transactionDto.getReceiptNote(),
+                    transactionDto.getCustomerName());
+
+            System.out.println("Transaction Added Successfully");
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+        return true;
+    }
+
+
     private final class TransactionLineItemMapper implements RowMapper<TransactionLineItemDto> {
 
         @Override

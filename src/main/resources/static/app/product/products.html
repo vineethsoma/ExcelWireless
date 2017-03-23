@@ -23,17 +23,17 @@
                 </div>
             </div>
             <div class="col-md-2" ng-repeat = "product in GlobalVariable.product">
-                <div>
-                    <img ng-src="data:image/JPEG;base64,{{product.image}}" ng-click = "productCtrl.getProductDetails(product)" class= "img-responsive"  > 
+                <div class= "img-responsive">
+                    <img ng-src="data:image/JPEG;base64,{{product.image}}" ng-click = "productCtrl.getProductDetails(product)"> 
                 </div>
-                <h3  class="product-description">{{product.description}}</h3>
-                <h3  ng-show = "productCtrl.user" class="product-price">{{product.retailPrice}}</h3>
-                <div class="row" style="padding: 0px;margin: 0px;text-align: center">
+                <h2  class="product-description">{{product.description}}</h2>
+                <h2  ng-show = "productCtrl.user" class="product-price">${{product.retailPrice}}</h2>
+                <div class="row" style="padding: 0px;margin: 0px;">
                     <div class="col-md-6" style="width: 30%;padding: 0px;">
-                        <input ng-show = "productCtrl.user" type="text" class="form-control"  placeholder="Quantity" ng-model="productCtrl.countNumber[$index]" data-restrict-characters="restrictCharacter.OnlyDigits.regExp" style="height: 30px;"/>
+                        <input ng-show = "productCtrl.user" type="text" class="form-control"  placeholder="Qty" ng-model="productCtrl.countNumber[$index]" data-restrict-characters="restrictCharacter.OnlyDigits.regExp" style="height: 30px"/>
                     </div>
-                    <div class="col-md-6" style="padding-left: 4px;width: 70%;padding-right: 0;padding-top:0;padding-bottom:0;margin: 0px;">
-                        <button style="width: 68px;white-space: normal;height: 30px;" ng-show = "productCtrl.user" type="button" class="btn btn-primary" ng-click="productCtrl.updateCartCount(productCtrl.countNumber[$index],product)">Add To Cart</button>
+                    <div class="col-md-6" style="padding-left: 4px;width: 70%;">
+                        <button style="width: 68px;font-size:9px;height: 30px;" ng-show = "productCtrl.user" type="button" class="btn-primary" ng-click="productCtrl.updateCartCount(productCtrl.countNumber[$index],product)">Add To Cart</button>
                     </div>
                 </div>
             </div>

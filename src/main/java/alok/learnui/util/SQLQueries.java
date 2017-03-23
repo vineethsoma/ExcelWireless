@@ -59,9 +59,8 @@ public class SQLQueries {
                     "DISCOUNT_PERCENTAGE," +
                     "RETAILWITHDISCOUNT," +
                     "TOTALPRODUCTPRICE," +
-                    "TOTAL_PRODUCT_PRICE_WITH_TAX, " +
-                    "IMEI_NO)" +
-            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    "TOTAL_PRODUCT_PRICE_WITH_TAX)" +
+            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
 
@@ -183,4 +182,24 @@ public class SQLQueries {
 
 
     public String deleteProductFromCustomerOrder = "DELETE FROM web_transaction_line_item where CUSTOMER_PHONENO = ? AND PRODUCT_NO = ?";
+    public String getLastTransactionId = "SELECT max(CAST(TRANSACTION_COMP_ID AS SIGNED)) FROM transaction";
+    public String addTransaction =
+            "INSERT INTO transaction(" +
+                    "TRANSACTION_COMP_ID," +
+                    "TRANSACTION_DATE," +
+                    "TOTAL_AMOUNT," +
+                    "TAX_AMOUNT," +
+                    "DISCOUNT_AMOUNT," +
+                    "SUBTOTAL," +
+                    "TOTALQUANTITY," +
+                    "CUSTOMER_PHONENO," +
+                    "USER_ID," +
+                    "STATUS," +
+                    "PREVIOUS_BALANCE, " +
+                    "BALANCE, " +
+                    "RECEIPT_NOTE," +
+                    "FIRST_NAME_LAST_NAME," +
+                    "USERNAME) VALUES (?,?,?,?,?,?,?,?,'3',?,?,?,?,?,'asif')";
+
+    public String getProductForSearch = "SELECT PRODUCT_NO,DESCRIPTION,CATEGORY_ID,BRAND_ID,MODEL_ID FROM product";
 }

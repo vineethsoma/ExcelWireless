@@ -18,6 +18,12 @@
          globalVar.items = [];
          globalVar.URLCONSTANT = 'http://localhost:8080/';
          globalVar.customerPhoneNo = '';
+         globalVar.productForSearch = '';
+         globalVar.isValidUser = 'false';
+
+
+
+
          return globalVar;
      }
 

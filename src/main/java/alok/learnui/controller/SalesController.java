@@ -3,6 +3,7 @@ package alok.learnui.controller;
 import alok.learnui.bl.SalesManager;
 import alok.learnui.dto.TransactionDto;
 import alok.learnui.dto.TransactionLineItemDto;
+import org.jvnet.hk2.config.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,4 +45,23 @@ public class SalesController {
     {
         return salesManager.updateTransactionLineItem(phoneNo,productNo,quantity);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getLastTransactionId", produces = "application/json")
+    public int getTransactionLineItem()
+    {
+        return salesManager.getLastTransactionId();
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/checkoutTransaction")
+    public boolean checkoutTransaction(@RequestBody TransactionDto transactionDto)
+    {
+        return salesManager.checkoutTransaction(transactionDto);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/checkoutTransactionLineItem")
+    public boolean checkoutTransactionLineItem(@RequestBody List<TransactionLineItemDto> transactionLineItemDto)
+    {
+        return salesManager.checkoutTransactionLineItem(transactionLineItemDto);
+    }
+
 }

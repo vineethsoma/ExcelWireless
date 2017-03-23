@@ -17,7 +17,18 @@
         vm.dataList = [];
         vm.productList = [];
         vm.responseData = {};
+        $scope.GlobalVariable = GlobalVariable;
+
+        vm.productNames = [];
         // vm.productMethods = productDetailsService;
+
+
+
+        $rootScope.$on('isValid',function(evt,value){
+            GlobalVariable.isValidUser = value;
+
+        });
+
 
         vm.setDataList = function (name) {
             vm.dataList = [];
@@ -171,7 +182,7 @@
         }
 
 
-        vm.getProductDetails = function () {
+        vm.getProductDetailsForParts = function () {
 
                 $state.go('partProducts');
         }
@@ -179,13 +190,33 @@
         $rootScope.$on('updateCount',function(event,value){
 
                 vm.cartCount += parseInt(value);
+
+            //vm.cartCount = sessionStorage.checkoutQuantity;
         });
 
         vm.renderOrderPage = function () {
             $state.go('order');
         }
 
+        vm.getProductDetails = function () {
+
+            StoreService.getData(GlobalVariable.URLCONSTANT+"getProductForSearch").then(
+                function (success) {
+                    GlobalVariable.productForSearch = success.data;
+
+                    for (var i = 0; i < GlobalVariable.productForSearch.length; i++) {
+                        vm.productNames
+                            .push(GlobalVariable.productForSearch[i].description);
+                    }
+                },
+                function (error) {
+                    console.log("Failed to get customers order details");
+                });
+        }
+
         function render() {
+
+            GlobalVariable.isValidUser =  sessionStorage.validUser;
             vm.service.callGenericMethod('/getWebMenu', 'GET', {}).then(
                 function success(response) {
                     if (response.data &&
@@ -208,6 +239,8 @@
 
                 }
             );
+
+            vm.getProductDetails();
 
         //     vm.productMethods.getProdByCatId(12).then(success, error);
          }

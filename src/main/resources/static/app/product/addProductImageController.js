@@ -22,7 +22,6 @@ angular.module('excelWireless')
                     console.log("Product_Id:"+product_Id);
                 })
         }
-
         getProducts = function () {
 
                 StoreService.getData(GlobalVariable.URLCONSTANT+'getProductsByCategory?category_Id=6').then(

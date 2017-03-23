@@ -70,6 +70,22 @@ public class ProductManager {
         return productList;
     }
 
+    public List<ProductEcomerceDto> getProductForSearch() {
+
+        List<ProductEcomerceDto> productList = new ArrayList<>();
+
+        try
+        {
+            productList = jdbcTemplate.query(sqlQueries.getProductForSearch,new ProductMapperForProductSearch());
+
+            System.out.println("Send Product Details by Category Successfully");
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return productList;
+    }
 
 
     private final class ProductMapperForEcomerce implements RowMapper<ProductEcomerceDto>
@@ -101,6 +117,24 @@ public class ProductManager {
             }
 
 
+
+            return product;
+        }
+    }
+
+    private final class ProductMapperForProductSearch implements RowMapper<ProductEcomerceDto>
+    {
+
+        @Override
+        public ProductEcomerceDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+            ProductEcomerceDto product = new ProductEcomerceDto();
+
+            product.setProductNo(rs.getString("PRODUCT_NO"));
+            product.setDescription(rs.getString("DESCRIPTION"));
+            product.setCategoryId(rs.getInt("CATEGORY_ID"));
+            product.setModelId(rs.getInt("MODEL_ID"));
+            product.setBrandId(rs.getInt("BRAND_ID"));
 
             return product;
         }

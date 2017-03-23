@@ -35,7 +35,7 @@
         var vm = this;
 
         vm.productDto = {};
-        vm.barLimit = 5;
+        vm.barLimit = 10;
         vm.showDIV = false;
 
         $scope.restrictCharacter = restrictCharacter;
@@ -61,15 +61,18 @@
             $state.go('productDetails');
         }
 
-        var a = [];
+        var product1 = [];
         //getting no of products count as well as the product details and storing in to session to show on the order page.
         vm.updateCartCountParts = function (value, product) {
             console.log("Product details from product to product details" + product.description);
             product.quantity = value;
             product.phoneNo = sessionStorage.customerPhoneNo;
-            a.push(product);
+            product.retailWithDis = product.retailPrice;
+            product.totalProductPrice = parseFloat(product.retailPrice * value);
+            product.totalProductPriceWithTax = parseFloat(product.retailPrice * value);
+            product1.push(product);
 
-            sessionStorage.orderDetails = JSON.stringify(a);
+            sessionStorage.orderDetails = JSON.stringify(product1);
             $rootScope.$emit('updateCount', value);
 
             StoreService.postData(GlobalVariable.URLCONSTANT + "addTransactionLineItem", product, "application/json", "application/json").then(function (response) {

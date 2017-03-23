@@ -5,6 +5,7 @@ package alok.learnui.dto;
  */
 public class TransactionLineItemDto {
 
+    private int transactionCompId;
     private boolean addTax;
     private int brandId;
     private int categoryId;
@@ -24,7 +25,16 @@ public class TransactionLineItemDto {
     private int quantityForSell;
     private double costPrice;
     private double discount;
+    private String transactionStatus;
 
+
+    public int getTransactionCompId() {
+        return transactionCompId;
+    }
+
+    public void setTransactionCompId(int transactionCompId) {
+        this.transactionCompId = transactionCompId;
+    }
 
     public boolean isAddTax() {
         return addTax;
@@ -176,5 +186,13 @@ public class TransactionLineItemDto {
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    public String getTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public void setTransactionStatus(String transactionStatus) {
+        this.transactionStatus = transactionStatus;
     }
 }

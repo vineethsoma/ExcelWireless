@@ -3,11 +3,12 @@
 
     angular.module('excelWireless').controller('loginController', loginFunction);
 
-    loginFunction.$inject = ['$http', '$state', 'GlobalVariable'];
+    loginFunction.$inject = ['$http', '$state', 'GlobalVariable','StoreService','$rootScope'];
 
-    function loginFunction($http, $state, GlobalVariable) {
+    function loginFunction($http, $state, GlobalVariable,StoreService,$rootScope) {
 
         var vm = this;
+        var quantity = 0;
 
         vm.onLoginClicked = function (username,password) {
             var userDetail;
@@ -31,6 +32,9 @@
                     sessionStorage.firstName = userDetail.firstName;
                     sessionStorage.lastName = userDetail.lastName;
                     sessionStorage.companyName = userDetail.companyName;
+                    vm.getOrderDetails(userDetail.phoneNo);
+
+                    //Redundant code using same function need to fix and find the way to use one function
 
 
                     $state.go('home');
@@ -40,10 +44,30 @@
                     sessionStorage.validUser = false;
                     console.log("Wrong username or password")
                 }
-
+                $rootScope.$broadcast('isValid',sessionStorage.validUser);
                 console.info("Login Response:"+userDetail.username)
 
             });
+
         }
+        vm.getOrderDetails = function(phn) {
+
+            StoreService.getData(GlobalVariable.URLCONSTANT + "getTransactionLineItem?phoneNo="+phn).then(
+                function (success) {
+                    vm.orderDto = success.data;
+                    quantity = 0;
+                    for(var i=0;i<vm.orderDto.length;i++)
+                    {
+                        quantity = quantity + parseInt(vm.orderDto[i].quantity);
+                    }
+                    sessionStorage.totalQuantity = quantity;
+                    $rootScope.$broadcast('updateCount',quantity);
+                },
+                function (error) {
+                    console.log("Failed to get customers order details");
+                });
+            //vm.orderDto = JSON.parse(sessionStorage.orderDetails);
+        }
+
     }
 }());
