@@ -458,9 +458,7 @@ div.login-box .panel-body {
 {
     font-size: 15px;
     font-family: "Proxima Nova Semibold" !important;
-    height: 30px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
 
 }
 .product-price
