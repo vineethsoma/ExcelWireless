@@ -2,26 +2,26 @@
 <div class="container" ng-controller = "PartsController as p">
     <div class="row constrained">
         <div  class=" col-md-12" infinite-scroll="p.increaseLimit()" infinite-scroll-container='".constrained"'>
-            <!--<div class="col-md-3 mycontainer">-->
+            <div class="col-md-3 mycontainer">
 
-                    <!--<div class="left-nav">-->
-                        <!--<accordion close-others="true" >-->
-                            <!--<accordion-group  is-open="isopen"-->
-                                              <!--ng-repeat="item in items">-->
-                                <!--<accordion-heading >-->
-                                    <!--{{item.brandName}}-->
-                                    <!--<i class="pull-right glyphicon"-->
-                                       <!--ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>-->
-                                <!--</accordion-heading>-->
+                    <div class="left-nav">
+                        <accordion close-others="true" >
+                            <accordion-group  is-open="isopen"
+                                              ng-repeat="item in items">
+                                <accordion-heading >
+                                    {{item.brandName}}
+                                    <i class="pull-right glyphicon"
+                                       ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+                                </accordion-heading>
 
-                                <!--<div ng-repeat="model in item.modelDtoList">{{model.modelName}}</div>-->
-                            <!--</accordion-group>-->
-                        <!--</accordion>-->
-                    <!--</div>-->
+                                <div ng-repeat="model in item.modelDtoList">{{model.modelName}}</div>
+                            </accordion-group>
+                        </accordion>
+                    </div>
 
-                    <!--<div class="content">-->
-                    <!--</div>-->
-                <!--</div>-->
+                    <div class="content">
+                    </div>
+                </div>
             <div class="col-md-2" ng-repeat = "product in p.productDto | limitTo:p.barLimit" style="height:250px;">
                 <div  class= "img-responsive">
                     <img ng-src="data:image/JPEG;base64,{{product.image}}" ng-click = "p.getProductDetails(product)" > 
