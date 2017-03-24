@@ -3,7 +3,6 @@
     <div class="row constrained">
         <div  class=" col-md-12" infinite-scroll="p.increaseLimit()" infinite-scroll-container='".constrained"'>
             <div class="col-md-3 mycontainer">
-
                     <div class="left-nav">
                         <accordion close-others="true" >
                             <accordion-group  is-open="isopen"
@@ -22,7 +21,8 @@
                     <div class="content">
                     </div>
                 </div>
-            <div class="col-md-2" ng-repeat = "product in p.productDto | limitTo:p.barLimit" style="height:250px;">
+
+            <div class="col-md-2" ng-repeat = "product in p.productDto | limitTo:p.barLimit" style="height:260px;">
                 <div  class= "img-responsive">
                     <img ng-src="data:image/JPEG;base64,{{product.image}}" ng-click = "p.getProductDetails(product)" > 
                 </div>
