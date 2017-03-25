@@ -21,6 +21,7 @@
     <script type="text/javascript" src="libs/ng-infinite-scroll.js"></script>
 
     <script type="text/javascript" src="app.module.js"></script>
+    <script type="text/javascript" src="app/common/ngEnter.directive.js"></script>
     <script type="text/javascript" src="app/common/utils.js"></script>
     <script type="text/javascript" src="app/common/proxtraMessage.directive.js"></script>
     <script type="text/javascript" src="app/common/restrictCharacters.directive.js"></script>
@@ -105,7 +106,8 @@
             <div class="col-md-6 no-padding"><a href="index.html"><img src="assets/images/logo.png" height="80" width="220"></a></div>
             <div class="col-md-3 no-padding">
                 <div class="input-group search-group">
-                    <input type="text" class="form-control search-input" typeahead="productName for productName in bodyCtrl.productNames | filter:$viewValue " typeahead-min-length ="3" placeholder="Search Device/Model" aria-describedby="basic-addon2" ng-model = "bodyCtrl.test" >
+
+                    <input id="searchBox" type="text" class="form-control search-input" typeahead="productName for productName in bodyCtrl.productNames | filter:$viewValue " typeahead-min-length ="3" placeholder="Search Device/Model" aria-describedby="basic-addon2" ng-enter = "bodyCtrl.getProducts()" ng-model = "bodyCtrl.description" >
                     <span class="input-group-addon search-icon" id="search-button">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </span>

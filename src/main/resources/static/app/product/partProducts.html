@@ -21,8 +21,8 @@
                     <div class="content">
                     </div>
                 </div>
-
             <div class="col-md-2" ng-repeat = "product in p.productDto | limitTo:p.barLimit" style="height:260px;">
+
                 <div  class= "img-responsive">
                     <img ng-src="data:image/JPEG;base64,{{product.image}}" ng-click = "p.getProductDetails(product)" > 
                 </div>

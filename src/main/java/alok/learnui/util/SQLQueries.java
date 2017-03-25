@@ -99,7 +99,19 @@ public class SQLQueries {
 
     //SQL QUERY TO GET  DETAILS FROM DATABASE
 
-    public String getProductDetails = "SELECT * FROM product";
+    public String getProductDetails = "SELECT " +
+            "PRODUCT_NO," +
+            "CATEGORY_ID," +
+            "VENDOR_ID," +
+            "BRAND_ID," +
+            "MODEL_ID, " +
+            "DESCRIPTION," +
+            "COST_PRICE," +
+            "RETAIL_PRICE," +
+            "QUANTITY," +
+            "IMAGE " +
+          //  "TAX," +
+            "FROM product where ACTIVE_FLAG = 1";
 
     public String getModelDetails = "SELECT * FROM PRODUCT_MODEL WHERE ID = ? AND ID <> 'NULL' ";
 
@@ -147,9 +159,32 @@ public class SQLQueries {
 
     public String getModelDetailsForBrand = "SELECT distinct MODEL_ID FROM product WHERE BRAND_ID = ? AND MODEL_ID <> 'NULL' ";
 
-    public String getProductDetailsByCategoryId = "SELECT * FROM product WHERE CATEGORY_ID = ?";
+    public String getProductDetailsByCategoryId = "SELECT " +
+            " PRODUCT_NO," +
+            " CATEGORY_ID," +
+            " VENDOR_ID," +
+            " BRAND_ID," +
+            " MODEL_ID," +
+            " DESCRIPTION," +
+            " COST_PRICE," +
+            " RETAIL_PRICE," +
+            " IMAGE," +
+            " QUANTITY " +
+            " FROM product where ACTIVE_FLAG = 1 AND CATEGORY_ID = ?";
 
-    public String getProductDetailsByModelId = "SELECT * FROM product WHERE MODEL_ID = ?";
+    public String getProductDetailsByModelId = "SELECT " +
+            "PRODUCT_NO," +
+            "CATEGORY_ID," +
+            "VENDOR_ID," +
+            "BRAND_ID," +
+            "MODEL_ID, " +
+            "DESCRIPTION," +
+            "COST_PRICE," +
+            "RETAIL_PRICE" +
+            ",QUANTITY," +
+            "IMAGE" +
+            //"TAX" +
+            "FROM product WHERE MODEL_ID = ? AND ACTIVE_FLAG = 1";
     public String updateProductImage = "UPDATE product SET IMAGE = ? WHERE PRODUCT_ID = ?";
     public String getBrandDetailsForParts = "SELECT distinct p.BRAND_ID, b.BRAND_NAME FROM product p JOIN brand b on p.BRAND_ID = b.BRAND_ID where p.CATEGORY_ID = 14";
     public String addSingleTransactionLineItem = "INSERT INTO web_transaction_line_item ("+
@@ -201,5 +236,20 @@ public class SQLQueries {
                     "FIRST_NAME_LAST_NAME," +
                     "USERNAME) VALUES (?,?,?,?,?,?,?,?,'3',?,?,?,?,?,'asif')";
 
-    public String getProductForSearch = "SELECT PRODUCT_NO,DESCRIPTION,CATEGORY_ID,BRAND_ID,MODEL_ID FROM product";
+    public String getProductForSearch = "SELECT PRODUCT_NO,DESCRIPTION,CATEGORY_ID,BRAND_ID,MODEL_ID FROM product where ACTIVE_FLAG = 1 ";
+    public String getProductsByDescription = "SELECT " +
+            "PRODUCT_NO," +
+            "CATEGORY_ID," +
+            "VENDOR_ID," +
+            "BRAND_ID," +
+            "MODEL_ID," +
+            "DESCRIPTION," +
+            "COST_PRICE," +
+            "RETAIL_PRICE," +
+            "QUANTITY," +
+            "IMAGE " +
+            "FROM product " +
+            "WHERE MODEL_ID = " +
+            "(SELECT MODEL_ID FROM product " +
+            " WHERE DESCRIPTION = ?)";
 }

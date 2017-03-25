@@ -87,6 +87,22 @@ public class ProductManager {
         return productList;
     }
 
+    public List<ProductEcomerceDto> getProductsByDescription(String description) {
+
+        List<ProductEcomerceDto> productList = new ArrayList<>();
+        try
+        {
+            productList = jdbcTemplate.query(sqlQueries.getProductsByDescription,new ProductMapperForEcomerce(),description);
+
+            System.out.println("Send Product Details by Description Successfully");
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return productList;
+    }
+
 
     private final class ProductMapperForEcomerce implements RowMapper<ProductEcomerceDto>
     {
@@ -100,7 +116,7 @@ public class ProductManager {
 //
            int blobLength = (int)rs.getBlob("IMAGE").length();
 
-            product.setProductId(rs.getInt("PRODUCT_ID"));
+            //product.setProductId(rs.getInt("PRODUCT_ID"));
             product.setProductNo(rs.getString("PRODUCT_NO"));
             product.setDescription(rs.getString("DESCRIPTION"));
             product.setCategoryId(rs.getInt("CATEGORY_ID"));
@@ -110,7 +126,7 @@ public class ProductManager {
             product.setCostPrice(rs.getDouble("COST_PRICE"));
             product.setRetailPrice(rs.getDouble("RETAIL_PRICE"));
             product.setQuantity(rs.getInt("QUANTITY"));
-            product.setAddTax(rs.getBoolean("TAX"));
+           // product.setAddTax(rs.getBoolean("TAX"));
 
             if(blobLength != 0) {
                 product.setImage(rs.getBlob("IMAGE").getBytes(1, blobLength));

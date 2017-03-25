@@ -214,6 +214,20 @@
                 });
         }
 
+        //this function helps to get product details which is searched on search box and also get the related products with that products.
+        vm.getProducts = function () {
+
+            StoreService.getData(GlobalVariable.URLCONSTANT+"getProductsByDescription?description="+vm.description).then(
+                function (success) {
+                    GlobalVariable.product = success.data;
+                    $state.go('products');
+                },
+                function (error) {
+                    console.log("Failed get product details by description");
+                });
+        }
+
+
         function render() {
 
             GlobalVariable.isValidUser =  sessionStorage.validUser;

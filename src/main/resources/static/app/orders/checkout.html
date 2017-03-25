@@ -46,6 +46,7 @@
                 <button type="button" class="btn btn-primary btn-lg btn-block">
                     ORDER SUMMARY
                 </button>
+
                 <div class="checkoutDiv">
                         <table style="border-collapse: collapse">
                             <tbody>
@@ -66,12 +67,33 @@
                                 </tr>
                                 <tr>
                                     <td><h4>Order Total:</h4></td>
-                                    <td><h4>$5000.90</h4></td>
+                                    <td><h4>${{checkout.checkoutTotal}}</h4></td>
                                 </tr>
                             </tbody>
                             </table>
                     </div>
-                    <button type="button" ng-click = "checkout.finalCheckout(checkout.orderDto)" class=" btn btn-primary btn-lg btn-block" style="background-color: goldenrod;" >
+
+                <!--this is model div-->
+
+                <div class="modal fade" id="confirm-order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Are You Sure For Conform This Order</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                                <a class="btn btn-danger btn-ok" ng-click = "checkout.finalCheckout(checkout.orderDto)" data-dismiss="modal">YES</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--end of model div-->
+
+
+                    <button type="button" data-toggle="modal" data-target="#confirm-order" class=" btn btn-primary btn-lg btn-block" style="background-color: goldenrod;" >
                         PLACE YOUR ORDER
                     </button>
                 </div>

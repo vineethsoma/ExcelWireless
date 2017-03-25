@@ -45,6 +45,12 @@ public class ProductController {
         return productManager.getEcommerceProductsByCategory(category_Id);
     }
 
+    @RequestMapping(value = "/getProductsByDescription", method = RequestMethod.GET)
+    public List<ProductEcomerceDto> getProductsByDescription(@RequestParam String description) {
+
+        return productManager.getProductsByDescription(description);
+    }
+
     @RequestMapping(value = "/getEcommerceProductsByModel", method = RequestMethod.GET)
     public List<ProductEcomerceDto> getEcommerceProductsByBrand(@RequestParam int model_Id) {
 
