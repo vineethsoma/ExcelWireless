@@ -32,7 +32,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 
 	// https://mvnrepository.com/artifact/com.google.cloud.tools/appengine-plugins-core
-	compile group: 'com.google.cloud.tools', name: 'appengine-plugins-core', version: '0.2.8'
+	compile group: 'com.google.cloud.tools', name: 'appengine-maven-plugin', version: '1.2.1'
 
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.2.0.RELEASE'
 	runtime('com.h2database:h2')
