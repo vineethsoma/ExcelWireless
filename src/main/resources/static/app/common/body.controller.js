@@ -220,13 +220,13 @@
             StoreService.getData(GlobalVariable.URLCONSTANT+"getProductsByDescription?description="+vm.description).then(
                 function (success) {
                     GlobalVariable.product = success.data;
+                    vm.description = '';
                     $state.go('products');
                 },
                 function (error) {
                     console.log("Failed get product details by description");
                 });
         }
-
 
         function render() {
 

@@ -148,8 +148,6 @@ public class SQLQueries {
     public String getCustomersLast12MonthSpend = "SELECT sum(TOTAL_AMOUNT) TOTAL FROM transaction where CUSTOMER_PHONENO = ?";
 
 
-
-
     public String getProductId = "SELECT PRODUCT_ID FROM PRODUCT WHERE PRODUCT_NO = ?";
 
 
@@ -252,4 +250,5 @@ public class SQLQueries {
             "WHERE MODEL_ID = " +
             "(SELECT MODEL_ID FROM product " +
             " WHERE DESCRIPTION = ?)";
+    public String deleteAllTransactionLineItem = "DELETE FROM web_transaction_line_item WHERE CUSTOMER_PHONENO = ?";
 }

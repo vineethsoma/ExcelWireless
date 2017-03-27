@@ -64,4 +64,12 @@ public class SalesController {
         return salesManager.checkoutTransactionLineItem(transactionLineItemDto);
     }
 
+    //This needs to be done when customer place the final order cause i am storing unconfirmed transaction details into temp table so now after final order this details need to be deleted.
+    @RequestMapping(method = RequestMethod.POST, value = "/deleteAllTransactionLineItem")
+    public boolean deleteTransactionLineItemsForFinalOrder(@RequestParam String customerPhoneNo)
+    {
+        return salesManager.deleteTransactionLineItemsForFinalOrder(customerPhoneNo);
+    }
+
+
 }

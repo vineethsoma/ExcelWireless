@@ -109,9 +109,7 @@ public class SalesManager {
     //THIS WILL GIVE LAST TRANSACTION COMP ID WHICH HELP UI TO GENERATE NEXT ID
     public int getLastTransactionId() {
 
-        int lastTransactionID = jdbcTemplate.queryForObject(sqlQueries.getLastTransactionId, new Object[]{}, Integer.class);
-
-        return lastTransactionID;
+        return jdbcTemplate.queryForObject(sqlQueries.getLastTransactionId, new Object[]{}, Integer.class);
     }
 
     public boolean checkoutTransactionLineItem(List<TransactionLineItemDto> transactionLineItemDto) {
@@ -182,6 +180,14 @@ public class SalesManager {
         return true;
     }
 
+    public boolean deleteTransactionLineItemsForFinalOrder(String customerPhoneNo) {
+
+        int result = jdbcTemplate.update(sqlQueries.deleteAllTransactionLineItem,customerPhoneNo);
+
+        System.out.println("Deleted all transaction line item from web transaction line item table successfully");
+
+        return result != 0;
+    }
 
     private final class TransactionLineItemMapper implements RowMapper<TransactionLineItemDto> {
 

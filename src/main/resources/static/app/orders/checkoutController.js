@@ -25,6 +25,8 @@
         vm.lastName = sessionStorage.lastName;
         vm.companyName = sessionStorage.companyName;
 
+        vm.total = 0;
+        vm.totalQuantity = 0;
         vm.transactionTotal = 0;
         vm.totalTransactionQuantity = 0;
 
@@ -53,19 +55,20 @@
             //vm.orderDto = JSON.parse(sessionStorage.orderDetails);
         }
 
-        // vm.getTotalValue = function()
-        // {
-        //
-        //     for(var i=0;i<vm.orderDto.length;i++)
-        //     {
-        //         vm.total = vm.total + (parseFloat(vm.orderDto[i].retailPrice) * parseInt(vm.orderDto[i].quantity));
-        //         sessionStorage.total = vm.total;
-        //         vm.totalQuantity = vm.totalQuantity + parseInt(vm.orderDto[i].quantity);
-        //         sessionStorage.quantity = vm.totalQuantity;
-        //     }
-        // }
-        vm.checkoutTotal = sessionStorage.checkoutTotal;
-        vm.checkoutQuantity = sessionStorage.checkoutQuantity;
+        vm.getTotalValue = function()
+        {
+
+            for(var i=0;i<vm.orderDto.length;i++)
+            {
+                vm.total = vm.total + (parseFloat(vm.orderDto[i].retailPrice) * parseInt(vm.orderDto[i].quantity));
+                sessionStorage.total = vm.total;
+                vm.totalQuantity = vm.totalQuantity + parseInt(vm.orderDto[i].quantity);
+                sessionStorage.quantity = vm.totalQuantity;
+            }
+            vm.checkoutTotal = sessionStorage.total;
+            vm.checkoutQuantity = sessionStorage.quantity;
+        }
+
         //Placing final oder
         vm.finalCheckout = function (transactionLineItemDto) {
 
@@ -76,6 +79,8 @@
                 vm.totalTransactionQuantity = vm.totalTransactionQuantity + parseInt(transactionLineItemDto[p].quantity);
                 //sessionStorage.quantity = vm.totalQuantity;
             }
+
+
 
             //Adding transaction details into DB.
 
@@ -103,6 +108,10 @@
                     "receiptNote":'TestNotes', //TODO Need to replace with with text box by the time of order.
                     "transactionCompId":parseInt(sessionStorage.transactionId)+1
                 };
+
+                //setting up order id here to show on the thank you page.
+                sessionStorage.orderId = parseInt(sessionStorage.transactionId)+1;
+
             transactionDto = JSON.stringify(transactionDto);
 
             StoreService.postData(GlobalVariable.URLCONSTANT+"checkoutTransaction",transactionDto,"application/json","application/json").then(
@@ -145,6 +154,8 @@
                 function (error) {
                     console.log("Failed to checkout final order");
                 });
+
+            $state.go('thankYou');
         }
 
         function render()

@@ -32,13 +32,12 @@
             <!--start of product details image row-->
             <div class="row">
                 <div class="col-md-12">
-                    <!--<h1>{{product.description}}</h1>-->
-
-                    <!--<label>out of stock</label>-->
-                    <!--<h2>SKU : 080989898998</h2>-->
                     <h1>{{productDetails.a.description}}</h1>
-                    <h1>${{productDetails.a.retailPrice}}</h1>
-                    <!--<label>out of stock</label>-->
+                    <h1 ng-show = "productDetails.user">${{productDetails.a.retailPrice}}</h1>
+                    <h3   ng-show = "productDetails.a.quantity <= 0 " style="color: red;">
+                        Out of stock
+                    </h3>
+
                     <h2>SKU : {{productDetails.a.productNo}}</h2>
                     <hr>
                     <!--end of product details image row-->
@@ -47,7 +46,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div><label>Quantity</label></div>
+                        <div ng-show = "productDetails.user"><label>Quantity</label></div>
                         <input ng-show = "productDetails.user" type="text" class="form-control" placeholder="Please add product quantity" ng-model="productDetails.countNumber[$index]" data-restrict-characters="restrictCharacter.OnlyDigits.regExp" style=" width: 265px;height: 45px;">
                         <hr>
                     </div>

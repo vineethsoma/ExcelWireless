@@ -54,6 +54,10 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider', function 
             url:'/categoryProducts',
             templateUrl:'app/product/categoryProducts.html'
         })
+        .state('thankYou',{
+            url:'/thankYou',
+            templateUrl:'app/orders/thankYou.html'
+        })
         .state('checkout',{
             url:'/checkout',
             templateUrl:'app/orders/checkout.html'

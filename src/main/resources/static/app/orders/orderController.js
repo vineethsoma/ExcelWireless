@@ -86,6 +86,8 @@
             if(value != '' && value != undefined)
             {
                 vm.totalQuantity = vm.totalQuantity + parseFloat(value);
+                //Dont know how to find the total.
+               // vm.total = vm.total * vm.totalQuantity;
             }
 
             sessionStorage.checkoutTotal = vm.total;
