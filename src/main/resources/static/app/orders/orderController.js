@@ -17,11 +17,11 @@
 
 
         // vm.orderDto1 = JSON.parse(sessionStorage.orderDetails);
-        vm.test1 = function(value,index)
+        vm.test1 = function(value,index,retail)
         {
             console.log("value");
            // if(value != undefined && value != null && value != '')
-            vm.getTotalValue(value,index);
+            vm.getTotalValue(value,index,retail);
         }
 
         vm.getOrderDetails = function () {
@@ -29,7 +29,7 @@
             StoreService.getData(GlobalVariable.URLCONSTANT + "getTransactionLineItem?phoneNo="+sessionStorage.customerPhoneNo).then(
                 function (success) {
                     vm.orderDto = success.data;
-                    vm.getTotalValue('',-1);
+                    vm.getTotalValue('',-1,'');
                 },
                 function (error) {
                     console.log("Failed to get customers order details");
@@ -67,7 +67,7 @@
 
             $state.go('checkout');
         }
-        vm.getTotalValue = function(value,index)
+        vm.getTotalValue = function(value,index,retail)
         {
             vm.total = 0;
             vm.totalQuantity = 0;
@@ -86,6 +86,7 @@
             if(value != '' && value != undefined)
             {
                 vm.totalQuantity = vm.totalQuantity + parseFloat(value);
+                vm.total = vm.total + parseFloat(parseFloat(retail) * parseFloat(value));
                 //Dont know how to find the total.
                // vm.total = vm.total * vm.totalQuantity;
             }

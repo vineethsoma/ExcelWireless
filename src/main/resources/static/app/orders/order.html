@@ -55,7 +55,7 @@
                         <td ><img ng-src="data:image/JPEG;base64,{{order.image}}" height="70px" width="70px"></td>
                         <td>{{order.description}}</td>
                         <td>{{order.retailPrice}}</td>
-                        <td><input type="text" data-restrict-characters="restrictCharacter.OnlyDigits.regExp" ng-value="order.quantity" ng-model = "order.quantity" ng-change="o.test1(order.quantity,$index)" class="form-control"/></td>
+                        <td><input type="text" data-restrict-characters="restrictCharacter.OnlyDigits.regExp" ng-value="order.quantity" ng-model = "order.quantity" ng-change="o.test1(order.quantity,$index,order.retailPrice)" class="form-control"/></td>
                         <td>{{order.retailPrice * order.quantity}}</td>
                         <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">

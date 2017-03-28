@@ -21,17 +21,17 @@
                     <div class="content">
                     </div>
                 </div>
-            <div class="col-md-2" ng-repeat = "product in p.productDto | limitTo:p.barLimit" style="height:260px;">
+            <div class="col-md-2" ng-repeat = "product in p.productDto | limitTo:p.barLimit" style="height:300px;">
 
                 <div  class= "img-responsive">
                     <img ng-src="data:image/JPEG;base64,{{product.image}}" ng-click = "p.getProductDetails(product)" > 
                 </div>
 
-                <div style="text-align: center;"><span class="product-description">{{product.description}}</span></div>
-                <div ng-show = "p.user" style="text-align: center;"><span  class="product-price">${{product.retailPrice}}</span></div>
+                <div style="text-align: center;padding-bottom:10px;"><span class="product-description">{{product.description}}</span></div>
+                <div ng-show = "p.user" style="padding-bottom:10px;text-align: center;"><span  class="product-price">${{product.retailPrice}}</span></div>
 
 
-                <div   ng-show = "product.quantity > 0 ">
+                <div   ng-show = "product.quantity > 0 " style="padding-bottom:10px;">
                     <div class="col-md-6" style="width: 30%;padding: 0px;">
                      <input ng-show = "p.user" type="text" class="form-control"  placeholder="Qty" ng-model="p.countNumber[$index]" data-restrict-characters="restrictCharacter.OnlyDigits.regExp" style="height: 30px"/>
                         </div>
@@ -39,7 +39,7 @@
                     <button style="width: 68px;font-size:9px;height: 30px;" ng-show = "p.user" type="button" class="btn-primary" ng-click="p.updateCartCountParts(p.countNumber[$index],product)">Add To Cart</button>
                     </div>
                 </div>
-                <div   ng-show = "product.quantity <= 0 ">
+                <div   ng-show = "product.quantity <= 0 " style="padding-bottom:10px;">
                     <div  style="color: red;text-align: center;"><span style="color: red;">Out of stock</span></div>
                 </div>
             </div>
