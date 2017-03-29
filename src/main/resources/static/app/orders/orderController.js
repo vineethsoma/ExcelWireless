@@ -87,8 +87,6 @@
             {
                 vm.totalQuantity = vm.totalQuantity + parseFloat(value);
                 vm.total = vm.total + parseFloat(parseFloat(retail) * parseFloat(value));
-                //Dont know how to find the total.
-               // vm.total = vm.total * vm.totalQuantity;
             }
 
             sessionStorage.checkoutTotal = vm.total;

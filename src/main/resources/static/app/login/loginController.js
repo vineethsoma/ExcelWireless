@@ -3,13 +3,14 @@
 
     angular.module('excelWireless').controller('loginController', loginFunction);
 
-    loginFunction.$inject = ['$http', '$state', 'GlobalVariable','StoreService','$rootScope','util'];
+    loginFunction.$inject = ['$http', '$state', 'GlobalVariable','StoreService','$rootScope','util','$timeout'];
 
-    function loginFunction($http, $state, GlobalVariable,StoreService,$rootScope,util) {
+    function loginFunction($http, $state, GlobalVariable,StoreService,$rootScope,util, $timeout) {
 
         var vm = this;
         var quantity = 0;
         var errorArray = [];
+        vm.showError =false;
 
         vm.validations = function()
         {
@@ -70,8 +71,13 @@
                   }
                   else
                   {
+                      errorArray = [];
+                      vm.showError = true;
+                      vm.showErrorMsg="Invalid USername /password";
+                      callbackCust();
                       sessionStorage.validUser = false;
                       console.log("Wrong username or password")
+
                   }
                   $rootScope.$broadcast('isValid',sessionStorage.validUser);
                   console.info("Login Response:"+userDetail.username)
@@ -80,6 +86,12 @@
           }
 
 
+        }
+
+        function callbackCust() {
+            $timeout(function() {
+               vm.showError = false;
+            }, 9000);
         }
         vm.getOrderDetails = function(phn) {
 

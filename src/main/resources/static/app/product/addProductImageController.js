@@ -1,6 +1,7 @@
 angular.module('excelWireless')
     .controller('AddProductImageController', ['$scope', 'StoreService','GlobalVariable','$http', function ($scope, StoreService,GlobalVariable,$http) {
 
+        $scope.GlobalVariable = GlobalVariable;
         $scope.uploadImage = function (product_Id,value) {
 
            // var i =+ 1;
@@ -24,7 +25,7 @@ angular.module('excelWireless')
         }
         getProducts = function () {
 
-                StoreService.getData(GlobalVariable.URLCONSTANT+'getProductsByCategory?category_Id=6').then(
+                StoreService.getData(GlobalVariable.URLCONSTANT+'getProduct').then(
                     function (success) {
 
                         console.log(success.data)
@@ -34,9 +35,19 @@ angular.module('excelWireless')
                         console.log("Not able to get all products");
                     });
         }
+        $scope.selectproductType = function()
+        {
+          console.log($scope.productType+""+GlobalVariable.categoryList);
+        };
+
+        $scope.checkValueProduct = function(categoryId)
+        {
+            console.log(categoryId);
+        }
 
         function render()
         {
+            $scope.productType = "";
 
             getProducts();
         }

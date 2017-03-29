@@ -6,6 +6,7 @@
                     <img src="./assets/images/logo.png" style="margin-left: 140px" height="80" width="200"/>
                 </div>
                 <div class="panel-body">
+                    <div class="alert alert-success" ng-if="$ctrl.showError">{{$ctrl.showErrorMsg}}</div>
                     <form ng-submit="onLoginClicked($event)">
                         <div class="form-group">
                             <label class="control-label">Username:</label>

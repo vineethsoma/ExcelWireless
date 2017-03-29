@@ -187,12 +187,13 @@
                 $state.go('partProducts');
         }
         vm.cartCount =0;
-        $rootScope.$on('updateCount',function(event,value){
+            $rootScope.$on('updateCount',function(event,value){
 
-                vm.cartCount += parseInt(value);
+                    vm.cartCount += parseInt(value);
+                sessionStorage.totalQuantity = vm.cartCount;
 
-            //vm.cartCount = sessionStorage.checkoutQuantity;
-        });
+                //vm.cartCount = sessionStorage.checkoutQuantity;
+            });
 
         vm.renderOrderPage = function () {
             $state.go('order');
@@ -237,6 +238,7 @@
                         response.data.categoryDtoList &&
                         response.data.webBrandDtoList) {
                         vm.categoryList = response.data.categoryDtoList;
+                        GlobalVariable.categoryList = vm.categoryList;
                         $log.info("categories");
                         $log.info(vm.categoryList);
                         vm.brandList = response.data.webBrandDtoList;
@@ -255,6 +257,9 @@
             );
 
             vm.getProductDetails();
+            if(sessionStorage.totalQuantity)
+                vm.cartCount = parseInt(sessionStorage.totalQuantity);
+            console.log(vm.cartCount+"session" +sessionStorage.totalQuantity);
 
         //     vm.productMethods.getProdByCatId(12).then(success, error);
          }

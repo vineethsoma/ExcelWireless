@@ -19,7 +19,7 @@
         vm.state = sessionStorage.state;
         vm.country = sessionStorage.country;
         vm.zipcode = sessionStorage.zipcode;
-        vm.fax = sessionStorage.fax;
+        // vm.fax = sessionStorage.fax;
         vm.email = sessionStorage.email;
         vm.firstName = sessionStorage.firstName;
         vm.lastName = sessionStorage.lastName;

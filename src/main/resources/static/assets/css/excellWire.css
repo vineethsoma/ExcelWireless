@@ -219,6 +219,7 @@ hr
     width: 222px;
     height: 160px;
 text-align: center;
+    margin:0 auto;
 }
 .img-responsive img{
     max-width: 100%;
