@@ -118,38 +118,38 @@ public class SalesManager {
 //        int lastTransactionID = jdbcTemplate.queryForObject(sqlQueries.getLastTransactionId, new Object[]{}, Integer.class);
 //        int finalTransactionId = lastTransactionID + 1;
 
-        try {
-
-            jdbcTemplate.batchUpdate(sqlQueries.addTransactionLineItem, new BatchPreparedStatementSetter() {
-
-                @Override
-                public void setValues(PreparedStatement ps, int i) throws SQLException {
-
-                    TransactionLineItemDto transactionLineItemDto1 = transactionLineItemDto.get(i);
-
-                    ps.setInt(1,transactionLineItemDto1.getTransactionCompId());
-                    ps.setString(2, transactionLineItemDto1.getTransactionDate());
-                    ps.setString(3,"O");
-                    ps.setString(4, transactionLineItemDto1.getProductNo());
-                    ps.setInt(5, transactionLineItemDto1.getQuantity());
-                    ps.setDouble(6, transactionLineItemDto1.getRetailPrice());
-                    ps.setDouble(7, transactionLineItemDto1.getCostPrice());
-                    ps.setDouble(8, transactionLineItemDto1.getDiscount());
-                    ps.setDouble(9, transactionLineItemDto1.getDiscountPercentage());
-                    ps.setDouble(10, transactionLineItemDto1.getRetailWithDis());
-                    ps.setDouble(11, transactionLineItemDto1.getTotalProductPrice());
-                    ps.setDouble(12, transactionLineItemDto1.getTotalProductPriceWithTax());
-                }
-                @Override
-                public int getBatchSize() {
-                    return transactionLineItemDto.size();
-                }
-            });
-            System.out.println("Transaction Line Item Added Successfully");
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+//        try {
+//
+//            jdbcTemplate.batchUpdate(sqlQueries.addTransactionLineItem, new BatchPreparedStatementSetter() {
+//
+//                @Override
+//                public void setValues(PreparedStatement ps, int i) throws SQLException {
+//
+//                    TransactionLineItemDto transactionLineItemDto1 = transactionLineItemDto.get(i);
+//
+//                    ps.setInt(1,transactionLineItemDto1.getTransactionCompId());
+//                    ps.setString(2, transactionLineItemDto1.getTransactionDate());
+//                    ps.setString(3,"O");
+//                    ps.setString(4, transactionLineItemDto1.getProductNo());
+//                    ps.setInt(5, transactionLineItemDto1.getQuantity());
+//                    ps.setDouble(6, transactionLineItemDto1.getRetailPrice());
+//                    ps.setDouble(7, transactionLineItemDto1.getCostPrice());
+//                    ps.setDouble(8, transactionLineItemDto1.getDiscount());
+//                    ps.setDouble(9, transactionLineItemDto1.getDiscountPercentage());
+//                    ps.setDouble(10, transactionLineItemDto1.getRetailWithDis());
+//                    ps.setDouble(11, transactionLineItemDto1.getTotalProductPrice());
+//                    ps.setDouble(12, transactionLineItemDto1.getTotalProductPriceWithTax());
+//                }
+//                @Override
+//                public int getBatchSize() {
+//                    return transactionLineItemDto.size();
+//                }
+//            });
+//            System.out.println("Transaction Line Item Added Successfully");
+//
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
 
         return true;
     }
