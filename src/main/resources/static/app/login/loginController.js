@@ -62,26 +62,21 @@
                       sessionStorage.firstName = userDetail.firstName;
                       sessionStorage.lastName = userDetail.lastName;
                       sessionStorage.companyName = userDetail.companyName;
+                      sessionStorage.userRole = userDetail.userRole;
                       vm.getOrderDetails(userDetail.phoneNo);
 
-                      //Redundant code using same function need to fix and find the way to use one function
-
-
+                      // TODO Redundant code using same function need to fix and find the way to use one function
                       $state.go('home');
                   }
                   else
                   {
                       errorArray = [];
                       vm.showError = true;
-                      vm.showErrorMsg="Invalid USername /password";
+                      vm.showErrorMsg="Invalid Username/password";
                       callbackCust();
                       sessionStorage.validUser = false;
-                      console.log("Wrong username or password")
-
                   }
                   $rootScope.$broadcast('isValid',sessionStorage.validUser);
-                  console.info("Login Response:"+userDetail.username)
-
               });
           }
 

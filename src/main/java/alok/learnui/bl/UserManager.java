@@ -38,15 +38,9 @@ public class UserManager {
         boolean response = false;
         try
         {
-            customerDto = jdbcTemplate.queryForObject(sqlQuery.getUserDetails, new UserManager.AddUserMapper(),username);
+            customerDto = jdbcTemplate.queryForObject(sqlQuery.getCustomerDetailsForLogin, new UserManager.CustomerLoginAndAddMapper(),username);
 
-//            for(int i = 0; i<= user.size(); i++)
-//            {
-//                UserDto u = user.get(i);
-
-            if(null != customerDto)
-            {
-                if(customerDto.getEmail().equalsIgnoreCase(username) && customerDto.getPassword().equals(password))
+                if(null != customerDto && customerDto.getEmail().equalsIgnoreCase(username) && customerDto.getPassword().equals(password))
                 {
                     userLogin.setPhoneNo(customerDto.getPhoneNo());
                     userLogin.setValidUser(true);
@@ -59,42 +53,34 @@ public class UserManager {
                     userLogin.setCompanyName(customerDto.getCompanyName());
                     userLogin.setFirstName(customerDto.getFirstName());
                     userLogin.setLastName(customerDto.getLastName());
+                    userLogin.setUserRole("Customer");
 
                     System.out.println("Send customer information successfully");
-                    System.out.println(userLogin.getCompanyName());
                 }
                 else
                 {
                     userLogin.setValidUser(false);
                 }
-            }
-            else
-            {
-                userLogin.setValidUser(false);
-            }
-
-//                if(u.getUsername().equalsIgnoreCase(username) && u.getPassword().equals(password))
-//                {
-//                    userLogin.setValidUser(true);
-//                    userLogin.setUserRole(u.getUserRole());
-//                    userLogin.setUserId(u.getUserId());
-//                    break;
-//                }
-//                else
-//                {
-//                    userLogin.setValidUser(false);
-//                    userLogin.setUserRole(null)
         }
-
         catch (Exception e)
         {
+            //Here i am checking when customer login credentials failed i am checking for the admin and if admin then showing admin view.
+            //Because i am doing query for object and its throwing no result found exception
+            UserDto userDto;
+            userDto = jdbcTemplate.queryForObject(sqlQuery.getUserDetails, new UserManager.UserLoginMapper(),username);
+
+            if(null != userDto && userDto.getUsername().equalsIgnoreCase(username) && userDto.getPassword().equals(password))
+            {
+                userLogin.setUserRole(userDto.getUserRole());
+                userLogin.setValidUser(true);
+            }
             System.out.println(e);
         }
 
         return userLogin;
     }
 
-    private static final class AddUserMapper implements RowMapper<CustomerDto>
+    private static final class CustomerLoginAndAddMapper implements RowMapper<CustomerDto>
     {
 
         @Override
@@ -117,5 +103,22 @@ public class UserManager {
 
             return customerDto;
         }
+    }
+
+    private static final class UserLoginMapper implements RowMapper<UserDto>
+    {
+
+        @Override
+        public UserDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+            UserDto userDto = new UserDto();
+
+            userDto.setUserRole(rs.getString("USER_ROLE"));
+            userDto.setUsername(rs.getString("USERNAME"));
+            userDto.setPassword(rs.getString("PASSWORD"));
+
+            return userDto;
+        }
+
     }
 }

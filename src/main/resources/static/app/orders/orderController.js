@@ -4,9 +4,9 @@
 
     angular.module('excelWireless').controller('OrderController', getProduct);
 
-    getProduct.$inject = ['$scope','$rootScope','GlobalVariable', 'StoreService', '$state', 'AppState','RestrictedCharacter.Types'];
+    getProduct.$inject = ['$scope','$rootScope','GlobalVariable', 'StoreService', '$state', 'AppState','RestrictedCharacter.Types','$timeout'];
 
-    function getProduct($scope,$rootScope,GlobalVariable, StoreService, $state, AppState,restrictCharacter) {
+    function getProduct($scope,$rootScope,GlobalVariable, StoreService, $state, AppState,restrictCharacter,$timeout) {
 
         var vm = this;
         vm.orderDto = {};
@@ -14,6 +14,7 @@
         vm.total = 0;
         vm.totalQuantity = 0;
         $scope.restrictCharacter = restrictCharacter;
+        vm.updateSuccess = false;
 
 
         // vm.orderDto1 = JSON.parse(sessionStorage.orderDetails);
@@ -57,12 +58,30 @@
         {
             StoreService.postData(GlobalVariable.URLCONSTANT+"updateTransactionLineItem?phoneNo="+sessionStorage.customerPhoneNo+"&productNo="+productNo+"&quantity="+productQuantity).then(
                 function (success) {
+
+                    if(success)
+                    {
+                        vm.updateSuccess = true;
+                        vm.showUpdateMsg="Product quantity updated successfully";
+                        callbackCust();
+                    }
                     console.log("Updated product successfully");
                 },
                 function (error) {
+                    if(error)
+                    {
+                        vm.showErrorMsg="Something goes wrong not able to update product quantity";
+                    }
                     console.log("Failed to update product from order");
                 });
         }
+
+        function callbackCust() {
+            $timeout(function() {
+                vm.updateSuccess = false;
+            }, 3500);
+        }
+
         vm.continueOrder = function () {
 
             $state.go('checkout');

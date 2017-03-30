@@ -189,7 +189,7 @@
         vm.cartCount =0;
             $rootScope.$on('updateCount',function(event,value){
 
-                    vm.cartCount += parseInt(value);
+                vm.cartCount += parseInt(value);
                 sessionStorage.totalQuantity = vm.cartCount;
 
                 //vm.cartCount = sessionStorage.checkoutQuantity;
@@ -229,9 +229,18 @@
                 });
         }
 
+        vm.logout = function () {
+
+            sessionStorage.validUser = false;
+            GlobalVariable.isValidUser = false;
+            GlobalVariable.userRole = 'Customer';
+            sessionStorage.customerPhoneNo = '';
+        }
+
         function render() {
 
             GlobalVariable.isValidUser =  sessionStorage.validUser;
+            GlobalVariable.userRole = sessionStorage.userRole;
             vm.service.callGenericMethod('/getWebMenu', 'GET', {}).then(
                 function success(response) {
                     if (response.data &&

@@ -123,7 +123,10 @@ public class SQLQueries {
 
     public String getBrandDetails = "SELECT * FROM brand ORDER BY BRAND_NAME";
 
-    public String getUserDetails = "SELECT PHONE_NO,EMAIL,PASSWORD,STREET,CITY,STATE,COUNTRY,ZIPCODE,FAX,COMPANY_NAME,FIRST_NAME,LAST_NAME FROM customer where EMAIL = ?";
+    public String getCustomerDetailsForLogin = "SELECT PHONE_NO,EMAIL,PASSWORD,STREET,CITY,STATE,COUNTRY,ZIPCODE,FAX,COMPANY_NAME,FIRST_NAME,LAST_NAME FROM customer where EMAIL = ?";
+
+    public String getUserDetails = "SELECT USERNAME,PASSWORD,USER_ROLE FROM user where USERNAME = ? ";
+
 
     //SQL QUERY TO DELETE FROM DATABASE
 
@@ -251,4 +254,5 @@ public class SQLQueries {
             "(SELECT MODEL_ID FROM product " +
             " WHERE DESCRIPTION = ?)";
     public String deleteAllTransactionLineItem = "DELETE FROM web_transaction_line_item WHERE CUSTOMER_PHONENO = ?";
+    public String getProductPriceDetailsByCustomer = "SELECT PRODUCT_NO, RETAIL_PRICE FROM customer_product_price WHERE CUSTOMER_PHONENO = ?";
 }

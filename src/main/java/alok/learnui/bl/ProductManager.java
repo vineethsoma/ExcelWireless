@@ -1,6 +1,7 @@
 package alok.learnui.bl;
 
 import alok.learnui.dto.ProductEcomerceDto;
+import alok.learnui.dto.ProductPriceByCustomerDto;
 import alok.learnui.util.SQLQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -103,6 +104,34 @@ public class ProductManager {
         return productList;
     }
 
+    public List<ProductPriceByCustomerDto> getProductPriceForCustomer(String phoneNo) {
+
+        List<ProductPriceByCustomerDto> productPriceByCustomerDtoList = new ArrayList<>();
+
+        try{
+            productPriceByCustomerDtoList = jdbcTemplate.query(sqlQueries.getProductPriceDetailsByCustomer,new ProductPriceByCustomerMapper(), phoneNo);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return productPriceByCustomerDtoList;
+    }
+
+    private final class ProductPriceByCustomerMapper implements RowMapper<ProductPriceByCustomerDto>
+    {
+
+        @Override
+        public ProductPriceByCustomerDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+            ProductPriceByCustomerDto product = new ProductPriceByCustomerDto();
+
+            product.setProductNo(rs.getString("PRODUCT_NO"));
+            product.setRetailPrice(rs.getDouble("RETAIL_PRICE"));
+
+            return product;
+        }
+    }
 
     private final class ProductMapperForEcomerce implements RowMapper<ProductEcomerceDto>
     {

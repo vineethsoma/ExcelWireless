@@ -92,12 +92,42 @@
         function renderData() {
 
 
-            StoreService.getData(GlobalVariable.URLCONSTANT + 'getProductsByCategory?category_Id=6').then(
+            //call to get the price of the product by customer
+            StoreService.getData(GlobalVariable.URLCONSTANT + 'getProductPriceByCustomer?phoneNo='+sessionStorage.customerPhoneNo).then(
                 function (success) {
                     // console.log(success.data)
 
-                    vm.productDto = success.data;
+                    GlobalVariable.productPriceDto = success.data;
+                },
+                function (error) {
+                    console.log("getReplenishmentInfo call failed");
+                });
 
+            //Call to get all parts product
+            StoreService.getData(GlobalVariable.URLCONSTANT + 'getProductsByCategory?category_Id=6').then(
+                function (success) {
+                    // console.log(success.data)
+                    //var i = 0;
+                    var temProductDto = success.data;
+
+                    if(sessionStorage.validUser)
+                    {
+                        for(var i = 0; i< temProductDto.length; i++)
+                        {
+                            for(var j = 0; j< GlobalVariable.productPriceDto.length; j++)
+                            {
+                                if(GlobalVariable.productPriceDto[j].productNo == temProductDto[i].productNo)
+                                {
+                                    temProductDto[i].retailPrice = GlobalVariable.productPriceDto[j].retailPrice;
+                                }
+                            }
+                        }
+                        vm.productDto = temProductDto;
+                    }
+                    else
+                    {
+                        vm.productDto = success.data;
+                    }
                 },
                 function (error) {
                     console.log("getReplenishmentInfo call failed");

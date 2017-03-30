@@ -2,6 +2,7 @@ package alok.learnui.controller;
 
 import alok.learnui.bl.ProductManager;
 import alok.learnui.dto.ProductEcomerceDto;
+import alok.learnui.dto.ProductPriceByCustomerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,11 @@ public class ProductController {
         return productManager.getProductDetails();
     }
 
+    @RequestMapping(value = "/getProductPriceByCustomer", method = RequestMethod.GET)
+    public List<ProductPriceByCustomerDto> getProductPriceForCustomer(@RequestParam String phoneNo) {
+
+        return productManager.getProductPriceForCustomer(phoneNo);
+    }
     @RequestMapping(value = "/getProductForSearch", method = RequestMethod.GET)
     public List<ProductEcomerceDto> getProductForSearch() {
 
