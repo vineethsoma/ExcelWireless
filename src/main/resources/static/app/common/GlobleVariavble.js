@@ -20,6 +20,7 @@
          globalVar.customerPhoneNo = '';
          globalVar.productForSearch = '';
          globalVar.isValidUser = 'false';
+         globalVar.userRole = 'Customer';
 
 
 

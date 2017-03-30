@@ -29,7 +29,9 @@
 
         });
 
-
+        $rootScope.$on('setTypeOfUser',function(evt,value){
+            GlobalVariable.userRole = value;
+        });
         vm.setDataList = function (name) {
             vm.dataList = [];
             if (name === 'category') {

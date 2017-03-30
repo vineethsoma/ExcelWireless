@@ -63,6 +63,7 @@
                       sessionStorage.lastName = userDetail.lastName;
                       sessionStorage.companyName = userDetail.companyName;
                       sessionStorage.userRole = userDetail.userRole;
+                      $rootScope.$emit('setTypeOfUser',userDetail.userRole);
                       vm.getOrderDetails(userDetail.phoneNo);
 
                       // TODO Redundant code using same function need to fix and find the way to use one function

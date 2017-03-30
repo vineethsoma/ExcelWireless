@@ -37,6 +37,7 @@
         vm.productDto = {};
         vm.barLimit = 10;
         vm.showDIV = false;
+        $scope.GlobalVariable = GlobalVariable;
 
         $scope.restrictCharacter = restrictCharacter;
 
