@@ -23,7 +23,7 @@ angular.module('excelWireless')
                     console.log("Product_Id:"+product_Id);
                 })
         }
-        getProducts = function () {
+         function getProducts() {
 
                 StoreService.getData(GlobalVariable.URLCONSTANT+'getProduct').then(
                     function (success) {
@@ -43,6 +43,7 @@ angular.module('excelWireless')
         $scope.checkValueProduct = function(categoryId)
         {
             console.log(categoryId);
+           $scope.selectedCategory = parseInt(categoryId);
         }
 
         function render()

@@ -14,10 +14,13 @@
                     <option value="Category">Category</option>
                 </select>
             </div>
-            <div class="col-md-3" ng-if="productType == 'Category'">
-                <select  class="form-control"  id="category" ng-model="selectedCategory"
+            <div class="col-md-3" ng-show="productType == 'Category'">
+                <!--<select  class="form-control"  id="category" ng-model="category"
                         data-ng-options="category.categoryId as category.categoryName for category in GlobalVariable.categoryList" ng-change="checkValueProduct(selectedCategory)">
                          <option value="">Select</option>
+                </select>-->
+                <select class="form-control" name="repeatSelect" id="repeatSelect" ng-model="selectedCategory" ng-change="checkValueProduct(selectedCategory)">
+                    <option ng-repeat="category in GlobalVariable.categoryList" value="{{category.categoryId}}">{{category.categoryName}}</option>
                 </select>
             </div>
             </div>
@@ -41,7 +44,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat = "product in products | filter : selectedCategory" >
+                <tr ng-repeat = "product in products | filter : {categoryId : selectedCategory}" >
                     <td>1</td>
                     <td ><img  ng-src="data:image/JPEG;base64,{{product.image}}" height="100px" width="100px" /></td>
                     <td>{{product.productNo}}</td>
