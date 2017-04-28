@@ -2,9 +2,9 @@
     'use strict';
     angular.module('excelWireless').controller('PartsController', getPartsProduct);
 
-    getPartsProduct.$inject = ['GlobalVariable', 'StoreService', '$state', 'AppState', '$rootScope','$log', '$scope','RestrictedCharacter.Types'];
+    getPartsProduct.$inject = ['util','GlobalVariable', 'StoreService', '$state', 'AppState', '$rootScope','$log', '$scope','RestrictedCharacter.Types'];
 
-    function getPartsProduct(GlobalVariable, StoreService, $state, AppState,$rootScope,$log, $scope,restrictCharacter) {
+    function getPartsProduct(util,GlobalVariable, StoreService, $state, AppState,$rootScope,$log, $scope,restrictCharacter) {
 
         // $scope.items = [
         //     {
@@ -76,12 +76,15 @@
             sessionStorage.orderDetails = JSON.stringify(product1);
             $rootScope.$emit('updateCount', value);
 
+            util.Wait(true);
             StoreService.postData(GlobalVariable.URLCONSTANT + "addTransactionLineItem", product, "application/json", "application/json").then(function (response) {
-                    var data = response.data;
 
+                var data = response.data;
+                    util.Wait(false);
                     console.log("response data", data);
                 },
                 function (error) {
+                    util.Wait(false);
                     console.log("getReplenishmentInfo call failed");
                 });
         }
@@ -92,7 +95,7 @@
         }
         function renderData() {
 
-
+            util.Wait(true);
             //call to get the price of the product by customer
             StoreService.getData(GlobalVariable.URLCONSTANT + 'getProductPriceByCustomer?phoneNo='+sessionStorage.customerPhoneNo).then(
                 function (success) {
@@ -101,12 +104,14 @@
                     GlobalVariable.productPriceDto = success.data;
                 },
                 function (error) {
+                    util.Wait(false);
                     console.log("getReplenishmentInfo call failed");
                 });
 
             //Call to get all parts product
             StoreService.getData(GlobalVariable.URLCONSTANT + 'getProductsByCategory?category_Id=6').then(
                 function (success) {
+                    util.Wait(false);
                     // console.log(success.data)
                     //var i = 0;
                     var temProductDto = success.data;
@@ -131,6 +136,7 @@
                     }
                 },
                 function (error) {
+                    util.Wait(false);
                     console.log("getReplenishmentInfo call failed");
                 });
 
