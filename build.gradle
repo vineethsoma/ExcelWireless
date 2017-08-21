@@ -1,41 +1,20 @@
-buildscript {
-	ext {
-		springBootVersion = '1.4.1.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+plugins {
+    id "fi.evident.beanstalk" version "0.1.1"
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'spring-boot'
-
-jar {
-	baseName = 'ExcelWireless'
-	version = '0.0.1-SNAPSHOT'
-}
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-
-repositories {
-	mavenCentral()
+allprojects {
+//    task alltask.doLast  { task -> println "In $task.project.name" }
+//
+    version = '1.0.0-SNAPSHOT'
 }
 
+subprojects {
 
-dependencies {
-	compile('org.springframework.boot:spring-boot-starter-jdbc')
-	compile('org.springframework.boot:spring-boot-starter-jersey')
-	compile('org.springframework.boot:spring-boot-starter-web')
+    repositories {
+      mavenCentral()
+    }
+}
 
-	// https://mvnrepository.com/artifact/com.google.cloud.tools/appengine-plugins-core
-	compile group: 'com.google.cloud.tools', name: 'appengine-maven-plugin', version: '1.2.1'
-
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.2.0.RELEASE'
-	runtime('com.h2database:h2')
-	runtime('mysql:mysql-connector-java')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+task wrapper(type: Wrapper) {
+   gradleVersion = '3.4.1'
 }
