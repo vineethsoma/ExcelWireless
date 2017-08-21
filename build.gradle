@@ -1,0 +1,20 @@
+plugins {
+    id "fi.evident.beanstalk" version "0.1.1"
+}
+
+allprojects {
+//    task alltask.doLast  { task -> println "In $task.project.name" }
+//
+    version = '1.0.0-SNAPSHOT'
+}
+
+subprojects {
+
+    repositories {
+      mavenCentral()
+    }
+}
+
+task wrapper(type: Wrapper) {
+   gradleVersion = '3.4.1'
+}
