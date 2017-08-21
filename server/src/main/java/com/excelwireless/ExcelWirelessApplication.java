@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ExcelWirelessMavenApplication {
+public class ExcelWirelessApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ExcelWirelessMavenApplication.class, args);
+		SpringApplication.run(ExcelWirelessApplication.class, args);
 	}
 }
