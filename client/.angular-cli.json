@@ -23,6 +23,7 @@
       ],
       "scripts": [
         {"input":"../node_modules/jquery/dist/jquery.js", "output": "jquery"},
+        {"input":"../node_modules/tether/dist/js/tether.js", "output": "tether"},
         {"input":"../node_modules/masonry/dist/masonry.pkgd.js", "output": "masonry"},
         {"input":"../node_modules/isotope-layout/dist/isotope.pkgd.js", "output": "isotope"},
         {"input": "../node_modules/imagesloaded/imagesloaded.pkgd.js", "output":"imagesloaded"}
