@@ -2,6 +2,9 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 import $ from "jquery/dist/jquery";
 // var $:any = jQuery;
 // declare var $: JQuery ;
+// import "masonry-layout";
+// import "isotope-layout";
+// import "imagesloaded";
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
@@ -15,20 +18,37 @@ export class SearchResultsComponent implements  AfterViewInit {
   }
   ngAfterViewInit(){
     this.isotopeGrid = this.el.nativeElement.querySelector('.isotope-grid');
-    console.log($.imagesLoaded(()=>{console.log("Got here")}));
-    // this.script();
+    // console.log(imagesLoaded($('.isotope-grid')));
+    this.script();
   }
   
-  // script() {
-  //   if($('.isotope-grid').length > 0) {
-  //     var $grid = $('.isotope-grid').imagesLoaded(function() {
-  //       $grid.isotope({
-  //         itemSelector: '.grid-item',
-  //         transitionDuration: '0.7s',
-  //         masonry: {
-  //           columnWidth: '.grid-sizer',
-  //           gutter: '.gutter-sizer'
-  //         }
+  script() {
+    if($('.isotope-grid').length > 0) {
+      if(imagesLoaded($('.isotope-grid'))){
+        const grid = new Isotope('.isotope-grid');
+        // let iso = new Isotope(grid)grid
+        grid.arrange({
+          itemSelector: '.grid-item',
+          transitionDuration: '0.7s',
+          masonry: {
+            columnWidth: '.grid-sizer',
+            gutter: '.gutter-sizer'
+          }
+          });
+        grid.layout();
+        console.log("Got till here ");
+
+
+      }
+    }
+      
+        // $grid.isotope({
+        //   itemSelector: '.grid-item',
+        //   transitionDuration: '0.7s',
+        //   masonry: {
+        //     columnWidth: '.grid-sizer',
+        //     gutter: '.gutter-sizer'
+        //   }
   //       });
   //     });
   //   }
@@ -61,5 +81,5 @@ export class SearchResultsComponent implements  AfterViewInit {
   //       }
   //     });
 
-  // }
+  }
 }
