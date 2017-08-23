@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { NavabarComponent } from './navabar/navabar.component';
 import { IsotopeComponent } from './services/jquery/isotope/isotope.component';
 import { ImagesloadedComponent } from './services/jquery/imagesloaded/imagesloaded.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -13,9 +14,9 @@ import { ImagesloadedComponent } from './services/jquery/imagesloaded/imagesload
     HeaderComponent,
     NavabarComponent,
     IsotopeComponent, 
-    ImagesloadedComponent
+    ImagesloadedComponent, FooterComponent
   ],
-  exports: [HeaderComponent, NavabarComponent]
+  exports: [HeaderComponent, NavabarComponent, FooterComponent]
 
 })
 export class SharedModule { 
