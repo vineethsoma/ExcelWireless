@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpModule } from "@angular/http";
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { NavabarComponent } from './navabar/navabar.component';
@@ -8,7 +9,8 @@ import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpModule
   ],
   declarations: [
     HeaderComponent,
