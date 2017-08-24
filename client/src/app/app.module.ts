@@ -8,6 +8,7 @@ import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
 import { ProductModule } from './product/product.module';
 import { LcdbuybackModule } from './lcdbuyback/lcdbuyback.module';
+import { MyaccountModule } from './myaccount/myaccount.module';
 
 @NgModule({
   declarations: [
