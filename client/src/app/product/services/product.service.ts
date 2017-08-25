@@ -74,10 +74,14 @@ export class Product{
  productId: number;
  description: string;
  image: string; 
+ retailPrice: number;
+ costPrice:number;
 
  constructor(dto: ProductDTO){
     this.productId = dto.productId;
     this.image = dto.image;
     this.description = dto.description;
+    this.retailPrice = dto.retailPrice;
+    this.costPrice = dto.costPrice;
  }
 }

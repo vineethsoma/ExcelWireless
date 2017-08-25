@@ -18,8 +18,7 @@
         "testTsconfig": "tsconfig.spec.json",
         "prefix": "app",
         "styles": [
-            "styles.scss",
-            "./assets/css/vendor.min.css"
+            "styles.scss"
         ],
         "scripts": [
             "./assets/js/vendor.min.js",
