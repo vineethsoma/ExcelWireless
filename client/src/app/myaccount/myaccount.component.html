@@ -23,7 +23,7 @@
     <div class="container padding-bottom-3x mb-2">
         <div class="row">
             <div class="col-md-6">
-                <form class="login-box" [formGroup]="customerForm">
+                <form class="login-box">
                     <div class="row margin-bottom-1x">
                         <div class="col-xl-4 col-md-4 col-sm-4"><a class="btn btn-sm btn-block facebook-btn" href="#"><i class="socicon-facebook"></i>&nbsp;Facebook login</a></div>
                         <div class="col-xl-4 col-md-4 col-sm-4"><a class="btn btn-sm btn-block twitter-btn" href="#"><i class="socicon-twitter"></i>&nbsp;Twitter login</a></div>
@@ -31,10 +31,10 @@
                     </div>
                     <h4 class="margin-bottom-1x">Or using form below</h4>
                     <div class="form-group input-group">
-                        <input class="form-control" type="email" placeholder="Email" required><span class="input-group-addon"><i class="icon-mail"></i></span>
+                        <input class="form-control" type="email" placeholder="Email"><span class="input-group-addon"><i class="icon-mail"></i></span>
                     </div>
                     <div class="form-group input-group">
-                        <input class="form-control" type="password" placeholder="Password" required><span class="input-group-addon"><i class="icon-lock"></i></span>
+                        <input class="form-control" type="password" placeholder="Password"><span class="input-group-addon"><i class="icon-lock"></i></span>
                     </div>
                     <div class="d-flex flex-wrap justify-content-between padding-bottom-1x">
                         <label class="custom-control custom-checkbox">
@@ -45,7 +45,7 @@
                         <a class="navi-link" href="#">Forgot password?</a>
                     </div>
                     <div class="text-center text-sm-right">
-                        <button class="btn btn-primary margin-bottom-none" type="submit">Login</button>
+                        <button class="btn btn-primary margin-bottom-none" type="submit" (click)="this.customerLogin()">Login</button>
                     </div>
                 </form>
             </div>
@@ -53,41 +53,41 @@
                 <!-- <div class="padding-top-3x hidden-md-up"></div> -->
                 <h3 class="margin-bottom-1x">No Account? Register</h3>
                 <p>Registration takes less than a minute but gives you full control over your orders.</p>
-                <form class="row" method="post">
+                <form class="row" [formGroup]="customerForm">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-fn">First Name</label>
-                            <input class="form-control" type="text" id="reg-fn" required>
+                            <input class="form-control" formControlName="onlyFirstName" type="text">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-ln">Last Name</label>
-                            <input class="form-control" type="text" id="reg-ln" required>
+                            <input class="form-control" formControlName="lastName" type="text">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-email">E-mail Address</label>
-                            <input class="form-control" type="email" id="reg-email" required>
+                            <input class="form-control" formControlName="email" type="email">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-phone">Phone Number</label>
-                            <input class="form-control" type="text" id="reg-phone" required>
+                            <input class="form-control" formControlName="phoneNo" type="text">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-pass">Tax Id</label>
-                            <input class="form-control" type="password" id="reg-pass" required>
+                            <input class="form-control" formControlName="taxId" type="password">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-pass-confirm">Date Of Birth</label>
-                            <input class="form-control" type="password" id="reg-pass-confirm" required>
+                            <input class="form-control" formControlName="dateOfBirth" type="text">
                         </div>
                     </div>
 
@@ -98,42 +98,42 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-fn">Company Name</label>
-                            <input class="form-control" type="text" id="reg-fn" required>
+                            <input class="form-control" formControlName="companyName" type="text">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-ln">Bussiness Address Line</label>
-                            <input class="form-control" type="text" id="reg-ln" required>
+                            <input class="form-control" formControlName="street" type="text">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-email">City</label>
-                            <input class="form-control" type="email" id="reg-email" required>
+                            <input class="form-control" formControlName="city" type="email">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-phone">State</label>
-                            <input class="form-control" type="text" id="reg-phone" required>
+                            <input class="form-control" formControlName="state" type="text">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-pass">Country</label>
-                            <input class="form-control" type="password" id="reg-pass" required>
+                            <input class="form-control" formControlName="country" type="test">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-pass-confirm">Zip/Postal Code</label>
-                            <input class="form-control" type="password" id="reg-pass-confirm" required>
+                            <input class="form-control" formControlName="zipcode" type="password">
                         </div>
                     </div>
 
                     <div class="col-12 text-center text-sm-right">
-                        <button class="btn btn-primary margin-bottom-none" type="submit">Register</button>
+                        <button class="btn btn-primary margin-bottom-none" type="submit" [disabled]="this.customerForm.invalid" (click)="this.addCustomer()">Register</button>
                     </div>
                 </form>
             </div>

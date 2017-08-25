@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { ProductModule } from './product/product.module';
 import { LcdbuybackModule } from './lcdbuyback/lcdbuyback.module';
 import { MyaccountModule } from './myaccount/myaccount.module';
+import { OrderModule } from './order/order.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MyaccountModule } from './myaccount/myaccount.module';
     SharedModule,
     HomeModule,
     ProductModule,
-    LcdbuybackModule
+    LcdbuybackModule,
+    OrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
