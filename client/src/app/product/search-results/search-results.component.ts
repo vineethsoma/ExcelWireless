@@ -14,16 +14,30 @@ import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 })
 export class SearchResultsComponent implements OnInit, AfterViewInit {
   // params: any ; 
-  productsViewList: Observable<Array<Product>>;
-  fullproductList: Observable<Array<Product>>;
+  productsViewList: Array<Product>;
+  fullproductList: Array<Product>;
+  nubmerOfItemsPerPage: number; 
   constructor(private el: ElementRef, private productService: ProductService, private route: ActivatedRoute, private router: Router) {
-
+    this.nubmerOfItemsPerPage = 10; 
   }
   ngOnInit() {
     if (this.route.snapshot.paramMap.keys.length < 1)
       this.router.navigate(['/products/search', <SearchOptions>{ page: 1, categoryId: 1 }]);
-    this.fullproductList = this.route.paramMap.switchMap((params) => this.getProducts({ categoryId: +params.get("categoryId") })).share().do(() => console.log("FullProductList is called"));
-    this.productsViewList = this.route.paramMap.switchMap((params) => this.loadProductsToView({ page: +params.get("page") }, this.fullproductList));
+
+    let params;
+    this.route.paramMap.switchMap((_params) => {
+      params = _params;
+      return this.getProducts({ categoryId: +params.get("categoryId") })
+    
+    })
+      .subscribe((productList) => {
+        this.fullproductList = productList;
+        // console.log("Params", params);
+        // console.log("Full",this.fullproductList);
+        this.productsViewList = this.loadProductsToView({ page: +params.get("page")}, this.fullproductList); 
+        // console.log(this.productsViewList);
+      });
+    // this.route.paramMap.switchMap((params) => this.loadProductsToView({ page: +params.get("page") }, this.fullproductList));
   }
   ngAfterViewInit() {
   }
@@ -31,17 +45,14 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   getProducts(options: ProductOptions) {
     return this.productService.getProducts(options);
   }
-  test(){
-    this.fullproductList.do(()=> console.log("Performing a test"));
-  }
+  // test(){
+  //   this.fullproductList.do(()=> console.log("Performing a test"));
+  // }
 
-  loadProductsToView(options: SearchOptions, fullList: Observable<Array<Product>>) {
+  loadProductsToView(options: SearchOptions, fullList: Array<Product>) {
     let { page } = options;
-    return fullList.do(()=> console.log("Loading the view"))
-    .map((list) => {
-      return list.slice((page - 1) * 20, (page) * (20));
-    })
-
+    // console.log(options);
+    return  fullList.slice((page - 1) * this.nubmerOfItemsPerPage, (page) * (this.nubmerOfItemsPerPage));
   }
   navigateToSearch(options: SearchOptions) {
     this.router.navigate(['/products/search', options]);
@@ -65,29 +76,27 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   }
 
   getProductsLength() {
-    return this.fullproductList.do(() => console.log("Getting the product length")).map((list) => list.length);
+    return this.fullproductList.length;
   }
 
   getArrayOfPages() {
-    return this.getProductsLength().map((length) => {
-      const pages = Math.ceil(length / 20);
+      let length = this.getProductsLength();
+      const pages = Math.ceil(length / this.nubmerOfItemsPerPage);
       let arr = [];
-      for (let i = 0; i < pages; i++) {
+      for (let i = 1; i < pages; i++) {
         arr.push(i);
       }
       return arr;
-    })
   }
 
   getItemsViewed() {
-    return this.getProductsLength().map((length) => {
-      let start = this.getSearchOptions().page - 1 * 20;
-      let end = this.getSearchOptions().page * 20; 
+      let length = this.getProductsLength();
+      let start = this.getSearchOptions().page - 1 * this.nubmerOfItemsPerPage;
+      let end = this.getSearchOptions().page * this.nubmerOfItemsPerPage; 
       return {
         start: start >= length? start: 1,
-        end: end >= length? end: length
+        end: end <= length? end: length
       }
-    })
   }
 
   // @HostListener('window:scroll', ['$event'])

@@ -34,7 +34,8 @@
                     <option>Avarage Rating</option>
                     <option>A - Z Order</option>
                     <option>Z - A Order</option>
-                  </select><span class="text-muted">Showing:&nbsp;</span><span> {{((this.getItemsViewed() | async)|| {start: 0}).start}} - {{((this.getItemsViewed() | async) || {end: 0}).end}} items of {{(this.getProductsLength() | async)}}</span>
+                  </select>
+                  <span class="text-muted">Showing:&nbsp;</span><span *ngIf="this.fullproductList != null" > {{this.getItemsViewed().start}} - {{this.getItemsViewed().end}} items of {{this.getProductsLength()}}</span>
                 </div>
               </div>
               <div class="column">
@@ -42,16 +43,16 @@
               </div>
             </div>
             <!-- Products Grid-->
-            <div class="product-flex-grid">
+            <div *ngIf="this.productsViewList != null" class="product-flex-grid">
               <!-- <div class="gutter-sizer"></div> -->
               <!-- <div class="grid-sizer"></div> -->
               <!-- Product-->
-              <div class="product-flex-item" *ngFor="let product of this.productsViewList | async">
+              <div class="product-flex-item" *ngFor="let product of this.productsViewList">
                 <div class="product-card">
                   <!-- <div class="product-badge text-danger">50% Off</div> -->
                   <a class="product-thumb">
                     <img *ngIf="product.image!=null" src="data:image/png;base64,{{product.image}}" alt="{{product.productNo}}">
-                    <img *ngIf="!(product.image!=null) || product.image.length < 1" src="assets/images/no-image-found.jpg" alt="{{product.productNo}}">
+                    <img *ngIf="(product.image=='aW1hZ2U=')" src="assets/images/no-image-found.jpg" alt="{{product.productNo}}">
                   </a>
                   <h3 class="product-title"><a>{{product.description}}</a></h3>
                   <h4 class="product-price">
@@ -69,8 +70,8 @@
             <!-- Pagination-->
             <nav class="pagination">
               <div class="column">
-                <ul class="pages">
-                  <li *ngFor="let page of (this.getArrayOfPages() | async)"><a >{{page}}</a></li>
+                <ul *ngIf="this.fullproductList != null" class="pages">
+                  <li [class.active] ="page == this.getSearchOptions().page"  *ngFor="let page of (this.getArrayOfPages())"><a (click)="this.navigateToSearch(this.updateOptions({page: page}))">{{page}}</a></li>
                 </ul>
               </div>
               <div class="column text-right hidden-xs-down"><a class="btn btn-outline-secondary btn-sm" (click)="this.nextPage(this.getSearchOptions())" >Next&nbsp;<i class="icon-arrow-right"></i></a></div>
