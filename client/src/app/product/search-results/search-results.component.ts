@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import "isotope-layout";
 import "tether";
 import "imagesloaded";
@@ -41,22 +41,11 @@ export class SearchResultsComponent implements  OnInit, AfterViewInit {
       return list.splice(length, length + 20);
     })
     
-    this.productsViewList.subscribe(() => this.script());
+    // this.productsViewList.subscribe(() => this.script());
     
   }
-  
-  script() {
-    if($('.isotope-grid').length > 0) {
-      var $grid: any = $('.isotope-grid').imagesLoaded(function() {
-        $grid.isotope({
-  				itemSelector: '.grid-item',
-  				transitionDuration: '0.7s',
-  				masonry: {
-  					columnWidth: '.grid-sizer',
-  					gutter: '.gutter-sizer'
-  				}
-        });
-      });
-    }
+  // @HostListener('window:scroll', ['$event'])
+  onScroll(event) {
+    console.log(event);
   }
 }

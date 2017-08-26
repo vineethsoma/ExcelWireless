@@ -1,0 +1,12 @@
+.product-flex-grid {
+    display: flex;
+    // width: 1200px;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    .product-flex-item{
+        flex-basis: 20%;
+        // width: 300px;  /* Or whatever */
+        // height: 300px; /* Or whatever */
+        margin: 10px;  /* Magic! */
+    }
+}
