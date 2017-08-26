@@ -34,7 +34,7 @@
                     <option>Avarage Rating</option>
                     <option>A - Z Order</option>
                     <option>Z - A Order</option>
-                  </select><span class="text-muted">Showing:&nbsp;</span><span>1 - 12 items</span>
+                  </select><span class="text-muted">Showing:&nbsp;</span><span> {{((this.getItemsViewed() | async)|| {start: 0}).start}} - {{((this.getItemsViewed() | async) || {end: 0}).end}} items of {{(this.getProductsLength() | async)}}</span>
                 </div>
               </div>
               <div class="column">
@@ -48,10 +48,14 @@
               <!-- Product-->
               <div class="product-flex-item" *ngFor="let product of this.productsViewList | async">
                 <div class="product-card">
-                  <div class="product-badge text-danger">50% Off</div><a class="product-thumb" href="shop-single.html"><img src="data:image/png;base64,{{product.image}}" alt="Product"></a>
-                  <h3 class="product-title"><a href="shop-single.html">{{product.description}}</a></h3>
+                  <!-- <div class="product-badge text-danger">50% Off</div> -->
+                  <a class="product-thumb">
+                    <img *ngIf="product.image!=null" src="data:image/png;base64,{{product.image}}" alt="{{product.productNo}}">
+                    <img *ngIf="!(product.image!=null) || product.image.length < 1" src="assets/images/no-image-found.jpg" alt="{{product.productNo}}">
+                  </a>
+                  <h3 class="product-title"><a>{{product.description}}</a></h3>
                   <h4 class="product-price">
-                    <del>{{product.retailPrice| currency:'USD':true}}</del>{{product.costPrice | currency:'USD':true}}
+                    <del *ngIf="product.retailPrice != product.costPrice">{{product.retailPrice| currency:'USD':true}}</del>{{product.costPrice | currency:'USD':true}}
                   </h4>
                   <div class="product-buttons">
                     <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
@@ -63,19 +67,14 @@
             </div>
             <!-- <div ()="this.onScroll($event)"></div> -->
             <!-- Pagination-->
-            <!-- <nav class="pagination">
+            <nav class="pagination">
               <div class="column">
                 <ul class="pages">
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li>...</li>
-                  <li><a href="#">12</a></li>
+                  <li *ngFor="let page of (this.getArrayOfPages() | async)"><a >{{page}}</a></li>
                 </ul>
               </div>
-              <div class="column text-right hidden-xs-down"><a class="btn btn-outline-secondary btn-sm" href="#">Next&nbsp;<i class="icon-arrow-right"></i></a></div>
-            </nav> -->
+              <div class="column text-right hidden-xs-down"><a class="btn btn-outline-secondary btn-sm" (click)="this.nextPage(this.getSearchOptions())" >Next&nbsp;<i class="icon-arrow-right"></i></a></div>
+            </nav>
           </div>
           
         </div>

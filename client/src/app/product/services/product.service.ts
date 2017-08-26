@@ -11,7 +11,7 @@ export class ProductService {
 
   getProducts(options: ProductOptions): Observable<Array<Product>>{
       const {categoryId} = options;
-      console.log(categoryId);
+      // console.log(categoryId);
       let url = this.url+'/getProductsByCategory'; 
       
       if(categoryId)
@@ -51,16 +51,16 @@ export class ProductService {
 
 
 }
-interface ProductOptions {
+export class ProductOptions {
   categoryId?: number;
 }
 interface ProductDTO{
   productId: number;
-  productNo: string;
   categoryId: number;
   vendorId: number;
   brandId: number;
   modelId: number;
+  productNo: string;
   description: string;
   costPrice: number;
   markup: number;
@@ -72,10 +72,12 @@ interface ProductDTO{
 
 export class Product{
  productId: number;
+ productNo: number;
  description: string;
  image: string; 
  retailPrice: number;
  costPrice:number;
+ quantity: number;
 
  constructor(dto: ProductDTO){
     this.productId = dto.productId;
