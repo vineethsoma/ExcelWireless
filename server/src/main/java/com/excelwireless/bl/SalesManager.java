@@ -13,7 +13,11 @@ import org.springframework.stereotype.Component;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -190,6 +194,58 @@ public class SalesManager {
         System.out.println("Deleted all transaction line item from web transaction line item table successfully");
 
         return result != 0;
+    }
+
+    public List<TransactionDto> getSalesHistory(String phoneNo) {
+
+        List<TransactionDto> transactionDto = new ArrayList<>();
+
+
+        try {
+            transactionDto = jdbcTemplate.query(sqlQueries.getTransactionDetails, new TransactionMappeOnlyForSalesHitsory(), phoneNo);
+
+            System.out.println("Send Transaction Details Successfully");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return transactionDto;
+
+
+    }
+    private final class TransactionMappeOnlyForSalesHitsory implements RowMapper<TransactionDto> {
+
+        @Override
+        public TransactionDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+            TransactionDto transaction = new TransactionDto();
+
+
+            transaction.setTransactionCompId(rs.getInt("TRANSACTION_COMP_ID"));
+            DateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date d = null;
+            try {
+                d = f.parse(rs.getString("TRANSACTION_DATE"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            DateFormat date = new SimpleDateFormat("MM/dd/yyyy");//NEED TO CHECK THIS
+            DateFormat time = new SimpleDateFormat("hh:mm:ss");
+            transaction.setTransactionDate(date.format(d));
+            transaction.setTransactionTime(time.format(d));
+            transaction.setTotalAmount(rs.getDouble("TOTAL_AMOUNT"));
+            transaction.setTotalQuantity(rs.getInt("TOTALQUANTITY"));
+            transaction.setTax(rs.getDouble("TAX_AMOUNT"));
+            transaction.setDiscount(rs.getDouble("DISCOUNT_AMOUNT"));
+            transaction.setSubTotal(rs.getDouble("SUBTOTAL"));
+            transaction.setCustomerPhoneNo(rs.getString("CUSTOMER_PHONENO"));
+            transaction.setCustomerName(rs.getString("FIRST_NAME_LAST_NAME"));
+            transaction.setUsername(rs.getString("USERNAME"));
+            transaction.setStatus(rs.getString("STATUS"));
+            transaction.setReceiptNote(rs.getString("RECEIPT_NOTE"));
+            transaction.setTransactionNote(rs.getString("TRANSACTION_NOTE"));
+            return transaction;
+        }
     }
 
     private final class TransactionLineItemMapper implements RowMapper<TransactionLineItemDto> {

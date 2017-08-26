@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { NavabarComponent } from './navabar/navabar.component';
@@ -10,7 +11,8 @@ import { FooterComponent } from './footer/footer.component';
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   declarations: [
     HeaderComponent,
@@ -19,7 +21,7 @@ import { FooterComponent } from './footer/footer.component';
     ImagesloadedComponent,
     FooterComponent
   ],
-  exports: [HeaderComponent, NavabarComponent, FooterComponent]
+  exports: [HeaderComponent, NavabarComponent, FooterComponent, FormsModule]
 
 })
 export class SharedModule {

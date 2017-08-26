@@ -35,6 +35,13 @@ public class SalesController {
        return salesManager.getTransactionLineItemToDB(phoneNo);
     }
 
+    // This call is to show Order details on customer page.
+    @RequestMapping(value = "/getSalesHistory", method = RequestMethod.GET, produces = "application/json")
+    public List<TransactionDto> getTransactionFromDB(@RequestParam String phoneNo)
+    {
+        return salesManager.getSalesHistory(phoneNo);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/deleteTransactionLineItem")
     public boolean deleteTransactionLineItem(@RequestParam String phoneNo, @RequestParam String productNo)
     {

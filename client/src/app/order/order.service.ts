@@ -14,7 +14,8 @@ constructor(private http: Http) { }
 updateProductFromCart(phoneNo: number, productNo: any, quantity: number) {
  // console.log('Customer to be Added' + customer.onlyFirstName);
   // tslint:disable-next-line:whitespace
-  this.http.post('http://localhost:8080/updateTransactionLineItem?phoneNo=' +phoneNo+ 'productNo=' +productNo+ 'quantity=' + quantity, null)
+  // tslint:disable-next-line:max-line-length
+  this.http.post('http://localhost:8080/updateTransactionLineItem?phoneNo=' + phoneNo + '&productNo=' + productNo + '&quantity=' + quantity, null)
   .subscribe(data => {
     console.log('Response After updating product from cart' + data);
   },
@@ -25,7 +26,7 @@ updateProductFromCart(phoneNo: number, productNo: any, quantity: number) {
 
 deleteProductFromCart(phoneNo: number, productNo: any) {
     // tslint:disable-next-line:whitespace
-    this.http.post('http://localhost:8080/deleteTransactionLineItem?phoneNo=' +phoneNo + 'productNo=' +productNo, null)
+    this.http.post('http://localhost:8080/deleteTransactionLineItem?phoneNo=' +phoneNo + '&productNo=' +productNo, null)
     .subscribe(data => {
       console.log('Response After deleting product from cart' + data);
     },
@@ -33,6 +34,14 @@ deleteProductFromCart(phoneNo: number, productNo: any) {
     console.log(JSON.stringify(error.json()));
   });
   }
+
+  // This is to get last transaction id so i can add 1 and generate new one.
+  getLastTransactionId(): Observable<any> {
+  return this.http.get('http://localhost:8080/getLastTransactionId')
+  .map(this.extractData)
+  .catch(this.handleError);
+  }
+
 
   // This is after clicking on place final order where we storing Transaction details into real Transaction table.
   addTransactionDetails(transactionDetails: Transaction) {
