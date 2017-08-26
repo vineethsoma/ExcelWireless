@@ -11,6 +11,7 @@ import { CustomerService } from './customer.service';
 export class MyaccountComponent implements OnInit {
 
   customerForm: FormGroup;
+  customerLoginForm: FormGroup;
   customerDto: Customer;
   transactionLineItemDto: TransactionLineItem[];
   productPriceByCustomerDto: CustomerProductPrice[];
@@ -33,6 +34,14 @@ export class MyaccountComponent implements OnInit {
       'country': [''],
       'zipcode': ['']
     });
+
+    this.customerLoginForm = this.formBuilder.group({
+      'password': ['', Validators.required],
+     'email': ['', [ Validators.required,
+      Validators.pattern('^[A-Za-z0-9.]+@[A-Za-z0-9.]+$')]] // TODO - Need to fox this too .com is not validating
+    });
+
+
   }
 
   addCustomer(): void {
@@ -40,8 +49,11 @@ export class MyaccountComponent implements OnInit {
     this.customerForm.reset();
   }
   customerLogin() {
-    const username = 'alok';
-    const password = 'alok';
+
+    console.log('form Value', this.customerLoginForm.value);
+
+    const username = this.customerLoginForm.get('email').value;
+    const password = this.customerLoginForm.get('password').value;
 
     this.customerService.getCustomerDetails(username, password)
     .subscribe((cust: Customer) => {

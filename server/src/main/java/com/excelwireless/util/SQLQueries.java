@@ -270,4 +270,19 @@ public class SQLQueries {
 
 
     public String validateCustomerDetails = "SELECT count(*) FROM customer WHERE  PHONE_NO = ? OR EMAIL = ?";
+    public String getTransactionDetails = "SELECT " +
+            "            TRANSACTION_COMP_ID," +
+            "            TRANSACTION_DATE," +
+            "            TOTAL_AMOUNT," +
+            "            TAX_AMOUNT, SUBTOTAL," +
+            "            DISCOUNT_AMOUNT," +
+            "            CUSTOMER_PHONENO, TOTALQUANTITY, " +
+            "            STATUS," +
+            "            RECEIPT_NOTE," +
+            "            TRANSACTION_NOTE," +
+            "            FIRST_NAME_LAST_NAME," +
+            "            USERNAME " +
+            "            FROM transaction " +
+            "            WHERE CUSTOMER_PHONENO = ?" +
+            "            order by TRANSACTION_DATE";
 }

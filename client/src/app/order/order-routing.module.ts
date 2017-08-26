@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { OrderComponent } from './order.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { AddressComponent } from "./address/address.component";
+import { ShippingComponent } from "./shipping/shipping.component";
+import { PaymentComponent } from "./payment/payment.component";
 
 const routes: Routes = [
-  {path: '', component: OrderComponent
-  }
+  {path: '', component: OrderComponent },
+  {path: 'checkout', component: CheckoutComponent},
+  {path: 'address', component: AddressComponent},
+  {path: 'shipping', component: ShippingComponent},
+  {path: 'payment', component: PaymentComponent}
 ];
 
 @NgModule({

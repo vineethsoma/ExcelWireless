@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { NavabarComponent } from './navabar/navabar.component';
@@ -11,7 +12,8 @@ import { LoadComponent } from "./load/load.component";
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   declarations: [
     HeaderComponent,
@@ -21,7 +23,7 @@ import { LoadComponent } from "./load/load.component";
     FooterComponent,
     LoadComponent
   ],
-  exports: [HeaderComponent, NavabarComponent, FooterComponent, LoadComponent]
+  exports: [HeaderComponent, NavabarComponent, FooterComponent, LoadComponent, FormsModule]
 
 })
 export class SharedModule {
