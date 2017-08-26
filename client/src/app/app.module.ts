@@ -10,6 +10,7 @@ import { ProductModule } from './product/product.module';
 import { LcdbuybackModule } from './lcdbuyback/lcdbuyback.module';
 import { MyaccountModule } from './myaccount/myaccount.module';
 import { OrderModule } from './order/order.module';
+import { AdminModule } from "./admin/admin.module";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { OrderModule } from './order/order.module';
     HomeModule,
     ProductModule,
     LcdbuybackModule,
-    OrderModule
+    OrderModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

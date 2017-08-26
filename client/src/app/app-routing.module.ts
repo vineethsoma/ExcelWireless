@@ -6,7 +6,8 @@ const routes: Routes = [
   { path: 'products', loadChildren: 'app/product/product.module#ProductModule'},
   { path: 'lcdbuyback', loadChildren: 'app/lcdbuyback/lcdbuyback.module#LcdbuybackModule'},
   { path: 'myaccount', loadChildren: 'app/myaccount/myaccount.module#MyaccountModule'},
-  { path: 'order', loadChildren: 'app/order/order.module#OrderModule'}
+  { path: 'order', loadChildren: 'app/order/order.module#OrderModule'},
+  {path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule'}
 
 ];
 
