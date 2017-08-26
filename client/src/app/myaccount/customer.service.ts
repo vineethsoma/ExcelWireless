@@ -3,6 +3,7 @@ import {Http, Response, Headers} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms/forms';
 import { Customer, TransactionLineItem } from './myaccount.component';
+import { Transaction } from "../order/order.component";
 
 
 @Injectable()
@@ -21,7 +22,7 @@ addOrUpdateCustomer(customer: Customer) {
 });
 }
 
-    getCustomerDetails(username: string, password: string): Observable<Customer> {
+    getCustomerDetails(username: any, password: any): Observable<Customer> {
         return this.http.get('http://localhost:8080/getUserLoginDetails?username=' + username + '&password=' + password)
         .map(this.extractData)
         .catch(this.handleError);
@@ -29,6 +30,12 @@ addOrUpdateCustomer(customer: Customer) {
 
       getCustomerTransactionDetails(phoneNo: number): Observable<TransactionLineItem[]> {
         return this.http.get('http://localhost:8080/getTransactionLineItem?phoneNo=' + phoneNo)
+        .map(this.extractData)
+        .catch(this.handleError);
+      }
+
+      getCustomerSalesHistory(phoneNo: number): Observable<Transaction[]> {
+        return this.http.get('http://localhost:8080/getSalesHistory?phoneNo=' + phoneNo)
         .map(this.extractData)
         .catch(this.handleError);
       }
