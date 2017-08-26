@@ -12,47 +12,41 @@ import { ActivatedRoute, ParamMap, Router } from "@angular/router";
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss']
 })
-export class SearchResultsComponent implements OnInit, AfterViewInit {
-  // params: any ; 
+export class SearchResultsComponent implements OnInit { 
   productsViewList: Array<Product>;
   fullproductList: Array<Product>;
-  nubmerOfItemsPerPage: number; 
-  constructor(private el: ElementRef, private productService: ProductService, private route: ActivatedRoute, private router: Router) {
-    this.nubmerOfItemsPerPage = 10; 
+  searchOptions: SearchOptions; 
+  route: ActivatedRoute;
+  constructor(private el: ElementRef, private productService: ProductService, route: ActivatedRoute, private router: Router) {
+    this.route = route;
   }
   ngOnInit() {
-    if (this.route.snapshot.paramMap.keys.length < 1)
-      this.router.navigate(['/products/search', <SearchOptions>{ page: 1, categoryId: 1 }]);
-
-    let params;
-    this.route.paramMap.switchMap((_params) => {
-      params = _params;
-      return this.getProducts({ categoryId: +params.get("categoryId") })
+    this.searchOptions = this.updateOptions({});
     
+    if (this.route.snapshot.paramMap.keys.length < 1)
+      this.router.navigate(['/products/search', this.searchOptions]);
+    
+    this.route.paramMap.switchMap((_params) => {
+      this.searchOptions = this.updateOptions(new SearchOptions(_params));
+      return this.getProducts({ categoryId: this.searchOptions.categoryId })
+      
     })
-      .subscribe((productList) => {
-        this.fullproductList = productList;
-        // console.log("Params", params);
-        // console.log("Full",this.fullproductList);
-        this.productsViewList = this.loadProductsToView({ page: +params.get("page")}, this.fullproductList); 
-        // console.log(this.productsViewList);
+    .subscribe((productList) => {
+      this.fullproductList = productList;
+        this.productsViewList = this.loadProductsToView(this.searchOptions, this.fullproductList); 
       });
-    // this.route.paramMap.switchMap((params) => this.loadProductsToView({ page: +params.get("page") }, this.fullproductList));
-  }
-  ngAfterViewInit() {
   }
 
   getProducts(options: ProductOptions) {
     return this.productService.getProducts(options);
   }
-  // test(){
-  //   this.fullproductList.do(()=> console.log("Performing a test"));
-  // }
-
+  test(obj){
+    console.log(obj);
+  }
   loadProductsToView(options: SearchOptions, fullList: Array<Product>) {
     let { page } = options;
     // console.log(options);
-    return  fullList.slice((page - 1) * this.nubmerOfItemsPerPage, (page) * (this.nubmerOfItemsPerPage));
+    return  fullList.slice((page - 1) * this.searchOptions.pageSize, (page) * (this.searchOptions.pageSize));
   }
   navigateToSearch(options: SearchOptions) {
     this.router.navigate(['/products/search', options]);
@@ -60,19 +54,29 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   nextPage(): void {
     let page = this.getSearchOptions().page;
     let options = this.updateOptions({ page: ++page });
-    // this.productsViewList = this.loadProductsToView(options, this.fullproductList);
+    this.router.navigate(['/products/search', options]);
+  }
+  previousPage(): void {
+    let page = this.getSearchOptions().page;
+    let options = this.updateOptions({ page: --page });
     this.router.navigate(['/products/search', options]);
   }
 
   updateOptions(update: SearchOptions) {
-    let options = { ...this.route.snapshot.params, ...update };
+    let options; 
+    if (this.route.snapshot.paramMap.keys.length < 1)
+      options = new SearchOptions();
+    else
+      options = { ...(new SearchOptions(this.route.snapshot.paramMap)), ...update };
     return options;
   }
   getCeilingOfNumber(number: number) {
     return Math.ceil(number);
   }
   getSearchOptions(): SearchOptions {
-    return <SearchOptions>{ ...this.route.snapshot.params };
+    let options = new SearchOptions(this.route.snapshot.paramMap); 
+    // console.log(options);
+    return options;
   }
 
   getProductsLength() {
@@ -80,21 +84,23 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   }
 
   getArrayOfPages() {
-      let length = this.getProductsLength();
-      const pages = Math.ceil(length / this.nubmerOfItemsPerPage);
+      const pages = this.getNumberOfPages();
       let arr = [];
       for (let i = 1; i < pages; i++) {
         arr.push(i);
       }
       return arr;
   }
+  getNumberOfPages(){
+    return Math.ceil(this.getProductsLength() / this.searchOptions.pageSize);
+  }
 
   getItemsViewed() {
       let length = this.getProductsLength();
-      let start = this.getSearchOptions().page - 1 * this.nubmerOfItemsPerPage;
-      let end = this.getSearchOptions().page * this.nubmerOfItemsPerPage; 
+      let start = ((this.getSearchOptions().page-1)*this.searchOptions.pageSize) +1 ;
+      let end = this.getSearchOptions().page * this.searchOptions.pageSize; 
       return {
-        start: start >= length? start: 1,
+        start: start,
         end: end <= length? end: length
       }
   }
@@ -105,5 +111,21 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   }
 }
 class SearchOptions extends ProductOptions {
-  page: number = 0;
+  page?: number;
+  pageSize?: number;
+  sortOrder?: 'price-asc' | 'price-dsc' | 'description-asc' | 'description-dsc'
+
+  constructor(params?: ParamMap){
+    super();
+    if(params){
+      this.categoryId = +params.get("categoryId");
+      this.pageSize = +params.get("pageSize");
+      this.page = +params.get("page");
+    }
+    else{
+      this.categoryId = 1;
+      this.page = 1;
+      this.pageSize = 10;
+    }
+  } 
 }
