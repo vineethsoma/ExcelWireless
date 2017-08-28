@@ -11,6 +11,7 @@ import { LcdbuybackModule } from './lcdbuyback/lcdbuyback.module';
 import { MyaccountModule } from './myaccount/myaccount.module';
 import { OrderModule } from './order/order.module';
 import { AdminModule } from "./admin/admin.module";
+import { ContactUsModule } from "./contact-us/contact-us.module";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AdminModule } from "./admin/admin.module";
     ProductModule,
     LcdbuybackModule,
     OrderModule,
-    AdminModule
+    AdminModule,
+    ContactUsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

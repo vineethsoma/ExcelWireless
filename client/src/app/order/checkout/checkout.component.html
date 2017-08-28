@@ -13,7 +13,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-secondary btn-sm" type="button" data-dismiss="modal">Close</button>
-                    <button class="btn btn-danger btn-sm" type="button">Conform Delete</button>
+                    <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" (click)="deleteProductFromCart()">Conform Delete</button>
                 </div>
             </div>
         </div>
@@ -22,8 +22,8 @@
     <div class="row">
         <!-- <span class="alert-close" data-dismiss="alert"></span> -->
         <div class="col-md-12">
-            <button class="btn btn-outline-secondary col-md-3" style="font-size:20px">Total Quantity: 100</button>
-            <button class="btn btn-outline-secondary col-md-4" style="font-size:20px">Total Amount: $ 124.00</button>
+            <button class="btn btn-outline-secondary col-md-3" style="font-size:20px">Total Quantity: {{this.totalQuantity}} </button>
+            <button class="btn btn-outline-secondary col-md-4" style="font-size:20px">Total Amount: $ {{this.totalAmount}}</button>
             <button class="btn btn-success col-md-4" style="font-size:20px">Checkout</button>
         </div>
 
@@ -56,14 +56,14 @@
                     <td class="text-center text-lg text-medium">{{lineItem.retailPrice}}</td>
                     <td class="text-center">
                         <div class="count-input">
-                            <input type="text" placeholder="quantity" [(ngModel)]="lineItem['quantity']">
+                            <input class="form-control" type="text" placeholder="quantity" [(ngModel)]="lineItem['quantity']">
                         </div>
                     </td>
 
                     <td class="text-center text-lg text-medium">{{lineItem.retailPrice * lineItem.quantity}}</td>
                     <th class="text-center"><a class="btn btn-outline-primary btn-sm" (click)="this.updateProductFromCart(lineItem)">Update Cart</a></th>
                     <td class="text-center">
-                        <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#modalDefault">
+                        <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#modalDefault" (click)="getLineItem(lineItem)">
                         Remove
                         </button>
                     </td>

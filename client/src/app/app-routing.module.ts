@@ -7,8 +7,8 @@ const routes: Routes = [
   { path: 'lcdbuyback', loadChildren: 'app/lcdbuyback/lcdbuyback.module#LcdbuybackModule'},
   { path: 'myaccount', loadChildren: 'app/myaccount/myaccount.module#MyaccountModule'},
   { path: 'order', loadChildren: 'app/order/order.module#OrderModule'},
-  {path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule'}
-
+  { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule'},
+  { path: 'contactus', loadChildren: 'app/contact-us/contact-us.module#ContactUsModule'}
 ];
 
 @NgModule({
