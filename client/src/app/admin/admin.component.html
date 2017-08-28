@@ -12,9 +12,6 @@
                 <th>Stocks</th>
                 <th>Edit</th>
                 <th>Add Image</th>
-
-
-
             </tr>
         </thead>
         <tbody>
@@ -25,9 +22,9 @@
                 <td>$12.90</td>
                 <td>104</td>
                 <td>104</td>
-                <td><input type="file" id="file-input"></td>
-                <td><a class="btn btn-outline-success" href="#">Add Image</a></td>
+                <td><input type="file" id="file-input"> <img class="image" /></td>
+                <td><button class="btn btn-outline-success" (click)="addImage($event)">Add Image</button></td>
             </tr>
         </tbody>
-    </table>z
+    </table>
 </div>
