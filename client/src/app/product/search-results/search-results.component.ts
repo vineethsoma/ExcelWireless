@@ -109,6 +109,9 @@ export class SearchResultsComponent implements OnInit {
   onScroll(event) {
     console.log(event);
   }
+  sortProductList(options: SearchOptions){
+    console.log(options);
+  }
 }
 class SearchOptions extends ProductOptions {
   page?: number;
@@ -121,6 +124,7 @@ class SearchOptions extends ProductOptions {
       this.categoryId = +params.get("categoryId");
       this.pageSize = +params.get("pageSize");
       this.page = +params.get("page");
+      this.sortOrder = <'price-asc' | 'price-dsc' | 'description-asc' | 'description-dsc'>params.get("sortOrder");
     }
     else{
       this.categoryId = 1;
