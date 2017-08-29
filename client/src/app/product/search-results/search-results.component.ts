@@ -63,7 +63,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   updateOptions(update: SearchOptions) {
-    let options; 
+    let options: SearchOptions; 
     if (this.route.snapshot.paramMap.keys.length < 1)
       options = new SearchOptions();
     else

@@ -39,10 +39,11 @@
               <div class="column">
                   <div class="shop-sorting">
                       <label for="sorting">Results per page:</label>
-                      <select [(ngModel)]="this.searchOptions.pageSize" (ngModelChange)="this.navigateToSearch(this.updateOptions(this.searchOptions))" class="form-control" id="sorting">
+                      <select [(ngModel)]="this.searchOptions.pageSize" (ngModelChange)="this.navigateToSearch(this.updateOptions({page: 1, pageSize: this.searchOptions.pageSize}))" class="form-control" id="sorting">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
+                        <option [value]="this.getProductsLength()">All</option>
                       </select>
                     </div>
               </div>
