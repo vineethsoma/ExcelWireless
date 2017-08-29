@@ -8,12 +8,14 @@ import { IsotopeComponent } from './services/jquery/isotope/isotope.component';
 import { ImagesloadedComponent } from './services/jquery/imagesloaded/imagesloaded.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoadComponent } from "./load/load.component";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   declarations: [
     HeaderComponent,
