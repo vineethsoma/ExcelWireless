@@ -10,26 +10,32 @@ export class ProductService {
   }
 
   getProducts(options: ProductOptions): Observable<Array<Product>>{
-      const {categoryId} = options;
-      // console.log(categoryId);
-      let url = this.url+'/getProductsByCategory'; 
-      
-      if(categoryId)
-        url = url + "?category_Id=" + categoryId;
-      
-      return this.http.get(url)
-        .map(this.extractData)
-        .map((data) => {
-          let productList = [];
-          data.forEach((item) => {
-            productList.push(new Product(item));
-          });
-
-          return productList;
-        })
-        .catch(this.handleError);
+      return Observable.defer(() => this.productsHttpRequest(options))
+      .publishReplay(100, 10000)
+      .refCount()
+      .take(1); 
   }
 
+  productsHttpRequest(options: ProductOptions){
+    const {categoryId} = options;
+    // console.log(categoryId);
+    let url = this.url+'/getProductsByCategory'; 
+    
+    if(categoryId)
+      url = url + "?category_Id=" + categoryId;
+    
+    return this.http.get(url)
+      .map(this.extractData)
+      .map((data) => {
+        let productList = [];
+        data.forEach((item) => {
+          productList.push(new Product(item));
+        });
+
+        return productList;
+      })
+      .catch(this.handleError);
+  }
   private extractData(res: Response): Array<ProductDTO> {
     let body = res.json();
     // console.log(body);
