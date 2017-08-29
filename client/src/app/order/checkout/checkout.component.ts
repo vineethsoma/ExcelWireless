@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService } from '../order.service';
+import { OrderService, CheckoutOptions } from '../order.service';
 import { TransactionLineItem } from '../../myaccount/myaccount.component';
 import { Transaction } from '../order.component';
 
@@ -29,17 +29,13 @@ export class CheckoutComponent implements OnInit {
   getCheckoutDetails() {
     this.orderService.getCustomerTransactionDetails(7707030801)
       .subscribe((lineItems) => {
+        console.log('chekcout lineitem',lineItems);
         this.checkoutOptions = this.updateCheckoutOptions(lineItems);
+      console.log('chekcout option', this.checkoutOptions);
       });
   }
   updateCheckoutOptions(lineItems: TransactionLineItem[]) {
-    let totalQuantity = 0;
-    let totalAmount = 0;
-    lineItems.forEach((item) => {
-      totalQuantity += item.quantity;
-      totalAmount += item.quantity * item.retailPrice;
-    });
-    return new CheckoutOptions({ lineItems: lineItems, totalQuantity: totalQuantity, totalAmount: totalAmount });
+    return new CheckoutOptions({ lineItems: lineItems });
   }
   updateProductFromCart(lineItem: TransactionLineItem) {
     const phoneNo = 7707030801;
@@ -76,19 +72,4 @@ export class CheckoutComponent implements OnInit {
   }
 
 }
-class CheckoutOptions {
-  lineItems: TransactionLineItem[] = [];
-  totalQuantity;
-  totalAmount;
 
-  constructor(options?: CheckoutOptions) {
-    if (!options) {
-      this.lineItems = [];
-      this.totalQuantity = 0;
-      this.totalAmount = 0;
-    }
-    else {
-
-    }
-  }
-}

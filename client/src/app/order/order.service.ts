@@ -78,8 +78,12 @@ export class OrderService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-
-  private extractData(res: Response): Customer {
+  getCustomerCheckoutDetails(phoneNo: number): Observable<CheckoutOptions> {
+    return this.getCustomerTransactionDetails(phoneNo)
+      .map((items: TransactionLineItem[]) => new CheckoutOptions({lineItems: items}))
+      .catch(this.handleError);
+  }
+  private extractData(res: Response): any {
     let body = res.json();
     // console.log(body);
     return body || {};
@@ -97,5 +101,26 @@ export class OrderService {
     }
     console.error(errMsg);
     return Observable.throw(errMsg);
+  }
+}
+export class CheckoutOptions {
+  lineItems: TransactionLineItem[] = [];
+  totalQuantity;
+  totalAmount;
+
+  constructor(options?: {lineItems: TransactionLineItem[]}) {
+    if (!options) {
+      this.lineItems = [];
+      this.totalQuantity = 0;
+      this.totalAmount = 0;
+    } else {
+      this.lineItems = options.lineItems;
+      this.totalAmount = 0;
+      this.totalQuantity = 0;
+      this.lineItems.forEach((item) => {
+        this.totalQuantity += item.quantity;
+        this.totalAmount += item.quantity * item.retailPrice;
+      });
+    }
   }
 }

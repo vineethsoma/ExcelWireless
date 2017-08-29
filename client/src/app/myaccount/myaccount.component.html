@@ -70,24 +70,32 @@
                         <div class="form-group">
                             <label for="reg-fn">First Name *</label>
                             <input class="form-control" formControlName="onlyFirstName" type="text">
+                            <label style="color:red;" *ngIf="this.customerForm.get('onlyFirstName').hasError('required') && this.customerForm.get('onlyFirstName').touched">*Required </label>
+
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-ln">Last Name</label>
                             <input class="form-control" formControlName="lastName" type="text">
+                            <label style="color:red;" *ngIf="this.customerForm.get('lastName').hasError('required') && this.customerForm.get('lastName').touched">*Required </label>
+
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-email">E-mail Address</label>
                             <input class="form-control" formControlName="email" type="email">
+                            <label style="color:red;" *ngIf="this.customerForm.get('email').hasError('required') && this.customerForm.get('email').touched">*Required </label>
+
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="reg-phone">Phone Number</label>
                             <input class="form-control" formControlName="phoneNo" type="text">
+                            <label style="color:red;" *ngIf="this.customerForm.get('phoneNo').hasError('required') && this.customerForm.get('phoneNo').touched">*Required </label>
+
                         </div>
                     </div>
                     <div class="col-sm-6">

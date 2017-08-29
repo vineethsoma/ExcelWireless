@@ -21,7 +21,7 @@
     <!-- Alert-->
     <div class="row">
         <!-- <span class="alert-close" data-dismiss="alert"></span> -->
-        <div class="col-md-12">
+        <div class="col-md-12" *ngIf='this.checkoutOptions'>
             <button class="btn btn-outline-secondary col-md-3" style="font-size:20px">Total Quantity: {{this.checkoutOptions.totalQuantity}} </button>
             <button class="btn btn-outline-secondary col-md-4" style="font-size:20px">Total Amount: $ {{this.checkoutOptions.totalAmount}}</button>
             <button class="btn btn-success col-md-4" style="font-size:20px">Checkout</button>
@@ -43,7 +43,7 @@
                     <th class="text-center"><button class="btn btn-sm btn-outline-danger">Clear Cart</button></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf='this.checkoutOptions'>
                 <tr *ngFor="let lineItem of this.checkoutOptions.lineItems">
                     <td>
                         <div class="product-item">
@@ -78,7 +78,7 @@
                 <button class="btn btn-outline-primary btn-sm" type="submit">Apply Coupon</button>
             </form>
         </div>
-        <div class="column text-lg">Subtotal: <span class="text-medium">{{this.checkoutOptions.totalAmount}}</span></div>
+        <div class="column text-lg" *ngIf='this.checkoutOptions'>Subtotal: <span class="text-medium">{{this.checkoutOptions.totalAmount}}</span></div>
     </div>
     <div class="shopping-cart-footer">
         <div class="column"><a class="btn btn-outline-secondary" href="shop-grid-ls.html"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a></div>
