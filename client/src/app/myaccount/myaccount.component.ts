@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { CustomerService } from './customer.service';
+import { UserService } from "../user.service";
+import { Observable } from "rxjs/Rx";
 
 
 @Component({
@@ -16,7 +18,8 @@ export class MyaccountComponent implements OnInit {
   transactionLineItemDto: TransactionLineItem[];
   productPriceByCustomerDto: CustomerProductPrice[];
 
-  constructor(private customerService: CustomerService, private formBuilder: FormBuilder) { }
+
+  constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private userService: UserService) { }
 
   ngOnInit() {
     this.customerForm = this.formBuilder.group({
@@ -55,10 +58,8 @@ export class MyaccountComponent implements OnInit {
     const username = this.customerLoginForm.get('email').value;
     const password = this.customerLoginForm.get('password').value;
 
-    this.customerService.getCustomerDetails(username, password)
-    .subscribe((cust: Customer) => {
-      this.customerDto = cust;
-
+    this.userService.getCustomerDetails(username, password).subscribe((customer) => {
+      this.customerDto = customer;
       if (this.customerDto.validUser) {
           alert('right credintails');
           this.getTransactionDetails(this.customerDto.phoneNo);

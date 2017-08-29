@@ -12,6 +12,7 @@ import { MyaccountModule } from './myaccount/myaccount.module';
 import { OrderModule } from './order/order.module';
 import { AdminModule } from "./admin/admin.module";
 import { ContactUsModule } from "./contact-us/contact-us.module";
+import { UserService } from "./user.service";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ContactUsModule } from "./contact-us/contact-us.module";
     AdminModule,
     ContactUsModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

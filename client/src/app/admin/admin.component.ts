@@ -15,9 +15,9 @@ export class AdminComponent implements OnInit {
   formData: FormData;
   productDto: Product[];
   selectedProductDropdownOption: string;
-  listOfProductOption: WebBrandDto[];
+  listOfProductOption: CommonDto[];
   menuList: MenuDto[] = null;
-  webBrandDto: WebBrandDto[];
+  webBrandDtoList: WebBrandDto[];
 
   ngOnInit() {
     // this.getProduct();
@@ -45,8 +45,8 @@ getProduct() {
 getWebMenu() {
   this.adminService.getWebMenu()
   .subscribe((menu: WebBrandDto[]) => {
-    this.webBrandDto = menu;
-    console.log('Product Details for Admin page', this.webBrandDto);
+    this.webBrandDtoList = menu;
+    console.log('Product Details for Admin page', this.webBrandDtoList);
   });
 }
 
@@ -54,14 +54,16 @@ onProductDropdownChoose(): void {
  if (this.selectedProductDropdownOption === 'Brand') {
     console.log('inside the if for brand');
     console.log('Choose from drop down', this.selectedProductDropdownOption);
-    console.log('Webbrand Dto', this.webBrandDto);
+    console.log('Webbrand Dto From Menu List', this.webBrandDtoList);
 
     console.log('listOfProduct before', this.listOfProductOption);
-    for (let i = 0; i < this.webBrandDto.length; i ++) {
+    // console.log('webbrand count', this.webBrandDto[0].);
+    // for (let i = 0; i < this.webBrandDto.length; i ++) {
 
-      this.listOfProductOption[i].brandName = this.webBrandDto[i].brandName;
-      // = this.webBrandDto[i].brandName;
-    }
+    //   console.log('brans', this.webBrandDto[i].brandName);
+    //   this.listOfProductOption[i].name = this.webBrandDto[i].brandName;
+    //   console.log('listOfProduct before', this.listOfProductOption);
+    // }
     console.log('listOfProduct after', this.listOfProductOption);
   }
   // tslint:disable-next-line:one-line
@@ -131,5 +133,6 @@ export class Model {
 }
 export class CommonDto {
   name: string;
+  id: number;
   // description: string;
 }

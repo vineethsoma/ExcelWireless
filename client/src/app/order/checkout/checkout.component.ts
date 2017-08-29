@@ -18,7 +18,7 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private orderService: OrderService) { }
 
-  ngOnChange(){
+  ngOnChange() {
     this.getTotal(this.transactionLineItemDto);
   }
 
