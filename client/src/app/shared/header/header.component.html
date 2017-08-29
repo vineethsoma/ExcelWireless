@@ -20,15 +20,15 @@
         </a>
     </div>
     <div class="topbar-column">
-        <a class="social-button sb-facebook shape-none sb-dark" style="margin-right: 0px" href="#" target="_blank">
-            MY ACCOUNT |
+        <a [routerLink]="['/myaccount']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="social-button sb-facebook shape-none sb-dark" style="margin-right: 0px">
+        MY ACCOUNT |
         </a>
-        <a class="social-button sb-facebook shape-none sb-dark" style="margin-right: 0px">
-            REGISTER |
+        <a class="social-button sb-facebook shape-none sb-dark" style="margin-right: 0px" [routerLink]="['/myaccount']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        REGISTER |
         </a>
-        <a class="social-button sb-facebook shape-none sb-dark" style="margin-right: 0px" href="#" target="_blank">
-                CONTACT US
-            </a>
+        <a class="social-button sb-facebook shape-none sb-dark" [routerLink]="['/contactus']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" style="margin-right: 0px">
+        CONTACT US
+        </a>
         <div class="lang-currency-switcher-wrap">
             <div class="lang-currency-switcher dropdown-toggle"><span class="language"><img alt="English" src="/assets/img/flags/GB.png"></span><span class="currency">$ USD</span></div>
             <div class="dropdown-menu">
