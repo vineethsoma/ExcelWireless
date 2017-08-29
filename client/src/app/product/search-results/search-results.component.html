@@ -27,11 +27,11 @@
               <div class="column">
                 <div class="shop-sorting">
                   <label for="sorting">Sort by:</label>
-                  <select [(ngModel)]= "sortOrder"  class="form-control" id="sorting">
-                    <option>Low - High Price</option>
-                    <option>High - Low Price</option>
-                    <option>A - Z Order</option>
-                    <option>Z - A Order</option>
+                  <select [(ngModel)]= "this.searchOptions.sortOrder" (ngModelChange)="this.sortProductList(this.searchOptions)" class="form-control" id="sorting">
+                    <option value="price-asc">Low - High Price</option>
+                    <option value="price-dsc">High - Low Price</option>
+                    <option value="description-asc">A - Z Order</option>
+                    <option value="description-dsc">Z - A Order</option>
                   </select>
                   <span class="text-muted">Showing:&nbsp;</span><span *ngIf="this.fullproductList != null" > {{this.getItemsViewed().start}} - {{this.getItemsViewed().end}} items of {{this.getProductsLength()}}</span>
                 </div>
@@ -39,10 +39,11 @@
               <div class="column">
                   <div class="shop-sorting">
                       <label for="sorting">Results per page:</label>
-                      <select [(ngModel)]="this.searchOptions.pageSize" (ngModelChange)="this.navigateToSearch(this.updateOptions(this.searchOptions))" class="form-control" id="sorting">
+                      <select [(ngModel)]="this.searchOptions.pageSize" (ngModelChange)="this.navigateToSearch(this.updateOptions({page: 1, pageSize: this.searchOptions.pageSize}))" class="form-control" id="sorting">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
+                        <option [value]="this.getProductsLength()">All</option>
                       </select>
                     </div>
               </div>

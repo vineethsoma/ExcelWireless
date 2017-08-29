@@ -176,7 +176,7 @@
     <!-- Main Navigation-->
     <nav class="site-menu">
         <ul>
-            <li class="active"><a href="index.html"><span>HOME</span></a>
+            <li [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a ><span>HOME</span></a>
             </li>
             <li><a href="shop-grid-ls.html"><span>CATEGORY</span></a>
                 <ul class="sub-menu">
@@ -260,7 +260,7 @@
                 </ul>
             </li>
             <li><a href="blog-rs.html"><span>LCD BUYBACK</span></a>
-                <ul class="sub-menu">
+                <!-- <ul class="sub-menu">
                     <li class="has-children"><a href="blog-rs.html"><span>Blog Layout</span></a>
                         <ul class="sub-menu">
                             <li><a href="blog-rs.html">Blog Right Sidebar</a></li>
@@ -275,17 +275,17 @@
                             <li><a href="blog-single-ns.html">Post No Sidebar</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul> -->
             </li>
-            <li><a href="#"><span>CONTACT US</span></a>
-                <ul class="sub-menu">
+            <li  [routerLink]="['/contactus']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a><span>CONTACT US</span></a>
+                <!-- <ul class="sub-menu">
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contacts.html">Contacts</a></li>
                     <li><a href="faq.html">Help / FAQ</a></li>
                     <li><a href="search-results.html">Search Results</a></li>
                     <li><a href="404.html">404 Not Found</a></li>
                     <li><a class="text-danger" href="docs/dev-setup.html">Documentation</a></li>
-                </ul>
+                </ul> -->
             </li>
         </ul>
     </nav>
@@ -304,11 +304,10 @@
                         <li class="sub-menu-separator"></li>
                         <li>
                             <a href="#"> <i class="icon-unlock"></i>Logout</a>
-                        </li>
-                    </ul>
+                               </ul> 
                 </div>
                 <div class="cart">
-                    <a href="cart.html"></a><i class="icon-bag"></i><span class="count">3</span><span class="subtotal">$289.68</span>
+                    <i class="icon-bag"></i><span class="count">3</span><span class="subtotal">$289.68</span>
                     <div class="toolbar-dropdown">
                         <div class="dropdown-product-item"><span class="dropdown-product-remove"><i class="icon-cross"></i></span>
                             <a class="dropdown-product-thumb" href="shop-single.html"><img src="img/cart-dropdown/01.jpg" alt="Product"></a>
@@ -328,7 +327,7 @@
                         </div>
                         <div class="toolbar-dropdown-group">
                             <div class="column"><a class="btn btn-sm btn-block btn-secondary" href="cart.html">View Cart</a></div>
-                            <div class="column"><a class="btn btn-sm btn-block btn-success" href="checkout-address.html">Checkout</a></div>
+                            <div class="column"><a class="btn btn-sm btn-block btn-success"  [routerLink]="['/checkout']">Checkout</a></div>
                         </div>
                     </div>
                 </div>
