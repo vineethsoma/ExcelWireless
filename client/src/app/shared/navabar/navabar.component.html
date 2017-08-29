@@ -179,7 +179,7 @@
             <li [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a ><span>HOME</span></a>
             </li>
             <li><a href="shop-grid-ls.html"><span>CATEGORY</span></a>
-                <ul class="sub-menu">
+                <!-- <ul class="sub-menu">
                     <li><a href="shop-categories.html">Shop Categories</a></li>
                     <li class="has-children"><a href="shop-grid-ls.html"><span>Shop Grid</span></a>
                         <ul class="sub-menu">
@@ -206,7 +206,7 @@
                             <li><a href="checkout-complete.html">Complete</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul> -->
             </li>
             <li class="has-megamenu"><a href="#"><span>BRAND</span></a>
                 <ul class="mega-menu">
@@ -259,7 +259,7 @@
                     <li><a href="account-tickets.html">My Tickets</a></li>
                 </ul>
             </li>
-            <li><a href="blog-rs.html"><span>LCD BUYBACK</span></a>
+            <li [routerLink]="['/lcdbuyback']" [routerLinkActive]="['active']"><a><span>LCD BUYBACK</span></a>
                 <!-- <ul class="sub-menu">
                     <li class="has-children"><a href="blog-rs.html"><span>Blog Layout</span></a>
                         <ul class="sub-menu">
