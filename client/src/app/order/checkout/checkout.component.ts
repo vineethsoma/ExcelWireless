@@ -9,65 +9,86 @@ import { Transaction } from '../order.component';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-
-  transactionLineItemDto: TransactionLineItem[] = [];
   transactionDto: Transaction;
-  totalQuantity = 0;
-  totalAmount = 0;
   selectedItemToDelete: TransactionLineItem;
-
+  checkoutOptions: CheckoutOptions;
   constructor(private orderService: OrderService) { }
 
-  ngOnChange(){
-    this.getTotal(this.transactionLineItemDto);
+  // ngOnChange(){
+  //   this.getTotal(this.transactionLineItemDto);
+  // }
+
+  updateCheckout(options: CheckoutOptions) {
+
   }
 
   ngOnInit() {
     this.getCheckoutDetails();
-      console.log('totalQuanity for get checkout', this.totalQuantity);
-      console.log('totalQuanity for total', this.totalQuantity);
   }
 
   getCheckoutDetails() {
     this.orderService.getCustomerTransactionDetails(7707030801)
-    .subscribe((transactionLineItem: TransactionLineItem[]) => {
-      this.transactionLineItemDto = transactionLineItem;
-      console.log('Transaction Line Item Details', this.transactionLineItemDto);
-    });
+      .subscribe((lineItems) => {
+        this.checkoutOptions = this.updateCheckoutOptions(lineItems);
+      });
   }
-
-  getTotal(transactionLineItemTest: TransactionLineItem[]) {
-    this.totalAmount = 0;
-    this.totalQuantity = 0;
-    this.transactionLineItemDto.forEach((item) => {
-      this.totalAmount = this.totalAmount + item.quantity;
-      this.totalQuantity = this.totalQuantity + (item.quantity * item.retailPrice);
+  updateCheckoutOptions(lineItems: TransactionLineItem[]) {
+    let totalQuantity = 0;
+    let totalAmount = 0;
+    lineItems.forEach((item) => {
+      totalQuantity += item.quantity;
+      totalAmount += item.quantity * item.retailPrice;
     });
+    return new CheckoutOptions({ lineItems: lineItems, totalQuantity: totalQuantity, totalAmount: totalAmount });
   }
-
   updateProductFromCart(lineItem: TransactionLineItem) {
     const phoneNo = 7707030801;
-    const productNo = '8809998255262';
+    // const productNo = '8809998255262';
     // const quantity = 5;
-    this.orderService.updateProductFromCart(phoneNo, lineItem.productNo, lineItem.quantity);
+    this.orderService.updateProductFromCart(phoneNo, lineItem.productNo, lineItem.quantity)
+      .subscribe(data => {
+        console.log('Response After updating product from cart' + data);
+        this.getCheckoutDetails();
+      },
+      error => {
+        console.log(JSON.stringify(error.json()));
+      })
+      ;
+    // this.checkoutOptions.lineItems.find((item) => item.productNo == lineItem.productNo)
+
+  }
+  deleteProductFromCart(lineItem: TransactionLineItem) {
+      const phoneNo = 7707030801;
+    //   const productNo = '88060852585559';
+
+      this.orderService.deleteProductFromCart(phoneNo, this.selectedItemToDelete.productNo)
+      .subscribe(data => {
+        console.log('Response After deleting product from cart' + data);
+        this.getCheckoutDetails();
+      },
+        error => {
+      console.log(JSON.stringify(error.json()));
+    });
   }
 
   getLineItem(lineItem: TransactionLineItem) {
     this.selectedItemToDelete = lineItem;
   }
 
-  deleteProductFromCart() {
-    const phoneNo = 7707030801;
-    const productNo = '88060852585559';
+}
+class CheckoutOptions {
+  lineItems: TransactionLineItem[] = [];
+  totalQuantity;
+  totalAmount;
 
-    this.orderService.deleteProductFromCart(phoneNo, this.selectedItemToDelete.productNo);
-    // TO DO need to fix this its not happing.
-    // After deleting line item loading new line iten object.
-    this.getCheckoutDetails();
+  constructor(options?: CheckoutOptions) {
+    if (!options) {
+      this.lineItems = [];
+      this.totalQuantity = 0;
+      this.totalAmount = 0;
+    }
+    else {
+
+    }
   }
-
-
-
-
-
 }

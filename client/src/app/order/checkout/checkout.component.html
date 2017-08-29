@@ -22,8 +22,8 @@
     <div class="row">
         <!-- <span class="alert-close" data-dismiss="alert"></span> -->
         <div class="col-md-12">
-            <button class="btn btn-outline-secondary col-md-3" style="font-size:20px">Total Quantity: {{this.totalQuantity}} </button>
-            <button class="btn btn-outline-secondary col-md-4" style="font-size:20px">Total Amount: $ {{this.totalAmount}}</button>
+            <button class="btn btn-outline-secondary col-md-3" style="font-size:20px">Total Quantity: {{this.checkoutOptions.totalQuantity}} </button>
+            <button class="btn btn-outline-secondary col-md-4" style="font-size:20px">Total Amount: $ {{this.checkoutOptions.totalAmount}}</button>
             <button class="btn btn-success col-md-4" style="font-size:20px">Checkout</button>
         </div>
 
@@ -44,7 +44,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let lineItem of this.transactionLineItemDto">
+                <tr *ngFor="let lineItem of this.checkoutOptions.lineItems">
                     <td>
                         <div class="product-item">
                             <a class="product-thumb" href="shop-single.html"><img src="assets/img/shop/cart/01.jpg" alt="Product"></a>
