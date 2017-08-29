@@ -54,7 +54,7 @@ export class ProductService {
 export class ProductOptions {
   categoryId?: number;
 }
-interface ProductDTO{
+interface ProductDTO {
   productId: number;
   categoryId: number;
   vendorId: number;
@@ -70,16 +70,16 @@ interface ProductDTO{
   addTax: false;
 }
 
-export class Product{
+export class Product {
  productId: number;
  productNo: number;
  description: string;
- image: string; 
+ image: string;
  retailPrice: number;
- costPrice:number;
+ costPrice: number;
  quantity: number;
 
- constructor(dto: ProductDTO){
+ constructor(dto: ProductDTO) {
     this.productId = dto.productId;
     this.image = dto.image;
     this.description = dto.description;
