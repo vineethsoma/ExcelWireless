@@ -5,3 +5,10 @@
 // @import '../node_modules/socicon/css/socicon.css';
 @import './assets/css/vendor.min.css';
 @import './scss/theme.scss';
+// this is for home page model-- not sure where to put, so put it here and worked
+.img-model-home-page {
+    display: block;
+    margin: auto;
+    width: 50%;
+    margin-bottom: 15px;
+}

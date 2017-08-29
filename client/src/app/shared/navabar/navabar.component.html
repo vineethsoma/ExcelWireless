@@ -139,9 +139,8 @@
                     <a href="account-orders.html"></a><i class="icon-head"></i>
                     <ul class="toolbar-dropdown">
                         <li class="sub-menu-title"><span>Hello,</span> Daniel Adams</li>
-                        <li><a href="account-profile.html">My Profile</a></li>
-                        <li><a href="account-orders.html">Orders List</a></li>
-                        <li><a href="account-wishlist.html">Wishlist</a></li>
+                        <li><a [routerLink]="['/myaccount/myprofile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">My Profile</a></li>
+                        <li><a [routerLink]="['/myaccount/myorder']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Orders List</a></li>
                         <li class="sub-menu-separator"></li>
                         <li>
                             <a href="#"> <i class="icon-unlock"></i>Logout</a>

@@ -32,9 +32,13 @@
                     </div>
                 </div>
             </aside>
-            <nav class="list-group"><a class="list-group-item justify-content-between active" href="account-orders.html"><span><i class="icon-bag"></i>Orders</span><span class="badge badge-primary badge-pill">6</span></a>
-                <a class="list-group-item" href="account-profile.html"><i class="icon-head"></i>Profile</a><a class="list-group-item" href="account-address.html"><i class="icon-map"></i>Addresses</a><a class="list-group-item justify-content-between" href="account-wishlist.html"><span><i class="icon-heart"></i>Wishlist</span><span class="badge badge-primary badge-pill">3</span></a>
-                <a class="list-group-item justify-content-between" href="account-tickets.html"><span><i class="icon-tag"></i>My Tickets</span><span class="badge badge-primary badge-pill">4</span></a>
+            <nav class="list-group">
+                <a class="list-group-item justify-content-between active" [routerLink]="['/myaccount/myorder']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <span><i class="icon-bag"></i>Orders</span>
+                </a>
+                <a class="list-group-item" [routerLink]="['/myaccount/myprofile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <i class="icon-head"></i>Profile
+                </a>
             </nav>
         </div>
         <div class="col-lg-8">
@@ -47,6 +51,7 @@
                             <th>Date Purchased</th>
                             <th>Quantity</th>
                             <th>Total</th>
+                            <th>Download</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,13 +60,17 @@
                             <td>{{transaction.transactionDate}} {{transaction.transactionTime}}</td>
                             <td><span class="text-danger">{{transaction.totalQuantity}}</span></td>
                             <td><span class="text-medium">${{transaction.totalAmount}}</span></td>
+                            <td>
+                                <a class="text-medium" href="#">
+                                    <i class="icon-download"></i>
+                                </a>
+                            </td>
                         </tr>
 
                     </tbody>
                 </table>
             </div>
             <hr>
-            <div class="text-right"><a class="btn btn-link-primary margin-bottom-none" href="#"><i class="icon-download"></i>&nbsp;Order Details</a></div>
         </div>
     </div>
 </div>

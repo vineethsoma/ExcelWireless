@@ -13,7 +13,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-secondary btn-sm" type="button" data-dismiss="modal">Close</button>
-                    <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" (click)="deleteProductFromCart()">Conform Delete</button>
+                    <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" (click)="deleteProductFromCart()">Confirm Delete</button>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                     <th class="text-center">Retail</th>
                     <th class="text-center">Quantity</th>
                     <th class="text-center">Total</th>
-                    <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="">Update Cart</a></th>
+                    <th class="text-center"><a class="btn btn-outline-primary btn-sm">Update Cart</a></th>
                     <th class="text-center"><button class="btn btn-sm btn-outline-danger">Clear Cart</button></th>
                 </tr>
             </thead>
@@ -61,10 +61,10 @@
                     </td>
 
                     <td class="text-center text-lg text-medium">{{lineItem.retailPrice * lineItem.quantity}}</td>
-                    <th class="text-center"><a class="btn btn-outline-primary btn-sm" (click)="this.updateProductFromCart(lineItem)">Update Cart</a></th>
+                    <th class="text-center"><a class="btn btn-outline-primary btn-sm" (click)="this.updateProductFromCart(lineItem)">Update Quantity</a></th>
                     <td class="text-center">
                         <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#modalDefault" (click)="getLineItem(lineItem)">
-                        Remove
+                        Remove Product
                         </button>
                     </td>
                 </tr>
@@ -78,7 +78,7 @@
                 <button class="btn btn-outline-primary btn-sm" type="submit">Apply Coupon</button>
             </form>
         </div>
-        <div class="column text-lg" *ngIf='this.checkoutOptions'>Subtotal: <span class="text-medium">{{this.checkoutOptions.totalAmount}}</span></div>
+        <div class="column text-lg" style="font-size: 25px;" *ngIf='this.checkoutOptions'>Subtotal: <span class="text-medium">$ {{this.checkoutOptions.totalAmount}}</span></div>
     </div>
     <div class="shopping-cart-footer">
         <div class="column"><a class="btn btn-outline-secondary" href="shop-grid-ls.html"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a></div>
