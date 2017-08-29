@@ -14,14 +14,18 @@ export class CheckoutComponent implements OnInit {
   transactionDto: Transaction;
   totalQuantity = 0;
   totalAmount = 0;
+  selectedItemToDelete: TransactionLineItem;
 
   constructor(private orderService: OrderService) { }
 
+  ngOnChange(){
+    this.getTotal(this.transactionLineItemDto);
+  }
+
   ngOnInit() {
     this.getCheckoutDetails();
-      console.log('totalQuanity', this.totalQuantity);
-      this.getTotal(this.transactionLineItemDto);
-      console.log('totalQuanity', this.totalQuantity);
+      console.log('totalQuanity for get checkout', this.totalQuantity);
+      console.log('totalQuanity for total', this.totalQuantity);
   }
 
   getCheckoutDetails() {
@@ -33,11 +37,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   getTotal(transactionLineItemTest: TransactionLineItem[]) {
-    for (let i = 0; i < transactionLineItemTest.length; i ++) {
-      this.totalQuantity = this.totalQuantity + this.transactionLineItemDto[i].quantity;
-      this.totalAmount = this.totalAmount + (this.transactionLineItemDto[i].retailPrice * this.transactionLineItemDto[i].quantity);
-      console.log('totalQuanity', this.totalQuantity);
-    }
+    this.totalAmount = 0;
+    this.totalQuantity = 0;
+    this.transactionLineItemDto.forEach((item) => {
+      this.totalAmount = this.totalAmount + item.quantity;
+      this.totalQuantity = this.totalQuantity + (item.quantity * item.retailPrice);
+    });
   }
 
   updateProductFromCart(lineItem: TransactionLineItem) {
@@ -47,11 +52,15 @@ export class CheckoutComponent implements OnInit {
     this.orderService.updateProductFromCart(phoneNo, lineItem.productNo, lineItem.quantity);
   }
 
-  deleteProductFromCart(lineItem: TransactionLineItem) {
+  getLineItem(lineItem: TransactionLineItem) {
+    this.selectedItemToDelete = lineItem;
+  }
+
+  deleteProductFromCart() {
     const phoneNo = 7707030801;
     const productNo = '88060852585559';
 
-    this.orderService.deleteProductFromCart(phoneNo, lineItem.productNo);
+    this.orderService.deleteProductFromCart(phoneNo, this.selectedItemToDelete.productNo);
     // TO DO need to fix this its not happing.
     // After deleting line item loading new line iten object.
     this.getCheckoutDetails();
