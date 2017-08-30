@@ -14,7 +14,7 @@ export class AdminComponent implements OnInit {
   productsViewList: Array<Product>;
   fullproductList: Array<Product>;
   selectedProductDropdownOption: "Category" | "Brand" | "Model";
-  sectedCommonOption: CommonDto;
+  sectedCommonOption: any;
   searachOptions: SearchOptions;
   image: any;
   formData: FormData;
@@ -46,12 +46,13 @@ export class AdminComponent implements OnInit {
   loadProductsToView() {
     // console.log(options);
     let commonDto = this.sectedCommonOption;
+    console.log( commonDto);
     if(!commonDto)
       this.productsViewList = this.fullproductList;
     if(this.selectedProductDropdownOption == "Brand")
-      this.productsViewList = this.fullproductList.filter((product) => product.brandId == commonDto.id);
+      this.productsViewList = this.fullproductList.filter((product) => product.brandId == commonDto);
     if(this.selectedProductDropdownOption == "Category")
-      this.productsViewList = this.fullproductList.filter((product) => product.categoryId == commonDto.id);
+      this.productsViewList = this.fullproductList.filter((product) => product.categoryId == commonDto);
     console.log(this.productsViewList);
   }
   addImage(product: Product) {
