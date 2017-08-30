@@ -44,9 +44,9 @@ getProduct() {
 }
 getWebMenu() {
   this.adminService.getWebMenu()
-  .subscribe((menu: WebBrandDto[]) => {
-    this.webBrandDtoList = menu;
-    console.log('Product Details for Admin page', this.webBrandDtoList);
+  .subscribe((menu: MenuDto[]) => {
+    this.menuList = menu;
+    console.log('Product Details for Admin page', this.menuList);
   });
 }
 

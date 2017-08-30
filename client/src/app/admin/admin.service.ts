@@ -27,7 +27,7 @@ addImage(productId: number, image: any) {
         .map(this.extractData)
         .catch(this.handleError);
       }
-      getWebMenu(): Observable<WebBrandDto[]> {
+      getWebMenu(): Observable<MenuDto[]> {
         return this.http.get('http://localhost:8080/getWebMenu')
         .map(this.extractData)
         .catch(this.handleError);
