@@ -20,6 +20,16 @@ export class ProductService {
     return this.brandsHttpRequest();
   }
 
+  getCategories(){
+    return this.webMenuHttpRequest()
+    .map((menu) => {
+      let categories = [];
+      menu.categoryDtoList.forEach((categoryDTO) => categories.push(new Category(categoryDTO)))
+    
+      return categories;
+    })
+  }
+
   private brandsHttpRequest(): Observable<Array<Brand>>{
     return this.webMenuHttpRequest().map(
       (menu) => {
@@ -97,6 +107,15 @@ interface ProductDTO {
   quantity: number;
   image: string;
   addTax: false;
+}
+export class Category{
+  categoryId: number;
+  categoryName: string;
+  
+  constructor(options: CatergoryDTO){
+    this.categoryId = options.categoryId;
+    this.categoryName = options.categoryName;
+  }
 }
 export class Brand {
   brandId: number;
