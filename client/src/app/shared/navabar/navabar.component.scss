@@ -5,13 +5,13 @@ ul.flex-menu{
     flex-wrap: wrap;
     // position: absolute;
     li.flex-menu-item{
-        display: flex;
         width: 20%;
         // position: relative;
+        ul.flex-submenu{
+        display: flex;
         justify-content: center;
         flex-flow: row;
         flex-wrap: wrap;
-    ul.flex-submenu{
         // display: flex;
         li.flex-submenu-item{
             width: 20%

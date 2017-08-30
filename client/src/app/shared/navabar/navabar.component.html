@@ -22,14 +22,13 @@
             
             <li class="has-megamenu"><a href="#"><span>BRAND</span></a>
                 <ul class="mega-menu">
-
                         <!-- <span class="mega-menu-title"></span> -->
                         <ul class="flex-menu">
                             <li class ="flex-menu-item"*ngFor="let brand of this.brands | async">
                                 <a (click) ="this.selectBrand(this.brand)">{{brand.brandName}}</a>
-                                <ul *ngIf="this.selectedBrand" class="mega-menu">
+                                <ul class="mega-menu">
                                     <ul class="flex-submenu">
-                                        <li class ="flex-submenu-item" *ngFor="let model of this.selectedBrand.models">
+                                        <li class ="flex-submenu-item" *ngFor="let model of brand.models">
                                             <a>{{model.modelName}}</a>    
                                         </li>
                                     </ul>
