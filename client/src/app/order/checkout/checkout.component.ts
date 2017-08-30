@@ -29,7 +29,7 @@ export class CheckoutComponent implements OnInit {
   getCheckoutDetails() {
     this.orderService.getCustomerTransactionDetails(7707030801)
       .subscribe((lineItems) => {
-        console.log('chekcout lineitem',lineItems);
+        console.log('chekcout lineitem', lineItems);
         this.checkoutOptions = this.updateCheckoutOptions(lineItems);
       console.log('chekcout option', this.checkoutOptions);
       });
