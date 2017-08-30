@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms/forms';
 import { Transaction } from "../order/order.component";
 import { Product } from "../product/services/product.service";
-import { Category, Brand, Vendor, Model, MenuDto, WebBrandDto } from "./admin.component";
 
 
 @Injectable()
@@ -27,35 +26,6 @@ addImage(productId: number, image: any) {
         .map(this.extractData)
         .catch(this.handleError);
       }
-      getWebMenu(): Observable<MenuDto[]> {
-        return this.http.get('http://localhost:8080/getWebMenu')
-        .map(this.extractData)
-        .catch(this.handleError);
-      }
-
-      getCategoryDetails(): Observable<Category[]> {
-        return this.http.get('http://localhost:8080/getCategory')
-        .map(this.extractData)
-        .catch(this.handleError);
-    }
-
-    getBrandDetails(): Observable<Brand[]> {
-        return this.http.get('http://localhost:8080/getBrand')
-        .map(this.extractData)
-        .catch(this.handleError);
-    }
-
-    getVendorDetails(): Observable<Vendor[]> {
-        return this.http.get('http://localhost:8080/getVendor')
-        .map(this.extractData)
-        .catch(this.handleError);
-    }
-
-    getModelDetails(): Observable<Model[]> {
-      return this.http.get('http://localhost:8080/getModel')
-        .map(this.extractData)
-        .catch(this.handleError);
-    }
 
       private extractData(res: Response): Product {
         const body = res.json();
