@@ -88,6 +88,8 @@ public class ProductManager {
         return productList;
     }
 
+
+
     public List<ProductEcomerceDto> getProductForSearch(String searchInput) {
 
         List<ProductEcomerceDto> productList = new ArrayList<ProductEcomerceDto>();

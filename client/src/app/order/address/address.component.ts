@@ -10,6 +10,7 @@ import { TransactionLineItem } from "../../myaccount/myaccount.component";
 export class AddressComponent implements OnInit {
 
   checkoutOptions: CheckoutOptions;
+  sameShippingAddress = true;
 
   constructor(private orderService: OrderService) { }
 
@@ -26,6 +27,10 @@ export class AddressComponent implements OnInit {
   }
   updateCheckoutOptions(lineItems: TransactionLineItem[]) {
     return new CheckoutOptions({ lineItems: lineItems });
+  }
+
+  showDifferentShippingOption() {
+    this.sameShippingAddress = !this.sameShippingAddress;
   }
 
 }

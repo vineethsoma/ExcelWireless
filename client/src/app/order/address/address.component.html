@@ -96,37 +96,38 @@
             <hr class="padding-bottom-1x">
             <div class="form-group">
                 <label class="custom-control custom-checkbox">
-            <input class="custom-control-input" type="checkbox" checked><span class="custom-control-indicator"></span><span class="custom-control-description">Same as billing address</span>
+            <input class="custom-control-input" type="checkbox" checked (click)="this.showDifferentShippingOption()"><span class="custom-control-indicator"></span><span class="custom-control-description">Same as billing address</span>
           </label>
             </div>
 
             <!-- WHEN BILLING ADDRESS AND SHIPPING ADDRESS ARE DIFFERENT -->
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="checkout-address1">Address 1</label>
-                        <input class="form-control" type="text" id="checkout-address1">
+            <div *ngIf="!this.sameShippingAddress">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="checkout-address1">Address 1</label>
+                            <input class="form-control" type="text" id="checkout-address1">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="checkout-address2">Address 2</label>
+                            <input class="form-control" type="text" id="checkout-address2">
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="checkout-address2">Address 2</label>
-                        <input class="form-control" type="text" id="checkout-address2">
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="checkout-company">Company Name</label>
-                        <input class="form-control" type="text" id="checkout-company">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="checkout-company">Company Name</label>
+                            <input class="form-control" type="text" id="checkout-company">
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="checkout-country">Country</label>
-                        <select class="form-control" id="checkout-country">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="checkout-country">Country</label>
+                            <select class="form-control" id="checkout-country">
                     <option>Choose country</option>
                     <option>Australia</option>
                     <option>Canada</option>
@@ -135,15 +136,15 @@
                     <option>Switzerland</option>
                     <option>USA</option>
                   </select>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row padding-bottom-1x">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="checkout-city">City</label>
-                        <select class="form-control" id="checkout-city">
+                <div class="row padding-bottom-1x">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="checkout-city">City</label>
+                            <select class="form-control" id="checkout-city">
                     <option>Choose city</option>
                     <option>Amsterdam</option>
                     <option>Berlin</option>
@@ -151,12 +152,13 @@
                     <option>New York</option>
                     <option>Paris</option>
                   </select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="checkout-zip">ZIP Code</label>
-                        <input class="form-control" type="text" id="checkout-zip">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="checkout-zip">ZIP Code</label>
+                            <input class="form-control" type="text" id="checkout-zip">
+                        </div>
                     </div>
                 </div>
             </div>

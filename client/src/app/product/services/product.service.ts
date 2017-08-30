@@ -4,8 +4,8 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from "rxjs";
 @Injectable()
 export class ProductService {
-  private url: string; 
-  constructor(private http: Http) { 
+  private url: string;
+  constructor(private http: Http) {
     this.url = environment.productUrl;
   }
 
