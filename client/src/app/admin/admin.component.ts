@@ -55,8 +55,8 @@ export class AdminComponent implements OnInit {
       this.productsViewList = this.fullproductList.filter((product) => product.categoryId == commonDto);
     console.log(this.productsViewList);
   }
-  addImage(product: Product) {
-    const element: any = (document.querySelectorAll('#file-input')[0]);
+  addImage(product: Product, index: number) {
+    const element: any = (document.querySelectorAll('#file-input')[index]);
     console.log('image', element.files[0]);
    // console.log('Event', event.target.files[0]);
     this.image = element.files[0];
