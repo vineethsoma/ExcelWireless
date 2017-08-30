@@ -235,22 +235,28 @@ public class SQLQueries {
                     "FIRST_NAME_LAST_NAME," +
                     "USERNAME) VALUES (?,?,?,?,?,?,?,?,'3',?,?,?,?,?,'asif')";
 
-    public String getProductForSearch = "SELECT PRODUCT_NO,DESCRIPTION,CATEGORY_ID,BRAND_ID,MODEL_ID FROM product where ACTIVE_FLAG = 1 AND IS_ECOMMERCE = 1";
-    public String getProductsByDescription = "SELECT " +
-            "PRODUCT_NO," +
-            "CATEGORY_ID," +
-            "VENDOR_ID," +
-            "BRAND_ID," +
-            "MODEL_ID," +
-            "DESCRIPTION," +
-            "COST_PRICE," +
-            "RETAIL_PRICE," +
-            "QUANTITY," +
-            "IMAGE " +
-            "FROM product " +
-            "WHERE ACTIVE_FLAG = 1 AND IS_ECOMMERCE = 1 AND MODEL_ID = " +
-            "(SELECT MODEL_ID FROM product " +
-            " WHERE DESCRIPTION = ?)";
+    public String getProductsByDescription = " " +
+            "                        SELECT " +
+            "                        PRODUCT_NO," +
+            "                        PRODUCT_ID," +
+            "                        CATEGORY_ID," +
+            "                       VENDOR_ID," +
+            "                        BRAND_ID," +
+            "                       MODEL_ID," +
+            "                        DESCRIPTION," +
+            "                        COST_PRICE," +
+            "                        RETAIL_PRICE," +
+            "                        QUANTITY," +
+            "                        IMAGE " +
+            "                        FROM product " +
+            "                        WHERE ACTIVE_FLAG = 1 " +
+            "                       AND IS_ECOMMERCE = 1 " +
+            "                       AND (DESCRIPTION "+
+            "                        like '%'?'%' " +
+            "                        or product_no = ?)";
+    public String  getProductForSearch = "" +
+            "SELECT PRODUCT_NO,PRODUCT_ID,CATEGORY_ID,VENDOR_ID,BRAND_ID,MODEL_ID,DESCRIPTION,COST_PRICE,RETAIL_PRICE,QUANTITY,IMAGE "+
+            "FROM product WHERE ACTIVE_FLAG = 1 AND IS_ECOMMERCE = 1 AND (DESCRIPTION like '%' ? '%' or PRODUCT_NO=?)";
     public String deleteAllTransactionLineItem = "DELETE FROM web_transaction_line_item WHERE CUSTOMER_PHONENO = ?";
     public String getProductPriceDetailsByCustomer = "SELECT PRODUCT_NO, RETAIL_PRICE FROM customer_product_price WHERE CUSTOMER_PHONENO = ?";
     public String getProductDetailsByModelIdAndCategoryId = "SELECT " +

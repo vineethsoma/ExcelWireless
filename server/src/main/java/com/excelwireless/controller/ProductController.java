@@ -35,9 +35,9 @@ public class ProductController {
         return productManager.getProductPriceForCustomer(phoneNo);
     }
     @RequestMapping(value = "/getProductForSearch", method = RequestMethod.GET)
-    public List<ProductEcomerceDto> getProductForSearch() {
+    public List<ProductEcomerceDto> getProductForSearch(@RequestParam String searchInput) {
 
-        return productManager.getProductForSearch();
+        return productManager.getProductForSearch(searchInput);
     }
     @RequestMapping(value = "/getProductsByCategory", method = RequestMethod.GET)
     public List<ProductEcomerceDto> getProductsByCategory(@RequestParam int category_Id) throws SQLException {

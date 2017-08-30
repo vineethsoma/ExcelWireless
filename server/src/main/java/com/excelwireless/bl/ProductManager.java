@@ -70,48 +70,6 @@ public class ProductManager {
 
     }
 
-    private final class ProductMapperForEcomerce implements RowMapper<ProductEcomerceDto>
-    {
-
-        @Override
-        public ProductEcomerceDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-            ProductEcomerceDto product = new ProductEcomerceDto();
-
-            try {
-                product.setProductId(rs.getInt("PRODUCT_ID"));
-                product.setProductNo(rs.getString("PRODUCT_NO"));
-                product.setDescription(rs.getString("DESCRIPTION"));
-                product.setCategoryId(rs.getInt("CATEGORY_ID"));
-                product.setModelId(rs.getInt("MODEL_ID"));
-                product.setVendorId(rs.getInt("VENDOR_ID"));
-                product.setBrandId(rs.getInt("BRAND_ID"));
-                product.setCostPrice(rs.getDouble("COST_PRICE"));
-                product.setRetailPrice(rs.getDouble("RETAIL_PRICE"));
-                product.setQuantity(rs.getInt("QUANTITY"));
-
-
-
-                int blobLength = (int) rs.getBlob("IMAGE").length();
-
-
-
-                // product.setAddTax(rs.getBoolean("TAX"));
-
-                if (blobLength != 0) {
-                    product.setImage(rs.getBlob("IMAGE").getBytes(1, blobLength));
-                }
-            }
-            catch (Exception e)
-            {
-                e.getStackTrace();
-                System.out.println(product.getProductNo());
-            }
-
-
-            return product;
-        }
-    }
 
     public List<ProductEcomerceDto> getEcommerceProductsByCategory(int category_Id) {
 
@@ -130,15 +88,15 @@ public class ProductManager {
         return productList;
     }
 
-    public List<ProductEcomerceDto> getProductForSearch() {
+    public List<ProductEcomerceDto> getProductForSearch(String searchInput) {
 
         List<ProductEcomerceDto> productList = new ArrayList<ProductEcomerceDto>();
 
         try
         {
-            productList = jdbcTemplate.query(sqlQueries.getProductForSearch,new ProductMapperForProductSearch());
+            productList = jdbcTemplate.query(sqlQueries.getProductForSearch, new ProductMapperForEcomerce(),searchInput, searchInput);
 
-            System.out.println("Send Product Details by Category Successfully");
+            System.out.println("Send Product Details by Search Input Successfully");
         }
         catch (Exception e)
         {
@@ -152,7 +110,7 @@ public class ProductManager {
         List<ProductEcomerceDto> productList = new ArrayList<ProductEcomerceDto>();
         try
         {
-            productList = jdbcTemplate.query(sqlQueries.getProductsByDescription,new ProductMapperForEcomerce(),description);
+            productList = jdbcTemplate.query(sqlQueries.getProductsByDescription,new ProductMapperForEcomerce(),description,description);
 
             System.out.println("Send Product Details by Description Successfully");
         }
@@ -244,6 +202,50 @@ public class ProductManager {
         System.out.println(a);
 
 
+    }
+
+
+    private final class ProductMapperForEcomerce implements RowMapper<ProductEcomerceDto>
+    {
+
+        @Override
+        public ProductEcomerceDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+            ProductEcomerceDto product = new ProductEcomerceDto();
+
+            try {
+                product.setProductId(rs.getInt("PRODUCT_ID"));
+                product.setProductNo(rs.getString("PRODUCT_NO"));
+                product.setDescription(rs.getString("DESCRIPTION"));
+                product.setCategoryId(rs.getInt("CATEGORY_ID"));
+                product.setModelId(rs.getInt("MODEL_ID"));
+                product.setVendorId(rs.getInt("VENDOR_ID"));
+                product.setBrandId(rs.getInt("BRAND_ID"));
+                product.setCostPrice(rs.getDouble("COST_PRICE"));
+                product.setRetailPrice(rs.getDouble("RETAIL_PRICE"));
+                product.setQuantity(rs.getInt("QUANTITY"));
+
+
+
+                int blobLength = (int) rs.getBlob("IMAGE").length();
+
+
+
+                // product.setAddTax(rs.getBoolean("TAX"));
+
+                if (blobLength != 0) {
+                    product.setImage(rs.getBlob("IMAGE").getBytes(1, blobLength));
+                }
+            }
+            catch (Exception e)
+            {
+                e.getStackTrace();
+                System.out.println(product.getProductNo());
+            }
+
+
+            return product;
+        }
     }
 
 }
