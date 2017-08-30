@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from "rxjs";
+import { ParamMap } from "@angular/router";
 @Injectable()
 export class ProductService {
   private url: string;
@@ -52,11 +53,10 @@ export class ProductService {
   productsHttpRequest(options: ProductOptions){
     const {categoryId} = options;
     // console.log(categoryId);
-    let url = this.url+'/getProductsByCategory'; 
-    
-    if(categoryId)
-      url = url + "?category_Id=" + categoryId;
-    
+    let url =this.url+ "/getProduct";
+    if(categoryId){
+      url = this.url+'/getProductsByCategory?category_Id=' + categoryId;
+    }
     return this.http.get(url)
       .map(this.extractData)
       .map((data) => {
@@ -149,13 +149,16 @@ export class Product {
  retailPrice: number;
  costPrice: number;
  quantity: number;
-
+brandId: number;
+categoryId: number;
  constructor(dto: ProductDTO) {
     this.productId = dto.productId;
     this.image = dto.image;
     this.description = dto.description;
     this.retailPrice = dto.retailPrice;
     this.costPrice = dto.costPrice;
+    this.brandId = dto.brandId;
+    this.categoryId = dto.categoryId;
  }
 }
 interface WebMenuDTO{
@@ -181,4 +184,24 @@ interface ModelDTO{
   modelName: string;
   description: string;
   noOfProducts: 0; 
+}
+export class SearchOptions extends ProductOptions {
+  page?: number;
+  pageSize?: number;
+  sortOrder?: 'price-asc' | 'price-dsc' | 'description-asc' | 'description-dsc'
+
+  constructor(params?: ParamMap){
+    super();
+    if(params){
+      this.categoryId = +params.get("categoryId");
+      this.pageSize = +params.get("pageSize");
+      this.page = +params.get("page");
+      this.sortOrder = <'price-asc' | 'price-dsc' | 'description-asc' | 'description-dsc'>params.get("sortOrder");
+    }
+    else{
+      this.categoryId = 1;
+      this.page = 1;
+      this.pageSize = 10;
+    }
+  } 
 }

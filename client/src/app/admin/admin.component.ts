@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { AdminService } from "./admin.service";
-import { Product } from "../product/services/product.service";
+import { Product, ProductService, Brand, Category, Model, SearchOptions } from "../product/services/product.service";
 
 @Component({
   selector: 'app-admin',
@@ -9,21 +9,51 @@ import { Product } from "../product/services/product.service";
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private adminService: AdminService, private element: ElementRef) { }
+  constructor(private adminService: AdminService, private element: ElementRef, private productService: ProductService) { }
 
+  productsViewList: Array<Product>;
+  fullproductList: Array<Product>;
+  selectedProductDropdownOption: "Category" | "Brand" | "Model";
+  sectedCommonOption: CommonDto;
+  searachOptions: SearchOptions;
   image: any;
   formData: FormData;
-  productDto: Product[];
-  selectedProductDropdownOption: string;
   listOfProductOption: CommonDto[];
-  menuList: MenuDto[] = null;
-  webBrandDtoList: WebBrandDto[];
+  brandList: Array<Brand> = null;
+  categroyList: Array<Category> = null;
+  modelList: Array<Model> = null;
 
   ngOnInit() {
-    // this.getProduct();
-    this.getWebMenu();
+    this.productService.getBrands()
+      .subscribe((brands) => {
+        this.brandList = brands
+        this.modelList = [];
+      });
+    this.productService.getCategories()
+      .subscribe((categories) => this.categroyList = categories);
+    this.productService.getProducts({})
+      .subscribe((productList) => {
+        this.fullproductList = productList;
+        this.loadProductsToView();
+      });
   }
-
+  getProducts(options: SearchOptions) {
+    return this.productService.getProducts(options);
+  }
+  test(obj){
+    console.log(obj);
+  }
+  loadProductsToView() {
+    // console.log(options);
+    let commonDto = this.sectedCommonOption;
+    if(!commonDto)
+      this.productsViewList = this.fullproductList;
+    if(this.selectedProductDropdownOption == "Brand")
+      this.productsViewList = this.fullproductList.filter((product) => product.brandId == commonDto.id);
+    if(this.selectedProductDropdownOption == "Category")
+      this.productsViewList = this.fullproductList.filter((product) => product.categoryId == commonDto.id);
+    console.log(this.productsViewList);
+  }
   addImage(product: Product) {
     const element: any = (document.querySelectorAll('#file-input')[0]);
     console.log('image', element.files[0]);
@@ -35,101 +65,24 @@ export class AdminComponent implements OnInit {
     this.adminService.addImage(product.productId, this.formData);
 }
 
-getProduct() {
-  this.adminService.getProduct()
-  .subscribe((product: Product[]) => {
-    this.productDto = product;
-    console.log('Product Details for Admin page', this.productDto);
-  });
-}
-getWebMenu() {
-  this.adminService.getWebMenu()
-  .subscribe((menu: MenuDto[]) => {
-    this.menuList = menu;
-    console.log('Product Details for Admin page', this.menuList);
-  });
-}
-
 onProductDropdownChoose(): void {
  if (this.selectedProductDropdownOption === 'Brand') {
-    console.log('inside the if for brand');
-    console.log('Choose from drop down', this.selectedProductDropdownOption);
-    console.log('Webbrand Dto From Menu List', this.webBrandDtoList);
-
-    console.log('listOfProduct before', this.listOfProductOption);
-    // console.log('webbrand count', this.webBrandDto[0].);
-    // for (let i = 0; i < this.webBrandDto.length; i ++) {
-
-    //   console.log('brans', this.webBrandDto[i].brandName);
-    //   this.listOfProductOption[i].name = this.webBrandDto[i].brandName;
-    //   console.log('listOfProduct before', this.listOfProductOption);
-    // }
-    console.log('listOfProduct after', this.listOfProductOption);
+    this.listOfProductOption = [] ; 
+    this.brandList.forEach((brand) => this.listOfProductOption.push({id: brand.brandId, name: brand.brandName}));
+    console.log("List of options", this.listOfProductOption);
   }
   // tslint:disable-next-line:one-line
   else if (this.selectedProductDropdownOption === 'Category') {
-          // console.log('inside the if for brand');
-
-          this.adminService.getCategoryDetails()
-          .subscribe((categories: Category[]) => {
-          // this.listOfProductOption = categories;
-        });
+    this.listOfProductOption = [] ; 
+    this.categroyList.forEach((category) => this.listOfProductOption.push({id: category.categoryId, name: category.categoryName}));
+    console.log("List of options", this.listOfProductOption);
     }
   // tslint:disable-next-line:one-line
-  else if (this.selectedProductDropdownOption === 'Vendor') {
-    this.adminService.getVendorDetails()
-    .subscribe((vendors: Vendor[]) => {
-    // this.listOfProductOption = vendors;
-        });
-}
-  // tslint:disable-next-line:one-line
   else if (this.selectedProductDropdownOption === 'Model') {
-    this.adminService.getModelDetails()
-    .subscribe((models: Model[]) => {
-    // this.listOfProductOption = models;
-        });
+  
   }
-      // tslint:disable-next-line:one-line
-      // else {
-      //     this.listOfProductOption = null;
-      // }
 }
 
-}
-export class MenuDto {
-  // List<CategoryDto>
-  categoryDtoList: Category[];
-  webBrandDtoList: WebBrandDto[];
-  // List<WebBrandDto> webBrandDtoList;
-  // List<ModelDto> modelDtoList;
-}
-export class WebBrandDto {
-   brandId: number;
-   brandName: string;
-   modelDtoList: Model[];
-}
-export class Category {
-  categoryId: number;
-  name: string;
-  description: string;
-
-}
-export class Brand {
-  brandId: number;
-  name: string;
-  description: string;
-}
-
-export class Vendor {
-  vendorId: number;
-  name: string;
-  description: string;
-}
-
-export class Model {
-  modelId: number;
-  name: string;
-  description: string;
 }
 export class CommonDto {
   name: string;

@@ -7,6 +7,9 @@ ul.flex-menu{
     li.flex-menu-item{
         width: 20%;
         // position: relative;
+        a:hover{
+            cursor: hand;
+        } 
         ul.flex-submenu{
         display: flex;
         justify-content: center;
