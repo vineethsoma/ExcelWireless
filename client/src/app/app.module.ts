@@ -13,6 +13,7 @@ import { OrderModule } from './order/order.module';
 import { AdminModule } from "./admin/admin.module";
 import { ContactUsModule } from "./contact-us/contact-us.module";
 import { UserService } from "./user.service";
+import { ProductService } from "./product/services/product.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { UserService } from "./user.service";
     AdminModule,
     ContactUsModule
   ],
-  providers: [UserService],
+  providers: [UserService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
