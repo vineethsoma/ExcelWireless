@@ -1,0 +1,95 @@
+ul.flex-menu{
+    display: flex;
+    justify-content: center;
+    flex-flow: row;
+    flex-wrap: wrap;
+    // position: absolute;
+    li.flex-menu-item{
+        display: flex;
+        width: 20%;
+        // position: relative;
+        justify-content: center;
+        flex-flow: row;
+        flex-wrap: wrap;
+    ul.flex-submenu{
+        // display: flex;
+        li.flex-submenu-item{
+            width: 20%
+        }
+    }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // Mega Menu
+// %mega-menu {
+//     display: none;
+//     position: absolute;
+//     top: 100%;
+//     left: 0;
+//     width: 100%;
+//     margin-top: -1px !important;
+//     border: 1px solid $border-color;
+//     background-color: $white-color;
+//     table-layout: fixed;
+//     > li {
+//         display: table-cell !important;
+//         position: relative;
+//         padding: 25px !important;
+//         border-left: 1px solid $border-color;
+//         vertical-align: top;
+//         .mega-menu-title {
+//             display: block;
+//             margin-bottom: 16px;
+//             padding-bottom: 10px; //~12px
+//             border-bottom: 1px solid $border-color;
+//             color: $gray;
+//             font-weight: 500;
+//             text: {
+//                 transform: uppercase;
+//                 align: left;
+//             }
+//         }
+//         &:first-child { border-left: 0; }
+//     }
+// }
+// .site-menu ul > li:hover {
+//     > .sub-menu {
+//         display: block;
+//         -webkit-animation: submenu-show .3s cubic-bezier(.68, -.55, .265, 1.55);
+//         animation: submenu-show .3s cubic-bezier(.68, -.55, .265, 1.55);
+//     }
+//     > .mega-menu {
+//         display: table;
+//         -webkit-animation: megamenu-show .45s cubic-bezier(.68, -.55, .265, 1.55);
+//         animation: megamenu-show .45s cubic-bezier(.68, -.55, .265, 1.55);
+//         .sub-menu {
+//         -webkit-animation: none;
+//         animation: none;
+//         }
+//     }
+//     }
+// .mega-menu { @extend %mega-menu; }

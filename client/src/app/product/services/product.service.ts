@@ -16,6 +16,29 @@ export class ProductService {
       .take(1); 
   }
 
+  getBrands(){
+    return this.brandsHttpRequest();
+  }
+
+  private brandsHttpRequest(): Observable<Array<Brand>>{
+    return this.webMenuHttpRequest().map(
+      (menu) => {
+      let brands = [];
+        menu.webBrandDtoList.forEach(
+          (brand) => brands.push(new Brand(brand))
+        );
+      
+      return brands; 
+      });
+  }
+  webMenuHttpRequest(): Observable<WebMenuDTO>{
+    let url = this.url + "/getWebMenu";
+    return this.http.get(url)
+    .map(this.extractData)
+    .catch(this.handleError);
+
+  }
+
   productsHttpRequest(options: ProductOptions){
     const {categoryId} = options;
     // console.log(categoryId);
@@ -75,7 +98,30 @@ interface ProductDTO {
   image: string;
   addTax: false;
 }
-
+export class Brand {
+  brandId: number;
+  brandName: string;
+  models: Array<Model>;
+  
+  constructor(options: BrandDTO){
+    this.brandId = options.brandId;
+    this.brandName = options.brandName;
+    this.models = [];
+    options.modelDtoList.forEach((model) => this.models.push(new Model(model)));
+  }
+}
+export class Model{
+  modelId: number;
+  modelName: string;
+  description: string;
+  quantity: number;
+  constructor(options: ModelDTO){
+    this.modelId = options.modelId;
+    this.modelName = options.modelName;
+    this.description = options.description;
+    this.quantity = options.noOfProducts;
+  }
+}
 export class Product {
  productId: number;
  productNo: number;
@@ -92,4 +138,28 @@ export class Product {
     this.retailPrice = dto.retailPrice;
     this.costPrice = dto.costPrice;
  }
+}
+interface WebMenuDTO{
+  webBrandDtoList: Array<BrandDTO>;
+  categoryDtoList: Array<any>;
+}
+interface CatergoryDTO{
+  categoryId: number;
+  categoryName: string;
+  description: string;
+  noOfProducts: number;
+  filterValue: string;
+
+}
+interface BrandDTO{
+  brandId: number;
+  brandName: string;
+  modelDtoList: Array<ModelDTO>; 
+}
+
+interface ModelDTO{
+  modelId: number;
+  modelName: string;
+  description: string;
+  noOfProducts: 0; 
 }
