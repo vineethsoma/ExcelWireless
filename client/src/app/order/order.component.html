@@ -39,48 +39,42 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Product Name</th>
+                            <th>Product Description</th>
+                            <th>Retail</th>
+                            <th>Quantity</th>
                             <th class="text-center">Subtotal</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr *ngFor="let lineItem of this.transactionLineItemDto">
                             <td>
                                 <div class="product-item">
-                                    <a class="product-thumb" href="shop-single.html"><img src="img/shop/cart/01.jpg" alt="Product"></a>
+                                    <a class="product-thumb" href="shop-single.html">
+                                        <img src="img/shop/cart/01.jpg" alt="Product">
+                                    </a>
                                     <div class="product-info">
-                                        <h4 class="product-title"><a href="shop-single.html">Unionbay Park<small>x 1</small></a></h4><span><em>Size:</em> 10.5</span><span><em>Color:</em> Dark Blue</span>
+                                        <h5 class="product-title">
+                                            {{lineItem.description}}
+                                        </h5>
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-center text-lg text-medium">$43.90</td>
-                            <td class="text-center"><a class="btn btn-outline-primary btn-sm" href="cart.html">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product-item">
-                                    <a class="product-thumb" href="shop-single.html"><img src="img/shop/cart/02.jpg" alt="Product"></a>
-                                    <div class="product-info">
-                                        <h4 class="product-title"><a href="shop-single.html">Daily Fabric Cap<small>x 2</small></a></h4><span><em>Size:</em> XL</span><span><em>Color:</em> Black</span>
-                                    </div>
-                                </div>
+                            <td class="text-center text-lg text-medium">
+                                {{lineItem.retailPrice}}
                             </td>
-                            <td class="text-center text-lg text-medium">$24.89</td>
-                            <td class="text-center"><a class="btn btn-outline-primary btn-sm" href="cart.html">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product-item">
-                                    <a class="product-thumb" href="shop-single.html"><img src="img/shop/cart/03.jpg" alt="Product"></a>
-                                    <div class="product-info">
-                                        <h4 class="product-title"><a href="shop-single.html">Cole Haan Crossbody<small>x 1</small></a></h4><span><em>Size:</em> -</span><span><em>Color:</em> Turquoise</span>
-                                    </div>
-                                </div>
+                            <td class="text-center text-lg text-medium">
+                                {{lineItem.quantity}}
                             </td>
-                            <td class="text-center text-lg text-medium">$200.00</td>
-                            <td class="text-center"><a class="btn btn-outline-primary btn-sm" href="cart.html">Edit</a></td>
+                            <td class="text-center text-lg text-medium">
+                                {{lineItem.quantity * lineItem.retailPrice}}
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-outline-primary btn-sm" href="cart.html">Edit</a>
+                            </td>
                         </tr>
+
+
                     </tbody>
                 </table>
             </div>

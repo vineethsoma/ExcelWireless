@@ -33,4 +33,9 @@ export class NavabarComponent implements OnInit {
   selectBrand(brand: Brand){
     this.selectedBrand = brand;
   }
+
+  logout()
+  {
+    alert("user logged out !!")
+  }
 }
