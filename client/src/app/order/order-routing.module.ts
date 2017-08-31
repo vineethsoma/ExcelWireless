@@ -5,13 +5,15 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AddressComponent } from "./address/address.component";
 import { ShippingComponent } from "./shipping/shipping.component";
 import { PaymentComponent } from "./payment/payment.component";
+import { ThankyouComponent } from "./thankyou/thankyou.component";
 
 const routes: Routes = [
   {path: '', component: OrderComponent },
   {path: 'checkout', component: CheckoutComponent},
   {path: 'address', component: AddressComponent},
   {path: 'shipping', component: ShippingComponent},
-  {path: 'payment', component: PaymentComponent}
+  {path: 'payment', component: PaymentComponent},
+  {path: 'thankyou', component: ThankyouComponent}
 ];
 
 @NgModule({

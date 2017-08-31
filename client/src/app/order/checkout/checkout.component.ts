@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService, CheckoutOptions } from '../order.service';
 import { TransactionLineItem } from '../../myaccount/myaccount.component';
 import { Transaction } from '../order.component';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -9,10 +10,13 @@ import { Transaction } from '../order.component';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
+
   transactionDto: Transaction;
   selectedItemToDelete: TransactionLineItem;
   checkoutOptions: CheckoutOptions;
-  constructor(private orderService: OrderService) { }
+  checkoutForm: FormGroup;
+  
+  constructor(private orderService: OrderService, private formBuilder: FormBuilder) { }
 
   // ngOnChange(){
   //   this.getTotal(this.transactionLineItemDto);
@@ -23,6 +27,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.checkoutForm = this.formBuilder.group({
+      'onlyFirstName': ['', Validators.required]
+    });
+
+
     this.getCheckoutDetails();
   }
 
