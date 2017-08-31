@@ -16,7 +16,7 @@
     </div>
     <div class="col-md-3" *ngIf="this.listOfProductOption != null">
         <select [(ngModel)] = "this.sectedCommonOption" (change)="this.loadProductsToView()" class="form-control" id="select-input">
-                <option  *ngFor = "let option of this.listOfProductOption">
+                <option  *ngFor = "let option of this.listOfProductOption" [value]="option.id">
                         {{option.name}}
                     </option>
             </select>
@@ -45,7 +45,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of this.productsViewList">
+            <tr *ngFor="let product of this.productsViewList;let i = index" [attr.data-index]="i">
                 <td>
                     <img *ngIf="product.image!=null" src="data:image/png;base64,{{product.image}}" height="100px" width="100px" />
                     <img *ngIf="(product.image=='aW1hZ2U=')" src="assets/images/no-image-found.jpg" height="100px" width="100px" alt="{{product.productNo}}">
@@ -56,7 +56,7 @@
                 <td>$ {{product.retailPrice}}</td>
                 <td>{{product.quantity}}</td>
                 <td><input type="file" id="file-input"> <img class="image" /></td>
-                <td><button class="btn btn-outline-success" (click)="addImage(product)">Add Image</button></td>
+                <td><button class="btn btn-outline-success" (click)="addImage(product, i)">Add Image</button></td>
             </tr>
         </tbody>
     </table>
