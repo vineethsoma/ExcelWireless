@@ -17,7 +17,7 @@ export class UserService {
     private _isAuthenticated: BehaviorSubject<boolean>; 
 
     constructor(private http: Http, private orderService: OrderService) { 
-        this._isAuthenticated = <BehaviorSubject<boolean>>new BehaviorSubject<boolean>(false);
+        this._isAuthenticated = <BehaviorSubject<boolean>>new BehaviorSubject<boolean>(true);
     }
 
     getCustomerDetails(username: any, password: any): Observable<Customer> {
@@ -56,12 +56,13 @@ export class UserService {
         return this.transactionLineItemObject;
       }
       getCheckoutOptions(phoneNo: number): Observable<CheckoutOptions> {
-        if (!this.checkoutDetails) {
-            this.checkoutDetails =  this.orderService.getCheckoutDetails(phoneNo).
-            publishReplay(1)
-            .refCount()
+        // if (!this.checkoutDetails) {
+            this.checkoutDetails =  this.orderService.getCheckoutDetails(phoneNo)
+            // publishReplay(10)
+            // .refCount()
+            .share()
             .catch(this.handleError);
-        }
+        // }
         return this.checkoutDetails;
       }
 

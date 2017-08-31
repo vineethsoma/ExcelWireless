@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Brand } from "../../product/services/product.service";
+import { Brand, Model } from "../../product/services/product.service";
 import { Observable } from "rxjs/Rx";
 import { UserService } from "../../user.service";
 import { CheckoutOptions } from "../../order/order.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-navabar',
@@ -17,7 +18,7 @@ export class NavabarComponent implements OnInit {
   config = {
     isAuthenticated: false
   }
-  constructor(userService: UserService) { 
+  constructor(userService: UserService, private router: Router) { 
     this.userService = userService;
     this.userService.isAuthenticated()
     .subscribe((isAuthenticated) => {
@@ -28,6 +29,11 @@ export class NavabarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.brands.subscribe((list)=>console.log(list));
+  }
+
+  navigateToModel(model: Model){
+    this.router.navigate(['/products/search'])
   }
 
   selectBrand(brand: Brand){

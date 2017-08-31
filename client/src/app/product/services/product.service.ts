@@ -51,12 +51,15 @@ export class ProductService {
   }
 
   productsHttpRequest(options: ProductOptions){
-    const {categoryId, description} = options;
+    const {categoryId, description, modelId} = options;
     // console.log(categoryId);
     let url =this.url+ "/getProduct";
     
     if(description){
       url = this.url+'/getProductForSearch?searchInput=' + description;  
+    }
+    else if(modelId){
+      url = this.url + '/getEcommerceProductsByModel?model_Id=' + modelId;
     }
     else if(categoryId){
       url = this.url+'/getProductsByCategory?category_Id=' + categoryId;
@@ -98,6 +101,7 @@ export class ProductService {
 export class ProductOptions {
   categoryId?: number;
   description?: string;
+  modelId?: number;
 }
 interface ProductDTO {
   productId: number;
@@ -127,10 +131,12 @@ export class Brand {
   brandId: number;
   brandName: string;
   models: Array<Model>;
+  image: string;
   
   constructor(options: BrandDTO){
     this.brandId = options.brandId;
     this.brandName = options.brandName;
+    this.image = options.brandImage;
     this.models = [];
     options.modelDtoList.forEach((model) => this.models.push(new Model(model)));
   }
@@ -182,6 +188,7 @@ interface CatergoryDTO{
 interface BrandDTO{
   brandId: number;
   brandName: string;
+  brandImage: string;
   modelDtoList: Array<ModelDTO>; 
 }
 

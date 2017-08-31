@@ -3,6 +3,7 @@ import { OrderService, CheckoutOptions } from '../order.service';
 import { TransactionLineItem } from '../../myaccount/myaccount.component';
 import { Transaction } from '../order.component';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { UserService } from "../../user.service";
 
 @Component({
   selector: 'app-checkout',
@@ -16,7 +17,7 @@ export class CheckoutComponent implements OnInit {
   checkoutOptions: CheckoutOptions;
   checkoutForm: FormGroup;
   
-  constructor(private orderService: OrderService, private formBuilder: FormBuilder) { }
+  constructor(private orderService: OrderService, private formBuilder: FormBuilder, private userService: UserService) { }
 
   // ngOnChange(){
   //   this.getTotal(this.transactionLineItemDto);
@@ -37,11 +38,11 @@ export class CheckoutComponent implements OnInit {
   }
 
   getCheckoutDetails() {
-    this.orderService.getCheckoutDetails(7707030801)
+    this.userService.getCheckoutOptions(7707030801)
       .subscribe((checkoutOptions) => {
         // console.log('chekcout lineitem', lineItems);
         this.checkoutOptions = checkoutOptions;
-      console.log('chekcout option', this.checkoutOptions);
+      // console.log('chekcout option', this.checkoutOptions);
       });
   }
 

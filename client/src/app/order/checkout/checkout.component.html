@@ -47,7 +47,7 @@
                 <tr *ngFor="let lineItem of this.checkoutOptions.lineItems">
                     <td>
                         <div class="product-item">
-                            <a class="product-thumb" href="shop-single.html"><img src="assets/img/shop/cart/01.jpg" alt="Product"></a>
+                            <a class="product-thumb" href="shop-single.html"><img class="img-responsive" src="data:image/png;base64,{{lineItem.image}}" alt="{{lineItem.description}}"></a>
                             <div class="product-info">
                                 <h4 class="product-title">{{lineItem.description}}</h4>
                             </div>

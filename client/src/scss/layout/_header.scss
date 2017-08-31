@@ -319,7 +319,7 @@
 
 // Sub Menu
 .sub-menu { @extend %sub-menu; }
-.site-menu ul > li:hover {
+.site-menu ul > li:active {
   > .sub-menu {
     display: block;
     -webkit-animation: submenu-show .3s cubic-bezier(.68, -.55, .265, 1.55);

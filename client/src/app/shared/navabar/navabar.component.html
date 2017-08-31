@@ -20,16 +20,16 @@
             <li><a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span>HOME</span></a></li>
             <li><a><span>CATEGORY</span></a></li>
 
-            <li class="has-megamenu"><a href="#"><span>BRAND</span></a>
+            <li class="has-megamenu" ><a href="#"><span>BRAND</span></a>
                 <ul class="mega-menu">
                     <!-- <span class="mega-menu-title"></span> -->
                     <ul class="flex-menu">
                         <li class="flex-menu-item" *ngFor="let brand of this.brands | async">
-                            <a (click)="this.selectBrand(this.brand)">{{brand.brandName}}</a>
-                            <ul class="mega-menu">
+                            <a (click)="this.selectBrand(this.brand)"><img class="img-responsive" src="data:image/png;base64,{{brand.image}}" alt="{{brand.brandName}}"></a>
+                            <ul class="mega-menu" >
                                 <ul class="flex-submenu">
                                     <li class="flex-submenu-item" *ngFor="let model of brand.models">
-                                        <a>{{model.modelName}}</a>
+                                        <a (click)="this.navigateToModel(model)"><span>{{model.modelName}}</span></a>
                                     </li>
                                 </ul>
                             </ul>
@@ -61,7 +61,7 @@
             <div class="tools">
                 <div class="search"><i class="icon-search"></i></div>
                 <div class="account">
-                    <a href="account-orders.html"></a><i class="icon-head"></i>
+                    <a></a><i class="icon-head"></i>
                     <ul *ngIf="this.config.isAuthenticated" class="toolbar-dropdown">
                         <li class="sub-menu-title"><span>Hello,</span> Daniel Adams</li>
                         <li><a [routerLink]="['/myaccount/myprofile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">My Profile</a></li>
@@ -73,16 +73,16 @@
                         <li><a [routerLink] ="['/myaccount']"> <i class="icon-lock"></i>Login</a></li>
                     </ul>
                 </div>
-                <div *ngIf="this.userService.isAuthenticated() | async" class="cart">
-                    <i class="icon-bag"></i><span class="count">3</span><span class="subtotal">${{(this.checkoutDetails | async).totalAmount}}</span>
+                <div *ngIf="this.config.isAuthenticated && (this.checkoutDetails | async) != null" class="cart">
+                    <i class="icon-bag"></i><span class="count">3</span><span class="subtotal">${{(this.checkoutDetails | async)?.totalAmount}}</span>
                     <div class="toolbar-dropdown">
-                        <div class="dropdown-product-item" *ngFor="let item of (this.checkoutDetails | async).lineItems"><span class="dropdown-product-remove"><i class="icon-cross"></i></span>
-                            <a class="dropdown-product-thumb" ><img [src]="item.image" alt="Product"></a>
+                        <div class="dropdown-product-item" *ngFor="let item of (this.checkoutDetails | async)?.lineItems"><span class="dropdown-product-remove"><i class="icon-cross"></i></span>
+                            <a class="dropdown-product-thumb" ><img class="img-responsive" src="data:image/png;base64,{{item.image}}" alt="{{item.description}}"></a>
                             <div class="dropdown-product-info"><a class="dropdown-product-title">{{item.description}}</a><span class="dropdown-product-details">{{item.quantity}} x ${{item.retailPrice}}</span></div>
                         </div>
                         <div class="toolbar-dropdown-group">
                             <div class="column"><span class="text-lg">Total:</span></div>
-                            <div class="column text-right"><span class="text-lg text-medium">${{(this.checkoutDetails | async).totalAmount}}&nbsp;</span></div>
+                            <div class="column text-right"><span class="text-lg text-medium">${{(this.checkoutDetails | async)?.totalAmount}}&nbsp;</span></div>
                         </div>
                         <div class="toolbar-dropdown-group">
                             <div class="column"><a class="btn btn-sm btn-block btn-success" [routerLink]="['/checkout']">View Cart</a></div>
