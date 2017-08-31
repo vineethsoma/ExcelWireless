@@ -32,19 +32,20 @@ export class CheckoutComponent implements OnInit {
       'onlyFirstName': ['', Validators.required]
     });
 
-
     this.getCheckoutDetails();
   }
 
   getCheckoutDetails() {
-    this.orderService.getCheckoutDetails(7707030801)
-      .subscribe((checkoutOptions) => {
-        // console.log('chekcout lineitem', lineItems);
-        this.checkoutOptions = checkoutOptions;
+    this.orderService.getCustomerTransactionDetails(7707030801)
+      .subscribe((lineItems) => {
+        console.log('chekcout lineitem', lineItems);
+        this.checkoutOptions = this.updateCheckoutOptions(lineItems);
       console.log('chekcout option', this.checkoutOptions);
       });
   }
-
+  updateCheckoutOptions(lineItems: TransactionLineItem[]) {
+    return new CheckoutOptions({ lineItems: lineItems });
+  }
   updateProductFromCart(lineItem: TransactionLineItem) {
     const phoneNo = 7707030801;
     // const productNo = '8809998255262';
