@@ -17,63 +17,41 @@
     <!-- Main Navigation-->
     <nav class="site-menu">
         <ul>
-            <li [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a><span>HOME</span></a></li>
+            <li><a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span>HOME</span></a></li>
             <li><a><span>CATEGORY</span></a></li>
-            
+
             <li class="has-megamenu"><a href="#"><span>BRAND</span></a>
                 <ul class="mega-menu">
-                        <!-- <span class="mega-menu-title"></span> -->
-                        <ul class="flex-menu">
-                            <li class ="flex-menu-item"*ngFor="let brand of this.brands | async">
-                                <a (click) ="this.selectBrand(this.brand)">{{brand.brandName}}</a>
-                                <ul class="mega-menu">
-                                    <ul class="flex-submenu">
-                                        <li class ="flex-submenu-item" *ngFor="let model of brand.models">
-                                            <a>{{model.modelName}}</a>    
-                                        </li>
-                                    </ul>
+                    <!-- <span class="mega-menu-title"></span> -->
+                    <ul class="flex-menu">
+                        <li class="flex-menu-item" *ngFor="let brand of this.brands | async">
+                            <a (click)="this.selectBrand(this.brand)">{{brand.brandName}}</a>
+                            <ul class="mega-menu">
+                                <ul class="flex-submenu">
+                                    <li class="flex-submenu-item" *ngFor="let model of brand.models">
+                                        <a>{{model.modelName}}</a>
+                                    </li>
                                 </ul>
-                            </li>
-                        </ul>
+                            </ul>
+                        </li>
+                    </ul>
                 </ul>
             </li>
-            <li><a href="account-orders.html"><span>PARTS</span></a>
-                <ul class="sub-menu">
-                    <li><a href="account-login.html">Login / Register</a></li>
-                    <li><a href="account-orders.html">Orders List</a></li>
-                    <li><a href="account-wishlist.html">Wishlist</a></li>
-                    <li><a href="account-profile.html">Profile Page</a></li>
-                    <li><a href="account-address.html">Contact / Shipping Address</a></li>
-                    <li><a href="account-tickets.html">My Tickets</a></li>
-                </ul>
+            <li>
+                <a>
+                    <span>PARTS</span>
+                </a>
             </li>
-            <li><a [routerLink]="['/lcdbuyback']" [routerLinkActive]="['active']"><span>LCD BUYBACK</span></a>
-                <!-- <ul class="sub-menu">
-                    <li class="has-children"><a href="blog-rs.html"><span>Blog Layout</span></a>
-                        <ul class="sub-menu">
-                            <li><a href="blog-rs.html">Blog Right Sidebar</a></li>
-                            <li><a href="blog-ls.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-ns.html">Blog No Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-children"><a href="blog-single-rs.html"><span>Single Post Layout</span></a>
-                        <ul class="sub-menu">
-                            <li><a href="blog-single-rs.html">Post Right Sidebar</a></li>
-                            <li><a href="blog-single-ls.html">Post Left Sidebar</a></li>
-                            <li><a href="blog-single-ns.html">Post No Sidebar</a></li>
-                        </ul>
-                    </li>
-                </ul> -->
+            <li>
+                <a [routerLink]="['/lcdbuyback']" [routerLinkActive]="['active']">
+                    <span>LCD BUYBACK</span>
+                </a>
             </li>
-            <li><a [routerLink]="['/contactus']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span>CONTACT US</span></a>
-                <!-- <ul class="sub-menu">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contacts.html">Contacts</a></li>
-                    <li><a href="faq.html">Help / FAQ</a></li>
-                    <li><a href="search-results.html">Search Results</a></li>
-                    <li><a href="404.html">404 Not Found</a></li>
-                    <li><a class="text-danger" href="docs/dev-setup.html">Documentation</a></li>
-                </ul> -->
+            <li>
+                <a [routerLink]="['/contactus']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <span>CONTACT US</span>
+                </a>
+
             </li>
         </ul>
     </nav>
@@ -83,30 +61,51 @@
             <div class="tools">
                 <div class="search"><i class="icon-search"></i></div>
                 <div class="account">
-                    <a href="account-orders.html"></a><i class="icon-head"></i>
+                    <i class="icon-head"></i>
                     <ul class="toolbar-dropdown">
                         <li class="sub-menu-title"><span>Hello,</span> Daniel Adams</li>
                         <li><a [routerLink]="['/myaccount/myprofile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">My Profile</a></li>
                         <li><a [routerLink]="['/myaccount/myorder']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Orders List</a></li>
                         <li class="sub-menu-separator"></li>
                         <li>
-                            <a href="#"> <i class="icon-unlock"></i>Logout</a>
+                            <a [routerLink]="['']" (click)="this.logout()">
+                                <i class="icon-unlock"></i>Logout
+                            </a>
                     </ul>
                 </div>
                 <div class="cart">
                     <i class="icon-bag"></i><span class="count">3</span><span class="subtotal">$289.68</span>
                     <div class="toolbar-dropdown">
                         <div class="dropdown-product-item"><span class="dropdown-product-remove"><i class="icon-cross"></i></span>
-                            <a class="dropdown-product-thumb" href="shop-single.html"><img src="img/cart-dropdown/01.jpg" alt="Product"></a>
-                            <div class="dropdown-product-info"><a class="dropdown-product-title" href="shop-single.html">Unionbay Park</a><span class="dropdown-product-details">1 x $43.90</span></div>
+                            <a class="dropdown-product-thumb">
+                                <img src="/assets/img/cart-dropdown/01.jpg" alt="Product">
+                            </a>
+
+                            <div class="dropdown-product-info">
+                                <a class="dropdown-product-title" href="shop-single.html">Unionbay Park</a>
+                                <span class="dropdown-product-details">1 x $43.90</span>
+                            </div>
                         </div>
-                        <div class="dropdown-product-item"><span class="dropdown-product-remove"><i class="icon-cross"></i></span>
-                            <a class="dropdown-product-thumb" href="shop-single.html"><img src="img/cart-dropdown/02.jpg" alt="Product"></a>
-                            <div class="dropdown-product-info"><a class="dropdown-product-title" href="shop-single.html">Daily Fabric Cap</a><span class="dropdown-product-details">2 x $24.89</span></div>
+                        <div class="dropdown-product-item">
+                            <span class="dropdown-product-remove">
+                                <i class="icon-cross"></i>
+                            </span>
+                            <a class="dropdown-product-thumb">
+                                <img src="/assets/img/cart-dropdown/02.jpg" alt="Product"></a>
+                            <div class="dropdown-product-info">
+                                <a class="dropdown-product-title">Daily Fabric Cap</a>
+                                <span class="dropdown-product-details">2 x $24.89</span>
+                            </div>
                         </div>
-                        <div class="dropdown-product-item"><span class="dropdown-product-remove"><i class="icon-cross"></i></span>
-                            <a class="dropdown-product-thumb" href="shop-single.html"><img src="img/cart-dropdown/03.jpg" alt="Product"></a>
-                            <div class="dropdown-product-info"><a class="dropdown-product-title" href="shop-single.html">Haan Crossbody</a><span class="dropdown-product-details">1 x $200.00</span></div>
+                        <div class="dropdown-product-item">
+                            <span class="dropdown-product-remove">
+                                <i class="icon-cross"></i>
+                            </span>
+                            <a class="dropdown-product-thumb"><img src="/assets/img/cart-dropdown/03.jpg" alt="Product"></a>
+                            <div class="dropdown-product-info">
+                                <a class="dropdown-product-title">Haan Crossbody</a>
+                                <span class="dropdown-product-details">1 x $200.00</span>
+                            </div>
                         </div>
                         <div class="toolbar-dropdown-group">
                             <div class="column"><span class="text-lg">Total:</span></div>

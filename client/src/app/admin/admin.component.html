@@ -10,12 +10,11 @@
             <option>Select All</option>
             <option>Brand</option>
             <option>Category</option>
-            <option>Model</option>
-            <option>Vendor</option>
+            <!-- <option>Model</option> -->
         </select>
     </div>
     <div class="col-md-3" *ngIf="this.listOfProductOption != null">
-        <select [(ngModel)] = "this.sectedCommonOption" (change)="this.loadProductsToView()" class="form-control" id="select-input">
+        <select [(ngModel)]="this.sectedCommonOption" (change)="this.loadProductsToView()" class="form-control" id="select-input">
                 <option  *ngFor = "let option of this.listOfProductOption" [value]="option.id">
                         {{option.name}}
                     </option>

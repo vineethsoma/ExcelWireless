@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { CustomerService } from './customer.service';
 import { UserService } from "../user.service";
 import { Observable } from "rxjs/Rx";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class MyaccountComponent implements OnInit {
   productPriceByCustomerDto: CustomerProductPrice[];
 
 
-  constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.customerForm = this.formBuilder.group({
@@ -62,6 +63,7 @@ export class MyaccountComponent implements OnInit {
       this.customerDto = customer;
       if (this.customerDto.validUser) {
           alert('right credintails');
+          this.router.navigate(['']);
           this.getTransactionDetails(this.customerDto.phoneNo);
           this.getProductPriceByCustomer(this.customerDto.phoneNo);
         } else {
