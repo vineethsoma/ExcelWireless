@@ -3,24 +3,46 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms/forms';
 import { Customer, TransactionLineItem } from "./myaccount/myaccount.component";
+import { CheckoutOptions, OrderService } from "./order/order.service";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 
 @Injectable()
 export class UserService {
-
+    
     private customerObject: Observable<Customer>;
+    private customer: Customer; 
     private transactionLineItemObject: Observable<TransactionLineItem[]>;
-    constructor(private http: Http) { }
+    private checkoutDetails: Observable<CheckoutOptions>;
+    private _isAuthenticated: BehaviorSubject<boolean>; 
+
+    constructor(private http: Http, private orderService: OrderService) { 
+        this._isAuthenticated = <BehaviorSubject<boolean>>new BehaviorSubject<boolean>(false);
+    }
 
     getCustomerDetails(username: any, password: any): Observable<Customer> {
         if (!this.customerObject) {
-            this.customerObject = this.http.get('http://localhost:8080/getUserLoginDetails?username=' + username + '&password=' + password)
-                .map(this.extractData)
-                .publishReplay(1)
-                .refCount()
-                .catch(this.handleError);
+            this.customerObject = this.cutomerHttpRequest(username, password)
+            .map((customer) => {
+                if(customer && customer.lastName)
+                    this._isAuthenticated.next(true);
+                return customer;
+            })
+            .publishReplay(1)
+            .refCount()
+            .share();
         }
         return this.customerObject;
+    }   
+
+    isAuthenticated(): Observable<boolean>{
+        return this._isAuthenticated.asObservable();
+    }
+
+    cutomerHttpRequest(username: any, password: any): Observable<Customer>{
+        return this.http.get('http://localhost:8080/getUserLoginDetails?username=' + username + '&password=' + password)
+        .map(this.extractData)
+        .catch(this.handleError); 
     }
 
     getCustomerTransactionDetails(phoneNo: number): Observable<TransactionLineItem[]> {
@@ -32,6 +54,15 @@ export class UserService {
         .catch(this.handleError);
         }
         return this.transactionLineItemObject;
+      }
+      getCheckoutOptions(phoneNo: number): Observable<CheckoutOptions> {
+        if (!this.checkoutDetails) {
+            this.checkoutDetails =  this.orderService.getCheckoutDetails(phoneNo).
+            publishReplay(1)
+            .refCount()
+            .catch(this.handleError);
+        }
+        return this.checkoutDetails;
       }
 
 

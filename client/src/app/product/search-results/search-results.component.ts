@@ -28,7 +28,7 @@ export class SearchResultsComponent implements OnInit {
     
     this.route.paramMap.switchMap((_params) => {
       this.searchOptions = this.updateOptions(new SearchOptions(_params));
-      return this.getProducts({ categoryId: this.searchOptions.categoryId })
+      return this.getProducts({ categoryId: this.searchOptions.categoryId, description: this.searchOptions.description })
       
     })
     .subscribe((productList) => {
@@ -125,6 +125,7 @@ class SearchOptions extends ProductOptions {
       this.pageSize = +params.get("pageSize");
       this.page = +params.get("page");
       this.sortOrder = <'price-asc' | 'price-dsc' | 'description-asc' | 'description-dsc'>params.get("sortOrder");
+      this.description = params.get("description");
     }
     else{
       this.categoryId = 1;

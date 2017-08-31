@@ -73,10 +73,17 @@ export class OrderService {
       .catch(this.handleError);
   }
 
+  updateCheckoutOptions(lineItems: TransactionLineItem[]) {
+    return new CheckoutOptions({ lineItems: lineItems });
+  }
   getCustomerTransactionDetails(phoneNo: number): Observable<TransactionLineItem[]> {
     return this.http.get('http://localhost:8080/getTransactionLineItem?phoneNo=' + phoneNo)
+   
       .map(this.extractData)
       .catch(this.handleError);
+  }
+  getCheckoutDetails(phoneNo: number): Observable<CheckoutOptions>{
+    return this.getCustomerTransactionDetails(phoneNo).map(this.updateCheckoutOptions);
   }
   getCustomerCheckoutDetails(phoneNo: number): Observable<CheckoutOptions> {
     return this.getCustomerTransactionDetails(phoneNo)

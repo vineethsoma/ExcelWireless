@@ -51,12 +51,17 @@ export class ProductService {
   }
 
   productsHttpRequest(options: ProductOptions){
-    const {categoryId} = options;
+    const {categoryId, description} = options;
     // console.log(categoryId);
     let url =this.url+ "/getProduct";
-    if(categoryId){
+    
+    if(description){
+      url = this.url+'/getProductForSearch?searchInput=' + description;  
+    }
+    else if(categoryId){
       url = this.url+'/getProductsByCategory?category_Id=' + categoryId;
     }
+    
     return this.http.get(url)
       .map(this.extractData)
       .map((data) => {
@@ -92,6 +97,7 @@ export class ProductService {
 }
 export class ProductOptions {
   categoryId?: number;
+  description?: string;
 }
 interface ProductDTO {
   productId: number;
