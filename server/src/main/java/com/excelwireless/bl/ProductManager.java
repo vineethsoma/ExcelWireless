@@ -199,6 +199,13 @@ public class ProductManager {
         //Here getting image as MultipartFile and then getting input stream of the file and then getting the size of the file.
         SqlLobValue lobValue = new SqlLobValue(image_file.getInputStream(), (int )image_file.getSize(), lobHandler);
 
+
+        // DO NOT DELETE THIS --- >THIS LOGIC HELP TO ADD IMAGES FOR BRANDS
+//        product_id = 18;
+//        int a = jdbcTemplate.update(sqlQueries.updateBrandImage,new Object[]{lobValue, product_id}, new int[] {Types.BLOB, Types.INTEGER});
+
+
+
         int a = jdbcTemplate.update(sqlQueries.updateProductImage,new Object[]{lobValue, product_id}, new int[] {Types.BLOB, Types.INTEGER});
 
         System.out.println(a);

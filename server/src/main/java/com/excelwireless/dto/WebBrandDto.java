@@ -9,6 +9,7 @@ public class WebBrandDto {
 
     private int brandId;
     private String brandName;
+    private byte[] brandImage;
     private List<ModelDto> modelDtoList;
 
     public int getBrandId() {
@@ -33,5 +34,13 @@ public class WebBrandDto {
 
     public void setModelDtoList(List<ModelDto> modelDtoList) {
         this.modelDtoList = modelDtoList;
+    }
+
+    public byte[] getBrandImage() {
+        return brandImage;
+    }
+
+    public void setBrandImage(byte[] brandImage) {
+        this.brandImage = brandImage;
     }
 }

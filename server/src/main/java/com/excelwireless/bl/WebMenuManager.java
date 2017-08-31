@@ -50,6 +50,9 @@ public class WebMenuManager {
 
             webBrandDto.setBrandId(brandDtos.get(i).getBrandId());
             webBrandDto.setBrandName(brandDtos.get(i).getBrandName());
+            if(null != brandDtos.get(i).getBrandImage()) {
+                webBrandDto.setBrandImage(brandDtos.get(i).getBrandImage());
+            }
 
             //Calling method to get all models details for particular brand id.
             modelDtoList = getModelListForBrand(brandDtos.get(i).getBrandId());
@@ -159,9 +162,18 @@ public class WebMenuManager {
             brand.setBrandId(rs.getInt("BRAND_ID"));
             brand.setBrandName(rs.getString("BRAND_NAME"));
 
-//            List<ModelDto> modelDtoList = new ArrayList<>();
-//
-//            modelDtoList = jdbcTemplate.query(sqlQueries.getModelDetailsForBrand, new WebModelMapper(), brand.getBrandId());
+            try
+            {
+                int blobLength = (int) rs.getBlob("BRAND_IMAGE").length();
+                if (blobLength != 0) {
+                    brand.setBrandImage(rs.getBlob("BRAND_IMAGE").getBytes(1, blobLength));
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println(e);
+            }
+
 
 
 

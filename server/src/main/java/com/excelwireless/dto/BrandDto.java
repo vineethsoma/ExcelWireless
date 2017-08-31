@@ -9,6 +9,7 @@ public class BrandDto {
     private String brandName;
     private String brandDescription;
     private int noOfProducts;
+    private byte[] brandImage;
 
     public String getFilterValue() {
         return filterValue;
@@ -55,8 +56,11 @@ public class BrandDto {
         this.brandName = brandName;
     }
 
+    public byte[] getBrandImage() {
+        return brandImage;
+    }
 
-
-
-
+    public void setBrandImage(byte[] brandImage) {
+        this.brandImage = brandImage;
+    }
 }

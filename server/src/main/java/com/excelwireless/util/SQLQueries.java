@@ -291,4 +291,7 @@ public class SQLQueries {
             "            FROM transaction " +
             "            WHERE CUSTOMER_PHONENO = ?" +
             "            order by TRANSACTION_DATE";
+
+    public String updateBrandImage = "UPDATE brand SET BRAND_IMAGE = ? WHERE BRAND_ID = ?";
+
 }
