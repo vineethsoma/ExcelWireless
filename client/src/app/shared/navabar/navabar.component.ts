@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Brand, Model } from "../../product/services/product.service";
+import { Brand, Model, ProductService, Category } from "../../product/services/product.service";
 import { Observable } from "rxjs/Rx";
 import { UserService } from "../../user.service";
 import { CheckoutOptions } from "../../order/order.service";
@@ -12,15 +12,17 @@ import { Router } from "@angular/router";
 })
 export class NavabarComponent implements OnInit {
   @Input() brands: Observable<Array<Brand>>;
+  categories: Observable<Array<Category>>;
   selectedBrand: Brand = null;
   checkoutDetails: Observable<CheckoutOptions> = null;
   userService: UserService;
   config = {
     isAuthenticated: false,
     showBrandMenu: false,
-    showModelMenu: false
+    showModelMenu: false,
+    showCategoryMenu: false
   }
-  constructor(userService: UserService, private router: Router) { 
+  constructor(userService: UserService, private router: Router,private productService: ProductService) { 
     this.userService = userService;
     this.userService.isAuthenticated()
     .subscribe((isAuthenticated) => {
@@ -28,6 +30,9 @@ export class NavabarComponent implements OnInit {
       if(isAuthenticated)
         this.checkoutDetails = this.userService.getCheckoutOptions(7707030801);
     })
+
+
+    this.categories = this.productService.getCategories();
   }
 
   ngOnInit() {
@@ -36,6 +41,11 @@ export class NavabarComponent implements OnInit {
 
   navigateToModel(model: Model){
     this.router.navigate(['/products/search', {modelId: model.modelId}])
+  }
+
+  navigateToCategory(category: Category){
+    this.config.showCategoryMenu = false;
+    this.router.navigate(['/products/search', {categoryId: category.categoryId}])  
   }
 
   selectBrand(brand: Brand){

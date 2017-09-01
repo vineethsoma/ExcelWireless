@@ -18,7 +18,16 @@
     <nav class="site-menu">
         <ul>
             <li><a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span>HOME</span></a></li>
-            <li><a><span>CATEGORY</span></a></li>
+
+            <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }" ><a (click)="this.config.showCategoryMenu = !this.config.showCategoryMenu"><span>CATEGORY</span></a>
+                <ul class="mega-menu">
+                    <ul class="flex-catmenu">
+                        <li class="flex-catmenu-item" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }" *ngFor="let category of this.categories | async">
+                            <a (click)="this.navigateToCategory(category)">{{category.categoryName}}</a>
+                        </li>
+                    </ul>
+                </ul>
+            </li>
 
             <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showBrandMenu }" ><a (click)="this.toggleBrand()"><span>BRAND</span></a>
                 <ul class="mega-menu">
