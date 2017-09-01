@@ -141,16 +141,18 @@ export class Brand {
     options.modelDtoList.forEach((model) => this.models.push(new Model(model)));
   }
 }
-export class Model{
+export class Model  {
   modelId: number;
   modelName: string;
   description: string;
   quantity: number;
+  image: string;
   constructor(options: ModelDTO){
     this.modelId = options.modelId;
     this.modelName = options.modelName;
     this.description = options.description;
     this.quantity = options.noOfProducts;
+    this.image = options.modelImage;
   }
 }
 export class Product {
@@ -197,6 +199,8 @@ interface ModelDTO{
   modelName: string;
   description: string;
   noOfProducts: 0; 
+  modelImage: string;
+
 }
 export class SearchOptions extends ProductOptions {
   page?: number;

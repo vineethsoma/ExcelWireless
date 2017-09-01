@@ -19,7 +19,7 @@
         <ul>
             <li><a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span>HOME</span></a></li>
 
-            <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }" ><a (click)="this.config.showCategoryMenu = !this.config.showCategoryMenu"><span>CATEGORY</span></a>
+            <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }"><a (click)="this.config.showCategoryMenu = !this.config.showCategoryMenu"><span>CATEGORY</span></a>
                 <ul class="mega-menu">
                     <ul class="flex-catmenu">
                         <li class="flex-catmenu-item text-left" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }" *ngFor="let category of this.categories | async">
@@ -29,16 +29,16 @@
                 </ul>
             </li>
 
-            <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showBrandMenu }" ><a (click)="this.toggleBrand()"><span>BRAND</span></a>
+            <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showBrandMenu }"><a (click)="this.toggleBrand()"><span>BRAND</span></a>
                 <ul class="mega-menu">
                     <!-- <span class="mega-menu-title"></span> -->
                     <ul class="flex-menu">
                         <li class="flex-menu-item" [ngClass]="{'brand-menu-show': this.config.showModelMenu }" *ngFor="let brand of this.brands | async">
                             <a (click)="this.selectBrand(this.brand)"><img class="img-responsive" src="data:image/png;base64,{{brand.image}}" alt="{{brand.brandName}}"></a>
-                            <ul *ngIf="this.config.showModelMenu" class="mega-menu" >
+                            <ul *ngIf="this.config.showModelMenu" class="mega-menu">
                                 <ul class="flex-submenu">
-                                    <li class="flex-submenu-item"  *ngFor="let model of this.selectedBrand.models">
-                                        <a (click)="this.navigateToModel(model)"><span>{{model.modelName}}</span></a>
+                                    <li class="flex-submenu-item text-left" *ngFor="let model of this.selectedBrand.models">
+                                        <a (click)="this.navigateToModel(model)"><span><img class="img-responsive" src="data:image/png;base64,{{model.image}}" alt="{{model.description}}">{{model.modelName}}</span></a>
                                     </li>
                                 </ul>
                             </ul>
@@ -76,17 +76,21 @@
                         <li><a [routerLink]="['/myaccount/myprofile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">My Profile</a></li>
                         <li><a [routerLink]="['/myaccount/myorder']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Orders List</a></li>
                         <li class="sub-menu-separator"></li>
-                        <li><a href="#"> <i class="icon-unlock"></i>Logout</a></li>
+                        <li>
+                            <a href="#"> <i class="icon-unlock"></i>Logout</a>
+                        </li>
                     </ul>
                     <ul *ngIf="!this.config.isAuthenticated" class="toolbar-dropdown">
-                        <li><a [routerLink] ="['/myaccount']"> <i class="icon-lock"></i>Login</a></li>
+                        <li>
+                            <a [routerLink]="['/myaccount']"> <i class="icon-lock"></i>Login</a>
+                        </li>
                     </ul>
                 </div>
                 <div *ngIf="this.config.isAuthenticated && (this.checkoutDetails | async) != null" class="cart">
                     <i class="icon-bag"></i><span class="count">{{(this.checkoutDetails | async)?.totalQuantity}}</span><span class="subtotal">${{(this.checkoutDetails | async)?.totalAmount}}</span>
                     <div class="toolbar-dropdown">
                         <div class="dropdown-product-item" *ngFor="let item of (this.checkoutDetails | async)?.lineItems"><span class="dropdown-product-remove"><i class="icon-cross"></i></span>
-                            <a class="dropdown-product-thumb" ><img class="img-responsive" src="data:image/png;base64,{{item.image}}" alt="{{item.description}}"></a>
+                            <a class="dropdown-product-thumb"><img class="img-responsive" src="data:image/png;base64,{{item.image}}" alt="{{item.description}}"></a>
                             <div class="dropdown-product-info"><a class="dropdown-product-title">{{item.description}}</a><span class="dropdown-product-details">{{item.quantity}} x ${{item.retailPrice}}</span></div>
                         </div>
                         <div class="toolbar-dropdown-group">
