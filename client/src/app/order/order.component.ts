@@ -28,7 +28,7 @@ export class OrderComponent implements OnInit {
 
     const phoneNo = 7707030801;
 
-    // Firt getting transaction line item detail for customer and then form the TRANSACTION DTO TO SEND
+    // First getting transaction line item detail for customer and then form the TRANSACTION DTO TO SEND
     this.orderService.getCustomerTransactionDetails(phoneNo)
     .subscribe((transactionLineItem: TransactionLineItem[]) => {
       this.transactionLineItemDto = transactionLineItem;
