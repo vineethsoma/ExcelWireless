@@ -26,6 +26,23 @@ ul.flex-menu{
     }
     }
 }
+ul.flex-catmenu{
+    display: flex;
+    // height: 200px;
+    justify-content: flex-start;
+    flex-flow: row;
+    flex-wrap: wrap;
+    align-items: center;
+    // position: absolute;
+    li.flex-catmenu-item{
+        width: 20%;
+        // height: 50%;
+        // position: relative;
+        a:hover{
+            cursor: hand;
+        }
+    }
+}
 .brand-menu-show {
     cursor: pointer;
     // {
