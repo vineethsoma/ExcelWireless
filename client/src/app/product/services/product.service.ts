@@ -54,8 +54,8 @@ export class ProductService {
     const {categoryId, description, modelId} = options;
     // console.log(categoryId);
     let url =this.url+ "/getProduct";
-    
-    if(description){
+    console.log(options);
+    if(description && description != "null"){
       url = this.url+'/getProductForSearch?searchInput=' + description;  
     }
     else if(modelId){

@@ -21,13 +21,14 @@ export class SearchResultsComponent implements OnInit {
     this.route = route;
   }
   ngOnInit() {
-    this.searchOptions = this.updateOptions({});
-    
-    if (this.route.snapshot.paramMap.keys.length < 1)
-      this.router.navigate(['/products/search', this.searchOptions]);
+    this.searchOptions = this.updateOptions({page: 1, pageSize: 20});
     
     this.route.paramMap.switchMap((_params) => {
       this.searchOptions = this.updateOptions(new SearchOptions(_params));
+      
+    if (this.route.snapshot.paramMap.keys.length < 2)
+      this.router.navigate(['/products/search', this.searchOptions]);
+
       return this.getProducts(this.searchOptions)
       
     })
@@ -40,7 +41,7 @@ export class SearchResultsComponent implements OnInit {
   getProducts(options: ProductOptions) {
     return this.productService.getProducts(options);
   }
-  test(obj){
+  test(obj){ 
     console.log(obj);
   }
   loadProductsToView(options: SearchOptions, fullList: Array<Product>) {
@@ -67,7 +68,7 @@ export class SearchResultsComponent implements OnInit {
     if (this.route.snapshot.paramMap.keys.length < 1)
       options = new SearchOptions();
     else
-      options = { ... new SearchOptions(),...(new SearchOptions(this.route.snapshot.paramMap)), ...update };
+      options = {page: 1, pageSize: 20 , ...(new SearchOptions(this.route.snapshot.paramMap)), ...update };
     return options;
   }
   getCeilingOfNumber(number: number) {
@@ -121,9 +122,9 @@ class SearchOptions extends ProductOptions {
   constructor(params?: ParamMap){
     super();
     if(params){
-      this.categoryId = +params.get("categoryId");
-      this.pageSize = +params.get("pageSize");
-      this.page = +params.get("page");
+      this.categoryId = +params.get("categoryId") || 1;
+      this.pageSize = +params.get("pageSize") || 20;
+      this.page = +params.get("page") || 1 ;
       this.sortOrder = <'price-asc' | 'price-dsc' | 'description-asc' | 'description-dsc'>params.get("sortOrder");
       this.description = params.get("description");
       this.modelId = +params.get("modelId");

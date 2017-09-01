@@ -25,7 +25,7 @@
             <!-- Shop Toolbar-->
             <div class="shop-toolbar padding-bottom-1x mb-2">
               <div class="column">
-                <div class="shop-sorting">
+                <div *ngIf="false" class="shop-sorting">
                   <label for="sorting">Sort by:</label>
                   <select [(ngModel)]= "this.searchOptions.sortOrder" (ngModelChange)="this.sortProductList(this.searchOptions)" class="form-control" id="sorting">
                     <option value="price-asc">Low - High Price</option>
