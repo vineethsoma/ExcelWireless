@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService, CheckoutOptions } from "../order.service";
 import { TransactionLineItem } from "../../myaccount/myaccount.component";
+import { UserService } from "../../user.service";
 
 @Component({
   selector: 'app-address',
@@ -12,9 +13,11 @@ export class AddressComponent implements OnInit {
   checkoutOptions: CheckoutOptions;
   sameShippingAddress = true;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private userService:  UserService) { }
 
   ngOnInit() {
+
+    this.userService.getCustomerDetails();
 
   }
   getCheckoutDetails() {
@@ -25,6 +28,9 @@ export class AddressComponent implements OnInit {
       console.log('chekcout option', this.checkoutOptions);
       });
   }
+
+
+  
   updateCheckoutOptions(lineItems: TransactionLineItem[]) {
     return new CheckoutOptions({ lineItems: lineItems });
   }

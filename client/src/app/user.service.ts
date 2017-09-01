@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms/forms';
 import { Customer, TransactionLineItem } from "./myaccount/myaccount.component";
 import { CheckoutOptions, OrderService } from "./order/order.service";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Router } from "@angular/router";
 
 
 @Injectable()
@@ -16,11 +17,19 @@ export class UserService {
     private checkoutDetails: Observable<CheckoutOptions>;
     private _isAuthenticated: BehaviorSubject<boolean>; 
 
-    constructor(private http: Http, private orderService: OrderService) { 
+    constructor(private http: Http, private orderService: OrderService, private router: Router) { 
         this._isAuthenticated = <BehaviorSubject<boolean>>new BehaviorSubject<boolean>(true);
     }
 
-    getCustomerDetails(username: any, password: any): Observable<Customer> {
+    getCustomerDetails(): Observable<Customer> {
+        if (!this.customerObject) {
+            this.router.navigate(['/myaccount']);
+        }
+        return this.customerObject;
+    } 
+    
+    
+    authenticateUser(username: any, password: any): Observable<Customer> {
         if (!this.customerObject) {
             this.customerObject = this.cutomerHttpRequest(username, password)
             .map((customer) => {
@@ -33,7 +42,7 @@ export class UserService {
             .share();
         }
         return this.customerObject;
-    }   
+    }  
 
     isAuthenticated(): Observable<boolean>{
         return this._isAuthenticated.asObservable();

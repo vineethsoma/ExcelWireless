@@ -59,7 +59,7 @@ export class MyaccountComponent implements OnInit {
     const username = this.customerLoginForm.get('email').value;
     const password = this.customerLoginForm.get('password').value;
 
-    this.userService.getCustomerDetails(username, password).subscribe((customer) => {
+    this.userService.authenticateUser(username, password).subscribe((customer) => {
       this.customerDto = customer;
       if (this.customerDto.validUser) {
           alert('right credintails');
