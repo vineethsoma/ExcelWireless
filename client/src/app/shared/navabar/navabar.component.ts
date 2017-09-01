@@ -40,6 +40,8 @@ export class NavabarComponent implements OnInit {
   }
 
   navigateToModel(model: Model){
+    this.config.showBrandMenu = false;
+    this.config.showModelMenu = false;
     this.router.navigate(['/products/search', {modelId: model.modelId}])
   }
 
