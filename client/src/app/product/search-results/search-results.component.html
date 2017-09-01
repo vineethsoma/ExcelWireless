@@ -33,8 +33,10 @@
                     <option value="description-asc">A - Z Order</option>
                     <option value="description-dsc">Z - A Order</option>
                   </select>
-                  <span class="text-muted">Showing:&nbsp;</span><span *ngIf="this.fullproductList != null" > {{this.getItemsViewed().start}} - {{this.getItemsViewed().end}} items of {{this.getProductsLength()}}</span>
                 </div>
+                <span class="text-muted">Showing:&nbsp;</span><span *ngIf="this.fullproductList != null" > {{this.getItemsViewed().start}} - {{this.getItemsViewed().end}} items of {{this.getProductsLength()}}</span>
+                <button class="btn btn-outline-primary btn-sm col-6" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add All to Cart</button>
+                
               </div>
               <div class="column">
                   <div class="shop-sorting">
@@ -65,8 +67,12 @@
                     <del *ngIf="product.retailPrice != product.costPrice">{{product.retailPrice| currency:'USD':true}}</del>{{product.costPrice | currency:'USD':true}}
                   </h4>
                   <div class="product-buttons">
-                    <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
-                    <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
+                    <div class="row">
+                    <!-- <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button> -->
+                    <input class="form-control col-4" type="text" placeholder="Qty." >
+                    <div class="col-1"></div>
+                    <button class="btn btn-outline-primary btn-sm col-6" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -11,7 +11,7 @@
             <!-- Off-Canvas Toggle (#mobile-menu)-->
             <a class="offcanvas-toggle menu-toggle" href="#mobile-menu" data-toggle="offcanvas"></a>
             <!-- Site Logo-->
-            <a class="site-logo" href="index.html"><img src="/assets/images/neoLogo.jpg"></a>
+            <a class="site-logo" [routerLink]="['/']"><img src="/assets/images/neoLogo.jpg"></a>
         </div>
     </div>
     <!-- Main Navigation-->
@@ -22,7 +22,7 @@
             <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }" ><a (click)="this.config.showCategoryMenu = !this.config.showCategoryMenu"><span>CATEGORY</span></a>
                 <ul class="mega-menu">
                     <ul class="flex-catmenu">
-                        <li class="flex-catmenu-item" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }" *ngFor="let category of this.categories | async">
+                        <li class="flex-catmenu-item text-left" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }" *ngFor="let category of this.categories | async">
                             <a (click)="this.navigateToCategory(category)">{{category.categoryName}}</a>
                         </li>
                     </ul>
@@ -47,7 +47,7 @@
                 </ul>
             </li>
             <li>
-                <a>
+                <a (click)="this.navigateToParts()">
                     <span>PARTS</span>
                 </a>
             </li>
@@ -83,7 +83,7 @@
                     </ul>
                 </div>
                 <div *ngIf="this.config.isAuthenticated && (this.checkoutDetails | async) != null" class="cart">
-                    <i class="icon-bag"></i><span class="count">3</span><span class="subtotal">${{(this.checkoutDetails | async)?.totalAmount}}</span>
+                    <i class="icon-bag"></i><span class="count">{{(this.checkoutDetails | async)?.totalQuantity}}</span><span class="subtotal">${{(this.checkoutDetails | async)?.totalAmount}}</span>
                     <div class="toolbar-dropdown">
                         <div class="dropdown-product-item" *ngFor="let item of (this.checkoutDetails | async)?.lineItems"><span class="dropdown-product-remove"><i class="icon-cross"></i></span>
                             <a class="dropdown-product-thumb" ><img class="img-responsive" src="data:image/png;base64,{{item.image}}" alt="{{item.description}}"></a>

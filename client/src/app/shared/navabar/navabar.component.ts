@@ -50,6 +50,10 @@ export class NavabarComponent implements OnInit {
     this.router.navigate(['/products/search', {categoryId: category.categoryId}])  
   }
 
+  navigateToParts(){
+    this.router.navigate(['/products/search', {categoryId: 6}])  
+  }
+
   selectBrand(brand: Brand){
     this.selectedBrand = brand;
     this.config.showModelMenu = !this.config.showModelMenu;
