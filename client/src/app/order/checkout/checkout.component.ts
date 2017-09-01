@@ -37,19 +37,11 @@ export class CheckoutComponent implements OnInit {
   }
 
   getCheckoutDetails() {
-<<<<<<< HEAD
     this.userService.getCheckoutOptions(7707030801)
       .subscribe((checkoutOptions) => {
         // console.log('chekcout lineitem', lineItems);
         this.checkoutOptions = checkoutOptions;
       // console.log('chekcout option', this.checkoutOptions);
-=======
-    this.orderService.getCustomerTransactionDetails(7707030801)
-      .subscribe((lineItems) => {
-        console.log('chekcout lineitem', lineItems);
-        this.checkoutOptions = this.updateCheckoutOptions(lineItems);
-      console.log('chekcout option', this.checkoutOptions);
->>>>>>> 6363ea008c3ba512e6d05c0829060c600a7e59ba
       });
   }
   updateCheckoutOptions(lineItems: TransactionLineItem[]) {

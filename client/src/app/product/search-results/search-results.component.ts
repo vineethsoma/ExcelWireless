@@ -67,7 +67,7 @@ export class SearchResultsComponent implements OnInit {
     if (this.route.snapshot.paramMap.keys.length < 1)
       options = new SearchOptions();
     else
-      options = { ...(new SearchOptions(this.route.snapshot.paramMap)), ...update };
+      options = { ... new SearchOptions(),...(new SearchOptions(this.route.snapshot.paramMap)), ...update };
     return options;
   }
   getCeilingOfNumber(number: number) {

@@ -33,7 +33,7 @@ export class NavabarComponent implements OnInit {
   }
 
   navigateToModel(model: Model){
-    this.router.navigate(['/products/search'])
+    this.router.navigate(['/products/search', {modelId: model.modelId}])
   }
 
   selectBrand(brand: Brand){
