@@ -16,7 +16,9 @@ export class NavabarComponent implements OnInit {
   checkoutDetails: Observable<CheckoutOptions> = null;
   userService: UserService;
   config = {
-    isAuthenticated: false
+    isAuthenticated: false,
+    showBrandMenu: false,
+    showModelMenu: false
   }
   constructor(userService: UserService, private router: Router) { 
     this.userService = userService;
@@ -38,10 +40,16 @@ export class NavabarComponent implements OnInit {
 
   selectBrand(brand: Brand){
     this.selectedBrand = brand;
+    this.config.showModelMenu = !this.config.showModelMenu;
+    console.log(this.config);
   }
 
   logout()
   {
     alert("user logged out !!")
+  }
+
+  toggleBrand(){
+    this.config.showBrandMenu = !this.config.showBrandMenu;
   }
 }

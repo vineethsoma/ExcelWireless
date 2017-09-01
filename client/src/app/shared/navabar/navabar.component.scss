@@ -26,9 +26,9 @@ ul.flex-menu{
     }
     }
 }
-.site-menu ul > li {
+.brand-menu-show {
     cursor: pointer;
-    :hover{
+    // {
         > .sub-menu {
         display: block;
         -webkit-animation: submenu-show .3s cubic-bezier(.68, -.55, .265, 1.55);
@@ -43,7 +43,7 @@ ul.flex-menu{
             -webkit-animation: none;
             animation: none;
         }
-    }
+    // }
 }
     }
 // .mega-menu { @extend %mega-menu; }
