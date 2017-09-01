@@ -9,7 +9,7 @@ public class ModelDto {
     private String modelName;
     private String description;
     private int noOfProducts;
-    private String modelImage;
+    private byte[] modelImage;
 
     public int getModelId() {
         return modelId;
@@ -43,11 +43,11 @@ public class ModelDto {
         this.noOfProducts = noOfProducts;
     }
 
-    public String getModelImage() {
+    public byte[] getModelImage() {
         return modelImage;
     }
 
-    public void setModelImage(String modelImage) {
+    public void setModelImage(byte[] modelImage) {
         this.modelImage = modelImage;
     }
 }

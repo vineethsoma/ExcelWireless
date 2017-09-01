@@ -204,9 +204,13 @@ public class ProductManager {
 //        product_id = 18;
 //        int a = jdbcTemplate.update(sqlQueries.updateBrandImage,new Object[]{lobValue, product_id}, new int[] {Types.BLOB, Types.INTEGER});
 
+        // DO NOT DELETE THIS --- >THIS LOGIC HELP TO ADD IMAGES FOR MODEL
+        product_id = 100;
+        int a = jdbcTemplate.update(sqlQueries.updateModelImage,new Object[]{lobValue, product_id}, new int[] {Types.BLOB, Types.INTEGER});
 
 
-        int a = jdbcTemplate.update(sqlQueries.updateProductImage,new Object[]{lobValue, product_id}, new int[] {Types.BLOB, Types.INTEGER});
+
+       // int a = jdbcTemplate.update(sqlQueries.updateProductImage,new Object[]{lobValue, product_id}, new int[] {Types.BLOB, Types.INTEGER});
 
         System.out.println(a);
 

@@ -96,6 +96,9 @@ public class WebMenuManager {
 
                 modelDto.setModelId(modelDtoList.get(0).getModelId());
                 modelDto.setModelName(modelDtoList.get(0).getModelName());
+                if(null != modelDtoList.get(0).getModelImage()) {
+                    modelDto.setModelImage(modelDtoList.get(0).getModelImage());
+                }
 
                 modelDtoListGlobal.add(modelDto);
                 modelDtoListGlobal.set(i,modelDto);
@@ -194,6 +197,18 @@ public class WebMenuManager {
             modelDto.setModelId(rs.getInt("ID"));
 
             modelDto.setModelName(rs.getString("NAME"));
+
+            try
+            {
+                int blobLength = (int) rs.getBlob("MODEL_IMAGE").length();
+                if (blobLength != 0) {
+                    modelDto.setModelImage(rs.getBlob("MODEL_IMAGE").getBytes(1, blobLength));
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println(e);
+            }
 
             return modelDto;
         }

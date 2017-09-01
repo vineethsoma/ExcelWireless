@@ -294,4 +294,5 @@ public class SQLQueries {
 
     public String updateBrandImage = "UPDATE brand SET BRAND_IMAGE = ? WHERE BRAND_ID = ?";
 
+    public String updateModelImage = "UPDATE product_model SET MODEL_IMAGE = ? WHERE ID = ?";
 }
