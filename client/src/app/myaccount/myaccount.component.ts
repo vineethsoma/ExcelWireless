@@ -59,18 +59,7 @@ export class MyaccountComponent implements OnInit {
     const username = this.customerLoginForm.get('email').value;
     const password = this.customerLoginForm.get('password').value;
 
-    this.userService.authenticateUser(username, password).subscribe((customer) => {
-      this.customerDto = customer;
-      if (this.customerDto.validUser) {
-          alert('right credintails');
-          this.router.navigate(['']);
-          this.getTransactionDetails(this.customerDto.phoneNo);
-          this.getProductPriceByCustomer(this.customerDto.phoneNo);
-        } else {
-          alert('Wrong credintails');
-        }
-      console.log('customer details', this.customerDto);
-    });
+    this.userService.authenticateUser(username, password); 
   }
 
   getTransactionDetails(phoneNo: number) {

@@ -72,7 +72,7 @@
                 <div class="account">
                     <a></a><i class="icon-head"></i>
                     <ul *ngIf="this.config.isAuthenticated" class="toolbar-dropdown">
-                        <li class="sub-menu-title"><span>Hello,</span> Daniel Adams</li>
+                        <li class="sub-menu-title"><span>Hello,</span> {{(this.userDetails | async)?.onlyFirstName}}&nbsp;{{(this.userDetails | async)?.lastName}}</li>
                         <li><a [routerLink]="['/myaccount/myprofile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">My Profile</a></li>
                         <li><a [routerLink]="['/myaccount/myorder']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Orders List</a></li>
                         <li class="sub-menu-separator"></li>

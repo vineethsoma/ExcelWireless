@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Rx";
 import { UserService } from "../../user.service";
 import { CheckoutOptions } from "../../order/order.service";
 import { Router } from "@angular/router";
+import { Customer } from "../../myaccount/myaccount.component";
 
 @Component({
   selector: 'app-navabar',
@@ -15,20 +16,20 @@ export class NavabarComponent implements OnInit {
   categories: Observable<Array<Category>>;
   selectedBrand: Brand = null;
   checkoutDetails: Observable<CheckoutOptions> = null;
-  userService: UserService;
+  userDetails: Observable<Customer>;
   config = {
     isAuthenticated: false,
     showBrandMenu: false,
     showModelMenu: false,
     showCategoryMenu: false
   }
-  constructor(userService: UserService, private router: Router,private productService: ProductService) { 
-    this.userService = userService;
+  constructor(private userService: UserService, private router: Router,private productService: ProductService) { 
+    this.userDetails = userService.getCustomerDetails();
     this.userService.isAuthenticated()
     .subscribe((isAuthenticated) => {
       this.config.isAuthenticated = isAuthenticated;
       if(isAuthenticated)
-        this.checkoutDetails = this.userService.getCheckoutOptions(7707030801);
+        this.checkoutDetails = this.userService.getCheckoutOptions();
     })
 
 

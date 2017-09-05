@@ -37,7 +37,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   getCheckoutDetails() {
-    this.userService.getCheckoutOptions(7707030801)
+    
+    this.userService.refreshCheckoutDetails();
+    this.userService.getCheckoutOptions()
       .subscribe((checkoutOptions) => {
         // console.log('chekcout lineitem', lineItems);
         this.checkoutOptions = checkoutOptions;
