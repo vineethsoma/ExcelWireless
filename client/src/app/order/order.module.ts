@@ -10,6 +10,7 @@ import { AddressComponent } from "./address/address.component";
 import { ShippingComponent } from "./shipping/shipping.component";
 import { PaymentComponent } from "./payment/payment.component";
 import { ThankyouComponent } from "./thankyou/thankyou.component";
+import { AuthGuard } from '../auth.guard';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { ThankyouComponent } from "./thankyou/thankyou.component";
     FormsModule
   ],
   declarations: [OrderComponent, CheckoutComponent, AddressComponent, ShippingComponent, PaymentComponent, ThankyouComponent],
-  providers: [OrderService]
+  providers: [OrderService, AuthGuard]
 })
 export class OrderModule { }
