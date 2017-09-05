@@ -80,8 +80,7 @@ export class OrderComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     // This needs to be done when customer place the final order cause i am storing unconfirmed transaction details into temp table so now after final order this details need to be deleted.
   deleteTransactionLineItemDetails() {
-
-    this.orderService.deleteTransactionLineItemDetails(null);
+    this.orderService.deleteTransactionLineItemDetails();
   }
 }
 

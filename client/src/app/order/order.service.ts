@@ -4,23 +4,28 @@ import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms/forms';
 import { Customer, TransactionLineItem } from '../myaccount/myaccount.component';
 import { Transaction } from './order.component';
+import { UserService } from "../user.service";
 
 
 @Injectable()
 export class OrderService {
+  customer: Customer = null; 
+  constructor(private http: Http, private userService: UserService) {
+      this.userService.getCustomerDetails().subscribe((customer) => {
+        this.customer = customer;
+      });
+   }
 
-  constructor(private http: Http) { }
-
-  updateProductFromCart(phoneNo: number, productNo: any, quantity: number) {
+  updateProductFromCart(productNo: any, quantity: number) {
     // console.log('Customer to be Added' + customer.onlyFirstName);
     // tslint:disable-next-line:whitespace
     // tslint:disable-next-line:max-line-length
-    return this.http.post('http://localhost:8080/updateTransactionLineItem?phoneNo=' + phoneNo + '&productNo=' + productNo + '&quantity=' + quantity, null);
+    return this.http.post('http://localhost:8080/updateTransactionLineItem?phoneNo=' + this.customer.phoneNo + '&productNo=' + productNo + '&quantity=' + quantity, null);
   }
 
-  deleteProductFromCart(phoneNo: number, productNo: any) {
+  deleteProductFromCart(productNo: any) {
     // tslint:disable-next-line:whitespace
-    return this.http.post('http://localhost:8080/deleteTransactionLineItem?phoneNo=' + phoneNo + '&productNo=' + productNo, null)
+    return this.http.post('http://localhost:8080/deleteTransactionLineItem?phoneNo=' + this.customer.phoneNo + '&productNo=' + productNo, null)
 
   }
 
@@ -56,9 +61,9 @@ export class OrderService {
   }
   // tslint:disable-next-line:max-line-length
   // This needs to be done when customer place the final order cause i am storing unconfirmed transaction details into temp table so now after final order this details need to be deleted.
-  deleteTransactionLineItemDetails(phoneNo: number) {
+  deleteTransactionLineItemDetails() {
     // tslint:disable-next-line:whitespace
-    this.http.post('http://localhost:8080/deleteTransactionLineItemsForFinalOrder?customerPhoneNo=' + phoneNo, null)
+    this.http.post('http://localhost:8080/deleteTransactionLineItemsForFinalOrder?customerPhoneNo=' + this.customer.phoneNo, null)
       .subscribe(data => {
         console.log('Response After deleting tranaction line items from temp table' + data);
       },
@@ -82,11 +87,11 @@ export class OrderService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-  getCheckoutDetails(phoneNo: number): Observable<CheckoutOptions>{
-    return this.getCustomerTransactionDetails(phoneNo).map(this.updateCheckoutOptions);
+  getCheckoutDetails(): Observable<CheckoutOptions>{
+    return this.getCustomerTransactionDetails(this.customer.phoneNo).map(this.updateCheckoutOptions);
   }
-  getCustomerCheckoutDetails(phoneNo: number): Observable<CheckoutOptions> {
-    return this.getCustomerTransactionDetails(phoneNo)
+  getCustomerCheckoutDetails(): Observable<CheckoutOptions> {
+    return this.getCustomerTransactionDetails(this.customer.phoneNo)
       .map((items: TransactionLineItem[]) => new CheckoutOptions({lineItems: items}))
       .catch(this.handleError);
   }

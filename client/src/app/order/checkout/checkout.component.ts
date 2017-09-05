@@ -17,12 +17,10 @@ export class CheckoutComponent implements OnInit {
   checkoutOptions: CheckoutOptions;
   checkoutForm: FormGroup;
   
-  constructor(private orderService: OrderService, private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private userService: UserService, private orderService: OrderService, private formBuilder: FormBuilder) { 
 
-  // ngOnChange(){
-  //   this.getTotal(this.transactionLineItemDto);
-  // }
-
+    
+  }
   updateCheckout(options: CheckoutOptions) {
 
   }
@@ -32,7 +30,7 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm = this.formBuilder.group({
       'onlyFirstName': ['', Validators.required]
     });
-
+    console.log("Checkout initialized");
     this.getCheckoutDetails();
   }
 
@@ -43,17 +41,17 @@ export class CheckoutComponent implements OnInit {
       .subscribe((checkoutOptions) => {
         // console.log('chekcout lineitem', lineItems);
         this.checkoutOptions = checkoutOptions;
-      // console.log('chekcout option', this.checkoutOptions);
+      console.log('chekcout option', this.checkoutOptions);
       });
   }
   updateCheckoutOptions(lineItems: TransactionLineItem[]) {
     return new CheckoutOptions({ lineItems: lineItems });
   }
   updateProductFromCart(lineItem: TransactionLineItem) {
-    const phoneNo = 7707030801;
     // const productNo = '8809998255262';
     // const quantity = 5;
-    this.orderService.updateProductFromCart(phoneNo, lineItem.productNo, lineItem.quantity)
+
+    this.orderService.updateProductFromCart(lineItem.productNo, lineItem.quantity)
       .subscribe(data => {
         console.log('Response After updating product from cart' + data);
         this.getCheckoutDetails();
@@ -69,7 +67,7 @@ export class CheckoutComponent implements OnInit {
       const phoneNo = 7707030801;
     //   const productNo = '88060852585559';
 
-      this.orderService.deleteProductFromCart(phoneNo, this.selectedItemToDelete.productNo)
+      this.orderService.deleteProductFromCart(this.selectedItemToDelete.productNo)
       .subscribe(data => {
         console.log('Response After deleting product from cart' + data);
         this.getCheckoutDetails();

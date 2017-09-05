@@ -3,7 +3,6 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms/forms';
 import { Customer, TransactionLineItem } from "./myaccount/myaccount.component";
-import { CheckoutOptions, OrderService } from "./order/order.service";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Router } from "@angular/router";
 
@@ -20,7 +19,7 @@ export class UserService{
     private _userDetails: BehaviorSubject<Customer>;
     private fetching: boolean = false
     private localStorage: ExcelData = undefined;
-    constructor(private http: Http, private orderService: OrderService, private router: Router) {
+    constructor(private http: Http, private router: Router) {
         this._isAuthenticated = <BehaviorSubject<boolean>>new BehaviorSubject<boolean>(false);
         this._checkoutDetails = <BehaviorSubject<CheckoutOptions>>new BehaviorSubject<CheckoutOptions>({ lineItems: null, totalAmount: 0, totalQuantity: 0 });
         this._userDetails = new BehaviorSubject<Customer>(undefined);
@@ -87,7 +86,9 @@ export class UserService{
         // if (!this.checkoutDetails) {
         this.fetching = true;
         let {phoneNo} = this.customer; 
-        this.orderService.getCheckoutDetails(phoneNo)
+        this.http.get('http://localhost:8080/getTransactionLineItem?phoneNo=' + phoneNo)
+        .map(this.extractData)
+        .map(this.updateCheckoutOptions)
             .subscribe((data) => {
                 this.fetching = false;
                 this._checkoutDetails.next(data);
@@ -101,7 +102,7 @@ export class UserService{
         // }
         return this.checkoutDetails;
     }
-    private extractData(res: Response): Customer {
+    private extractData(res: Response): any {
         const body = res.json();
         // console.log(body);
         return body || {};
@@ -120,9 +121,35 @@ export class UserService{
         console.error(errMsg);
         return Observable.throw(errMsg);
     }
+    updateCheckoutOptions(lineItems: TransactionLineItem[]) {
+        return new CheckoutOptions({ lineItems: lineItems });
+      }
 
 }
 
 interface ExcelData{
     userDetails: Customer; 
 }
+
+export class CheckoutOptions {
+    lineItems: TransactionLineItem[] = [];
+    totalQuantity;
+    totalAmount;
+    
+    constructor(options?: {lineItems: TransactionLineItem[]}) {
+      if (!options) {
+        this.lineItems = [];
+        this.totalQuantity = 0;
+        this.totalAmount = 0;
+      } else {
+        this.lineItems = options.lineItems;
+        this.totalAmount = 0;
+        this.totalQuantity = 0;
+        this.lineItems.forEach((item) => {
+          this.totalQuantity += item.quantity;
+          this.totalAmount += item.quantity * item.retailPrice;
+        });
+      }
+    }
+  }
+  
