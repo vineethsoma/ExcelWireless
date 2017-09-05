@@ -35,6 +35,7 @@ export class UserService{
         this.localStorage = null; 
         localStorage.removeItem("excel-data");
         this._isAuthenticated.next(false);
+        this.router.navigate(['']);
     }
     getCustomerDetails(): Observable<Customer> {
         return this._userDetails.asObservable();

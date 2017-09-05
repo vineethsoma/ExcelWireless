@@ -54,9 +54,6 @@ updateCheckoutOptions(lineItems: TransactionLineItem[]) {
   return new CheckoutOptions({ lineItems: lineItems });
 }
 updateProductFromCart(lineItem: TransactionLineItem) {
-  // const productNo = '8809998255262';
-  // const quantity = 5;
-
   this.orderService.updateProductFromCart(lineItem.productNo, lineItem.quantity)
     .subscribe(data => {
       console.log('Response After updating product from cart' + data);

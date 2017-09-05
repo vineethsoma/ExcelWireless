@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { CustomerService } from './customer.service';
 import { UserService } from "../user.service";
 import { Observable } from "rxjs/Rx";
-import { ActivatedRoute, ParamMap, Router } from "@angular/router";
+import { ActivatedRoute, ParamMap, Router, Route } from "@angular/router";
 
 
 @Component({
@@ -20,7 +20,7 @@ export class MyaccountComponent implements OnInit {
   productPriceByCustomerDto: CustomerProductPrice[];
 
 
-  constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private userService: UserService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.customerForm = this.formBuilder.group({
@@ -60,6 +60,13 @@ export class MyaccountComponent implements OnInit {
     const password = this.customerLoginForm.get('password').value;
 
     this.userService.authenticateUser(username, password); 
+
+    let navigateUrl = this.route.snapshot.paramMap.get('redirectTo');
+    this.userService.isAuthenticated().subscribe((isAuth) => {
+      if(isAuth && navigateUrl && navigateUrl != "null"){
+        this.router.navigate([navigateUrl]);
+      }
+    });
   }
 
   getTransactionDetails(phoneNo: number) {
