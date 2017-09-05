@@ -42,12 +42,20 @@ export class NavabarComponent implements OnInit {
   navigateToModel(model: Model){
     this.config.showBrandMenu = false;
     this.config.showModelMenu = false;
+    this.config.showCategoryMenu = false;
     this.router.navigate(['/products/search', {modelId: model.modelId}])
   }
 
   navigateToCategory(category: Category){
     this.config.showCategoryMenu = false;
     this.router.navigate(['/products/search', {categoryId: category.categoryId}])  
+  }
+
+  closeMenu()
+  {
+    this.config.showBrandMenu = false;
+    this.config.showModelMenu = false;
+    this.config.showCategoryMenu = false;
   }
 
   navigateToParts(){

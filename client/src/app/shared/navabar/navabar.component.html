@@ -17,9 +17,9 @@
     <!-- Main Navigation-->
     <nav class="site-menu">
         <ul>
-            <li><a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span>HOME</span></a></li>
+            <li><a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span (click) = "this.closeMenu()">HOME</span></a></li>
 
-            <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }"><a (click)="this.config.showCategoryMenu = !this.config.showCategoryMenu"><span>CATEGORY</span></a>
+            <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }"><a (click)="this.config.showCategoryMenu = !this.config.showCategoryMenu"><span (click) = "this.closeMenu()">CATEGORY</span></a>
                 <ul class="mega-menu">
                     <ul class="flex-catmenu">
                         <li class="flex-catmenu-item text-left" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }" *ngFor="let category of this.categories | async">
@@ -48,17 +48,17 @@
             </li>
             <li>
                 <a (click)="this.navigateToParts()">
-                    <span>PARTS</span>
+                    <span (click)="this.closeMenu()">PARTS</span>
                 </a>
             </li>
             <li>
                 <a [routerLink]="['/lcdbuyback']" [routerLinkActive]="['active']">
-                    <span>LCD BUYBACK</span>
+                    <span (click)="this.closeMenu()">LCD BUYBACK</span>
                 </a>
             </li>
             <li>
                 <a [routerLink]="['/contactus']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                    <span>CONTACT US</span>
+                    <span (click)="this.closeMenu()">CONTACT US</span>
                 </a>
 
             </li>
