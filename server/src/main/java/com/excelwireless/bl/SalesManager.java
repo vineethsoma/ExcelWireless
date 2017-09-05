@@ -29,10 +29,10 @@ import java.util.List;
 public class SalesManager {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    SQLQueries sqlQueries;
+    private SQLQueries sqlQueries;
 
     @Autowired
     CustomerManager customerManager;
@@ -213,6 +213,49 @@ public class SalesManager {
 
 
     }
+
+    public void addAllTransactionLineItemToDB(List<TransactionLineItemDto> lineItemDtoList) {
+
+        try {
+
+            jdbcTemplate.batchUpdate(sqlQueries.addSingleTransactionLineItem, new BatchPreparedStatementSetter() {
+
+                @Override
+                public void setValues(PreparedStatement ps, int i) throws SQLException {
+
+                    TransactionLineItemDto transactionLineItemDto1 = lineItemDtoList.get(i);
+
+                    ps.setString(1, transactionLineItemDto1.getPhoneNo());
+                    ps.setString(2, transactionLineItemDto1.getTransactionDate());
+                    ps.setString(3, transactionLineItemDto1.getProductNo());
+                    ps.setInt(4, transactionLineItemDto1.getQuantity());
+                    ps.setDouble(5, transactionLineItemDto1.getRetailPrice());
+                    ps.setDouble(6, transactionLineItemDto1.getCostPrice());
+                    ps.setDouble(7, transactionLineItemDto1.getDiscount());
+                    ps.setDouble(8, transactionLineItemDto1.getDiscountPercentage());
+                    ps.setDouble(9, transactionLineItemDto1.getRetailWithDis());
+                    ps.setDouble(10, transactionLineItemDto1.getTotalProductPrice());
+                    ps.setDouble(11, transactionLineItemDto1.getTotalProductPriceWithTax());
+                    ps.setBytes(12, transactionLineItemDto1.getImage());
+
+
+                }
+                @Override
+                public int getBatchSize() {
+                    return lineItemDtoList.size();
+                }
+            });
+            System.out.println("All Transaction Line Item Added Successfully");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+
+
+
     private final class TransactionMappeOnlyForSalesHitsory implements RowMapper<TransactionDto> {
 
         @Override
