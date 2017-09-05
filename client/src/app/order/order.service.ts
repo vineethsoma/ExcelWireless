@@ -6,12 +6,13 @@ import { Customer, TransactionLineItem } from '../myaccount/myaccount.component'
 import { Transaction } from './order.component';
 import { UserService } from "../user.service";
 import { Product } from "../product/services/product.service";
+import { Router } from "@angular/router";
 
 
 @Injectable()
 export class OrderService {
   customer: Customer = null; 
-  constructor(private http: Http, private userService: UserService) {
+  constructor(private http: Http, private userService: UserService, private router: Router) {
       this.userService.getCustomerDetails().subscribe((customer) => {
         this.customer = customer;
       });
@@ -45,9 +46,9 @@ export class OrderService {
 
 
   // This is after clicking on place final order where we storing Transaction details into real Transaction table.
-  addTransactionDetails(transactionDetails: Transaction) {
+  addTransactionDetails(transactionDto: Transaction) {
     // tslint:disable-next-line:whitespace
-    this.http.post('http://localhost:8080/addTransaction', transactionDetails)
+    this.http.post('http://localhost:8080/checkoutTransaction', transactionDto)
       .subscribe(data => {
         console.log('Response After adding transaction details' + data);
       },
@@ -60,6 +61,10 @@ export class OrderService {
     // tslint:disable-next-line:whitespace
     this.http.post('http://localhost:8080/checkoutTransactionLineItem', transactionLineItemDetails)
       .subscribe(data => {
+        if(data.status === 200)
+          {
+            this.router.navigate(['/order/thankyou']);
+          }
         console.log('Response Addiing lineitem details' + data);
       },
       error => {
@@ -70,7 +75,7 @@ export class OrderService {
   // This needs to be done when customer place the final order cause i am storing unconfirmed transaction details into temp table so now after final order this details need to be deleted.
   deleteTransactionLineItemDetails() {
     // tslint:disable-next-line:whitespace
-    this.http.post('http://localhost:8080/deleteTransactionLineItemsForFinalOrder?customerPhoneNo=' + this.customer.phoneNo, null)
+    this.http.post('http://localhost:8080/deleteAllTransactionLineItem?customerPhoneNo=' + this.customer.phoneNo, null)
       .subscribe(data => {
         console.log('Response After deleting tranaction line items from temp table' + data);
       },

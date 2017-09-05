@@ -47,11 +47,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let lineItem of this.transactionLineItemDto">
+                        <tr *ngFor="let lineItem of this.checkoutOptions.lineItems">
                             <td>
                                 <div class="product-item">
                                     <a class="product-thumb" href="shop-single.html">
-                                        <img src="img/shop/cart/01.jpg" alt="Product">
+                                        <img src="data:image/png;base64,{{lineItem.image}}" alt="Product">
                                     </a>
                                     <div class="product-info">
                                         <h5 class="product-title">
@@ -80,27 +80,44 @@
             </div>
             <div class="shopping-cart-footer">
                 <div class="column"></div>
-                <div class="column text-lg">Subtotal: <span class="text-medium">$289.68</span></div>
+                <div class="column text-lg">Subtotal: <span class="text-medium">$ {{this.checkoutOptions.totalAmount}}</span></div>
             </div>
             <div class="row padding-top-1x mt-3">
                 <div class="col-sm-6">
                     <h5>Shipping to:</h5>
                     <ul class="list-unstyled">
-                        <li><span class="text-muted">Client:</span>Daniel Adams</li>
-                        <li><span class="text-muted">Address:</span>44 Shirley Ave. West Chicago, IL 60185, USA</li>
-                        <li><span class="text-muted">Phone:</span>+1(808) 764 554 330</li>
+                        <li>
+                            <span class="text-muted">
+                                Company Name:
+                            </span> {{this.customer.companyName}}
+                        </li>
+                        <li>
+                            <span class="text-muted">
+                                Customer Name:
+                            </span> {{this.customer.onlyFirstName + this.customer.lastName}}
+                        </li>
+                        <li>
+                            <span class="text-muted">
+                                Address:
+                            </span> {{this.customer.street}}, {{this.customer.city}}, {{this.customer.state}}, {{this.customer.zipCode}}, {{this.customer.country}}
+                        </li>
+                        <li>
+                            <span class="text-muted">
+                                    Phone No:
+                                </span> {{this.customer.phoneNo}}
+                        </li>
                     </ul>
                 </div>
                 <div class="col-sm-6">
                     <h5>Payment method:</h5>
                     <ul class="list-unstyled">
-                        <li><span class="text-muted">Credit Card:</span>**** **** **** 5300</li>
+                        <li><span class="text-muted">Our Suport Team Will Reach Out To You :)</span></li>
                     </ul>
                 </div>
             </div>
             <div class="checkout-footer margin-top-1x">
                 <div class="column hidden-xs-down">
-                    <button class="btn btn-outline-secondary" [routerLink]="['/order/payment']">
+                    <button class="btn btn-outline-secondary" [routerLink]="['/order/shipping']">
                     <i class="icon-arrow-left"></i>&nbsp;Back
                   </button>
                 </div>
@@ -122,19 +139,19 @@
                     <table class="table">
                         <tr>
                             <td>Cart Subtotal:</td>
-                            <td class="text-medium">$289.68</td>
+                            <td class="text-medium">$ {{this.checkoutOptions.totalAmount}}</td>
                         </tr>
                         <tr>
                             <td>Shipping:</td>
-                            <td class="text-medium">$22.50</td>
+                            <td class="text-medium">$ 0.00</td>
                         </tr>
                         <tr>
                             <td>Estimated tax:</td>
-                            <td class="text-medium">$3.42</td>
+                            <td class="text-medium">$ 0.00</td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td class="text-lg text-medium">$315.60</td>
+                            <td class="text-lg text-medium">$ {{this.checkoutOptions.totalAmount}}</td>
                         </tr>
                     </table>
                 </section>
@@ -144,45 +161,50 @@
                     <!-- Entry-->
                     <div class="entry">
                         <div class="entry-thumb">
-                            <a href="shop-single.html"><img src="img/shop/widget/01.jpg" alt="Product"></a>
+                            <a href="shop-single.html"><img src="assets/img/shop/widget/01.jpg" alt="Product"></a>
                         </div>
                         <div class="entry-content">
-                            <h4 class="entry-title"><a href="shop-single.html">Oakley Kickback</a></h4><span class="entry-meta">$155.00</span>
+                            <h4 class="entry-title"><a href="">Oakley Kickback</a></h4><span class="entry-meta">$155.00</span>
                         </div>
                     </div>
                     <!-- Entry-->
                     <div class="entry">
                         <div class="entry-thumb">
-                            <a href="shop-single.html"><img src="img/shop/widget/02.jpg" alt="Product"></a>
+                            <a href="shop-single.html"><img src="assets/img/shop/widget/02.jpg" alt="Product"></a>
                         </div>
                         <div class="entry-content">
-                            <h4 class="entry-title"><a href="shop-single.html">Top-Sider Fathom</a></h4><span class="entry-meta">$90.00</span>
+                            <h4 class="entry-title"><a href="">Top-Sider Fathom</a></h4><span class="entry-meta">$90.00</span>
                         </div>
                     </div>
                     <!-- Entry-->
                     <div class="entry">
                         <div class="entry-thumb">
-                            <a href="shop-single.html"><img src="img/shop/widget/03.jpg" alt="Product"></a>
+                            <a href="shop-single.html"><img src="assets/img/shop/widget/03.jpg" alt="Product"></a>
                         </div>
                         <div class="entry-content">
-                            <h4 class="entry-title"><a href="shop-single.html">Vented Straw Fedora</a></h4><span class="entry-meta">$49.50</span>
+                            <h4 class="entry-title"><a href="">Vented Straw Fedora</a></h4><span class="entry-meta">$49.50</span>
                         </div>
                     </div>
                     <!-- Entry-->
                     <div class="entry">
                         <div class="entry-thumb">
-                            <a href="shop-single.html"><img src="img/shop/widget/04.jpg" alt="Product"></a>
+                            <a href="shop-single.html"><img src="assets/img/shop/widget/04.jpg" alt="Product"></a>
                         </div>
                         <div class="entry-content">
-                            <h4 class="entry-title"><a href="shop-single.html">Big Wordmark Tote</a></h4><span class="entry-meta">$29.99</span>
+                            <h4 class="entry-title"><a href="">Big Wordmark Tote</a></h4><span class="entry-meta">$29.99</span>
                         </div>
                     </div>
                 </section>
+
                 <!-- Promo Banner-->
-                <section class="promo-box" style="background-image: url(img/banners/02.jpg);"><span class="overlay-dark" style="opacity: .4;"></span>
+                <section class="promo-box" style="background-image: url(assets/img/banners/02.jpg);">
+                    <span class="overlay-dark" style="opacity: .4;"></span>
                     <div class="promo-box-content text-center padding-top-2x padding-bottom-2x">
                         <h4 class="text-light text-thin text-shadow">New Collection of</h4>
-                        <h3 class="text-bold text-light text-shadow">Sunglasses</h3><a class="btn btn-outline-white btn-sm" href="shop-grid-ls.html">Shop Now</a>
+                        <h3 class="text-bold text-light text-shadow">Sunglasses</h3>
+                        <a class="btn btn-outline-white btn-sm" href="shop-grid-ls.html">
+                            Shop Now
+                        </a>
                     </div>
                 </section>
             </aside>

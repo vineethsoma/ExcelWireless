@@ -110,7 +110,7 @@ export class Customer {
 
 export class TransactionLineItem {
 
-  transactionCompId: number;
+  transactionCompId: number = 0;
   addTax: Boolean;
   brandId: number;
   categoryId: number;

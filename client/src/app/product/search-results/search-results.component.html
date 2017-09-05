@@ -58,12 +58,15 @@
                         <div class="product-card">
                             <!-- <div class="product-badge text-danger">50% Off</div> -->
                             <a class="product-thumb">
-                                <img *ngIf="product.image!=null" src="data:image/png;base64,{{product.image}}" alt="{{product.productNo}}">
-                                <img *ngIf="(product.image=='aW1hZ2U=')" src="assets/images/no-image-found.jpg" alt="{{product.productNo}}">
+                                <img *ngIf="product.image!=null" src="data:image/png;base64,{{product.image}}" alt="SKU : {{product.productNo}}">
+                                <img *ngIf="(product.image=='aW1hZ2U=')" src="assets/images/no-image-found.jpg" alt="SKU : {{product.productNo}}">
                             </a>
                             <h3 class="product-title"><a>{{product.description}}</a></h3>
-                            <h4 class="product-price">
-                                <del *ngIf="product.retailPrice != product.costPrice">{{product.retailPrice| currency:'USD':true}}</del>{{product.costPrice | currency:'USD':true}}
+                            <h4 class="product-price" *ngIf="this.config.isAuthenticated">
+                                {{product.retailPrice| currency:'USD':true}}
+                                <!-- <del *ngIf="product.retailPrice != product.costPrice">
+                                    
+                                </del> -->
                             </h4>
                             <div class="product-buttons">
                                 <div class="row">

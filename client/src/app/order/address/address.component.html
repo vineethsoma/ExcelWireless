@@ -21,7 +21,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="checkout-fn">First Name</label>
-                        <input class="form-control" type="text" id="checkout-fn" [(ngModel)]="this.customer.lastName">
+                        <input class="form-control" type="text" id="checkout-fn" [(ngModel)]="this.customer.onlyFirstName">
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -78,6 +78,7 @@
                 <option>Geneve</option>
                 <option>New York</option>
                 <option>Paris</option>
+                <option>Atlanta</option>
               </select>
                     </div>
                 </div>
@@ -204,7 +205,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td *ngIf='this.checkoutOptions' class="text-lg text-medium">${{this.checkoutOptions.totalAmount}} + 22.50</td>
+                            <td *ngIf='this.checkoutOptions' class="text-lg text-medium">${{this.checkoutOptions.totalAmount}}</td>
                         </tr>
                     </table>
                 </section>
