@@ -25,6 +25,7 @@ export class AddressComponent implements OnInit {
 
     //this.userService.getCustomerTransactionDetails(7707030801)
 
+    this.getCustomerDetails();
     this.getCheckoutDetails();
 
   }
@@ -43,6 +44,19 @@ export class AddressComponent implements OnInit {
         }
         )
       }
+
+      getCustomerDetails(){
+        this.userService.isAuthenticated().subscribe((isAuth) => {
+          if (isAuth) {
+
+            this.userService.getCustomerDetails()
+            .subscribe((cust) =>{
+              this.customer = cust;
+              console.log('Custoemr Details', this.customer);
+            });
+      } 
+        })
+  }
 
   
 

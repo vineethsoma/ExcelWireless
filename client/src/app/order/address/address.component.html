@@ -21,13 +21,13 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="checkout-fn">First Name</label>
-                        <input class="form-control" type="text" id="checkout-fn">
+                        <input class="form-control" type="text" id="checkout-fn" [(ngModel)]="this.customer.lastName">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="checkout-ln">Last Name</label>
-                        <input class="form-control" type="text" id="checkout-ln">
+                        <input class="form-control" type="text" id="checkout-ln" [(ngModel)]="this.customer.lastName">
                     </div>
                 </div>
             </div>
@@ -35,13 +35,13 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="checkout-email">E-mail Address</label>
-                        <input class="form-control" type="email" id="checkout-email">
+                        <input class="form-control" type="email" id="checkout-email" [(ngModel)]="this.customer.email">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="checkout-phone">Phone Number</label>
-                        <input class="form-control" type="text" id="checkout-phone">
+                        <input class="form-control" type="text" id="checkout-phone" [(ngModel)]="this.customer.phoneNo">
                     </div>
                 </div>
             </div>
@@ -49,13 +49,13 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="checkout-company">Company Name</label>
-                        <input class="form-control" type="text" id="checkout-company">
+                        <input class="form-control" type="text" id="checkout-company" [(ngModel)]="this.customer.companyName">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="checkout-country">Country</label>
-                        <select class="form-control" id="checkout-country">
+                        <select class="form-control" id="checkout-country" [(ngModel)]="this.customer.country">
                 <option>Choose country</option>
                 <option>Australia</option>
                 <option>Canada</option>
@@ -71,7 +71,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="checkout-city">City</label>
-                        <select class="form-control" id="checkout-city">
+                        <select class="form-control" id="checkout-city" [(ngModel)]="this.customer.city">
                 <option>Choose city</option>
                 <option>Amsterdam</option>
                 <option>Berlin</option>
@@ -84,7 +84,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="checkout-zip">ZIP Code</label>
-                        <input class="form-control" type="text" id="checkout-zip">
+                        <input class="form-control" type="text" id="checkout-zip" [(ngModel)]="this.customer.zipCode">
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="checkout-address1">Address 1</label>
-                        <input class="form-control" type="text" id="checkout-address1">
+                        <input class="form-control" type="text" id="checkout-address1" [(ngModel)]="this.customer.street">
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -194,10 +194,10 @@
                             <td>Total Quantity:</td>
                             <td *ngIf='this.checkoutOptions' class="text-medium">{{this.checkoutOptions.totalQuantity}}</td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td>Shipping:</td>
                             <td class="text-medium">$22.50</td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td>Estimated tax:</td>
                             <td class="text-medium">$0.00</td>

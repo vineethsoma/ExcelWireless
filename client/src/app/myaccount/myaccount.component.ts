@@ -84,6 +84,7 @@ export class MyaccountComponent implements OnInit {
 export class Customer {
   phoneNo: number;
   onlyFirstName: string;
+  firstName: string;
   lastName: string;
   companyName: string;
   email: any;
