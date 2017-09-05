@@ -29,11 +29,18 @@ public class SalesController {
         salesManager.addTransactionLineItemToDB(product);
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/addAllTransactionLineItem", consumes = "application/json")
+    public void addAllTransactionLineItem(@RequestBody List<TransactionLineItemDto> lineItemDtoList)
+    {
+        salesManager.addAllTransactionLineItemToDB(lineItemDtoList);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/getTransactionLineItem", produces = "application/json")
     public List<TransactionLineItemDto> getTransactionLineItem(@RequestParam String phoneNo)
     {
        return salesManager.getTransactionLineItemToDB(phoneNo);
     }
+
 
     // This call is to show Order details on customer page.
     @RequestMapping(value = "/getSalesHistory", method = RequestMethod.GET, produces = "application/json")

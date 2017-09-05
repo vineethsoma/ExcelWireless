@@ -23,8 +23,10 @@ export class NavabarComponent implements OnInit {
     showModelMenu: false,
     showCategoryMenu: false
   }
-  constructor(private userService: UserService, private router: Router,private productService: ProductService) { 
+  constructor(private userService: UserService, private router: Router,private productService: ProductService) {
+
     this.userDetails = userService.getCustomerDetails();
+    
     this.userService.isAuthenticated()
     .subscribe((isAuthenticated) => {
       this.config.isAuthenticated = isAuthenticated;

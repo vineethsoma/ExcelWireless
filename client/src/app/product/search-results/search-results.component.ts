@@ -6,6 +6,8 @@ import "imagesloaded";
 import { ProductService, Product, ProductOptions } from "../services/product.service";
 import { Observable } from "rxjs/Rx";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
+import { UserService } from "../../user.service";
+import { OrderService } from "../../order/order.service";
 
 @Component({
   selector: 'app-search-results',
@@ -17,10 +19,18 @@ export class SearchResultsComponent implements OnInit {
   fullproductList: Array<Product>;
   searchOptions: SearchOptions; 
   route: ActivatedRoute;
-  constructor(private el: ElementRef, private productService: ProductService, route: ActivatedRoute, private router: Router) {
+  config = {isAuthenticated: false};
+
+  constructor(private userService: UserService,private orderService: OrderService, private el: ElementRef, private productService: ProductService, route: ActivatedRoute, private router: Router) {
     this.route = route;
   }
   ngOnInit() {
+
+    this.userService.isAuthenticated()
+    .subscribe((isAuthenticated) => {
+      this.config.isAuthenticated = isAuthenticated;
+    });
+
     this.searchOptions = this.updateOptions({page: 1, pageSize: 20});
     
     this.route.paramMap.switchMap((_params) => {
@@ -38,9 +48,19 @@ export class SearchResultsComponent implements OnInit {
       });
   }
 
+  addProduct(product: Product)
+  {
+    //Logic to add product.
+    this.orderService.addSingleProductToCart(product)
+    .subscribe((data) => {
+        this.userService.refreshCheckoutDetails();
+    });
+  }
   getProducts(options: ProductOptions) {
     return this.productService.getProducts(options);
   }
+
+  
   test(obj){ 
     console.log(obj);
   }

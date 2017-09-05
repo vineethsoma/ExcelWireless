@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms/forms';
 import { Customer, TransactionLineItem } from '../myaccount/myaccount.component';
 import { Transaction } from './order.component';
 import { UserService } from "../user.service";
+import { Product } from "../product/services/product.service";
 
 
 @Injectable()
@@ -16,6 +17,12 @@ export class OrderService {
       });
    }
 
+   addSingleProductToCart(product: Product) {
+    // console.log('Customer to be Added' + customer.onlyFirstName);
+    // tslint:disable-next-line:whitespace
+    // tslint:disable-next-line:max-line-length
+    return this.http.post('http://localhost:8080/addTransactionLineItem', new CheckoutDto(product, this.customer));
+  }
   updateProductFromCart(productNo: any, quantity: number) {
     // console.log('Customer to be Added' + customer.onlyFirstName);
     // tslint:disable-next-line:whitespace
@@ -134,5 +141,33 @@ export class CheckoutOptions {
         this.totalAmount += item.quantity * item.retailPrice;
       });
     }
+  }
+}
+export class CheckoutDto {
+  productId: number;
+  categoryId: number;
+  vendorId: number;
+  brandId: number;
+  modelId: number;
+  productNo: string;
+  description: string;
+  costPrice: number;
+  markup: number;
+  retailPrice: number;
+  quantity: number;
+  image: string;
+  addTax: false;
+  phoneNo: number;
+
+  constructor (p: Product, u: Customer){
+    this.brandId = p.brandId;
+    this.categoryId = p.categoryId;
+    this.productNo = p.productNo;
+    this.quantity = p.quantityForPurchase;
+    this.image = p.image;
+    this.description = p.description;
+    this.retailPrice = p.retailPrice;
+    this.costPrice = p.costPrice;
+    this.phoneNo = u.phoneNo;
   }
 }
