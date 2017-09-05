@@ -34,6 +34,7 @@ export class UserService{
     logout(){
         this.localStorage = null; 
         localStorage.removeItem("excel-data");
+        this._isAuthenticated.next(false);
     }
     getCustomerDetails(): Observable<Customer> {
         return this._userDetails.asObservable();
