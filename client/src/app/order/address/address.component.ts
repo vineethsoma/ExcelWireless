@@ -14,7 +14,7 @@ export class AddressComponent implements OnInit {
   sameShippingAddress = true;
   customer: Customer;
 
-  constructor(private orderService: OrderService, private userService:  UserService) { }
+  constructor(private userService:  UserService,private orderService: OrderService) { }
 
   ngOnInit() {
 
@@ -23,17 +23,26 @@ export class AddressComponent implements OnInit {
     //   .subscribe()
     // }
 
-    this.userService.getCustomerTransactionDetails(7707030801)
+    //this.userService.getCustomerTransactionDetails(7707030801)
+
+    this.getCheckoutDetails();
 
   }
   getCheckoutDetails() {
-    this.orderService.getCustomerTransactionDetails(7707030801)
-      .subscribe((lineItems) => {
-        console.log('chekcout lineitem', lineItems);
-        this.checkoutOptions = this.updateCheckoutOptions(lineItems);
-      console.log('chekcout option', this.checkoutOptions);
-      });
-  }
+    
+        this.userService.isAuthenticated().subscribe((isAuth) => {
+          if (isAuth) {
+            this.userService.refreshCheckoutDetails();
+            this.userService.getCheckoutOptions()
+            .subscribe((checkoutOptions) => {
+              // console.log('chekcout lineitem', lineItems);
+                this.checkoutOptions = checkoutOptions;
+                console.log('chekcout option', this.checkoutOptions);
+              });
+          }
+        }
+        )
+      }
 
   
 

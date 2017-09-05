@@ -1,108 +1,104 @@
-
-    <!-- Off-Canvas Wrapper-->
-    <div class="offcanvas-wrapper">
-      <!-- Page Title-->
-      <div class="page-title">
+<!-- Off-Canvas Wrapper-->
+<div class="offcanvas-wrapper">
+    <!-- Page Title-->
+    <div class="page-title">
         <div class="container">
-          <div class="column">
-            <h1>Search Results</h1>
-          </div>
-          <div class="column">
-            <ul class="breadcrumbs">
-              <li><a href="index.html">Home</a>
-              </li>
-              <li class="separator">&nbsp;</li>
-              <li>Search Results</li>
-            </ul>
-          </div>
+            <div class="column">
+                <h1>Search Results</h1>
+            </div>
+            <div class="column">
+                <ul class="breadcrumbs">
+                    <li><a href="index.html">Home</a>
+                    </li>
+                    <li class="separator">&nbsp;</li>
+                    <li>Search Results</li>
+                </ul>
+            </div>
         </div>
-      </div>
-      <!-- Page Content-->
-      <div class="container padding-bottom-3x mb-1">
+    </div>
+    <!-- Page Content-->
+    <div class="container padding-bottom-3x mb-1">
         <div class="row">
-          <!-- Products-->
-          <div class="col-xl-12 col-lg-12 push-xl-0 push-lg-0">
-            <!-- Shop Toolbar-->
-            <div class="shop-toolbar padding-bottom-1x mb-2">
-              <div class="column">
-                <div *ngIf="false" class="shop-sorting">
-                  <label for="sorting">Sort by:</label>
-                  <select [(ngModel)]= "this.searchOptions.sortOrder" (ngModelChange)="this.sortProductList(this.searchOptions)" class="form-control" id="sorting">
+            <!-- Products-->
+            <div class="col-xl-12 col-lg-12 push-xl-0 push-lg-0">
+                <!-- Shop Toolbar-->
+                <div class="shop-toolbar padding-bottom-1x mb-2">
+                    <div class="column">
+                        <div *ngIf="false" class="shop-sorting">
+                            <label for="sorting">Sort by:</label>
+                            <select [(ngModel)]="this.searchOptions.sortOrder" (ngModelChange)="this.sortProductList(this.searchOptions)" class="form-control" id="sorting">
                     <option value="price-asc">Low - High Price</option>
                     <option value="price-dsc">High - Low Price</option>
                     <option value="description-asc">A - Z Order</option>
                     <option value="description-dsc">Z - A Order</option>
                   </select>
-                </div>
-                <span class="text-muted">Showing:&nbsp;</span><span *ngIf="this.fullproductList != null" > {{this.getItemsViewed().start}} - {{this.getItemsViewed().end}} items of {{this.getProductsLength()}}</span>
-                <button class="btn btn-outline-primary btn-sm col-6" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add All to Cart</button>
-                
-              </div>
-              <div class="column">
-                  <div class="shop-sorting">
-                      <label for="sorting">Results per page:</label>
-                      <select [(ngModel)]="this.searchOptions.pageSize" (ngModelChange)="this.navigateToSearch(this.updateOptions({page: 1, pageSize: this.searchOptions.pageSize}))" class="form-control" id="sorting">
+                        </div>
+                        <span class="text-muted">Showing:&nbsp;</span><span *ngIf="this.fullproductList != null"> {{this.getItemsViewed().start}} - {{this.getItemsViewed().end}} items of {{this.getProductsLength()}}</span>
+                        <button class="btn btn-outline-primary btn-sm col-6" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add All to Cart</button>
+
+                    </div>
+                    <div class="column">
+                        <div class="shop-sorting">
+                            <label for="sorting">Results per page:</label>
+                            <select [(ngModel)]="this.searchOptions.pageSize" (ngModelChange)="this.navigateToSearch(this.updateOptions({page: 1, pageSize: this.searchOptions.pageSize}))" class="form-control" id="sorting">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
                         <option *ngIf="this.fullproductList != null"  [value]="this.getProductsLength()">All</option>
                       </select>
+                        </div>
                     </div>
-              </div>
-            </div>
-            <!-- Products Grid-->
-            <div *ngIf="this.productsViewList != null" class="product-flex-grid">
-              <!-- <div class="gutter-sizer"></div> -->
-              <!-- <div class="grid-sizer"></div> -->
-              <!-- Product-->
-              <div class="product-flex-item" *ngFor="let product of this.productsViewList">
-                <div class="product-card">
-                  <!-- <div class="product-badge text-danger">50% Off</div> -->
-                  <a class="product-thumb">
-                    <img *ngIf="product.image!=null" src="data:image/png;base64,{{product.image}}" alt="{{product.productNo}}">
-                    <img *ngIf="(product.image=='aW1hZ2U=')" src="assets/images/no-image-found.jpg" alt="{{product.productNo}}">
-                  </a>
-                  <h3 class="product-title"><a>{{product.description}}</a></h3>
-                  <h4 class="product-price">
-                    <del *ngIf="product.retailPrice != product.costPrice">{{product.retailPrice| currency:'USD':true}}</del>{{product.costPrice | currency:'USD':true}}
-                  </h4>
-                  <div class="product-buttons">
-                    <div class="row">
-                    <!-- <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button> -->
-                    <input class="form-control col-4" type="text" placeholder="Qty." >
-                    <div class="col-1"></div>
-                    <button class="btn btn-outline-primary btn-sm col-6" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
-                    </div>
-                  </div>
                 </div>
-              </div>
-              
-            </div>
-            <!-- <div ()="this.onScroll($event)"></div> -->
-            <!-- Pagination-->
-            <nav class="pagination">
-              <div class="column text-left hidden-xs-down" >
-                <button class="btn btn-outline-secondary btn-sm" 
-                  [disabled]="!(this.fullproductList != null && ((this.getSearchOptions().page - 1) >= 1))" 
-                  (click)="this.previousPage(this.getSearchOptions())" >
+                <!-- Products Grid-->
+                <div *ngIf="this.productsViewList != null" class="product-flex-grid">
+                    <!-- <div class="gutter-sizer"></div> -->
+                    <!-- <div class="grid-sizer"></div> -->
+                    <!-- Product-->
+                    <div class="product-flex-item" *ngFor="let product of this.productsViewList">
+                        <div class="product-card">
+                            <!-- <div class="product-badge text-danger">50% Off</div> -->
+                            <a class="product-thumb">
+                                <img *ngIf="product.image!=null" src="data:image/png;base64,{{product.image}}" alt="{{product.productNo}}">
+                                <img *ngIf="(product.image=='aW1hZ2U=')" src="assets/images/no-image-found.jpg" alt="{{product.productNo}}">
+                            </a>
+                            <h3 class="product-title"><a>{{product.description}}</a></h3>
+                            <h4 class="product-price">
+                                <del *ngIf="product.retailPrice != product.costPrice">{{product.retailPrice| currency:'USD':true}}</del>{{product.costPrice | currency:'USD':true}}
+                            </h4>
+                            <div class="product-buttons">
+                                <div class="row">
+                                    <!-- <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button> -->
+                                    <input *ngIf="this.config.isAuthenticated" class="form-control col-4" [(ngModel)]="product.quantityForPurchase" type="text" placeholder="Qty.">
+                                    <div class="col-1"></div>
+                                    <button *ngIf="this.config.isAuthenticated" (click)="this.addProduct(product)" class="btn btn-outline-primary btn-sm col-6" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product"
+                                        data-toast-message="successfuly added to cart!">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- <div ()="this.onScroll($event)"></div> -->
+                <!-- Pagination-->
+                <nav class="pagination">
+                    <div class="column text-left hidden-xs-down">
+                        <button class="btn btn-outline-secondary btn-sm" [disabled]="!(this.fullproductList != null && ((this.getSearchOptions().page - 1) >= 1))" (click)="this.previousPage(this.getSearchOptions())">
                   <i class="icon-arrow-left"></i>&nbsp;Previous
                 </button>
-              </div>  
-              <div class="column text-center">
-                <ul *ngIf="this.fullproductList != null" class="pages">
-                  <li [class.active] ="page == this.getSearchOptions().page"  *ngFor="let page of (this.getArrayOfPages())"><a (click)="this.navigateToSearch(this.updateOptions({page: page}))">{{page}}</a></li>
-                </ul>
-              </div>
-              <div class="column text-right hidden-xs-down">
-                <button class="btn btn-outline-secondary btn-sm" 
-                [disabled]="!(this.fullproductList != null && ((this.getSearchOptions().page + 1) <= this.getProductsLength()/this.numberOfItemsPerPage))"
-                (click)="this.nextPage(this.getSearchOptions())" >
+                    </div>
+                    <div class="column text-center">
+                        <ul *ngIf="this.fullproductList != null" class="pages">
+                            <li [class.active]="page == this.getSearchOptions().page" *ngFor="let page of (this.getArrayOfPages())"><a (click)="this.navigateToSearch(this.updateOptions({page: page}))">{{page}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="column text-right hidden-xs-down">
+                        <button class="btn btn-outline-secondary btn-sm" [disabled]="!(this.fullproductList != null && ((this.getSearchOptions().page + 1) <= this.getProductsLength()/this.numberOfItemsPerPage))" (click)="this.nextPage(this.getSearchOptions())">
                   Next&nbsp;<i class="icon-arrow-right"></i>
                 </button>
-              </div>
-            </nav>
-          </div>
-          
+                    </div>
+                </nav>
+            </div>
+
         </div>
-      </div>
     </div>
+</div>

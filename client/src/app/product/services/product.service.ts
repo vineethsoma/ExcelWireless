@@ -103,7 +103,7 @@ export class ProductOptions {
   description?: string;
   modelId?: number;
 }
-interface ProductDTO {
+export class ProductDTO {
   productId: number;
   categoryId: number;
   vendorId: number;
@@ -117,6 +117,13 @@ interface ProductDTO {
   quantity: number;
   image: string;
   addTax: false;
+
+  constructor (p: Product){
+    this.brandId = p.brandId;
+    this.categoryId = p.categoryId;
+    this.productNo = p.productNo;
+    this.quantity = p.quantityForPurchase
+  }
 }
 export class Category{
   categoryId: number;
@@ -157,7 +164,7 @@ export class Model  {
 }
 export class Product {
  productId: number;
- productNo: number;
+ productNo: string;
  description: string;
  image: string;
  retailPrice: number;
@@ -165,6 +172,7 @@ export class Product {
  quantity: number;
 brandId: number;
 categoryId: number;
+quantityForPurchase: number;
  constructor(dto: ProductDTO) {
     this.productId = dto.productId;
     this.image = dto.image;
@@ -172,7 +180,9 @@ categoryId: number;
     this.retailPrice = dto.retailPrice;
     this.costPrice = dto.costPrice;
     this.brandId = dto.brandId;
+    this.productNo = dto.productNo;
     this.categoryId = dto.categoryId;
+    
  }
 }
 interface WebMenuDTO{
