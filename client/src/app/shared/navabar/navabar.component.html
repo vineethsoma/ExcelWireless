@@ -76,8 +76,8 @@
                         <li><a [routerLink]="['/myaccount/myprofile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">My Profile</a></li>
                         <li><a [routerLink]="['/myaccount/myorder']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Orders List</a></li>
                         <li class="sub-menu-separator"></li>
-                        <li>
-                            <a href="#"> <i class="icon-unlock"></i>Logout</a>
+                        <li (click)="this.logout()">
+                            <a> <i class="icon-unlock"></i>Logout</a>
                         </li>
                     </ul>
                     <ul *ngIf="!this.config.isAuthenticated" class="toolbar-dropdown">

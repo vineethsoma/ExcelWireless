@@ -71,7 +71,9 @@ export class NavabarComponent implements OnInit {
 
   logout()
   {
-    alert("user logged out !!")
+    // alert("user logged out !!")
+    
+    this.userService.logout();
   }
 
   toggleBrand(){

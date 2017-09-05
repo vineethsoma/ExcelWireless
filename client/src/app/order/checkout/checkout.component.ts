@@ -16,10 +16,10 @@ export class CheckoutComponent implements OnInit {
   selectedItemToDelete: TransactionLineItem;
   checkoutOptions: CheckoutOptions;
   checkoutForm: FormGroup;
-  
-  constructor(private userService: UserService, private orderService: OrderService, private formBuilder: FormBuilder) { 
 
-    
+  constructor(private userService: UserService, private orderService: OrderService, private formBuilder: FormBuilder) {
+
+
   }
   updateCheckout(options: CheckoutOptions) {
 
@@ -35,51 +35,57 @@ export class CheckoutComponent implements OnInit {
   }
 
   getCheckoutDetails() {
-    
-    this.userService.refreshCheckoutDetails();
-    this.userService.getCheckoutOptions()
-      .subscribe((checkoutOptions) => {
-        // console.log('chekcout lineitem', lineItems);
-        this.checkoutOptions = checkoutOptions;
-      console.log('chekcout option', this.checkoutOptions);
-      });
-  }
-  updateCheckoutOptions(lineItems: TransactionLineItem[]) {
-    return new CheckoutOptions({ lineItems: lineItems });
-  }
-  updateProductFromCart(lineItem: TransactionLineItem) {
-    // const productNo = '8809998255262';
-    // const quantity = 5;
 
-    this.orderService.updateProductFromCart(lineItem.productNo, lineItem.quantity)
-      .subscribe(data => {
-        console.log('Response After updating product from cart' + data);
-        this.getCheckoutDetails();
-      },
-      error => {
-        console.log(JSON.stringify(error.json()));
-      })
-      ;
-    // this.checkoutOptions.lineItems.find((item) => item.productNo == lineItem.productNo)
-
+    this.userService.isAuthenticated().subscribe((isAuth) => {
+      if (isAuth) {
+        this.userService.refreshCheckoutDetails();
+        this.userService.getCheckoutOptions()
+        .subscribe((checkoutOptions) => {
+          // console.log('chekcout lineitem', lineItems);
+            this.checkoutOptions = checkoutOptions;
+            console.log('chekcout option', this.checkoutOptions);
+          });
+      }
+    }
+    )
   }
-  deleteProductFromCart(lineItem: TransactionLineItem) {
-      const phoneNo = 7707030801;
-    //   const productNo = '88060852585559';
 
-      this.orderService.deleteProductFromCart(this.selectedItemToDelete.productNo)
-      .subscribe(data => {
-        console.log('Response After deleting product from cart' + data);
-        this.getCheckoutDetails();
-      },
-        error => {
+updateCheckoutOptions(lineItems: TransactionLineItem[]) {
+  return new CheckoutOptions({ lineItems: lineItems });
+}
+updateProductFromCart(lineItem: TransactionLineItem) {
+  // const productNo = '8809998255262';
+  // const quantity = 5;
+
+  this.orderService.updateProductFromCart(lineItem.productNo, lineItem.quantity)
+    .subscribe(data => {
+      console.log('Response After updating product from cart' + data);
+      this.getCheckoutDetails();
+    },
+    error => {
+      console.log(JSON.stringify(error.json()));
+    })
+    ;
+  // this.checkoutOptions.lineItems.find((item) => item.productNo == lineItem.productNo)
+
+}
+deleteProductFromCart(lineItem: TransactionLineItem) {
+  const phoneNo = 7707030801;
+  //   const productNo = '88060852585559';
+
+  this.orderService.deleteProductFromCart(this.selectedItemToDelete.productNo)
+    .subscribe(data => {
+      console.log('Response After deleting product from cart' + data);
+      this.getCheckoutDetails();
+    },
+    error => {
       console.log(JSON.stringify(error.json()));
     });
-  }
+}
 
-  getLineItem(lineItem: TransactionLineItem) {
-    this.selectedItemToDelete = lineItem;
-  }
+getLineItem(lineItem: TransactionLineItem) {
+  this.selectedItemToDelete = lineItem;
+}
 
 }
 
