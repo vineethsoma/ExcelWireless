@@ -17,4 +17,8 @@ export class HomeComponent implements OnInit {
   navigateToModel(model: Model){
     this.router.navigate(['/products/search', {modelId: model.modelId}])
   }
+
+  navigateToModelFromHomePage(model: Model){
+    this.router.navigate(['/products/search', {modelId: model}])
+  }
 }
