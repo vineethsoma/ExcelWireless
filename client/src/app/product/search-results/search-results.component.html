@@ -1,5 +1,6 @@
 <!-- Off-Canvas Wrapper-->
 <div class="offcanvas-wrapper">
+
     <!-- Page Title-->
     <div class="page-title">
         <div class="container">
@@ -34,7 +35,6 @@
                   </select>
                         </div>
                         <span class="text-muted">Showing:&nbsp;</span><span *ngIf="this.fullproductList != null"> {{this.getItemsViewed().start}} - {{this.getItemsViewed().end}} items of {{this.getProductsLength()}}</span>
-                        <button class="btn btn-outline-primary btn-sm col-6" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add All to Cart</button>
 
                     </div>
                     <div class="column">
@@ -48,6 +48,11 @@
                       </select>
                         </div>
                     </div>
+                </div>
+                <!-- This is add all to cart logic -->
+                <div style="position: fixed;right: 15px;cursor: pointer;text-align: center;" (click)="this.addAllProducts()">
+                    <img src="/assets/images/Cart.png" width="70" height="70" style="color: transparent;vertical-align: middle;">
+                    <p>Add All To Cart</p>
                 </div>
                 <!-- Products Grid-->
                 <div *ngIf="this.productsViewList != null" class="product-flex-grid">
@@ -71,7 +76,7 @@
                             <div class="product-buttons">
                                 <div class="row">
                                     <!-- <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button> -->
-                                    <input *ngIf="this.config.isAuthenticated" class="form-control col-4" [(ngModel)]="product.quantityForPurchase" type="text" placeholder="Qty.">
+                                    <input *ngIf="this.config.isAuthenticated" class="form-control col-4" [(ngModel)]="product.quantityForPurchase" type="number" min="1" placeholder="Qty.">
                                     <div class="col-1"></div>
                                     <button *ngIf="this.config.isAuthenticated" (click)="this.addProduct(product)" class="btn btn-outline-primary btn-sm col-6" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product"
                                         data-toast-message="successfuly added to cart!">Add to Cart</button>

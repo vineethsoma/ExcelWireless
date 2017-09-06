@@ -165,6 +165,29 @@ public class CustomerManager {
 
     }
 
+    public int updateCustomerToDB(CustomerDto customerDto) {
+
+        int status = 0;
+
+        status = jdbcTemplate.update(sqlQuery.updateCustomerQuery,
+                customerDto.getFirstName(),
+                customerDto.getLastName(),
+                customerDto.getTaxId(),
+                customerDto.getDateOfBirth(),
+                customerDto.getStreet(),
+                customerDto.getCity(),
+                customerDto.getState(),
+                customerDto.getCountry(),
+                customerDto.getZipcode(),
+                customerDto.getCompanyName(),
+                customerDto.getPhoneNo());
+
+        System.out.println("Customer Details Updated Successfully !!");
+
+
+        return status;
+    }
+
 
     private final class CustomerMapper implements RowMapper<CustomerDto>
     {

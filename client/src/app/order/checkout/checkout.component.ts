@@ -54,6 +54,7 @@ updateCheckoutOptions(lineItems: TransactionLineItem[]) {
   return new CheckoutOptions({ lineItems: lineItems });
 }
 updateProductFromCart(lineItem: TransactionLineItem) {
+  
   this.orderService.updateProductFromCart(lineItem.productNo, lineItem.quantity)
     .subscribe(data => {
       console.log('Response After updating product from cart' + data);

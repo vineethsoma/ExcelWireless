@@ -56,6 +56,13 @@ export class SearchResultsComponent implements OnInit {
         this.userService.refreshCheckoutDetails();
     });
   }
+
+  addAllProducts()
+  {
+    let productList = this.productsViewList.filter((product) => product.quantityForPurchase > 0);
+    this.orderService.addAllProductToCart(productList)
+    .subscribe((data) => this.userService.refreshCheckoutDetails());
+  }
   getProducts(options: ProductOptions) {
     return this.productService.getProducts(options);
   }

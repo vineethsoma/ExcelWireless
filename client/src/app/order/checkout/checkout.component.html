@@ -56,7 +56,7 @@
                     <td class="text-center text-lg text-medium">{{lineItem.retailPrice}}</td>
                     <td class="text-center">
                         <div class="count-input">
-                            <input class="form-control" type="text" placeholder="quantity" [(ngModel)]="lineItem['quantity']">
+                            <input class="form-control" type="number" min="1" placeholder="quantity" [(ngModel)]="lineItem['quantity']">
                         </div>
                     </td>
 

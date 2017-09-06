@@ -24,6 +24,16 @@ export class OrderService {
     // tslint:disable-next-line:max-line-length
     return this.http.post('http://localhost:8080/addTransactionLineItem', new CheckoutDto(product, this.customer));
   }
+
+  addAllProductToCart(productList: Array<Product>) {
+    let productDtoList: Array<CheckoutDto> = []; 
+    productList.forEach((product) => {
+
+      productDtoList.push(new CheckoutDto(product, this.customer));
+    });
+
+    return this.http.post('http://localhost:8080/addAllTransactionLineItem', productDtoList );
+  }
   updateProductFromCart(productNo: any, quantity: number) {
     // console.log('Customer to be Added' + customer.onlyFirstName);
     // tslint:disable-next-line:whitespace

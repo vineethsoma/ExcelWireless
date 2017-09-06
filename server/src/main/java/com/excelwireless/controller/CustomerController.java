@@ -28,6 +28,12 @@ public class CustomerController {
         return customerManager.validateCustomer(phoneNo, email);
     }
 
+    @RequestMapping(value = "/updateCustomer", method = RequestMethod.POST, consumes = "application/json")
+    public int updateCustomer(@RequestBody CustomerDto customerDto) {
+
+        return customerManager.updateCustomerToDB(customerDto);
+    }
+
 //    @RequestMapping(value = "/sendEmail", method = RequestMethod.POST, consumes = "application/json")
 //    public void sendEmail(@RequestBody CustomerDto customerDto) {
 //        customerManager.sendEmail(customerDto);

@@ -53,6 +53,7 @@ export class CustomerprofileComponent implements OnInit {
 
 updateCustomerDetails(){
 
+
   this.customerServcie.updateCustomer(this.customerProfileForm.value);
 
   console.log('customer info', this.customerProfileForm.value)
