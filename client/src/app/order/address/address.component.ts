@@ -44,7 +44,6 @@ export class AddressComponent implements OnInit {
         }
         )
       }
-
       getCustomerDetails(){
         this.userService.isAuthenticated().subscribe((isAuth) => {
           if (isAuth) {
