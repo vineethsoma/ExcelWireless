@@ -1,11 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Observer, BehaviorSubject } from 'rxjs/Rx';
 import { FormControl } from '@angular/forms/forms';
 import { Customer, TransactionLineItem } from "./myaccount/myaccount.component";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Router } from "@angular/router";
-
 
 @Injectable()
 export class UserService{
@@ -17,25 +15,27 @@ export class UserService{
     private _isAuthenticated: BehaviorSubject<boolean>;
     private _checkoutDetails: BehaviorSubject<CheckoutOptions>;
     private _userDetails: BehaviorSubject<Customer>;
-    private fetching: boolean = false
+    private fetching: Observable<boolean>;
     private localStorage: ExcelData = undefined;
     constructor(private http: Http, private router: Router) {
         this._isAuthenticated = <BehaviorSubject<boolean>>new BehaviorSubject<boolean>(false);
         this._checkoutDetails = <BehaviorSubject<CheckoutOptions>>new BehaviorSubject<CheckoutOptions>({ lineItems: null, totalAmount: 0, totalQuantity: 0 });
         this._userDetails = new BehaviorSubject<Customer>(undefined);
-        
-        this.localStorage = JSON.parse(localStorage.getItem("excel-data"));
-        console.log(this.localStorage);
-        if(this.localStorage != null){
-            const user = this.localStorage.userDetails; 
-            this.authenticateUser(user.email, user.password);
-        }
+        this.authenticateFromLocalStorage();
     }
     logout(){
         this.localStorage = null; 
         localStorage.removeItem("excel-data");
         this._isAuthenticated.next(false);
         this.router.navigate(['']);
+    }
+    authenticateFromLocalStorage(){
+        this.localStorage = JSON.parse(localStorage.getItem("excel-data"));
+        console.log(this.localStorage);
+        if(this.localStorage != null){
+            const user = this.localStorage.userDetails; 
+            this.authenticateUser(user.email, user.password);
+        }
     }
     getCustomerDetails(): Observable<Customer> {
         return this._userDetails.asObservable();
@@ -44,22 +44,37 @@ export class UserService{
 
     authenticateUser(username: any, password: any): void {
         this._isAuthenticated.next(false);
+      this.fetching = Observable.create( (observer: Observer<boolean>) => {
         this.cutomerHttpRequest(username, password).subscribe((user) => {
+            this.fetching;
             this.customer = user;
             this._userDetails.next(user);
             localStorage.setItem("excel-data", JSON.stringify(<ExcelData>({...this.localStorage, userDetails: {...user, email: username, password: password}, } )));
             this._isAuthenticated.next(true);
+            observer.next(true);
         },
     
         (err) => {
             this._userDetails.next(undefined);
             this._isAuthenticated.next(false);
-        }); 
+            observer.error(err);
+        },
+        () => {
+            observer.complete();
+        }
+    ); 
+    }
+    );
 
     }
-
     isAuthenticated(): Observable<boolean> {
-        return this._isAuthenticated.asObservable();
+        console.log("IS AUthneticated status",this._isAuthenticated);
+        return this._isAuthenticated.asObservable(); 
+        
+    }
+
+    isFetching(): Promise<boolean> {
+        return this.fetching.last().toPromise(); 
     }
 
     cutomerHttpRequest(username: any, password: any): Observable<Customer> {
@@ -86,20 +101,16 @@ export class UserService{
 
     refreshCheckoutDetails(): Observable<CheckoutOptions> {
         // if (!this.checkoutDetails) {
-        this.fetching = true;
         let {phoneNo} = this.customer; 
         this.http.get('http://localhost:8080/getTransactionLineItem?phoneNo=' + phoneNo)
         .map(this.extractData)
         .map(this.updateCheckoutOptions)
             .subscribe((data) => {
-                this.fetching = false;
                 this._checkoutDetails.next(data);
             },
             (err) => {
-                this.fetching = false;
             },
             () => {
-                this.fetching = false;
             });
         // }
         return this.checkoutDetails;
