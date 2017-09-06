@@ -64,6 +64,7 @@ export class MyaccountComponent implements OnInit {
     let navigateUrl = this.route.snapshot.paramMap.get('redirectTo');
     this.userService.isAuthenticated().subscribe((isAuth) => {
       if(isAuth && navigateUrl && navigateUrl != "null"){
+        console.log(navigateUrl);
         this.router.navigate([navigateUrl]);
       }
     });
