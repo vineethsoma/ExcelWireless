@@ -116,7 +116,7 @@ public class SalesManager {
     //THIS WILL GIVE LAST TRANSACTION COMP ID WHICH HELP UI TO GENERATE NEXT ID
     public int getLastTransactionId() {
 
-        return jdbcTemplate.queryForObject(sqlQueries.getLastTransactionId, new Object[]{}, Integer.class);
+        return jdbcTemplate.queryForObject(sqlQueries.getLastTransactionId, new Object[]{}, Integer.class) + 1;
     }
 
     public boolean checkoutTransactionLineItem(List<TransactionLineItemDto> transactionLineItemDto) {

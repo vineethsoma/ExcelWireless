@@ -70,6 +70,7 @@ public class ProductController {
 
         productManager.insertProductImage(product_Id,file);
     }
+
 ////    @RequestMapping(value = "/getImage", method = RequestMethod.GET)
 ////    public ResponseEntity<?> getEcommerceProductsByBrand1(@RequestParam int model_Id) throws SQLException {
 ////
