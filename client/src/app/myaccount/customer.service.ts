@@ -11,7 +11,7 @@ export class CustomerService {
 
 constructor(private http: Http) { }
 
-addOrUpdateCustomer(customer: Customer) {
+addCustomer(customer: Customer) {
  console.log('Customer to be Added' + customer.onlyFirstName);
   this.http.post('http://localhost:8080/addCustomer', customer)
   .subscribe(data => {
@@ -21,6 +21,16 @@ addOrUpdateCustomer(customer: Customer) {
   console.log(JSON.stringify(error.json()));
 });
 }
+updateCustomer(customer: Customer) {
+  console.log('Customer to be Updated' + customer.firstName);
+   this.http.post('http://localhost:8080/updateCustomer', customer)
+   .subscribe(data => {
+     console.log('Response After Updating Customer Details' + data);
+   },
+     error => {
+   console.log(JSON.stringify(error.json()));
+ });
+ }
 
     getCustomerDetails(username: any, password: any): Observable<Customer> {
         return this.http.get('http://localhost:8080/getUserLoginDetails?username=' + username + '&password=' + password)

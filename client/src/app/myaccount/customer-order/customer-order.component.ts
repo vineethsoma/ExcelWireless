@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from "../customer.service";
 import { Transaction } from "../../order/order.component";
+import { UserService } from "../../user.service";
+import { Customer } from "../myaccount.component";
 
 @Component({
   selector: 'app-customer-order',
@@ -10,18 +12,33 @@ import { Transaction } from "../../order/order.component";
 export class CustomerOrderComponent implements OnInit {
 
   transactionDto: Transaction[];
+  customer: Customer;
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private userService: UserService, private customerService: CustomerService) { }
 
   ngOnInit() {
 
-    this.customerService.getCustomerSalesHistory(7707030801)
+    this.getCustomerDetails();
+    this.customerService.getCustomerSalesHistory(this.customer.phoneNo)
     .subscribe((transaction: Transaction[]) => {
       this.transactionDto = transaction;
       console.log('Transaction Details for customer order', this.transactionDto);
     });
 
   }
+
+  getCustomerDetails(){
+
+    this.userService.isAuthenticated().subscribe((isAuth) => {
+      if (isAuth) {
+        this.userService.getCustomerDetails()
+        .subscribe((cust) =>{
+          this.customer = cust;
+          console.log('Custoemr Details', this.customer);
+        });
+  } 
+    })
+}
 
 
 

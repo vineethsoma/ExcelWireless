@@ -49,7 +49,7 @@ export class MyaccountComponent implements OnInit {
   }
 
   addCustomer(): void {
-    this.customerService.addOrUpdateCustomer(this.customerForm.value);
+    this.customerService.addCustomer(this.customerForm.value);
     this.customerForm.reset();
   }
   customerLogin() {
