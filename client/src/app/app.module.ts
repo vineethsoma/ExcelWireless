@@ -14,6 +14,7 @@ import { AdminModule } from "./admin/admin.module";
 import { ContactUsModule } from "./contact-us/contact-us.module";
 import { UserService } from "./user.service";
 import { ProductService } from "./product/services/product.service";
+import { AuthGuard } from "./auth.guard";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { ProductService } from "./product/services/product.service";
     AdminModule,
     ContactUsModule
   ],
-  providers: [UserService, ProductService],
+  providers: [UserService, ProductService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

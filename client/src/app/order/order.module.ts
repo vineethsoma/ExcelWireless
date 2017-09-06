@@ -20,6 +20,6 @@ import { AuthGuard } from '../auth.guard';
     FormsModule
   ],
   declarations: [OrderComponent, CheckoutComponent, AddressComponent, ShippingComponent, PaymentComponent, ThankyouComponent],
-  providers: [OrderService, AuthGuard]
+  providers: [OrderService]
 })
 export class OrderModule { }
