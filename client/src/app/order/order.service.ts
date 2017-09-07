@@ -7,12 +7,15 @@ import { Transaction } from './order.component';
 import { UserService } from "../user.service";
 import { Product } from "../product/services/product.service";
 import { Router } from "@angular/router";
+import { environment } from "../../environments/environment";
 
 
 @Injectable()
 export class OrderService {
+  private url: string;
   customer: Customer = null; 
   constructor(private http: Http, private userService: UserService, private router: Router) {
+    this.url = environment.orderUrl;
       this.userService.getCustomerDetails().subscribe((customer) => {
         this.customer = customer;
       });
@@ -22,7 +25,7 @@ export class OrderService {
     // console.log('Customer to be Added' + customer.onlyFirstName);
     // tslint:disable-next-line:whitespace
     // tslint:disable-next-line:max-line-length
-    return this.http.post('http://localhost:8080/addTransactionLineItem', new CheckoutDto(product, this.customer));
+    return this.http.post(this.url+'/addTransactionLineItem', new CheckoutDto(product, this.customer));
   }
 
   addAllProductToCart(productList: Array<Product>) {
@@ -32,24 +35,24 @@ export class OrderService {
       productDtoList.push(new CheckoutDto(product, this.customer));
     });
 
-    return this.http.post('http://localhost:8080/addAllTransactionLineItem', productDtoList );
+    return this.http.post(this.url+'/addAllTransactionLineItem', productDtoList );
   }
   updateProductFromCart(productNo: any, quantity: number) {
     // console.log('Customer to be Added' + customer.onlyFirstName);
     // tslint:disable-next-line:whitespace
     // tslint:disable-next-line:max-line-length
-    return this.http.post('http://localhost:8080/updateTransactionLineItem?phoneNo=' + this.customer.phoneNo + '&productNo=' + productNo + '&quantity=' + quantity, null);
+    return this.http.post(this.url+'/updateTransactionLineItem?phoneNo=' + this.customer.phoneNo + '&productNo=' + productNo + '&quantity=' + quantity, null);
   }
 
   deleteProductFromCart(productNo: any) {
     // tslint:disable-next-line:whitespace
-    return this.http.post('http://localhost:8080/deleteTransactionLineItem?phoneNo=' + this.customer.phoneNo + '&productNo=' + productNo, null)
+    return this.http.post(this.url+'/deleteTransactionLineItem?phoneNo=' + this.customer.phoneNo + '&productNo=' + productNo, null)
 
   }
 
   // This is to get last transaction id so i can add 1 and generate new one.
   getLastTransactionId(): Observable<any> {
-    return this.http.get('http://localhost:8080/getLastTransactionId')
+    return this.http.get(this.url+'/getLastTransactionId')
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -58,7 +61,7 @@ export class OrderService {
   // This is after clicking on place final order where we storing Transaction details into real Transaction table.
   addTransactionDetails(transactionDto: Transaction) {
     // tslint:disable-next-line:whitespace
-    this.http.post('http://localhost:8080/checkoutTransaction', transactionDto)
+    this.http.post(this.url+'/checkoutTransaction', transactionDto)
       .subscribe(data => {
         console.log('Response After adding transaction details' + data);
       },
@@ -69,7 +72,7 @@ export class OrderService {
 
   addTransactionLineItemDetails(transactionLineItemDetails: TransactionLineItem[]) {
     // tslint:disable-next-line:whitespace
-    this.http.post('http://localhost:8080/checkoutTransactionLineItem', transactionLineItemDetails)
+    this.http.post(this.url+'/checkoutTransactionLineItem', transactionLineItemDetails)
       .subscribe(data => {
         if(data.status === 200)
           {
@@ -85,7 +88,7 @@ export class OrderService {
   // This needs to be done when customer place the final order cause i am storing unconfirmed transaction details into temp table so now after final order this details need to be deleted.
   deleteTransactionLineItemDetails() {
     // tslint:disable-next-line:whitespace
-    this.http.post('http://localhost:8080/deleteAllTransactionLineItem?customerPhoneNo=' + this.customer.phoneNo, null)
+    this.http.post(this.url+'/deleteAllTransactionLineItem?customerPhoneNo=' + this.customer.phoneNo, null)
       .subscribe(data => {
         console.log('Response After deleting tranaction line items from temp table' + data);
       },
@@ -95,7 +98,7 @@ export class OrderService {
   }
 
   getCustomerDetails(username: string, password: string): Observable<Customer> {
-    return this.http.get('http://localhost:8080/getUserLoginDetails?username=' + username + '&password=' + password)
+    return this.http.get(this.url+'/getUserLoginDetails?username=' + username + '&password=' + password)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -104,7 +107,7 @@ export class OrderService {
     return new CheckoutOptions({ lineItems: lineItems });
   }
   getCustomerTransactionDetails(phoneNo: number): Observable<TransactionLineItem[]> {
-    return this.http.get('http://localhost:8080/getTransactionLineItem?phoneNo=' + phoneNo)
+    return this.http.get(this.url+'/getTransactionLineItem?phoneNo=' + phoneNo)
    
       .map(this.extractData)
       .catch(this.handleError);
