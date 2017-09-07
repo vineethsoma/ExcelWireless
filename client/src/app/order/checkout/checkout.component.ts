@@ -43,7 +43,7 @@ export class CheckoutComponent implements OnInit {
         .subscribe((checkoutOptions) => {
           // console.log('chekcout lineitem', lineItems);
             this.checkoutOptions = checkoutOptions;
-            console.log('chekcout option', this.checkoutOptions);
+            // console.log('chekcout option', this.checkoutOptions);
           });
       }
     }
