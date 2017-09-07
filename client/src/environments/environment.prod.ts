@@ -1,4 +1,8 @@
 export const environment = {
   production: true,
-  productUrl: ''  
+  productUrl: '',
+  adminUrl:'',
+  customerUrl: '',
+  orderUrl: '',
+  userUrl: ''  
 };

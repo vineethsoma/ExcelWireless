@@ -4,16 +4,19 @@ import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms/forms';
 import { Customer, TransactionLineItem } from './myaccount.component';
 import { Transaction } from "../order/order.component";
+import { environment } from "../../environments/environment";
 
 
 @Injectable()
 export class CustomerService {
-
-constructor(private http: Http) { }
+private url: string;
+constructor(private http: Http) { 
+  this.url = environment.customerUrl;
+}
 
 addCustomer(customer: Customer) {
  console.log('Customer to be Added' + customer.onlyFirstName);
-  this.http.post('http://localhost:8080/addCustomer', customer)
+  this.http.post(this.url+'/addCustomer', customer)
   .subscribe(data => {
     console.log('Response From Add Customer call' + data);
   },
@@ -23,7 +26,7 @@ addCustomer(customer: Customer) {
 }
 updateCustomer(customer: Customer) {
   console.log('Customer to be Updated' + customer.firstName);
-   this.http.post('http://localhost:8080/updateCustomer', customer)
+   this.http.post(this.url+'/updateCustomer', customer)
    .subscribe(data => {
      console.log('Response After Updating Customer Details' + data);
    },
@@ -33,25 +36,25 @@ updateCustomer(customer: Customer) {
  }
 
     getCustomerDetails(username: any, password: any): Observable<Customer> {
-        return this.http.get('http://localhost:8080/getUserLoginDetails?username=' + username + '&password=' + password)
+        return this.http.get(this.url+'/getUserLoginDetails?username=' + username + '&password=' + password)
         .map(this.extractData)
         .catch(this.handleError);
       }
 
       getCustomerTransactionDetails(phoneNo: number): Observable<TransactionLineItem[]> {
-        return this.http.get('http://localhost:8080/getTransactionLineItem?phoneNo=' + phoneNo)
+        return this.http.get(this.url+'/getTransactionLineItem?phoneNo=' + phoneNo)
         .map(this.extractData)
         .catch(this.handleError);
       }
 
       getCustomerSalesHistory(phoneNo: number): Observable<Transaction[]> {
-        return this.http.get('http://localhost:8080/getSalesHistory?phoneNo=' + phoneNo)
+        return this.http.get(this.url+'/getSalesHistory?phoneNo=' + phoneNo)
         .map(this.extractData)
         .catch(this.handleError);
       }
 
       getProductPriceByCustomer(phoneNo: number) {
-        return this.http.get('http://localhost:8080/getProductPriceByCustomer?phoneNo=' + phoneNo)
+        return this.http.get(this.url+'/getProductPriceByCustomer?phoneNo=' + phoneNo)
         .map(this.extractData)
         .catch(this.handleError);
       }

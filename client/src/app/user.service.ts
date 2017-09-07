@@ -12,7 +12,7 @@ export class UserService {
     private _isAuthenticated: BehaviorSubject<boolean>;
     private _checkoutDetails: BehaviorSubject<CheckoutOptions>;
     private _userDetails: BehaviorSubject<Customer>;
-
+    private url: string; 
     private customer: Customer;
     private fetching: Subject<boolean>;
     private transactionLineItemObject: Observable<TransactionLineItem[]>;
@@ -118,14 +118,14 @@ export class UserService {
     }
 
     cutomerHttpRequest(username: any, password: any): Observable<Customer> {
-        return this.http.get('http://localhost:8080/getUserLoginDetails?username=' + username + '&password=' + password)
+        return this.http.get(this.url+'/getUserLoginDetails?username=' + username + '&password=' + password)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     getCustomerTransactionDetails(phoneNo: number): Observable<TransactionLineItem[]> {
         if (!this.transactionLineItemObject) {
-            this.transactionLineItemObject = this.http.get('http://localhost:8080/getTransactionLineItem?phoneNo=' + phoneNo)
+            this.transactionLineItemObject = this.http.get(this.url+'/getTransactionLineItem?phoneNo=' + phoneNo)
                 .map(this.extractData)
                 .publishReplay(1)
                 .refCount()
@@ -142,7 +142,7 @@ export class UserService {
     refreshCheckoutDetails(): Observable<CheckoutOptions> {
         // if (!this.checkoutDetails) {
         let { phoneNo } = this.customer;
-        this.http.get('http://localhost:8080/getTransactionLineItem?phoneNo=' + phoneNo)
+        this.http.get(this.url+'/getTransactionLineItem?phoneNo=' + phoneNo)
             .map(this.extractData)
             .map(this.updateCheckoutOptions)
             .subscribe((data) => {

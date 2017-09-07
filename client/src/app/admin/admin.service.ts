@@ -4,16 +4,18 @@ import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms/forms';
 import { Transaction } from "../order/order.component";
 import { Product } from "../product/services/product.service";
-
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class AdminService {
-
-constructor(private http: Http) { }
+private url: string; 
+constructor(private http: Http) { 
+  this.url  = environment.adminUrl;
+}
 
 addImage(productId: number, image: any) {
  console.log('Customer to be Added' + image);
-  this.http.post('http://localhost:8080/insertProductImage?product_Id=' + productId, image)
+  this.http.post(this.url+'/insertProductImage?product_Id=' + productId, image)
   .subscribe(data => {
     console.log('Response From Add Customer call' + data);
   },
@@ -22,7 +24,7 @@ addImage(productId: number, image: any) {
 });
     }
       getProduct(): Observable<Product[]> {
-        return this.http.get('http://localhost:8080/getProduct')
+        return this.http.get(this.url+'/getProduct')
         .map(this.extractData)
         .catch(this.handleError);
       }

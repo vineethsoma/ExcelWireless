@@ -5,5 +5,9 @@
 
 export const environment = {
   production: false,
-  productUrl: ''
+  productUrl: '',
+  adminUrl:'',
+  customerUrl: '',
+  orderUrl: '',
+  userUrl: ''
 };
