@@ -97,7 +97,7 @@ onProductDropdownChoose(): void {
 
   this.listOfProductOption = [];
   this.modelList.forEach((model) => this.listOfProductOption.push({id: model.modelId, name: model.modelName}));
-  console.log('list of model', this.listOfProductOption)
+  console.log('list of model option', this.listOfProductOption)
   }
 }
 

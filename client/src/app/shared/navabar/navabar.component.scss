@@ -65,17 +65,13 @@ ul.flex-catmenu {
     }
 }
 
-
 .site-search {
     opacity: 100;
     visibility: visible;
 }
 
 // .mega-menu { @extend %mega-menu; }
-
-
-
-.search-results{
+.search-results {
     display: none;
     position: absolute;
     top: 100%;
@@ -86,6 +82,12 @@ ul.flex-catmenu {
     background-color: white;
     table-layout: fixed;
 }
-.site-search{
+
+.site-search {
     position: static;
+}
+
+.custom-cart {
+    height: 500px !important;
+    overflow: scroll;
 }
