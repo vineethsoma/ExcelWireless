@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { CustomerService } from './customer.service';
 import { CustomerprofileComponent } from "./customerprofile/customerprofile.component";
 import { CustomerOrderComponent } from "./customer-order/customer-order.component";
+import { SharedModule } from "../shared/shared.module";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CustomerOrderComponent } from "./customer-order/customer-order.componen
     CommonModule,
     MyaccountRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [MyaccountComponent, CustomerprofileComponent, CustomerOrderComponent],
   providers: [CustomerService],
