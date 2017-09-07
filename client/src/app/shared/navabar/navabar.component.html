@@ -71,7 +71,7 @@
             <div class="tools">
                 <!-- <div class="search">
                     <i class="icon-search"></i> -->
-                <input class="form-control" type="text" [formControl]="search">
+                <input class="form-control" type="text" #search (keyup.enter)="this.navigateToSearch(search.value)">
                 <span class="input-group-addon">
                     <!-- <i class="icon-mail"></i> -->
                 </span>
