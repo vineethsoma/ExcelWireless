@@ -25,7 +25,8 @@ export class NavabarComponent implements OnInit {
     showModelMenu: false,
     showCategoryMenu: false
   }
-  search = new FormControl();
+  //search = new FormControl();
+  search: string;
   
   constructor(private userService: UserService, private router: Router,private productService: ProductService) {
 
@@ -48,28 +49,30 @@ export class NavabarComponent implements OnInit {
     //this.subscribeToSearchChanges();
   }
 
-  subscribeToSearchChanges(){
-    this.search.valueChanges
-    // .do(()=>{
+  // subscribeToSearchChanges(){
+  //   this.search.valueChanges
+  //   // .do(()=>{
   
-    // })
-    .debounceTime(800)
-    .distinctUntilChanged()
-    .subscribe(
-      (search: string) => {
-        if(search.length > 2) {
-          // this.productService.getProducts({description:search});
-          // this.productService.getProducts({description:search});
-          this.router.navigate(['/products/search', {description:search}]);
-        }
-      }
-    )
-  }
+  //   // })
+  //   .debounceTime(800)
+  //   .distinctUntilChanged()
+  //   .subscribe(
+  //     (search: string) => {
+  //       if(search.length > 2) {
+  //         // this.productService.getProducts({description:search});
+  //         // this.productService.getProducts({description:search});
+  //         this.router.navigate(['/products/search', {description:search}]);
+  //       }
+  //     }
+  //   )
+  // }
 
-  navigateToSearch(event: any) {
+  navigateToSearch() {
 
     console.log('event', event);
-    this.router.navigate(['/products/search', {description:event}]);
+    this.router.navigate(['/products/search', {description:this.search}]);
+    this.search = null;
+
     
   }
   navigateToModel(model: Model){
