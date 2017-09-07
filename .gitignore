@@ -1,3 +1,4 @@
+
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -29,3 +30,4 @@ nbdist/
 src/main/resources/static/bower_components/
 node_modules/
 server/src/main/resources/static/**
+/server/src/main/resources/static/*
