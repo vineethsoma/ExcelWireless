@@ -25,6 +25,8 @@ export class AdminComponent implements OnInit {
   isLoading = true;
 
   ngOnInit() {
+    // this.selectedProductDropdownOption = "Category";
+    // this.sectedCommonOption = "Repair Parts";
     this.productService.getBrands()
       .subscribe((brands) => {
         this.brandList = brands

@@ -71,11 +71,20 @@
     <div *ngIf="!this.config.showSearch" class="toolbar">
         <div class="inner">
             <div class="tools">
+<<<<<<< HEAD
                 <div class="search" (click)="this.toggleSearch()">
                     <i class="icon-search"></i>
                     <!-- <span class="input-group-addon">
                     <i class="icon-mail"></i>
                 </span> -->
+=======
+                <!-- <div class="search">
+                    <i class="icon-search"></i> -->
+                <input class="form-control" type="text" [(ngModel)]="search" (keyup.enter)="this.navigateToSearch()">
+                <span class="input-group-addon">
+                    <!-- <i class="icon-mail"></i> -->
+                </span>
+>>>>>>> c1ee1db1326e63aac54511fbf266e8306cdafb5a
 
                 </div>
                 <div class="account">
