@@ -65,13 +65,18 @@ export class UserService {
     //         }
     //     );
     // }
-
+    reset(){
+        this.customer = null;
+        this._checkoutDetails.next(null);
+        this._userDetails.next(null);
+    }
     authenticateUser(username: any, password: any): void {
-        this._isAuthenticated.next(false);
         console.log("Authentication user...")
+        this.reset();
         this.cutomerHttpRequest(username, password).subscribe((user) => {
                 
                 this.customer = user;
+                console.log(this.customer);
                 this._userDetails.next(user);
                 localStorage.setItem("excel-data", JSON.stringify(<ExcelData>({ ...this.localStorage, userDetails: { ...user, email: username, password: password }, })));
                 console.log("User successfully authenticated");
@@ -82,18 +87,18 @@ export class UserService {
                 (err) => {
                     this._userDetails.next(undefined);
                     this._isAuthenticated.next(false);
-                    // observer.error(err);
-                    // this.fetching.next(false);
                 },
                 () => {
-                    // observer.complete();
-                    // this.fetching.complete();
+
                 }
             );
         }
 
 
     isAuthenticated(): Observable<boolean> {
+        if(this.customer){
+            this._isAuthenticated.next(true);
+        }
         console.log("In Authneticated status", this._isAuthenticated);
         return this._isAuthenticated.asObservable();
     }
@@ -103,6 +108,13 @@ export class UserService {
             // return this.fetching.toPromise();
         
     // }
+
+    isAdmin(): boolean {
+        if(this.customer && this.customer.userRole.toLowerCase()=="admin"){
+            return true;
+        }
+        return false; 
+    }
 
     cutomerHttpRequest(username: any, password: any): Observable<Customer> {
         return this.http.get('http://localhost:8080/getUserLoginDetails?username=' + username + '&password=' + password)

@@ -109,6 +109,7 @@ export class Customer {
   password: any;
   createdDate: any;
   validUser: boolean;
+  userRole: string;
 }
 
 export class TransactionLineItem {
