@@ -5,6 +5,8 @@ import { UserService } from "../../user.service";
 import { CheckoutOptions } from "../../order/order.service";
 import { Router } from "@angular/router";
 import { Customer } from "../../myaccount/myaccount.component";
+import { FormControl } from "@angular/forms";
+
 
 @Component({
   selector: 'app-navabar',
@@ -37,6 +39,8 @@ export class NavabarComponent implements OnInit {
 
     this.categories = this.productService.getCategories();
   }
+
+  search = new FormControl();
 
   ngOnInit() {
     this.brands.subscribe((list)=>console.log(list));

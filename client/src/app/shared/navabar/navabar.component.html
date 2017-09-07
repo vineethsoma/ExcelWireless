@@ -68,7 +68,14 @@
     <div class="toolbar">
         <div class="inner">
             <div class="tools">
-                <div class="search"><i class="icon-search"></i></div>
+                <!-- <div class="search">
+                    <i class="icon-search"></i> -->
+                <input class="form-control" type="text" [formControl]="search">
+                <span class="input-group-addon">
+                    <!-- <i class="icon-mail"></i> -->
+                </span>
+
+                <!-- </div> -->
                 <div class="account">
                     <a></a><i class="icon-head"></i>
                     <ul *ngIf="this.config.isAuthenticated" class="toolbar-dropdown">
