@@ -5,16 +5,20 @@ import { UserService } from "./user.service";
 
 @Injectable()
 export class AdminGuard implements CanActivate {
-  constructor(private userService: UserService, private router: Router){
+  constructor(private userService: UserService, private router: Router) {
 
   }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if(this.userService.isAdmin()){
-      return true; 
-    }
-    this.router.navigate(['/myaccount', { redirectTo: state.url }]);
-    return false;
+    return this.userService.isAdmin().then(
+      (isAdmin) => {
+        if (isAdmin) {
+          console.log("Admin status", isAdmin);
+          return true;
+        }
+        this.router.navigate(['/myaccount', { redirectTo: state.url }]);
+        return false;
+      });
   }
 }

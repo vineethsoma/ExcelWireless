@@ -106,11 +106,15 @@ export class UserService {
 
     // }
 
-    isAdmin(): boolean {
-        if (this.customer && this.customer.userRole.toLowerCase() == "admin") {
-            return true;
-        }
-        return false;
+    async isAdmin(): Promise<boolean> {
+        return await this.authState()
+        .then((auth) => {
+            if(auth){
+                if(this.customer && this.customer.userRole.toLowerCase() =="admin")
+                    return true;
+            }
+            return false; 
+        });
     }
 
     cutomerHttpRequest(username: any, password: any): Observable<Customer> {
