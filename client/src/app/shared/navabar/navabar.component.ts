@@ -23,7 +23,8 @@ export class NavabarComponent implements OnInit {
     isAuthenticated: false,
     showBrandMenu: false,
     showModelMenu: false,
-    showCategoryMenu: false
+    showCategoryMenu: false,
+    showSearch: false
   }
   constructor(private userService: UserService, private router: Router,private productService: ProductService) {
 
@@ -87,5 +88,9 @@ export class NavabarComponent implements OnInit {
 
   toggleBrand(){
     this.config.showBrandMenu = !this.config.showBrandMenu;
+  }
+
+  toggleSearch(){
+    this.config.showSearch = !this.config.showSearch ;
   }
 }
