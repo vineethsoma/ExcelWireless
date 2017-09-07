@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Brand, ProductService } from "./product/services/product.service";
 import { Observable } from "rxjs/Rx";
+import { UserService } from "./user.service";
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,12 @@ import { Observable } from "rxjs/Rx";
 export class AppComponent {
   title = 'app';
   brands: Observable<Array<Brand>> = null; 
-  constructor(productService: ProductService){
+  constructor(private userService: UserService, productService: ProductService){
     this.brands = productService.getBrands();
   }
   ngOnInit(){
     console.log(environment);
+    this.userService.authenticateFromLocalStorage();
 
   }
 }
