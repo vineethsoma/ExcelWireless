@@ -74,7 +74,10 @@ export class UserService {
         this.localStorage = null;
         localStorage.removeItem("excel-data");
         this._isAuthenticated.next(false);
+        this._userDetails.next(undefined);
+        this._checkoutDetails.next({ lineItems: null, totalAmount: 0, totalQuantity: 0 });
         this.router.navigate(['']);
+        window.location.reload(true);
     }
     authenticateFromLocalStorage() {
         this.localStorage = JSON.parse(localStorage.getItem("excel-data"));
@@ -89,8 +92,7 @@ export class UserService {
     }
     reset() {
         this.customer = null;
-        this._checkoutDetails.next(null);
-        this._userDetails.next(null);
+
     }
     isAuthenticated(): Observable<boolean> {
         if (this.customer) {
