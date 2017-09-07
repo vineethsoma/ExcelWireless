@@ -6,7 +6,7 @@ import { Customer, TransactionLineItem } from "./myaccount/myaccount.component";
 import { Router } from "@angular/router";
 
 @Injectable()
-export class UserService{
+export class UserService {
 
     private customer: Customer;
     private transactionLineItemObject: Observable<TransactionLineItem[]>;
@@ -23,18 +23,20 @@ export class UserService{
         this._userDetails = new BehaviorSubject<Customer>(undefined);
         this.authenticateFromLocalStorage();
     }
-    logout(){
-        this.localStorage = null; 
+    logout() {
+        this.localStorage = null;
         localStorage.removeItem("excel-data");
         this._isAuthenticated.next(false);
         this.router.navigate(['']);
     }
-    authenticateFromLocalStorage(){
+    authenticateFromLocalStorage() {
         this.localStorage = JSON.parse(localStorage.getItem("excel-data"));
         console.log(this.localStorage);
-        if(this.localStorage != null){
-            const user = this.localStorage.userDetails; 
+        if (this.localStorage != null) {
+            const user = this.localStorage.userDetails;
             this.authenticateUser(user.email, user.password);
+            this.authenticateUserFromCache(user.email, user.password);
+            
         }
     }
     getCustomerDetails(): Observable<Customer> {
@@ -44,37 +46,57 @@ export class UserService{
 
     authenticateUser(username: any, password: any): void {
         this._isAuthenticated.next(false);
-      this.fetching = Observable.create( (observer: Observer<boolean>) => {
         this.cutomerHttpRequest(username, password).subscribe((user) => {
             this.fetching;
             this.customer = user;
             this._userDetails.next(user);
-            localStorage.setItem("excel-data", JSON.stringify(<ExcelData>({...this.localStorage, userDetails: {...user, email: username, password: password}, } )));
+            localStorage.setItem("excel-data", JSON.stringify(<ExcelData>({ ...this.localStorage, userDetails: { ...user, email: username, password: password }, })));
             this._isAuthenticated.next(true);
-            observer.next(true);
         },
-    
-        (err) => {
-            this._userDetails.next(undefined);
-            this._isAuthenticated.next(false);
-            observer.error(err);
-        },
-        () => {
-            observer.complete();
-        }
-    ); 
+
+            (err) => {
+                this._userDetails.next(undefined);
+                this._isAuthenticated.next(false);
+            },
+            () => {
+            }
+        );
     }
-    );
+
+    authenticateUserFromCache(username: any, password: any): void {
+        this._isAuthenticated.next(false);
+        this.fetching = Observable.create((observer: Observer<boolean>) => {
+            this.cutomerHttpRequest(username, password).subscribe((user) => {
+                this.fetching;
+                this.customer = user;
+                this._userDetails.next(user);
+                localStorage.setItem("excel-data", JSON.stringify(<ExcelData>({ ...this.localStorage, userDetails: { ...user, email: username, password: password }, })));
+                this._isAuthenticated.next(true);
+                observer.next(true);
+            },
+
+                (err) => {
+                    this._userDetails.next(undefined);
+                    this._isAuthenticated.next(false);
+                    observer.error(err);
+                },
+                () => {
+                    observer.complete();
+                }
+            );
+        }
+        );
 
     }
+
     isAuthenticated(): Observable<boolean> {
-        console.log("IS AUthneticated status",this._isAuthenticated);
-        return this._isAuthenticated.asObservable(); 
-        
+        console.log("IS AUthneticated status", this._isAuthenticated);
+        return this._isAuthenticated.asObservable();
+
     }
 
     isFetching(): Promise<boolean> {
-        return this.fetching.last().toPromise(); 
+        return this.fetching.last().toPromise();
     }
 
     cutomerHttpRequest(username: any, password: any): Observable<Customer> {
@@ -101,10 +123,10 @@ export class UserService{
 
     refreshCheckoutDetails(): Observable<CheckoutOptions> {
         // if (!this.checkoutDetails) {
-        let {phoneNo} = this.customer; 
+        let { phoneNo } = this.customer;
         this.http.get('http://localhost:8080/getTransactionLineItem?phoneNo=' + phoneNo)
-        .map(this.extractData)
-        .map(this.updateCheckoutOptions)
+            .map(this.extractData)
+            .map(this.updateCheckoutOptions)
             .subscribe((data) => {
                 this._checkoutDetails.next(data);
             },
@@ -136,33 +158,32 @@ export class UserService{
     }
     updateCheckoutOptions(lineItems: TransactionLineItem[]) {
         return new CheckoutOptions({ lineItems: lineItems });
-      }
+    }
 
 }
 
-interface ExcelData{
-    userDetails: Customer; 
+interface ExcelData {
+    userDetails: Customer;
 }
 
 export class CheckoutOptions {
     lineItems: TransactionLineItem[] = [];
     totalQuantity;
     totalAmount;
-    
-    constructor(options?: {lineItems: TransactionLineItem[]}) {
-      if (!options) {
-        this.lineItems = [];
-        this.totalQuantity = 0;
-        this.totalAmount = 0;
-      } else {
-        this.lineItems = options.lineItems;
-        this.totalAmount = 0;
-        this.totalQuantity = 0;
-        this.lineItems.forEach((item) => {
-          this.totalQuantity += item.quantity;
-          this.totalAmount += item.quantity * item.retailPrice;
-        });
-      }
+
+    constructor(options?: { lineItems: TransactionLineItem[] }) {
+        if (!options) {
+            this.lineItems = [];
+            this.totalQuantity = 0;
+            this.totalAmount = 0;
+        } else {
+            this.lineItems = options.lineItems;
+            this.totalAmount = 0;
+            this.totalQuantity = 0;
+            this.lineItems.forEach((item) => {
+                this.totalQuantity += item.quantity;
+                this.totalAmount += item.quantity * item.retailPrice;
+            });
+        }
     }
-  }
-  
+}
