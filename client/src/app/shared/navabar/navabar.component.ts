@@ -69,10 +69,11 @@ export class NavabarComponent implements OnInit {
   // }
 
   navigateToSearch() {
-
-    console.log('event', event);
-    this.router.navigate(['/products/search', {description:this.search}]);
+    let search = this.search;
+    console.log('event', search);
+    this.router.navigate(['/products/search', {description:search}]);
     this.search = null;
+    this.toggleSearch();
 
     
   }

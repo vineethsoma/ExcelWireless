@@ -2,7 +2,7 @@
     <!-- Search-->
     <!-- <li class="has-megamenu" [ngClass]="{'brand-menu-show': false }"> -->
     <form *ngIf="this.config.showSearch" class="site-search">
-        <input type="text" name="" placeholder="Type to search...">
+        <input type="text" name="search" [(ngModel)]="this.search" (keyup.enter)="this.navigateToSearch()" placeholder="Type to search...">
         <div class="search-tools"><span class="clear-search" (click)="this.toggleSearch()">Clear</span><span class="close-search"><i class="icon-cross"></i></span></div>
     </form>
     <!-- </li> -->
@@ -71,20 +71,11 @@
     <div *ngIf="!this.config.showSearch" class="toolbar">
         <div class="inner">
             <div class="tools">
-<<<<<<< HEAD
                 <div class="search" (click)="this.toggleSearch()">
                     <i class="icon-search"></i>
                     <!-- <span class="input-group-addon">
                     <i class="icon-mail"></i>
                 </span> -->
-=======
-                <!-- <div class="search">
-                    <i class="icon-search"></i> -->
-                <input class="form-control" type="text" [(ngModel)]="search" (keyup.enter)="this.navigateToSearch()">
-                <span class="input-group-addon">
-                    <!-- <i class="icon-mail"></i> -->
-                </span>
->>>>>>> c1ee1db1326e63aac54511fbf266e8306cdafb5a
 
                 </div>
                 <div class="account">
