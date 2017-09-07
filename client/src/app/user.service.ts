@@ -4,7 +4,7 @@ import { Observable, Observer, BehaviorSubject, Subject } from 'rxjs/Rx';
 import { FormControl } from '@angular/forms/forms';
 import { TransactionLineItem } from "./myaccount/myaccount.component";
 import { Router } from "@angular/router";
-
+import { environment } from "../environments/environment";
 
 @Injectable()
 export class UserService {
@@ -22,6 +22,7 @@ export class UserService {
         this._isAuthenticated = new BehaviorSubject<boolean>(false);
         this._checkoutDetails = new BehaviorSubject<CheckoutOptions>({ lineItems: null, totalAmount: 0, totalQuantity: 0 });
         this._userDetails = new BehaviorSubject<Customer>(undefined);
+        this.url = environment.userUrl;
     }
 
     authenticateUser(username: any, password: any): void {
