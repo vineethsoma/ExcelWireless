@@ -22,6 +22,7 @@ export class AdminComponent implements OnInit {
   brandList: Array<Brand> = null;
   categroyList: Array<Category> = null;
   modelList: Array<Model> = null;
+  isLoading = true;
 
   ngOnInit() {
     this.productService.getBrands()
@@ -35,6 +36,7 @@ export class AdminComponent implements OnInit {
       .subscribe((productList) => {
         this.fullproductList = productList;
         this.loadProductsToView();
+        this.isLoading = false;
       });
   }
   getProducts(options: SearchOptions) {

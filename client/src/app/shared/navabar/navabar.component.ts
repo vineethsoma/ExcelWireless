@@ -5,6 +5,8 @@ import { UserService } from "../../user.service";
 import { CheckoutOptions } from "../../order/order.service";
 import { Router } from "@angular/router";
 import { Customer } from "../../myaccount/myaccount.component";
+import { FormControl } from "@angular/forms";
+
 
 @Component({
   selector: 'app-navabar',
@@ -38,6 +40,8 @@ export class NavabarComponent implements OnInit {
     this.categories = this.productService.getCategories();
   }
 
+  search = new FormControl();
+
   ngOnInit() {
     this.brands.subscribe((list)=>console.log(list));
   }
@@ -66,9 +70,12 @@ export class NavabarComponent implements OnInit {
   }
 
   selectBrand(brand: Brand){
+    let count = 0 ; 
     this.selectedBrand = brand;
-    this.config.showModelMenu = !this.config.showModelMenu;
+    if(count == 0 )
+      this.config.showModelMenu = !this.config.showModelMenu;
     console.log(this.config);
+    count++; 
   }
 
   logout()
