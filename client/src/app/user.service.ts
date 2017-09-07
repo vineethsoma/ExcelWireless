@@ -2,27 +2,73 @@ import { Injectable, OnInit } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable, Observer, BehaviorSubject, Subject } from 'rxjs/Rx';
 import { FormControl } from '@angular/forms/forms';
-import { Customer, TransactionLineItem } from "./myaccount/myaccount.component";
+import { TransactionLineItem } from "./myaccount/myaccount.component";
 import { Router } from "@angular/router";
+
 
 @Injectable()
 export class UserService {
 
-    private customer: Customer;
-    private transactionLineItemObject: Observable<TransactionLineItem[]>;
-    public readonly userDetails: Observable<Customer>;
-    public readonly checkoutDetails: Observable<CheckoutOptions>;
     private _isAuthenticated: BehaviorSubject<boolean>;
     private _checkoutDetails: BehaviorSubject<CheckoutOptions>;
     private _userDetails: BehaviorSubject<Customer>;
-    // private fetching: Subject<boolean>;
+
+    private customer: Customer;
+    private fetching: Subject<boolean>;
+    private transactionLineItemObject: Observable<TransactionLineItem[]>;
     private localStorage: ExcelData = undefined;
+
     constructor(private http: Http, private router: Router) {
         this._isAuthenticated = new BehaviorSubject<boolean>(false);
         this._checkoutDetails = new BehaviorSubject<CheckoutOptions>({ lineItems: null, totalAmount: 0, totalQuantity: 0 });
         this._userDetails = new BehaviorSubject<Customer>(undefined);
-        // this.fetching = new Subject();
-        this.authenticateFromLocalStorage();
+    }
+
+    authenticateUser(username: any, password: any): void {
+        this.fetching = new Subject();
+        console.log("Authentication user...")
+        this.reset();
+        this.cutomerHttpRequest(username, password).subscribe(
+            (user) => {
+                this.customer = user;
+                // console.log(this.customer);
+                this._userDetails.next(user);
+                localStorage.setItem("excel-data", JSON.stringify(<ExcelData>({ ...this.localStorage, userDetails: { ...user, email: username, password: password }, })));
+                console.log("User successfully authenticated");
+                this._isAuthenticated.next(true);
+            },
+            (err) => {
+                this._userDetails.next(undefined);
+                this._isAuthenticated.next(false);
+            },
+            () => {
+                this.fetching.next(false);
+                this.fetching.complete();
+                this.fetching = null;
+            }
+        );
+    }
+
+    async authState():Promise<boolean>{
+        let authState = false;
+        if(this.customer){
+            authState=true;
+        }
+        else{
+            if(!this.fetching)
+                authState=false;
+            else
+                authState = 
+                    await this.fetching.asObservable()
+                    .map((data) => {
+                        if(this.customer)
+                            return true; 
+                        else 
+                            return false; 
+                    })
+                .toPromise();
+        }
+        return authState;
     }
     logout() {
         this.localStorage = null;
@@ -37,66 +83,17 @@ export class UserService {
             const user = this.localStorage.userDetails;
             this.authenticateUser(user.email, user.password);
         }
-        else{
-            // this.fetching.next(false);
-            // this.fetching.complete();
-        }
     }
     getCustomerDetails(): Observable<Customer> {
         return this._userDetails.asObservable();
     }
-
-
-    // authenticateUserOLD(username: any, password: any): void {
-    //     this._isAuthenticated.next(false);
-    //     this.cutomerHttpRequest(username, password).subscribe((user) => {
-    //         this.fetching;
-    //         this.customer = user;
-    //         this._userDetails.next(user);
-    //         localStorage.setItem("excel-data", JSON.stringify(<ExcelData>({ ...this.localStorage, userDetails: { ...user, email: username, password: password }, })));
-    //         this._isAuthenticated.next(true);
-    //     },
-
-    //         (err) => {
-    //             this._userDetails.next(undefined);
-    //             this._isAuthenticated.next(false);
-    //         },
-    //         () => {
-    //         }
-    //     );
-    // }
-    reset(){
+    reset() {
         this.customer = null;
         this._checkoutDetails.next(null);
         this._userDetails.next(null);
     }
-    authenticateUser(username: any, password: any): void {
-        console.log("Authentication user...")
-        this.reset();
-        this.cutomerHttpRequest(username, password).subscribe((user) => {
-                
-                this.customer = user;
-                console.log(this.customer);
-                this._userDetails.next(user);
-                localStorage.setItem("excel-data", JSON.stringify(<ExcelData>({ ...this.localStorage, userDetails: { ...user, email: username, password: password }, })));
-                console.log("User successfully authenticated");
-                this._isAuthenticated.next(true);
-                // this.fetching.next(false);
-            },
-
-                (err) => {
-                    this._userDetails.next(undefined);
-                    this._isAuthenticated.next(false);
-                },
-                () => {
-
-                }
-            );
-        }
-
-
     isAuthenticated(): Observable<boolean> {
-        if(this.customer){
+        if (this.customer) {
             this._isAuthenticated.next(true);
         }
         console.log("In Authneticated status", this._isAuthenticated);
@@ -104,16 +101,16 @@ export class UserService {
     }
 
     // isFetching(): Promise<boolean> {
-        //if(this.fetching)
-            // return this.fetching.toPromise();
-        
+    //if(this.fetching)
+    // return this.fetching.toPromise();
+
     // }
 
     isAdmin(): boolean {
-        if(this.customer && this.customer.userRole.toLowerCase()=="admin"){
+        if (this.customer && this.customer.userRole.toLowerCase() == "admin") {
             return true;
         }
-        return false; 
+        return false;
     }
 
     cutomerHttpRequest(username: any, password: any): Observable<Customer> {
@@ -152,7 +149,7 @@ export class UserService {
             () => {
             });
         // }
-        return this.checkoutDetails;
+        return this._checkoutDetails.asObservable();
     }
     private extractData(res: Response): any {
         const body = res.json();
@@ -203,4 +200,25 @@ export class CheckoutOptions {
             });
         }
     }
+}
+
+export class Customer {
+    phoneNo: number;
+    onlyFirstName: string;
+    firstName: string;
+    lastName: string;
+    companyName: string;
+    email: any;
+    taxId: any;
+    dateOfBirth: any;
+    street: any;
+    city: string;
+    state: string;
+    country: string;
+    zipCode: number;
+    storeCredit: any;
+    password: any;
+    createdDate: any;
+    validUser: boolean;
+    userRole: string;
 }
