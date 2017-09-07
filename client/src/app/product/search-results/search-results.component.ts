@@ -20,6 +20,7 @@ export class SearchResultsComponent implements OnInit {
   searchOptions: SearchOptions; 
   route: ActivatedRoute;
   config = {isAuthenticated: false};
+  isLoading = true;
 
   constructor(private userService: UserService,private orderService: OrderService, private el: ElementRef, private productService: ProductService, route: ActivatedRoute, private router: Router) {
     this.route = route;
@@ -44,10 +45,11 @@ export class SearchResultsComponent implements OnInit {
     })
     .subscribe((productList) => {
       this.fullproductList = productList;
-        this.productsViewList = this.loadProductsToView(this.searchOptions, this.fullproductList); 
+        this.productsViewList = this.loadProductsToView(this.searchOptions, this.fullproductList);
+        this.isLoading = false; 
       });
   }
-
+  
   addProduct(product: Product)
   {
     //Logic to add product.

@@ -31,11 +31,12 @@
 
             <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showBrandMenu }"><a (click)="this.toggleBrand()"><span>BRAND</span></a>
                 <ul class="mega-menu">
-                    <!-- <span class="mega-menu-title"></span> -->
+                    <span class="mega-menu-title"></span>
                     <ul class="flex-menu">
                         <li class="flex-menu-item" [ngClass]="{'brand-menu-show': this.config.showModelMenu }" *ngFor="let brand of this.brands | async">
                             <a (click)="this.selectBrand(this.brand)"><img class="img-responsive" src="data:image/png;base64,{{brand.image}}" alt="{{brand.brandName}}"></a>
                             <ul *ngIf="this.config.showModelMenu" class="mega-menu">
+                                <span class="mega-menu-title">{{this.selectedBrand.brandName}}</span>
                                 <ul class="flex-submenu">
                                     <li class="flex-submenu-item text-left" *ngFor="let model of this.selectedBrand.models">
                                         <a (click)="this.navigateToModel(model)"><span><img class="img-responsive" src="data:image/png;base64,{{model.image}}" alt="{{model.description}}">{{model.modelName}}</span></a>

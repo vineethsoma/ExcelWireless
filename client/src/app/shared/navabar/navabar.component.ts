@@ -70,9 +70,12 @@ export class NavabarComponent implements OnInit {
   }
 
   selectBrand(brand: Brand){
+    let count = 0 ; 
     this.selectedBrand = brand;
-    this.config.showModelMenu = !this.config.showModelMenu;
+    if(count == 0 )
+      this.config.showModelMenu = !this.config.showModelMenu;
     console.log(this.config);
+    count++; 
   }
 
   logout()

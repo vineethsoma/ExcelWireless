@@ -1,4 +1,4 @@
-ul.flex-menu{
+ul.flex-menu {
     display: flex;
     // height: 200px;
     justify-content: center;
@@ -6,27 +6,28 @@ ul.flex-menu{
     flex-wrap: wrap;
     align-items: center;
     // position: absolute;
-    li.flex-menu-item{
+    li.flex-menu-item {
         width: 10%;
         // height: 50%;
         // position: relative;
-        a:hover{
+        a:hover {
             cursor: hand;
-        } 
-        ul.flex-submenu{
-        display: flex;
-        justify-content: center;
-        flex-flow: row;
-        flex-shrink: 2;
-        flex-wrap: wrap;
-        // display: flex;
-        li.flex-submenu-item{
-            width: 20%
+        }
+        ul.flex-submenu {
+            display: flex;
+            justify-content: left;
+            flex-flow: row;
+            flex-shrink: 2;
+            flex-wrap: wrap;
+            // display: flex;
+            li.flex-submenu-item {
+                width: 20%
+            }
         }
     }
-    }
 }
-ul.flex-catmenu{
+
+ul.flex-catmenu {
     display: flex;
     // height: 200px;
     justify-content: flex-start;
@@ -34,33 +35,34 @@ ul.flex-catmenu{
     flex-wrap: wrap;
     align-items: center;
     // position: absolute;
-    li.flex-catmenu-item{
+    li.flex-catmenu-item {
         width: 20%;
         // height: 50%;
         // position: relative;
-        a:hover{
+        a:hover {
             cursor: hand;
         }
     }
 }
+
 .brand-menu-show {
     cursor: pointer;
     // {
-        > .sub-menu {
+    >.sub-menu {
         display: block;
         -webkit-animation: submenu-show .3s cubic-bezier(.68, -.55, .265, 1.55);
         animation: submenu-show .3s cubic-bezier(.68, -.55, .265, 1.55);
-    
-        }
-        > .mega-menu {
-            display: table;
-            -webkit-animation: megamenu-show .45s cubic-bezier(.68, -.55, .265, 1.55);
-            animation: megamenu-show .1s cubic-bezier(.68, -.55, .265, 1.55);
-            .sub-menu {
+    }
+    >.mega-menu {
+        display: table;
+        -webkit-animation: megamenu-show .45s cubic-bezier(.68, -.55, .265, 1.55);
+        animation: megamenu-show .1s cubic-bezier(.68, -.55, .265, 1.55);
+        .sub-menu {
             -webkit-animation: none;
             animation: none;
         }
-    // }
-}
+        // }
     }
+}
+
 // .mega-menu { @extend %mega-menu; }
