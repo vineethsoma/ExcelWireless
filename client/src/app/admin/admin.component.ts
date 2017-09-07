@@ -21,7 +21,7 @@ export class AdminComponent implements OnInit {
   listOfProductOption: CommonDto[];
   brandList: Array<Brand> = null;
   categroyList: Array<Category> = null;
-  modelList: Array<Model> = null;
+  modelList: Array<Model> = [];
   isLoading = true;
 
   ngOnInit() {
@@ -30,7 +30,14 @@ export class AdminComponent implements OnInit {
     this.productService.getBrands()
       .subscribe((brands) => {
         this.brandList = brands
-        this.modelList = [];
+
+        for(let i = 0; i < this.brandList.length; i ++) {
+
+          console.log('model lenght', this.brandList.length);
+          console.log('model vaule', this.brandList[i].models);
+
+          this.brandList[i].models.forEach((model) => this.modelList.push({modelId: model.modelId, modelName: model.modelName, description: model.description, quantity: model.quantity, image: model.image }));
+        }
       });
     this.productService.getCategories()
       .subscribe((categories) => this.categroyList = categories);
@@ -40,7 +47,10 @@ export class AdminComponent implements OnInit {
         this.loadProductsToView();
         this.isLoading = false;
       });
+
+      console.log('list of model', this.modelList)
   }
+  
   getProducts(options: SearchOptions) {
     return this.productService.getProducts(options);
   }
@@ -84,7 +94,10 @@ onProductDropdownChoose(): void {
     }
   // tslint:disable-next-line:one-line
   else if (this.selectedProductDropdownOption === 'Model') {
-  
+
+  this.listOfProductOption = [];
+  this.modelList.forEach((model) => this.listOfProductOption.push({id: model.modelId, name: model.modelName}));
+  console.log('list of model', this.listOfProductOption)
   }
 }
 
