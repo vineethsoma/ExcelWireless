@@ -65,4 +65,27 @@ ul.flex-catmenu {
     }
 }
 
+
+.site-search {
+    opacity: 100;
+    visibility: visible;
+}
+
 // .mega-menu { @extend %mega-menu; }
+
+
+
+.search-results{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: -1px !important;
+    border: 1px solid black;
+    background-color: white;
+    table-layout: fixed;
+}
+.site-search{
+    position: static;
+}

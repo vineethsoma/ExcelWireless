@@ -23,7 +23,8 @@ export class NavabarComponent implements OnInit {
     isAuthenticated: false,
     showBrandMenu: false,
     showModelMenu: false,
-    showCategoryMenu: false
+    showCategoryMenu: false,
+    showSearch: false
   }
   //search = new FormControl();
   search: string;
@@ -68,10 +69,11 @@ export class NavabarComponent implements OnInit {
   // }
 
   navigateToSearch() {
-
-    console.log('event', event);
-    this.router.navigate(['/products/search', {description:this.search}]);
+    let search = this.search;
+    console.log('event', search);
+    this.router.navigate(['/products/search', {description:search}]);
     this.search = null;
+    this.toggleSearch();
 
     
   }
@@ -116,5 +118,9 @@ export class NavabarComponent implements OnInit {
 
   toggleBrand(){
     this.config.showBrandMenu = !this.config.showBrandMenu;
+  }
+
+  toggleSearch(){
+    this.config.showSearch = !this.config.showSearch ;
   }
 }
