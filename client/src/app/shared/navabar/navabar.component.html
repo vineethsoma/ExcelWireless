@@ -3,15 +3,15 @@
     <!-- <li class="has-megamenu" [ngClass]="{'brand-menu-show': false }"> -->
     <form *ngIf="this.config.showSearch" class="site-search">
         <input type="text" name="search" [(ngModel)]="this.search" (keyup.enter)="this.navigateToSearch()" placeholder="Type to search...">
-        <div class="search-tools"><span class="clear-search" (click)="this.toggleSearch()">Clear</span><span class="close-search"><i class="icon-cross"></i></span></div>
+        <div class="search-tools"><span class="clear-search" (click)="this.search = ''" >Clear</span><span class="close-search" (click)="this.toggleSearch()"><i class="icon-cross"></i></span></div>
     </form>
     <!-- </li> -->
     <div *ngIf="!this.config.showSearch" class="site-branding">
         <div class="inner">
             <!-- Off-Canvas Toggle (#shop-categories)-->
-            <a class="offcanvas-toggle cats-toggle" href="#shop-categories" data-toggle="offcanvas"></a>
+            <a class="offcanvas-toggle cats-toggle" data-toggle="offcanvas"></a>
             <!-- Off-Canvas Toggle (#mobile-menu)-->
-            <a class="offcanvas-toggle menu-toggle" href="#mobile-menu" data-toggle="offcanvas"></a>
+            <a class="offcanvas-toggle menu-toggle" data-toggle="offcanvas"></a>
             <!-- Site Logo-->
             <a class="site-logo" [routerLink]="['/']"><img src="/assets/images/neoLogo.jpg"></a>
         </div>
