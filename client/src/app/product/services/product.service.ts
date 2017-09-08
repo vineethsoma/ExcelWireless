@@ -170,9 +170,10 @@ export class Product {
  retailPrice: number;
  costPrice: number;
  quantity: number;
-brandId: number;
-categoryId: number;
-quantityForPurchase: number;
+ brandId: number;
+ categoryId: number;
+ modelId: number;
+ quantityForPurchase: number;
  constructor(dto: ProductDTO) {
     this.productId = dto.productId;
     this.image = dto.image;
@@ -182,6 +183,8 @@ quantityForPurchase: number;
     this.brandId = dto.brandId;
     this.productNo = dto.productNo;
     this.categoryId = dto.categoryId;
+    this.modelId = dto.modelId;
+
     
  }
 }
