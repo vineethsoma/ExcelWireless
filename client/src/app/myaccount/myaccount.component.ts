@@ -67,7 +67,7 @@ export class MyaccountComponent implements OnInit {
       if(isAuth && navigateUrl && navigateUrl != "null"){
         console.log(navigateUrl);
         this.router.navigate([navigateUrl]);
-        // this.router.navigate(['']);
+        this.router.navigate(['']);
       }
     });
   }

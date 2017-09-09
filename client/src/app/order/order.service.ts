@@ -102,6 +102,7 @@ export class OrderService {
       .map(this.extractData)
       .catch(this.handleError);
   }
+  
 
   updateCheckoutOptions(lineItems: TransactionLineItem[]) {
     return new CheckoutOptions({ lineItems: lineItems });
