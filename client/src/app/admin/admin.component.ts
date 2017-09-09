@@ -67,6 +67,8 @@ export class AdminComponent implements OnInit {
       this.productsViewList = this.fullproductList.filter((product) => product.brandId == commonDto);
     if(this.selectedProductDropdownOption == "Category")
       this.productsViewList = this.fullproductList.filter((product) => product.categoryId == commonDto);
+    if(this.selectedProductDropdownOption == "Model")
+      this.productsViewList = this.fullproductList.filter((product) => product.modelId == commonDto);
     console.log(this.productsViewList);
   }
   addImage(product: Product, index: number) {

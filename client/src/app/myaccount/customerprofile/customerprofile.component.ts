@@ -25,7 +25,7 @@ export class CustomerprofileComponent implements OnInit {
       'lastName': [this.customer.lastName, Validators.required],
      'email': [{value: this.customer.email,disabled: true}, [ Validators.required,
         Validators.pattern('^[A-Za-z0-9.]+@[A-Za-z0-9.]+$')]], // TODO - Need to fox this too .com is not validating
-      'phoneNo': [{value: this.customer.phoneNo,disabled: true},[Validators.required, Validators.pattern('^[0-9]+$')]], // TODO - Need to fix this for phono no.
+      'phoneNo': [this.customer.phoneNo,[Validators.required, Validators.pattern('^[0-9]+$')]], // TODO - Need to fix this for phono no.
       'taxId': [this.customer.taxId],
       'dateOfBirth': [this.customer.dateOfBirth],
       'companyName': [this.customer.companyName],
