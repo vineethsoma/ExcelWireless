@@ -9,6 +9,7 @@ import { ImagesloadedComponent } from './services/jquery/imagesloaded/imagesload
 import { FooterComponent } from './footer/footer.component';
 import { LoadComponent } from "./load/load.component";
 import { RouterModule } from "@angular/router";
+import { GlobalService } from './services/global.service';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { RouterModule } from "@angular/router";
     FooterComponent,
     LoadComponent
   ],
-  exports: [HeaderComponent, NavabarComponent, FooterComponent, LoadComponent, FormsModule]
+  exports: [HeaderComponent, NavabarComponent, FooterComponent, LoadComponent, FormsModule],
+  providers: [GlobalService]
 
 })
 export class SharedModule {

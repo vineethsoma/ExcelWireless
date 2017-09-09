@@ -1,118 +1,141 @@
-<header class="navbar navbar-sticky">
+<header class="navbar  navbar-sticky"  [ngClass]="{'sidenav-open': this.config.showSideNav}">
     <!-- Search-->
     <!-- <li class="has-megamenu" [ngClass]="{'brand-menu-show': false }"> -->
-    <form *ngIf="this.config.showSearch" class="site-search">
-        <input type="text" name="search" [(ngModel)]="this.search" (keyup.enter)="this.navigateToSearch()" placeholder="Type to search...">
-        <div class="search-tools"><span class="clear-search" (click)="this.search = ''" >Clear</span><span class="close-search" (click)="this.toggleSearch()"><i class="icon-cross"></i></span></div>
-    </form>
-    <!-- </li> -->
-    <div *ngIf="!this.config.showSearch" class="site-branding">
-        <div class="inner">
-            <!-- Off-Canvas Toggle (#shop-categories)-->
-            <a class="offcanvas-toggle cats-toggle" data-toggle="offcanvas"></a>
-            <!-- Off-Canvas Toggle (#mobile-menu)-->
-            <a class="offcanvas-toggle menu-toggle" data-toggle="offcanvas"></a>
-            <!-- Site Logo-->
-            <a class="site-logo" [routerLink]="['/']"><img src="/assets/images/neoLogo.jpg"></a>
+    <!-- <div> -->
+
+
+
+        <form *ngIf="this.config.showSearch" class="site-search">
+            <input type="text" name="search" [(ngModel)]="this.search" (keyup.enter)="this.navigateToSearch()" placeholder="Type to search...">
+            <div class="search-tools"><span class="clear-search" (click)="this.search = ''">Clear</span><span class="close-search" (click)="this.toggleSearch()"><i class="icon-cross"></i></span></div>
+        </form>
+        <!-- </li> -->
+        <!-- Branding -->
+        <div *ngIf="!this.config.showSearch" class="site-branding">
+            <div class="inner">
+                <!-- Off-Canvas Toggle (#shop-categories)-->
+                <!-- <a class="offcanvas-toggle cats-toggle" data-toggle="offcanvas"></a> -->
+                <!-- Off-Canvas Toggle (#mobile-menu)-->
+                <a class="offcanvas-toggle menu-toggle" (click)="this.toggleSideMenu()"></a>
+                <!-- Site Logo-->
+                <a class="site-logo" [routerLink]="['/']"><img src="/assets/images/neoLogo.jpg"></a>
+            </div>
         </div>
-    </div>
-    <!-- Main Navigation-->
-    <nav *ngIf="!this.config.showSearch" class="site-menu">
-        <ul>
-            <li><a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span (click) = "this.closeMenu()">HOME</span></a></li>
+        <!-- Main Navigation-->
+        <nav *ngIf="!this.config.showSearch" class="site-menu">
+            <ul>
+                <li><a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span (click) = "this.closeMenu()">HOME</span></a></li>
 
-            <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }"><a (click)="this.config.showCategoryMenu = !this.config.showCategoryMenu"><span (click) = "this.closeMenu()">CATEGORY</span></a>
-                <ul class="mega-menu">
-                    <ul class="flex-catmenu">
-                        <li class="flex-catmenu-item text-left" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }" *ngFor="let category of this.categories | async">
-                            <a (click)="this.navigateToCategory(category)">{{category.categoryName}}</a>
-                        </li>
+                <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }"><a (click)="this.config.showCategoryMenu = !this.config.showCategoryMenu"><span (click) = "this.closeMenu()">CATEGORY</span></a>
+                    <ul class="mega-menu">
+                        <ul class="flex-catmenu">
+                            <li class="flex-catmenu-item text-left" [ngClass]="{'brand-menu-show': this.config.showCategoryMenu }" *ngFor="let category of this.categories | async">
+                                <a (click)="this.navigateToCategory(category)">{{category.categoryName}}</a>
+                            </li>
+                        </ul>
                     </ul>
-                </ul>
-            </li>
+                </li>
 
-            <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showBrandMenu }"><a (click)="this.toggleBrand()"><span>BRAND</span></a>
-                <ul class="mega-menu">
-                    <span class="mega-menu-title"></span>
-                    <ul class="flex-menu">
-                        <li class="flex-menu-item" [ngClass]="{'brand-menu-show': this.config.showModelMenu }" *ngFor="let brand of this.brands | async">
-                            <a (click)="this.selectBrand(this.brand)"><img class="img-responsive" src="data:image/png;base64,{{brand.image}}" alt="{{brand.brandName}}"></a>
-                            <ul *ngIf="this.config.showModelMenu" class="mega-menu">
-                                <span class="mega-menu-title">{{this.selectedBrand.brandName}}</span>
-                                <ul class="flex-submenu">
-                                    <li class="flex-submenu-item text-left" *ngFor="let model of this.selectedBrand.models">
-                                        <a (click)="this.navigateToModel(model)"><span><img class="img-responsive" src="data:image/png;base64,{{model.image}}" alt="{{model.description}}">{{model.modelName}}</span></a>
-                                    </li>
+                <li class="has-megamenu" [ngClass]="{'brand-menu-show': this.config.showBrandMenu }"><a (click)="this.toggleBrand()"><span>BRAND</span></a>
+                    <ul class="mega-menu">
+                        <span class="mega-menu-title"></span>
+                        <ul class="flex-menu">
+                            <li class="flex-menu-item" [ngClass]="{'brand-menu-show': this.config.showModelMenu }" *ngFor="let brand of this.brands | async">
+                                <a (click)="this.selectBrand(this.brand)"><img class="img-responsive" src="data:image/png;base64,{{brand.image}}" alt="{{brand.brandName}}"></a>
+                                <ul *ngIf="this.config.showModelMenu" class="mega-menu">
+                                    <span class="mega-menu-title">{{this.selectedBrand.brandName}}</span>
+                                    <ul class="flex-submenu">
+                                        <li class="flex-submenu-item text-left" *ngFor="let model of this.selectedBrand.models">
+                                            <a (click)="this.navigateToModel(model)"><span><img class="img-responsive" src="data:image/png;base64,{{model.image}}" alt="{{model.description}}">{{model.modelName}}</span></a>
+                                        </li>
+                                    </ul>
                                 </ul>
-                            </ul>
-                        </li>
+                            </li>
+                        </ul>
                     </ul>
-                </ul>
-            </li>
-            <li>
-                <a (click)="this.navigateToParts()">
-                    <span (click)="this.closeMenu()">PARTS</span>
-                </a>
-            </li>
-            <li>
-                <a [routerLink]="['/lcdbuyback']" [routerLinkActive]="['active']">
+                </li>
+                <li>
+                    <a (click)="this.navigateToParts()">
+                        <span (click)="this.closeMenu()">PARTS</span>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/lcdbuyback']" [routerLinkActive]="['active']">
                     <span (click)="this.closeMenu()">LCD BUYBACK</span>
                 </a>
-            </li>
-            <li>
-                <a [routerLink]="['/contactus']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                </li>
+                <li>
+                    <a [routerLink]="['/contactus']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <span (click)="this.closeMenu()">CONTACT US</span>
                 </a>
 
-            </li>
-        </ul>
-    </nav>
-    <!-- Toolbar-->
-    <div *ngIf="!this.config.showSearch" class="toolbar">
-        <div class="inner">
-            <div class="tools">
-                <div class="search" (click)="this.toggleSearch()">
-                    <i class="icon-search"></i>
-                    <!-- <span class="input-group-addon">
-                    <i class="icon-mail"></i>
-                </span> -->
+                </li>
+            </ul>
+        </nav>
+        <!-- Toolbar-->
+        <div *ngIf="!this.config.showSearch" class="toolbar">
+            <div class="inner">
+                <div class="tools">
+                    <div class="search" (click)="this.toggleSearch()">
+                        <i class="icon-search"></i>
+                        <!-- <span class="input-group-addon">
+                        <i class="icon-mail"></i>
+                    </span> -->
 
-                </div>
-                <div class="account">
-                    <a></a><i class="icon-head"></i>
-                    <ul *ngIf="this.config.isAuthenticated" class="toolbar-dropdown">
-                        <li class="sub-menu-title"><span>Hello,</span> {{(this.userDetails | async)?.onlyFirstName}}&nbsp;{{(this.userDetails | async)?.lastName}}</li>
-                        <li><a [routerLink]="['/myaccount/myprofile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">My Profile</a></li>
-                        <li><a [routerLink]="['/myaccount/myorder']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Orders List</a></li>
-                        <li class="sub-menu-separator"></li>
-                        <li (click)="this.logout()">
-                            <a> <i class="icon-unlock"></i>Logout</a>
-                        </li>
-                    </ul>
-                    <ul *ngIf="!this.config.isAuthenticated" class="toolbar-dropdown">
-                        <li>
-                            <a [routerLink]="['/myaccount']"> <i class="icon-lock"></i>Login</a>
-                        </li>
-                    </ul>
-                </div>
-                <div *ngIf="this.config.isAuthenticated && (this.checkoutDetails | async) != null" class="cart">
-                    <i class="icon-bag"></i><span class="count">{{(this.checkoutDetails | async)?.totalQuantity}}</span>
-                    <span class="subtotal">${{(this.checkoutDetails | async)?.totalAmount}}</span>
-                    <div class="toolbar-dropdown">
-                        <div class="dropdown-product-item" *ngFor="let item of (this.checkoutDetails | async)?.lineItems"><span class="dropdown-product-remove"><i class="icon-cross"></i></span>
-                            <a class="dropdown-product-thumb"><img class="img-responsive" src="data:image/png;base64,{{item.image}}" alt="{{item.description}}"></a>
-                            <div class="dropdown-product-info"><a class="dropdown-product-title">{{item.description}}</a><span class="dropdown-product-details">{{item.quantity}} x ${{item.retailPrice}}</span></div>
-                        </div>
-                        <div class="toolbar-dropdown-group">
-                            <div class="column"><span class="text-lg">Total:</span></div>
-                            <div class="column text-right"><span class="text-lg text-medium">${{(this.checkoutDetails | async)?.totalAmount}}&nbsp;</span></div>
-                        </div>
-                        <div class="toolbar-dropdown-group">
-                            <div class="column"><a class="btn btn-sm btn-block btn-success" [routerLink]="['/checkout']">View Cart</a></div>
+                    </div>
+                    <div class="account">
+                        <a></a><i class="icon-head"></i>
+                        <ul *ngIf="this.config.isAuthenticated" class="toolbar-dropdown">
+                            <li class="sub-menu-title"><span>Hello,</span> {{(this.userDetails | async)?.onlyFirstName}}&nbsp;{{(this.userDetails |
+                                async)?.lastName}}</li>
+                            <li><a [routerLink]="['/myaccount/myprofile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">My Profile</a></li>
+                            <li><a [routerLink]="['/myaccount/myorder']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Orders List</a></li>
+                            <li class="sub-menu-separator"></li>
+                            <li (click)="this.logout()">
+                                <a> <i class="icon-unlock"></i>Logout</a>
+                            </li>
+                        </ul>
+                        <ul *ngIf="!this.config.isAuthenticated" class="toolbar-dropdown">
+                            <li>
+                                <a [routerLink]="['/myaccount']"> <i class="icon-lock"></i>Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="this.config.isAuthenticated && (this.checkoutDetails | async) != null" class="cart">
+                        <i class="icon-bag"></i><span class="count">{{(this.checkoutDetails | async)?.totalQuantity}}</span>
+                        <span class="subtotal">${{(this.checkoutDetails | async)?.totalAmount}}</span>
+                        <div class="toolbar-dropdown">
+                            <div class="dropdown-product-item" *ngFor="let item of (this.checkoutDetails | async)?.lineItems"><span class="dropdown-product-remove"><i class="icon-cross"></i></span>
+                                <a class="dropdown-product-thumb"><img class="img-responsive" src="data:image/png;base64,{{item.image}}" alt="{{item.description}}"></a>
+                                <div class="dropdown-product-info"><a class="dropdown-product-title">{{item.description}}</a><span class="dropdown-product-details">{{item.quantity}} x ${{item.retailPrice}}</span></div>
+                            </div>
+                            <div class="toolbar-dropdown-group">
+                                <div class="column"><span class="text-lg">Total:</span></div>
+                                <div class="column text-right"><span class="text-lg text-medium">${{(this.checkoutDetails | async)?.totalAmount}}&nbsp;</span></div>
+                            </div>
+                            <div class="toolbar-dropdown-group">
+                                <div class="column"><a class="btn btn-sm btn-block btn-success" [routerLink]="['/checkout']">View Cart</a></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
 </header>
+
+<!-- Mobile Navigation  -->
+<div class="offcanvas-container has-sidenav" [ngClass]="{'active': this.config.showSideNav}" id="mobile-menu"><a class="account-link"><i class="icon-head"></i><span>Hello</span>,  {{(this.userDetails | async)?.onlyFirstName}}&nbsp;{{(this.userDetails |
+    async)?.lastName}}</a>
+    <nav class="offcanvas-menu">
+        <ul class="menu" [ngClass]="{'off-view': this.config.showSideSubMenu}">
+            <li><a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span (click) = "this.closeMenu()">HOME</span></a></li>
+                
+            <li class="has-children"><span><a href="javascript:void(0)"><span>CATEGORY</span></a><span class="sub-menu-toggle"  (click)="this.showSubMenuById('category')"></span></span>
+                <ul #category class="offcanvas-submenu" [ngClass]="this.sideNavConfig.category">
+                    <li *ngFor="let category of this.categories | async"><a href="javascript:void(0)">{{category.categoryName}}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>

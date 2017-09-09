@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { Brand, Model, ProductService, Category } from "../../product/services/product.service";
 import { Observable } from "rxjs/Rx";
 import { UserService } from "../../user.service";
@@ -6,6 +6,7 @@ import { CheckoutOptions } from "../../order/order.service";
 import { Router } from "@angular/router";
 import { Customer } from "../../myaccount/myaccount.component";
 import { FormControl } from "@angular/forms";
+import { GlobalService } from '../services/global.service';
 
 
 @Component({
@@ -24,13 +25,18 @@ export class NavabarComponent implements OnInit {
     showBrandMenu: false,
     showModelMenu: false,
     showCategoryMenu: false,
-    showSearch: false
+    showSearch: false,
+    showSideNav: true,
+    showSideSubMenu: false
   }
   //search = new FormControl();
   search: string;
+  sideNavConfig: SideNavConfig = new SideNavConfig();
   
-  constructor(private userService: UserService, private router: Router,private productService: ProductService) {
-
+  constructor(private globalService: GlobalService, private userService: UserService, private router: Router,private productService: ProductService, private el: ElementRef) {
+    this.globalService.getAppConfig().subscribe((config) => {
+      this.config.showSideNav = config.showSideNav;
+    });
     this.userDetails = userService.getCustomerDetails();
     
     this.userService.isAuthenticated()
@@ -123,4 +129,25 @@ export class NavabarComponent implements OnInit {
   toggleSearch(){
     this.config.showSearch = !this.config.showSearch ;
   }
+
+  toggleSideMenu(){
+    this.config.showSideNav = !this.config.showSideNav;
+    this.globalService.updateAppConfig({showSideNav: this.config.showSideNav});
+    console.log(this.config.showSideNav);
+  }
+
+  showSubMenuById(id: string){
+    // let element = this.el.nativeElement.querySelector('#category'); 
+    this.config.showSideSubMenu = true;
+    // element.addClass('in-view');
+    // console.log("Element ",element);
+    this.sideNavConfig[id]['in-view'] = true;
+    console.log(this.config.showSideSubMenu);
+  }
+}
+
+class SideNavConfig{
+  menuClass={'off-view':false};
+  category={'in-view': false};
+  brands={'in-view': false};
 }
