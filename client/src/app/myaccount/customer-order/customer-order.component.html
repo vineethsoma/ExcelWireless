@@ -5,11 +5,11 @@
         </div>
         <div class="column">
             <ul class="breadcrumbs">
-                <li><a href="index.html">Home</a>
+                <li><a [routerLink]="['']">Home</a>
                 </li>
-                <li class="separator">&nbsp;</li>
+                <!-- <li class="separator">&nbsp;</li>
                 <li><a href="account-orders.html">Account</a>
-                </li>
+                </li> -->
                 <li class="separator">&nbsp;</li>
                 <li>My Orders</li>
             </ul>
@@ -28,7 +28,7 @@
                     <div class="user-avatar">
                         <a class="edit-avatar" href="#"></a><img src="img/account/user-ava.jpg" alt="User"></div>
                     <div class="user-data">
-                        <h4>Daniel Adams</h4><span>Joined February 06, 2017</span>
+                        <h4>{{this.customer.firstName}} {{this.customer.lastName}}</h4><span>Joined February 06, 2017</span>
                     </div>
                 </div>
             </aside>

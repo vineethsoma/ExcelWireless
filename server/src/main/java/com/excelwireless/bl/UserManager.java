@@ -44,6 +44,7 @@ public class UserManager {
             {
                 userLogin.setPhoneNo(customerDto.getPhoneNo());
                 userLogin.setValidUser(true);
+                userLogin.setEmail(customerDto.getEmail());
                 userLogin.setStreet(customerDto.getStreet());
                 userLogin.setCity(customerDto.getCity());
                 userLogin.setState(customerDto.getState());

@@ -6,7 +6,7 @@
         </div>
         <div class="column">
             <ul class="breadcrumbs">
-                <li><a href="index.html">Home</a>
+                <li><a [routerLink]="['']">Home</a>
                 </li>
                 <li class="separator">&nbsp;</li>
                 <li>Checkout</li>
@@ -70,7 +70,7 @@
                                 {{lineItem.quantity * lineItem.retailPrice}}
                             </td>
                             <td class="text-center">
-                                <a class="btn btn-outline-primary btn-sm" href="cart.html">Edit</a>
+                                <a class="btn btn-outline-primary btn-sm" [routerLink]="['/checkout']">Edit</a>
                             </td>
                         </tr>
 
