@@ -1,4 +1,6 @@
 <app-header></app-header>
 <app-navabar [brands]="this.brands"></app-navabar>
-<router-outlet></router-outlet>
+<div class="has-sidenav" [ngClass]="{'sidenav-open': this.config.showSideNav}">
+    <router-outlet></router-outlet>
+</div>
 <app-footer></app-footer>

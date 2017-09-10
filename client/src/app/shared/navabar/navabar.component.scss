@@ -91,3 +91,18 @@ ul.flex-catmenu {
     height: 500px !important;
     overflow: scroll;
 }
+.sidenav-open{
+    z-index:1;
+}
+
+div#mobile-menu{
+    opacity: 0;
+    z-index: 10;
+    transition: transform .4s ease-in-out, -webkit-transform .4s ease-in-out;
+}
+.offcanvas-container.active{
+    visibility: visible;
+    opacity: 100 !important;
+    // transition: opacity .25s ease-in-out !important;
+    // transition: transform .4s ease-in-out !important;
+}

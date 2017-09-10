@@ -143,3 +143,15 @@ a>span {
         transform: rotate(360deg);
     }
 }
+
+.has-sidenav{
+    transition: transform .4s ease-in-out, -webkit-transform .4s ease-in-out;
+}
+.sidenav-open{
+    transform: translate3d(290px, 0, 0);
+}
+
+
+
+
+
