@@ -152,7 +152,7 @@ class SideNavConfig{
   menu={'off-view':false};
   category={'in-view': false};
   brands={'in-view': false};
-  models={'in-view': false};
+  models={'in-view-submenu': false};
   
   setActiveSubMenu(id: string){  
     if(id == 'category')
@@ -166,9 +166,9 @@ class SideNavConfig{
       this.brands['in-view']=false;
     
     if(id == 'models')
-      this.models['in-view']=true;
+      this.models['in-view-submenu']=true;
     else
-      this.models['in-view']=false;
+      this.models['in-view-submenu']=false;
     
     if(id == 'menu')
       this.menu['off-view']=false;
