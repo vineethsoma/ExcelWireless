@@ -107,7 +107,11 @@ div#mobile-menu{
     // transition: transform .4s ease-in-out !important;
 }
 nav.offcanvas-menu{
-    overflow: visible;
+    // overflow: visible;
+    // overflow-y: -webkit-paged-y;
+    overflow-x: hidden;
+    overflow-y: visible;
+    height: 100%;
 }
 .in-view-submenu{
     transform: translate3d(-200%, 0, 0) !important;

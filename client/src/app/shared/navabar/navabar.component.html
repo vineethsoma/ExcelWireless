@@ -137,16 +137,16 @@
     <nav class="offcanvas-menu">
         <ul class="menu" [ngClass]="this.sideNavConfig.menu">
             <li *ngIf="!this.config.isAuthenticated">
-                <a class="account-link" [routerLink]="['/myaccount']" href="javascript:void(0)"> 
+                <a class="account-link" [routerLink]="['/myaccount']" href="javascript:void(0)" (click)="this.toggleSideMenu()"> 
                     <i class="icon-unlock"></i><span>&nbsp;Login</span>
                 </a>
             </li>
-            <li><a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span (click) = "this.closeMenu()">HOME</span></a></li>
+            <li><a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span (click) = "this.toggleSideMenu()">HOME</span></a></li>
 
             <li class="has-children"><span><a href="javascript:void(0)"><span>CATEGORY</span></a><span class="sub-menu-toggle" (click)="this.showSubMenuById('category')"></span></span>
                 <ul class="offcanvas-submenu" [ngClass]="this.sideNavConfig.category">
                     <li><a href="javascript:void(0)" (click)="this.showSubMenuById('menu')"><i class="fa fa-arrow-left"></i>&nbsp;<span>Back</span></a></li>
-                    <li *ngFor="let category of this.categories | async"><a href="javascript:void(0)" (click)="this.navigateToCategory(category)">{{category.categoryName}}</a></li>
+                    <li *ngFor="let category of this.categories | async"><a href="javascript:void(0)" (click)="this.navigateToCategory(category);this.toggleSideMenu()">{{category.categoryName}}</a></li>
                 </ul>
             </li>
             <li class="has-children"><span><a href="javascript:void(0)"><span>BRANDS</span></a><span class="sub-menu-toggle" (click)="this.showSubMenuById('brands')"></span></span>
@@ -157,7 +157,7 @@
                         </span>
                         <ul *ngIf="this.selectedBrand" class="offcanvas-submenu" [ngClass]="this.sideNavConfig.models">
                             <li><a href="javascript:void(0)" (click)="this.showSubMenuById('brands')"><i class="fa fa-arrow-left"></i>&nbsp;<span>Back</span></a></li>
-                            <li *ngFor="let model of this.selectedBrand.models"><a href="javascript:void(0)" (click)="this.navigateToModel(model)">{{model.modelName}}</a></li>
+                            <li *ngFor="let model of this.selectedBrand.models"><a href="javascript:void(0)" (click)="this.navigateToModel(model);this.toggleSideMenu()">{{model.modelName}}</a></li>
                         </ul>
 
                     </li>
@@ -166,7 +166,7 @@
             <!-- <li *ngIf="this.selectedBrand" class="has-children">
             </li> -->
             <li *ngIf="this.config.isAuthenticated">
-                <a (click)="this.logout()" href="javascript:void(0)"> 
+                <a (click)="this.toggleSideMenu();this.logout();" href="javascript:void(0)"> 
                     <i class="icon-lock"></i><span>&nbsp;Logout</span>
                 </a>
             </li>

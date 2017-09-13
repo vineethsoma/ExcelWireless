@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <!-- This is add all to cart logic -->
-                <div class="cart-button" (click)="this.addAllProducts()">
+                <div *ngIf="this.config.isAuthenticated" class="cart-button" (click)="this.addAllProducts()">
                     <img src="/assets/images/Cart.png">
                     <p>Add All To Cart</p>
                 </div>
