@@ -136,18 +136,44 @@ export class NavabarComponent implements OnInit {
     console.log(this.config.showSideNav);
   }
 
-  showSubMenuById(id: string){
+  showSubMenuById(id: string,brand?: Brand){
     // let element = this.el.nativeElement.querySelector('#category'); 
     this.config.showSideSubMenu = true;
-    // element.addClass('in-view');
-    // console.log("Element ",element);
-    this.sideNavConfig[id]['in-view'] = true;
-    console.log(this.config.showSideSubMenu);
+    if(brand)
+      this.selectedBrand = brand; 
+    else
+      this.selectedBrand = null; 
+    this.sideNavConfig.setActiveSubMenu(id);
+    console.log(this.sideNavConfig);
   }
 }
 
 class SideNavConfig{
-  menuClass={'off-view':false};
+  menu={'off-view':false};
   category={'in-view': false};
   brands={'in-view': false};
+  models={'in-view-submenu': false};
+  
+  setActiveSubMenu(id: string){  
+    if(id == 'category')
+      this.category['in-view']=true;
+    else
+      this.category['in-view']=false;
+    
+    if(id == 'brands')
+      this.brands['in-view']=true;
+    else
+      this.brands['in-view']=false;
+    
+    if(id == 'models')
+      this.models['in-view-submenu']=true;
+    else
+      this.models['in-view-submenu']=false;
+    
+    if(id == 'menu')
+      this.menu['off-view']=false;
+    else
+      this.menu['off-view']=true;
+    
+  }
 }
