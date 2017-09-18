@@ -58,16 +58,16 @@
                     <p>Add All To Cart</p>
                 </div>
                 <!-- Products Grid-->
-                <div #productGrid *ngIf="this.productsViewList != null" class="product-flex-grid">
+                <div #productGrid *ngIf="this.productsViewList != null" class="product-flex-grid" (load)="this.isLoading=true;">
                     <!-- <div class="gutter-sizer"></div> -->
                     <!-- <div class="grid-sizer"></div> -->
                     <!-- Product-->
-                    <div class="product-flex-item" *ngFor="let product of this.productsViewList">
+                    <div class="product-flex-item" *ngFor="let product of this.productsViewList; let i = index" [attr.data-index]="i">
                         <div class="product-card">
                             <!-- <div class="product-badge text-danger">50% Off</div> -->
                             <a class="product-thumb">
-                                <img *ngIf="product.image!=null" src="data:image/png;base64,{{product.image}}" alt="SKU : {{product.productNo}}" (load)="this.isLoading=false">
-                                <img *ngIf="(product.image=='aW1hZ2U=')" src="assets/images/no-image-found.jpg" alt="SKU : {{product.productNo}}" (load)="this.isLoading=false">
+                                <img *ngIf="product.image!=null" src="data:image/png;base64,{{product.image}}" alt="SKU : {{product.productNo}}" (load)="this.lastImageLoaded(i)">
+                                <img *ngIf="(product.image=='aW1hZ2U=')" src="assets/images/no-image-found.jpg" alt="SKU : {{product.productNo}}" (load)="this.lastImageLoaded(i)">
                             </a>
                             <h3 class="product-title"><a>{{product.description}}</a></h3>
                             <h4 class="product-price" *ngIf="this.config.isAuthenticated">
