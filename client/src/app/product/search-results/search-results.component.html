@@ -43,7 +43,7 @@
                     <div class="column">
                         <div class="shop-sorting">
                             <label for="sorting">Results per page:</label>
-                            <select [(ngModel)]="this.searchOptions.pageSize" (ngModelChange)="this.navigateToSearch(this.updateOptions({page: 1, pageSize: this.searchOptions.pageSize}))" class="form-control" id="sorting">
+                            <select [(ngModel)]="this.searchOptions.pageSize" (ngModelChange)="this.isLoading=true;this.navigateToSearch(this.updateOptions({page: 1, pageSize: this.searchOptions.pageSize}))" class="form-control" id="sorting">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -66,8 +66,8 @@
                         <div class="product-card">
                             <!-- <div class="product-badge text-danger">50% Off</div> -->
                             <a class="product-thumb">
-                                <img *ngIf="product.image!=null" src="data:image/png;base64,{{product.image}}" alt="SKU : {{product.productNo}}">
-                                <img *ngIf="(product.image=='aW1hZ2U=')" src="assets/images/no-image-found.jpg" alt="SKU : {{product.productNo}}">
+                                <img *ngIf="product.image!=null" src="data:image/png;base64,{{product.image}}" alt="SKU : {{product.productNo}}" (load)="this.isLoading=false">
+                                <img *ngIf="(product.image=='aW1hZ2U=')" src="assets/images/no-image-found.jpg" alt="SKU : {{product.productNo}}" (load)="this.isLoading=false">
                             </a>
                             <h3 class="product-title"><a>{{product.description}}</a></h3>
                             <h4 class="product-price" *ngIf="this.config.isAuthenticated">
@@ -93,17 +93,17 @@
                 <!-- Pagination-->
                 <nav class="pagination">
                     <div class="column text-left hidden-xs-down">
-                        <button class="btn btn-outline-secondary btn-sm" [disabled]="!(this.fullproductList != null && ((this.getSearchOptions().page - 1) >= 1))" (click)="this.previousPage(this.getSearchOptions())">
+                        <button class="btn btn-outline-secondary btn-sm" [disabled]="!(this.fullproductList != null && ((this.getSearchOptions().page - 1) >= 1))" (click)="this.isLoading=true;this.previousPage(this.getSearchOptions())">
                   <i class="icon-arrow-left"></i>&nbsp;Previous
                 </button>
                     </div>
                     <div class="column text-center">
                         <ul *ngIf="this.fullproductList != null" class="pages">
-                            <li style="cursor: pointer" [class.active]="page == this.getSearchOptions().page" *ngFor="let page of (this.getArrayOfPages())"><a (click)="this.navigateToSearch(this.updateOptions({page: page}))">{{page}}</a></li>
+                            <li style="cursor: pointer" [class.active]="page == this.getSearchOptions().page" *ngFor="let page of (this.getArrayOfPages())"><a (click)="this.isLoading=true;this.navigateToSearch(this.updateOptions({page: page}))">{{page}}</a></li>
                         </ul>
                     </div>
                     <div class="column text-right hidden-xs-down">
-                        <button class="btn btn-outline-secondary btn-sm" [disabled]="!(this.fullproductList != null && ((this.getSearchOptions().page + 1) <= this.getProductsLength()/this.numberOfItemsPerPage))" (click)="this.nextPage(this.getSearchOptions())">
+                        <button class="btn btn-outline-secondary btn-sm" [disabled]="!(this.fullproductList != null && ((this.getSearchOptions().page + 1) <= this.getProductsLength()/this.numberOfItemsPerPage))" (click)="this.isLoading=true;this.nextPage(this.getSearchOptions())">
                   Next&nbsp;<i class="icon-arrow-right"></i>
                 </button>
                     </div>
