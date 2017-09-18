@@ -113,6 +113,12 @@ export class SearchResultsComponent implements OnInit {
     return this.fullproductList.length;
   }
 
+  lastImageLoaded(index: number){
+    if(index >= this.productsViewList.length -1){
+      this.isLoading = false;
+    }
+  }
+
   getArrayOfPages() {
       const pages = this.getNumberOfPages();
       let arr = [];
