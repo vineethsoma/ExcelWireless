@@ -154,7 +154,7 @@ public class SQLQueries {
 
 
 
-    public String getModelDetailsForBrand = "SELECT distinct MODEL_ID FROM product WHERE BRAND_ID = ? AND MODEL_ID <> 'NULL' ORDER BY MODEL_ID ASC ";
+    public String getModelDetailsForBrand = "SELECT distinct MODEL_ID FROM product WHERE BRAND_ID = ? AND MODEL_ID <> 'NULL' ORDER BY MODEL_ID DESC";
 
     public String getProductDetailsByCategoryId = "SELECT " +
             " PRODUCT_NO," +
