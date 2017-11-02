@@ -37,8 +37,8 @@ export class SearchResultsComponent implements OnInit {
     this.route.paramMap.switchMap((_params) => {
       this.searchOptions = this.updateOptions(new SearchOptions(_params));
       
-    if (this.route.snapshot.paramMap.keys.length < 2)
-      this.router.navigate(['/products/search', this.searchOptions]);
+    // if (this.route.snapshot.paramMap.keys.length < 2)
+    //   this.router.navigate(['/products/search', this.searchOptions]);
 
       return this.getProducts(this.searchOptions)
       
