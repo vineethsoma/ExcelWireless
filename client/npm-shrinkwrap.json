@@ -1,0 +1,191 @@
+{
+  "name": "excel-wireless2",
+  "version": "0.0.0",
+  "dependencies": {
+    "@angular/animations": {
+      "version": "4.3.5",
+      "from": "@angular/animations@>=4.2.4 <5.0.0",
+      "resolved": "https://registry.npmjs.org/@angular/animations/-/animations-4.3.5.tgz"
+    },
+    "@angular/common": {
+      "version": "4.3.5",
+      "from": "@angular/common@>=4.2.4 <5.0.0",
+      "resolved": "https://registry.npmjs.org/@angular/common/-/common-4.3.5.tgz"
+    },
+    "@angular/compiler": {
+      "version": "4.3.5",
+      "from": "@angular/compiler@>=4.2.4 <5.0.0",
+      "resolved": "https://registry.npmjs.org/@angular/compiler/-/compiler-4.3.5.tgz"
+    },
+    "@angular/core": {
+      "version": "4.3.5",
+      "from": "@angular/core@>=4.2.4 <5.0.0",
+      "resolved": "https://registry.npmjs.org/@angular/core/-/core-4.3.5.tgz"
+    },
+    "@angular/forms": {
+      "version": "4.3.5",
+      "from": "@angular/forms@>=4.2.4 <5.0.0",
+      "resolved": "https://registry.npmjs.org/@angular/forms/-/forms-4.3.5.tgz"
+    },
+    "@angular/http": {
+      "version": "4.3.5",
+      "from": "@angular/http@>=4.2.4 <5.0.0",
+      "resolved": "https://registry.npmjs.org/@angular/http/-/http-4.3.5.tgz"
+    },
+    "@angular/platform-browser": {
+      "version": "4.3.5",
+      "from": "@angular/platform-browser@>=4.2.4 <5.0.0",
+      "resolved": "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-4.3.5.tgz"
+    },
+    "@angular/platform-browser-dynamic": {
+      "version": "4.3.5",
+      "from": "@angular/platform-browser-dynamic@>=4.2.4 <5.0.0",
+      "resolved": "https://registry.npmjs.org/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.3.5.tgz"
+    },
+    "@angular/router": {
+      "version": "4.3.5",
+      "from": "@angular/router@>=4.2.4 <5.0.0",
+      "resolved": "https://registry.npmjs.org/@angular/router/-/router-4.3.5.tgz"
+    },
+    "big.js": {
+      "version": "3.1.3",
+      "from": "big.js@>=3.1.3 <4.0.0",
+      "resolved": "https://registry.npmjs.org/big.js/-/big.js-3.1.3.tgz"
+    },
+    "bootstrap": {
+      "version": "3.3.7",
+      "from": "bootstrap@latest",
+      "resolved": "https://registry.npmjs.org/bootstrap/-/bootstrap-3.3.7.tgz"
+    },
+    "core-js": {
+      "version": "2.5.0",
+      "from": "core-js@>=2.4.1 <3.0.0",
+      "resolved": "https://registry.npmjs.org/core-js/-/core-js-2.5.0.tgz"
+    },
+    "desandro-matches-selector": {
+      "version": "2.0.2",
+      "from": "desandro-matches-selector@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/desandro-matches-selector/-/desandro-matches-selector-2.0.2.tgz"
+    },
+    "emojis-list": {
+      "version": "2.1.0",
+      "from": "emojis-list@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/emojis-list/-/emojis-list-2.1.0.tgz"
+    },
+    "ev-emitter": {
+      "version": "1.1.1",
+      "from": "ev-emitter@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/ev-emitter/-/ev-emitter-1.1.1.tgz"
+    },
+    "feather-icons": {
+      "version": "3.2.2",
+      "from": "feather-icons@>=3.2.2 <4.0.0",
+      "resolved": "https://registry.npmjs.org/feather-icons/-/feather-icons-3.2.2.tgz"
+    },
+    "featherjs": {
+      "version": "0.1.0",
+      "from": "featherjs@>=0.1.0 <0.2.0",
+      "resolved": "https://registry.npmjs.org/featherjs/-/featherjs-0.1.0.tgz"
+    },
+    "fizzy-ui-utils": {
+      "version": "2.0.5",
+      "from": "fizzy-ui-utils@>=2.0.4 <3.0.0",
+      "resolved": "https://registry.npmjs.org/fizzy-ui-utils/-/fizzy-ui-utils-2.0.5.tgz"
+    },
+    "font-awesome": {
+      "version": "4.7.0",
+      "from": "font-awesome@latest",
+      "resolved": "https://registry.npmjs.org/font-awesome/-/font-awesome-4.7.0.tgz"
+    },
+    "get-size": {
+      "version": "2.0.2",
+      "from": "get-size@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/get-size/-/get-size-2.0.2.tgz"
+    },
+    "imagesloaded": {
+      "version": "4.1.3",
+      "from": "imagesloaded@>=4.1.3 <5.0.0",
+      "resolved": "https://registry.npmjs.org/imagesloaded/-/imagesloaded-4.1.3.tgz"
+    },
+    "imports-loader": {
+      "version": "0.7.1",
+      "from": "imports-loader@latest",
+      "resolved": "https://registry.npmjs.org/imports-loader/-/imports-loader-0.7.1.tgz"
+    },
+    "isotope-layout": {
+      "version": "3.0.4",
+      "from": "isotope-layout@latest",
+      "resolved": "https://registry.npmjs.org/isotope-layout/-/isotope-layout-3.0.4.tgz"
+    },
+    "jquery": {
+      "version": "3.2.1",
+      "from": "jquery@latest",
+      "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.2.1.tgz"
+    },
+    "json5": {
+      "version": "0.5.1",
+      "from": "json5@>=0.5.0 <0.6.0",
+      "resolved": "https://registry.npmjs.org/json5/-/json5-0.5.1.tgz"
+    },
+    "loader-utils": {
+      "version": "1.1.0",
+      "from": "loader-utils@>=1.1.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/loader-utils/-/loader-utils-1.1.0.tgz"
+    },
+    "masonry-layout": {
+      "version": "4.2.0",
+      "from": "masonry-layout@latest",
+      "resolved": "https://registry.npmjs.org/masonry-layout/-/masonry-layout-4.2.0.tgz"
+    },
+    "outlayer": {
+      "version": "2.1.1",
+      "from": "outlayer@>=2.1.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/outlayer/-/outlayer-2.1.1.tgz"
+    },
+    "owl.carousel": {
+      "version": "2.2.0",
+      "from": "owl.carousel@>=2.2.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/owl.carousel/-/owl.carousel-2.2.0.tgz"
+    },
+    "rxjs": {
+      "version": "5.4.3",
+      "from": "rxjs@>=5.4.2 <6.0.0",
+      "resolved": "https://registry.npmjs.org/rxjs/-/rxjs-5.4.3.tgz"
+    },
+    "socicon": {
+      "version": "3.0.5",
+      "from": "socicon@latest",
+      "resolved": "https://registry.npmjs.org/socicon/-/socicon-3.0.5.tgz"
+    },
+    "source-map": {
+      "version": "0.5.6",
+      "from": "source-map@>=0.5.6 <0.6.0",
+      "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.5.6.tgz"
+    },
+    "symbol-observable": {
+      "version": "1.0.4",
+      "from": "symbol-observable@>=1.0.1 <2.0.0",
+      "resolved": "https://registry.npmjs.org/symbol-observable/-/symbol-observable-1.0.4.tgz"
+    },
+    "tether": {
+      "version": "1.4.0",
+      "from": "tether@latest",
+      "resolved": "https://registry.npmjs.org/tether/-/tether-1.4.0.tgz"
+    },
+    "tslib": {
+      "version": "1.7.1",
+      "from": "tslib@>=1.7.1 <2.0.0",
+      "resolved": "https://registry.npmjs.org/tslib/-/tslib-1.7.1.tgz"
+    },
+    "velocity-animate": {
+      "version": "1.5.0",
+      "from": "velocity-animate@latest",
+      "resolved": "https://registry.npmjs.org/velocity-animate/-/velocity-animate-1.5.0.tgz"
+    },
+    "zone.js": {
+      "version": "0.8.16",
+      "from": "zone.js@>=0.8.14 <0.9.0",
+      "resolved": "https://registry.npmjs.org/zone.js/-/zone.js-0.8.16.tgz"
+    }
+  }
+}
